@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loan maturity · Telegraph corridor · Prescott Listing System</title><style>
+.steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.counts{display:flex;background:#fff;border:1px solid #D3D0CB;margin-bottom:16px}
+.counts div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.counts div:last-child{border-right:0}
+.counts .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.counts span{font-size:11px;color:#6B6A66;display:block}
+.counts .dis{color:#9A9892;background:#F7F6F3}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:150px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.inline{display:none;background:#F7F6F3;border:1px solid #D3D0CB;padding:10px 14px;margin:-6px 0 12px 0;font-size:12px}.inline.open{display:block}
+.tiles5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:10px;cursor:pointer}.tile.on{border:2px solid #2D2E41}
+.tile .thumb{height:120px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px}
+.pdf{display:flex;gap:16px}.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;flex:0 0 380px}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}.thumbs .box{width:70px;height:96px;cursor:pointer}.thumbs .box.on{border:2px solid #2D2E41}
+.who{font-size:11px;color:#6B6A66;margin-top:4px}
+.formfoot .left{margin-right:auto}
+tr.sel td{background:#EEF1FA}.btn.sm{padding:4px 10px;font-size:12px;white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.chart{height:180px;background:#fff;border:1px solid #D3D0CB;padding:10px}
+.chart svg{width:100%;height:100%}
+.lc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.seg{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}
+.seg button{font:inherit;background:#fff;border:none;border-right:1px solid #B5B2AC;padding:6px 12px;cursor:pointer}
+.seg button:last-child{border-right:0}.seg button.on{background:#2D2E41;color:#fff}
+.live{background:#F7F6F3;border:1px solid #D3D0CB;padding:14px}
+.live .big{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.live .split{font-size:12px;color:#6B6A66;margin-top:4px}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px;cursor:pointer}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.excl{background:#fff;border:1px solid #D3D0CB;padding:10px 14px}
+.excl .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #E6E3DE}.excl .row:last-child{border-bottom:0}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.4;color:#1E1E1E;background:#F7F6F3}
+.wftool{background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wftool span.lbl{color:#B5B2AC;margin-right:4px}
+.wftool button{font:inherit;background:#444;color:#fff;border:1px solid #666;padding:3px 10px;cursor:pointer}
+.wftool button.on{background:#fff;color:#1E1E1E}
+.wftool .sep{width:1px;height:18px;background:#666;margin:0 6px}
+.app{display:flex;min-height:calc(100vh - 34px)}
+.rail{width:216px;flex:0 0 216px;background:#fff;border-right:1px solid #D3D0CB;display:flex;flex-direction:column}
+.rail .tenant{padding:14px 16px;border-bottom:1px solid #D3D0CB;display:flex;gap:10px;align-items:center;font-weight:600}
+.logo{width:28px;height:28px;background:#E9E7E2;border:1px solid #B5B2AC;flex:0 0 28px}
+.rail nav{flex:1;padding:8px 0}
+.rail a{display:flex;align-items:center;padding:9px 16px;color:#1E1E1E;text-decoration:none}
+.rail a.cur{background:#2D2E41;color:#fff}
+.rail a.dis{color:#9A9892;cursor:default}
+.tag{font-size:10px;border:1px solid #B5B2AC;padding:0 4px;margin-left:auto;color:#6B6A66;border-radius:2px;line-height:14px}
+.rail .user{padding:12px 16px;border-top:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.rail .user b{display:block;color:#1E1E1E;font-weight:500}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid #D3D0CB;padding:10px 24px;display:flex;align-items:flex-end;justify-content:space-between;min-height:64px}
+.crumb{font-size:12px;color:#6B6A66;margin-bottom:4px}
+.crumb a{color:#2D2E41}
+h1{font-size:18px;font-weight:600;margin:0}
+.btn{font:inherit;font-size:13px;padding:7px 12px;border:1px solid #B5B2AC;background:#fff;color:#1E1E1E;cursor:pointer;border-radius:2px}
+.btn.primary{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.btn.danger{border-color:#B03A2E;color:#B03A2E}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:8px;align-items:center}
+.content{padding:20px 24px;flex:1;display:flex;gap:20px;align-items:flex-start}
+.body{flex:1;min-width:0}
+.panel{width:288px;flex:0 0 288px;background:#fff;border:1px solid #D3D0CB;padding:14px}
+.panel h3{font-size:13px;margin:0 0 8px;font-weight:600}
+.panel dl{margin:0;font-size:12px}.panel dt{color:#6B6A66;margin-top:8px}.panel dd{margin:0}
+h2{font-size:15px;font-weight:600;margin:0 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}
+th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:0 10px;height:36px;border-bottom:1px solid #D3D0CB;background:#F0EEEA;white-space:nowrap}
+td{padding:0 10px;height:40px;border-bottom:1px solid #E6E3DE;white-space:nowrap}
+tr.row{cursor:pointer}tr.row:hover td{background:#F7F6F3}tr.sel td{background:#ECEAE4}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td a{color:#2D2E41}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border:1px solid #B5B2AC;border-radius:10px;background:#fff;white-space:nowrap}
+.pill.ok{border-color:#2E7D4F;color:#2E7D4F}.pill.warn{border-color:#B8860B;color:#8A6500}.pill.err{border-color:#B03A2E;color:#B03A2E}.pill.navy{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.note{background:#FFF3B0;border:1px solid #D9B800;padding:6px 10px;font-size:12px;margin:8px 0;color:#1E1E1E}
+.note::before{content:"PRD gap: ";font-weight:600}
+.box{background:#E9E7E2;border:1px dashed #B5B2AC;color:#6B6A66;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px}
+.field{margin-bottom:14px}.field label{display:block;font-size:12px;color:#6B6A66;margin-bottom:4px}
+.req::after{content:" *";color:#B03A2E}
+input[type=text],input[type=number],input[type=date],select,textarea{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;background:#fff;width:100%;max-width:420px;border-radius:2px}
+input[readonly]{background:#F0EEEA;color:#6B6A66}
+.chk{display:flex;gap:8px;align-items:center;margin:6px 0}
+.chk input{width:auto}
+.empty{background:#fff;border:1px dashed #B5B2AC;padding:40px;text-align:center;color:#6B6A66}
+.empty b{display:block;color:#1E1E1E;margin-bottom:4px}
+.errbox{background:#fff;border:1px solid #B03A2E;padding:16px;color:#B03A2E}
+.errbox b{display:block;margin-bottom:4px}
+.skel{background:#E9E7E2;height:14px;margin:10px 0;border-radius:2px}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.section{background:#fff;border:1px solid #D3D0CB;padding:14px;margin-bottom:16px}
+.section h2{margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facts{display:flex;gap:24px;flex-wrap:wrap}.facts div{font-size:13px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.head h2{font-size:17px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{padding:10px 0;border-bottom:1px solid #E6E3DE;display:grid;grid-template-columns:120px 90px 1fr;gap:12px;align-items:start}
+.tl .when{font-variant-numeric:tabular-nums;color:#6B6A66;font-size:12px}
+.meta{font-size:12px;color:#6B6A66}
+.money,.num{font-variant-numeric:tabular-nums}
+.steps{display:flex;gap:0;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}
+.steps div.on{background:#2D2E41;color:#fff}
+.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.formfoot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid #D3D0CB;margin-top:16px}
+.formfoot .left{margin-right:auto}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:16px;max-width:460px;margin-top:12px;box-shadow:0 2px 0 #D3D0CB}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:14px;cursor:pointer;min-height:96px}
+.tile.dis{color:#9A9892;cursor:default;background:#F7F6F3}
+.tile .n{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;margin:4px 0}
+.tile .stage{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66}
+.toast{position:fixed;bottom:20px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px}
+.pdf{display:flex;gap:16px}
+.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;box-shadow:0 1px 0 #D3D0CB}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}
+.thumbs .box{width:70px;height:96px;cursor:pointer}
+.thumbs .box.on{border:2px solid #2D2E41}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.count{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:6px 12px;font-size:13px}.kv dt{color:#6B6A66}.kv dd{margin:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.totals{display:flex;gap:0;background:#fff;border:1px solid #D3D0CB;margin:14px 0}
+.totals div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.totals div:last-child{border-right:0}
+.totals .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.totals span{font-size:11px;color:#6B6A66;display:block}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:90px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+
+.rail nav{padding:6px 0}
+.rail .grp{margin-top:6px}
+.rail .grp>button{font:inherit;width:100%;text-align:left;background:none;border:none;padding:9px 16px;color:#6B6A66;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center}
+.rail .grp>button::before{content:"▾";font-size:10px;margin-right:6px;color:#9A9892}
+.rail .grp.closed>button::before{content:"▸"}
+.rail .grp.closed .items{display:none}
+.rail .items a{padding-left:34px}
+.rail .user{display:flex;align-items:center;cursor:pointer}
+.rail .user div{flex:1}
+.rail .user .chev{color:#9A9892;font-size:11px}
+
+body{background:#F7F6F3;padding-bottom:30px}
+.app{min-height:calc(100vh - 30px)}
+.note,.note::before{display:none}
+.rail{position:sticky;top:0;height:calc(100vh - 30px)}
+td.nw{white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.subtabs .last{margin-left:auto;font-size:12px;color:#6B6A66}
+.swatch{width:22px;height:22px;border:1px solid #B5B2AC;display:inline-block;vertical-align:middle;margin-right:8px}
+.slot{display:flex;gap:12px;align-items:center;border:1px solid #D3D0CB;background:#fff;padding:10px;margin-bottom:8px}
+.slot .box{width:120px;height:56px;flex:0 0 120px}
+.slot .fn{flex:1;font-size:12px}
+.prints{font-size:11px;color:#6B6A66;margin-top:3px}
+.tog{display:inline-block;width:32px;height:18px;border-radius:9px;background:#2D2E41;position:relative;vertical-align:middle;cursor:pointer}
+.tog::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.tog.off{background:#B5B2AC}.tog.off::after{right:auto;left:2px}
+.tog.dis{opacity:.4;cursor:default}
+.rule{background:#F0EEEA;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px}
+[data-stab]{display:flex;gap:20px;align-items:flex-start;width:100%}
+.content .panel{flex:0 0 288px;position:sticky;top:12px}
+.body{min-width:0}.section{overflow-x:auto}.section:has(.menu){overflow:visible}.menu .dd{z-index:50}.body table td,.body table th{white-space:normal}
+.panel .field{margin-bottom:10px}.panel input,.panel select,.panel textarea{max-width:none}
+.panel h3{display:flex;justify-content:space-between}.panel .x{cursor:pointer;color:#6B6A66}
+.panel table td,.panel table th{height:30px;padding:0 6px;font-size:12px}
+.panel .formfoot{margin-top:12px;padding-top:10px}
+.toast{display:none}
+.toast.show{display:block}
+.demo{position:fixed;left:0;right:0;bottom:0;background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;opacity:.9}
+
+a.btn{text-decoration:none;display:inline-block}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.filters select,.filters input{width:auto;max-width:220px}
+.filters .cnt{margin-left:auto;font-size:12px;color:#6B6A66}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}.facts div{font-size:14px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head h2{font-size:17px}
+.tl li{grid-template-columns:150px 90px 1fr}
+.menu{position:relative;display:inline-block}
+.menu .dd{position:absolute;right:0;top:34px;background:#fff;border:1px solid #B5B2AC;min-width:170px;z-index:5;display:none}
+.menu .dd a{display:block;padding:8px 12px;color:#1E1E1E;text-decoration:none}
+.menu.open .dd{display:block}
+.overlay{position:fixed;inset:0;background:rgba(30,30,30,.35);display:none;align-items:center;justify-content:center;z-index:20}
+.overlay.open{display:flex}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:18px;width:520px;max-width:92vw}
+.dialog h3{margin:0 0 10px;font-size:15px}
+.sbs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sbs .col{border:1px solid #D3D0CB;padding:10px;font-size:12px}
+.sbs .col b{display:block;margin-bottom:6px}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:#6B6A66}
+tr.sel td{background:#ECEAE4}
+.chkcol{width:28px}
+.srch{display:flex;gap:6px}.srch input{max-width:260px}
+.clear{font-size:12px;margin-left:8px}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{background:#fff;border:1px solid #D3D0CB;padding:8px}
+.ph .img{height:130px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px;position:relative}
+.ph .star{position:absolute;top:6px;right:8px;font-size:16px;color:#B5B2AC;cursor:pointer}.ph .star.on{color:#2D2E41}.ph .star.dis{opacity:.35;cursor:not-allowed}
+.ph .cap{font-size:12px;margin-top:6px}.ph .row2{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.ph .acts{font-size:11px;margin-top:6px}.ph .acts a{margin-right:8px}
+.maptile{height:200px;background:#EDEBE6;border:1px solid #D3D0CB;position:relative;overflow:hidden}
+.maptile svg{width:100%;height:100%}
+.maptile .lbl{position:absolute;bottom:8px;left:10px;font-size:12px;color:#6B6A66;background:rgba(255,255,255,.85);padding:2px 6px}
+.dt{display:flex;gap:8px}.dt input{max-width:160px}
+.bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
+.bulk.on{display:flex}
+
+/* Round 3 additions */
+.ctx{font-size:12px;color:#6B6A66;margin-top:4px}
+.ctx a{color:#2D2E41}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.card{background:#fff;border:1px solid #D3D0CB;padding:10px;cursor:pointer;position:relative;min-height:214px;display:flex;flex-direction:column}
+.card.on{border:2px solid #2D2E41;padding:9px}
+.card.off{background:#F7F6F3;color:#9A9892;cursor:default}
+.card.off .thumb{opacity:.5}
+.card .thumb{height:110px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:11px;text-align:center;padding:6px;position:relative}
+.card .thumb .fmt{position:absolute;bottom:4px;right:6px;font-size:10px;color:#9A9892}
+.card b{display:block;margin-top:8px;font-size:13px}
+.card .d{font-size:11.5px;color:#6B6A66;margin-top:2px;flex:1}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:8px;font-size:11px;flex-wrap:wrap}.card .foot .meta{white-space:nowrap}
+.card .why{font-size:11px;color:#8A6500;margin-top:6px}
+.card .why a{color:#2D2E41}
+.badge{display:inline-block;white-space:nowrap;font-size:10px;letter-spacing:.04em;text-transform:uppercase;border:1px solid #B5B2AC;padding:0 6px;border-radius:2px;color:#6B6A66;background:#fff}
+.badge.both{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.grouplbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:4px 0 8px}
+.layout{display:flex;gap:16px;align-items:flex-start}.layout .pagesrow{margin-bottom:24px!important}
+.sheet{background:#fff;border:1px solid #B5B2AC;position:relative;flex:0 0 auto;box-shadow:0 1px 0 #D3D0CB}
+.sheet .ln{position:absolute;left:8%;right:8%;height:5px;background:#E9E7E2}
+.sheet .hd{position:absolute;left:8%;right:8%;height:12px;background:#D3D0CB}
+.sheet .slot{position:absolute;border:2px dashed #2D2E41;background:rgba(45,46,65,.06);display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;color:#2D2E41;cursor:pointer;padding:6px}
+.sheet .slot.filled{border-style:solid;background:#E9E7E2;color:#1E1E1E}
+.sheet .slot.opt{border-color:#B5B2AC;color:#6B6A66}
+.sheet .slot .n{position:absolute;top:-9px;left:-9px;width:18px;height:18px;border-radius:50%;background:#2D2E41;color:#fff;font-size:11px;line-height:18px;text-align:center}
+.sheet .slot.opt .n{background:#B5B2AC}
+.sheet .copyarea{position:absolute;border:1px dashed #B8860B;background:#FFF9E0;font-size:10px;color:#8A6500;padding:3px 5px;line-height:1.3;overflow:hidden}
+.sheet .copyarea.sys{border-color:#B5B2AC;background:#F0EEEA;color:#6B6A66}
+.sheet .copyarea.pat{border-color:#2E7D4F;background:#EEF7F0;color:#2E7D4F}
+.sheet .pglbl{position:absolute;bottom:-18px;left:0;font-size:11px;color:#6B6A66;white-space:nowrap}
+.pagesrow{display:flex;gap:18px;margin-bottom:30px;flex-wrap:wrap}.seg button{white-space:nowrap}
+.slots table td{height:auto;padding:8px 10px;vertical-align:top}
+.lib{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lib .t{border:1px solid #D3D0CB;background:#fff;padding:4px;cursor:pointer;font-size:11px}
+.lib .t.on{border:2px solid #2D2E41;padding:3px}
+.lib .t .img{height:56px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:10px;text-align:center}
+.lib .t .cap{margin-top:3px;line-height:1.25}
+.copyf{background:#fff;border:1px solid #D3D0CB;padding:12px 14px;margin-bottom:12px}
+.copyf .hd{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.copyf .hd b{font-size:13px}
+.copyf .hd .r{display:flex;gap:10px;align-items:center;font-size:11.5px;color:#6B6A66}
+.copyf textarea,.copyf input[type=text]{max-width:none;width:100%}
+.copyf .cnt{font-variant-numeric:tabular-nums}
+.copyf .cnt.over{color:#B03A2E}
+.copyf .by{font-size:11px;color:#6B6A66;margin-top:5px}
+.copyf.sys{background:#F7F6F3}
+.copyf.sys .val{font-size:12.5px;color:#1E1E1E;line-height:1.5}
+.samples{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sample{background:#fff;border:1px solid #D3D0CB;padding:10px 12px;font-size:12.5px}
+.sample .addr{font-weight:600;margin-bottom:4px}
+.sample .h{font-style:italic;color:#2D2E41;margin-bottom:4px}
+.sample .meta{margin-top:6px}
+.skel{background:#E9E7E2;height:14px;margin:8px 0;border-radius:2px;animation:pulse 1.4s infinite}
+@keyframes pulse{0%{opacity:.6}50%{opacity:1}100%{opacity:.6}}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #B5B2AC;border-top-color:#2D2E41;border-radius:50%;animation:rot .9s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes rot{to{transform:rotate(360deg)}}
+.proof{display:flex;gap:16px;align-items:flex-start}
+.proof .thumbs .box{width:76px;height:98px;position:relative;background:#fff}
+.proof .thumbs .box span{position:absolute;bottom:2px;left:0;right:0;font-size:10px;text-align:center}
+.proof .page{width:420px;height:544px;background:#fff;border:1px solid #B5B2AC;position:relative;flex:0 0 420px;box-shadow:0 1px 0 #D3D0CB}
+.proof .page .img{position:absolute;background:#D9D6CF;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:11px;text-align:center}
+.proof .page .txt{position:absolute;font-size:9.5px;line-height:1.35;color:#1E1E1E}
+.proof .page .txt.h{font-size:14px;font-weight:600;line-height:1.2}
+.proof .page .txt.sm{font-size:8px;color:#6B6A66}
+.proof .page .qr{position:absolute;width:40px;height:40px;background:repeating-linear-gradient(90deg,#1E1E1E 0 3px,#fff 3px 6px);border:2px solid #1E1E1E}
+.proof .page .legal{position:absolute;left:24px;right:24px;bottom:14px;font-size:6.5px;color:#6B6A66;line-height:1.3}
+.proof .pick{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.cardsend{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.chan{background:#fff;border:1px solid #D3D0CB}
+.chan .ch{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid #E6E3DE;cursor:pointer}
+.chan .ch input{width:16px;height:16px;margin:0}
+.chan .ch b{font-size:14px}
+.chan .ch .sub{font-size:12px;color:#6B6A66;margin-left:auto}
+.chan .pane{padding:12px 14px}
+.chan.offc{opacity:.55}.chan.offc .pane{display:none}
+.chan .field{margin-bottom:10px}.chan .field input,.chan .field select{max-width:none}
+.radio{display:flex;gap:16px;font-size:13px;margin:6px 0}
+.radio label{display:flex;gap:6px;align-items:center}
+.ro{background:#F0EEEA;border:1px solid #D3D0CB;padding:8px 10px;font-size:12px;color:#6B6A66}
+.sum{background:#fff;border:1px solid #D3D0CB;padding:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.sum .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66}
+.sum .v{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;margin:2px 0}
+.sum .s{font-size:12px;color:#6B6A66}
+.stage{background:#fff;border:1px solid #D3D0CB;margin-bottom:12px;position:relative}
+.stage .st-h{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #E6E3DE}
+.stage .st-h b{font-size:14px;min-width:90px}
+.stage .st-h .state{margin-left:auto}
+.stage .st-b{padding:12px 14px}
+.stage.pend{color:#6B6A66}.stage.pend .st-h b{color:#6B6A66}
+.tracker{position:relative;padding-left:26px}
+.tracker::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;border-left:2px solid #D3D0CB}
+.tracker .stage::before{content:"";position:absolute;left:-23px;top:14px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.tracker .stage.done::before{background:#2D2E41}
+.tracker .stage.pend::before{border-color:#B5B2AC}
+.bar{height:10px;background:#E9E7E2;border:1px solid #D3D0CB;position:relative;margin:6px 0}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:#2D2E41}
+.bar i.warn{background:#B8860B}
+.live{display:flex;gap:0;border:1px solid #D3D0CB;background:#fff;margin-top:8px}
+.live div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB}.live div:last-child{border-right:0}
+.live .n{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}.live span{font-size:11px;color:#6B6A66;display:block}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2E7D4F;margin-right:6px;animation:pulse 1.4s infinite}
+.prop{background:#FFF3B0;border:1px solid #D9B800;padding:6px 10px;font-size:12px;margin-bottom:12px}
+.prop::before{content:"Proposal: ";font-weight:600}
+.ready{background:#fff;border:1px solid #D3D0CB;padding:28px;display:flex;gap:28px;align-items:flex-start;max-width:860px}
+.ready .th{width:180px;height:234px;background:#E9E7E2;border:1px solid #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px;text-align:center;flex:0 0 180px}
+.ready h2{font-size:22px;margin:0 0 6px}
+.ready .kv{margin:14px 0 18px}
+.steps div.done::after{content:" ✓";color:#2E7D4F}
+
+.assetcard .th{height:150px;background:#E9E7E2;border:1px solid #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px;text-align:center;margin-bottom:10px}
+.assetcard .th.empty{border-style:dashed;background:#fff}
+</style></head><body>
+<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Market_by_ZIP.html">Your Market</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="cur" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
+<div class="main">
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Outreach › <a href="Campaigns.html">Campaigns</a> › Loan maturity · Telegraph corridor</div><h1>Loan maturity · Telegraph corridor</h1></div><div class="actions"></div></div>
+<div class="content"><div data-stab="x"><div class="body">
+<div class="section"><div class="head"><div><h2>Loan maturity · Telegraph corridor</h2>
+<div style="margin-top:6px"><span class="pill ok">Calling</span> &nbsp; Owner list: <a href="List_Detail.html">Absentee 2–4 units · 94609, 94610</a> · 231 properties · 212 pieces &nbsp;·&nbsp; About: <a href="#">Loan matured · 12 properties</a></div>
+<div class="meta" style="margin-top:6px">Owner Nolan Jones · Goal: Reach every 2–4 unit owner whose loan matured in 2025–2026 before they refinance; book 3 listing appointments by Dec 15. · Target 500 calls a week</div></div>
+<div class="actions"><a class="btn primary" href="Send_Config.html">Send</a><span class="menu" id="morec"><button class="btn" onclick="toggle('morec')">⋯</button><div class="dd"><a href="#" onclick="toggle('morec');panel('editc');return false">Edit campaign</a><a href="Asset_4_Proof.html">View asset proof</a><a class="dis" style="color:#9A9892">Replace asset · locked after first send</a><a href="#" onclick="toggle('morec');panel('note');return false">Add note</a><a href="#" onclick="toggle('morec');dlg('closec');return false">Close campaign</a><a href="#" onclick="toggle('morec');dlg('archc');return false">Archive</a></div></span></div></div></div>
+<div class="counts"><div><div class="n">423</div><span>sent</span></div><div><div class="n">371</div><span>delivered</span></div><div><div class="n">186</div><span>called</span></div><div><div class="n">41</div><span>spoke</span></div><div><div class="n">3</div><span>appointments</span></div><div class="dis"><div class="n">—</div><span>listings <span class="tag">Coming later</span></span></div></div>
+<div class="meta" style="margin:-8px 0 14px">186 of 411 called · 412 calls this week · at this pace, about 1 week to go</div>
+<div class="tabs"><button class="on" onclick="tab('c','q',this)">Call queue</button><button onclick="tab('c','m',this)">Mailings</button><button onclick="tab('c','t',this)">Timeline</button><button disabled style="color:#9A9892">Content <span class="tag">Phase 3</span></button></div>
+<div data-tab-group="c" data-tab="q"><div class="section"><div class="head"><h2>Call queue</h2><div class="actions"><span class="menu" id="moreq"><button class="btn" onclick="toggle('moreq')">⋯</button><div class="dd"><a href="#" onclick="toggle('moreq');dlg('assign');return false">Assign calls</a><a class="dis" style="color:#9A9892">Export to Mojo · coming later</a></div></span></div></div><div class="meta" style="margin-bottom:8px">Everyone this campaign has sent to, in the order to call them. Work down the list; log each call as you go.</div>
+<div class="filters"><select><option>Everyone</option><option>Assigned to me</option><option>Not yet called</option><option>Callback due</option></select><select><option>Any outcome</option><option>No answer</option><option>Left message</option><option>Spoke</option><option>Callback requested</option></select><a href="#" class="clear">Clear</a><span class="cnt">225 left to call · showing 8</span></div>
+<table><tr><th>Owner</th><th>Property</th><th class="num">Units</th><th>Sent</th><th>Why now</th><th>Assigned to</th><th>Last call</th><th></th></tr><tr class="row sel" onclick="selrow(this)"><td><a href="Owner_Detail.html">Reyes Family Trust</a><br><span class="meta">(925) 555-0142</span></td><td><a href="Property_Detail.html">4512 Telegraph Ave</a> <span class=meta>· also in queue: 3 other buildings</span></td><td class="num">3</td><td class="nw">Oct 16 · mail</td><td>Replied (QR scan) · Tier A</td><td>Marissa Cruz</td><td class="nw">Callback Nov 4 · Nolan</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Haddad Properties LLC</a><br><span class="meta">(510) 555-0188</span></td><td><a href="Property_Detail.html">5210 Telegraph Ave</a> <span class=meta>· also in queue: 5 other buildings</span></td><td class="num">4</td><td class="nw">Oct 16 · mail</td><td>Recently sent · Tier A</td><td>Marissa Cruz</td><td class="nw">—</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Patricia Nguyen</a><br><span class="meta">(510) 555-0231</span></td><td><a href="Property_Detail.html">3024 Grove St</a></td><td class="num">2</td><td class="nw">Oct 16 · mail</td><td>Replied (web form)</td><td>Marissa Cruz</td><td class="nw">Left message · Oct 28</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">1840 Park LLC</a><br><span class="meta">(510) 555-0404</span></td><td><a href="Property_Detail.html">1840 Park Blvd</a></td><td class="num">2</td><td class="nw">Oct 16 · mail</td><td>Recently sent</td><td>Osi Umunna</td><td class="nw">—</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Grand Ave Holdings LLC</a><br><span class="meta">(925) 555-0310</span></td><td><a href="Property_Detail.html">3310 Grand Ave</a> <span class=meta>· also in queue: 4 other buildings</span></td><td class="num">4</td><td class="nw">Oct 16 · mail</td><td>Recently sent · Tier A</td><td>Osi Umunna</td><td class="nw">No answer · Oct 29</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Helen Castillo</a><br><span class="meta">(510) 555-0177</span></td><td><a href="Property_Detail.html">2919 Grand Ave</a></td><td class="num">3</td><td class="nw">Oct 16 · mail</td><td>Recently sent</td><td>—</td><td class="nw">—</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Alcatraz Partners</a><br><span class="meta">(510) 555-0290</span></td><td><a href="Property_Detail.html">610 Alcatraz Ave</a> <span class=meta>· also in queue: 1 other building</span></td><td class="num">2</td><td class="nw">Oct 16 · mail</td><td>Replied (email)</td><td>Marissa Cruz</td><td class="nw">Callback Nov 5</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr><tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Daniel & Mira Sato</a><br><span class="meta">(510) 555-0119</span></td><td><a href="Property_Detail.html">446 45th St</a></td><td class="num">2</td><td class="nw">Oct 16 · mail</td><td>Recently sent</td><td>—</td><td class="nw">—</td><td class="nw"><button class="btn sm" onclick="event.stopPropagation();panel('log')">Log call</button></td></tr></table>
+<div class="pager"><span>Rows 1–8 of 225</span><span><a href="#">Next 50</a></span></div></div></div>
+<div data-tab-group="c" data-tab="m" style="display:none">
+<div class="section"><div class="head"><div><h2>Runs</h2><div class="meta">Every send of this campaign's asset. Open a run for its live status. A follow-up is a second run of the same asset.</div></div></div>
+<table><tr><th>Run</th><th>Channels</th><th>Date</th><th class="num">Recipients</th><th class="num">Delivered</th><th class="num">Responses</th><th>Status</th></tr>
+<tr class="row" onclick="location.href='Run_Status.html'"><td><a href="Run_Status.html">MVI letter · Run 2 · Nov 2026</a></td><td>Mail · United Postcard</td><td class="nw">—</td><td class="num">212</td><td class="num">—</td><td class="num">—</td><td><span class="pill warn">Rendering · 144 of 212</span></td></tr>
+<tr class="row" onclick="location.href='Mailing_Detail.html'"><td><a href="Mailing_Detail.html">MVI letter · Run 1 · Oct 2026</a></td><td>Mail · United Postcard</td><td class="nw">Oct 16, 2026</td><td class="num">211</td><td class="num">171</td><td class="num">14</td><td><span class="pill ok">Mailed</span></td></tr></table>
+<div class="meta" style="margin-top:8px">Every run goes to the campaign's list, frozen at the moment of sending.</div></div></div>
+<div data-tab-group="c" data-tab="t" style="display:none"><div class="section"><ul class="tl">
+<li><span class="when">Nov 5, 2026 7:48 AM</span><span>Run</span><span>MVI letter · Run 2 confirmed · Nolan Jones · 212 recipients · rendering</span></li>
+<li><span class="when">Nov 5, 2026 7:42 AM</span><span>Asset</span><span>MVI letter approved by Nolan Jones · Ready · built by Edson Ruiz</span></li>
+<li><span class="when">Nov 3, 2026 4:10 PM</span><span>Call</span><span>Marissa Cruz · 14 calls today · 3 spoke · 1 callback set</span></li>
+<li><span class="when">Oct 28, 2026 9:00 AM</span><span>Note</span><span>Nolan Jones · "Confirmed by phone that Reyes has not refinanced; keep them at the top."</span></li>
+<li><span class="when">Oct 16, 2026 10:30 AM</span><span>Sent</span><span>MVI letter · 211 pieces · mail and email · 211 owners entered the call queue</span></li>
+<li><span class="when">Sep 30, 2026 11:00 AM</span><span>Created</span><span>Nolan Jones · list Absentee 2–4 units · 94609, 94610 · target 500 calls a week</span></li></ul></div></div>
+</div><div class="panel assetcard" data-panel="asset"><h3>Asset</h3>
+<div class="th">MVI letter<br>page 1 thumbnail</div>
+<div style="font-size:14px;font-weight:600">MVI letter <span class="pill ok" style="margin-left:6px">Ready</span></div>
+<div class="meta">4-page letter · per property · Mail · master v3</div>
+<dl class="kv" style="grid-template-columns:90px 1fr;font-size:12px;margin-top:10px"><dt>Pieces</dt><dd>231, one per property</dd><dt>Images</dt><dd>Photo per property · map fallback · Telegraph hero</dd><dt>Copy</dt><dd>5 areas · 2 edited</dd><dt>Built by</dt><dd>Edson Ruiz · Nov 4</dd><dt>Approved by</dt><dd>Nolan Jones · Nov 5</dd><dt>Runs</dt><dd>2 · <a href="Run_Status.html">Run 2 rendering</a></dd></dl>
+<div class="formfoot"><a class="btn" href="Asset_4_Proof.html">View proof</a><a class="btn primary" href="Send_Config.html">Send</a></div>
+<div class="meta" style="margin-top:10px">One asset per campaign. To send a different piece to this list, start a new campaign.</div></div>
+<div class="panel" data-panel="qside" style="display:none"><h3>Reyes Family Trust <span class="x" onclick="panel('asset')">✕</span></h3>
+<div class="meta">Entity · owns 4 properties · <span class="pill navy">Tier A</span></div>
+<h4 style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:14px 0 6px">Phone</h4>
+<div>(925) 555-0142</div>
+<h4 style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:14px 0 6px">Mailing address</h4>
+<div>1711 Mt Diablo Blvd<br>Walnut Creek, CA 94596</div>
+<h4 style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:14px 0 6px">This property</h4>
+<div><a href="Property_Detail.html">4512 Telegraph Ave</a> · Oakland 94609</div><div class="meta">3 units · est. value $1,425,000 · absentee</div>
+<h4 style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:14px 0 6px">Piece sent</h4>
+<div>MVI letter · mail</div><div class="meta">Mailed Oct 16, 2026 · delivered Oct 21 · QR code scanned Oct 29</div>
+<h4 style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:14px 0 6px">Prior touches</h4>
+<div class="meta">Oct 29 · QR scan from the MVI letter<br>Oct 28 · Note · Nolan: has not refinanced<br>Oct 4 · General market · Q3 wrap delivered<br>Jul 8 · Recent activity flyer delivered</div>
+<h4 style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:14px 0 6px">Other buildings in this queue (3)</h4>
+<div class="meta"><a href="#">5318 Telegraph Ave</a> · 2 units · not yet called<br><a href="#">472 41st St</a> · 4 units · not yet called<br><a href="#">3201 Adeline St</a> · 2 units · added by hand · not yet called</div>
+<div class="formfoot"><a class="btn" href="Owner_Detail.html">Open owner</a><button class="btn primary" onclick="panel('log')">Log call</button></div></div>
+<div class="panel" data-panel="editc" style="display:none"><h3>Edit campaign <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="field"><label>Name</label><input type="text" value="Loan maturity · Telegraph corridor" ></div><div class="field"><label>Owner list</label><input type="text" value="Absentee 2–4 units · 94609, 94610" readonly><div class="meta" style="margin-top:4px">Can’t change: 2 runs have been sent.</div></div><div class="field"><label>About</label><select><option selected>Loan matured · 12 properties</option><option>A listing…</option><option>Nothing in particular</option></select></div>
+<div class="field"><label>Goal</label><textarea rows="3" style="max-width:none" >Reach every 2–4 unit owner whose loan matured in 2025–2026 before they refinance; book 3 listing appointments by Dec 15.</textarea></div><div class="field"><label>Owner</label><select><option selected>Nolan Jones</option><option>David Weglarz</option></select></div><div class="field"><label>Calls per week target</label><input type="number" value="500" style="max-width:120px"></div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Save</button></div></div>
+<div class="panel" data-panel="note" style="display:none"><h3>Add a note <span class="x" onclick="panel(null)">✕</span></h3><div class="field"><label>Date</label><input type="date" value="2026-11-03"></div><div class="field"><label>Note</label><textarea rows="4" style="max-width:none" ></textarea></div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Add</button></div></div>
+<div class="panel" data-panel="log" style="display:none"><h3>Log call <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="meta" style="margin-bottom:10px">Reyes Family Trust · (925) 555-0142 · <a href="Property_Detail.html">4512 Telegraph Ave</a><br>Also in queue: 3 other buildings</div>
+<div class="field"><label>Outcome</label><select><option>No answer</option><option>Left message</option><option selected>Spoke</option><option>Appointment set</option><option>Callback requested</option><option>Not interested</option><option>Wrong number</option><option>Do not contact</option></select></div>
+<div class="field"><label>Callback on (if requested)</label><div class="dt"><input type="date"><input type="time"></div></div>
+<div class="field"><label>Notes</label><textarea rows="3" style="max-width:none" >Owner is weighing a refinance vs. sale; wants a value opinion before deciding.</textarea></div>
+<div class="field"><label>Next</label><select><option selected>Keep in queue</option><option>Mark this building done</option><option>Mark all 4 of their buildings done</option></select></div>
+<div class="meta">Appointment set opens the appointment form. Do not contact adds the owner to the do-not-contact list and removes all their rows.</div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Save</button></div></div></div></div>
+</div></div>
+<div class="overlay" id="closec" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Close this campaign</h3><div class='meta'>Closing freezes the call queue (225 calls left) and stops new mailings. <b>1 run is still rendering</b>; it must be complete or cancelled first.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn danger" onclick="closeDlg();save()">Close campaign</button></div></div></div><div class="overlay" id="archc" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Archive this campaign</h3><div class='meta'>Hides it from the Campaigns list. Everything stays on record.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn primary" onclick="closeDlg();save()">Archive</button></div></div></div><div class="overlay" id="assign" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Assign calls</h3><div class='field'><label>Assign the 3 selected rows to</label><select><option>Marissa Cruz</option><option>Osi Umunna</option><option>Nolan Jones</option></select></div><div class='meta'>Or pick 'Not yet called' above and assign the whole batch.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn primary" onclick="closeDlg();save()">Assign</button></div></div></div>
+<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px">Saved.</div>
+<div class="demo">Prescott Listing System · demo · Round 3 · Asset and Send Flow v1.0 · Nov 2026 · Buttons respond but nothing is stored.</div>
+<script>
+function grp(b){b.parentNode.classList.toggle('closed')}
+
+function panel(id){if(id===null)id='asset';document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
+function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
+function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
+function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+
+function tab(group,id,btn){document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(e){e.style.display=(e.dataset.tab===id)?'':'none'});var p=btn.parentNode;Array.prototype.forEach.call(p.children,function(b){b.classList.toggle('on',b===btn)})}
+function toggle(id){var e=document.getElementById(id);if(e)e.classList.toggle('open')}
+document.addEventListener('click',function(ev){document.querySelectorAll('.menu.open').forEach(function(m){if(!m.contains(ev.target))m.classList.remove('open')})});
+function dlg(id){document.querySelectorAll('.overlay').forEach(function(e){e.classList.toggle('open',e.id===id)})}
+function closeDlg(){document.querySelectorAll('.overlay').forEach(function(e){e.classList.remove('open')})}
+function selrow(tr){document.querySelectorAll('tr.sel').forEach(function(r){r.classList.remove('sel')});tr.classList.add('sel');panel('side')}
+function bulk(){var n=document.querySelectorAll('input.rowchk:checked').length;var b=document.getElementById('bulk');if(b){b.classList.toggle('on',n>0);document.getElementById('bulkn').textContent=n}}
+</script><script>function selrow(tr){if(event&&event.target.tagName=="A")return;tr.closest("table").querySelectorAll("tr.sel").forEach(function(x){x.classList.remove("sel")});tr.classList.add("sel");if(tr.closest("[data-tab=q]"))panel("qside")}</script></body></html>

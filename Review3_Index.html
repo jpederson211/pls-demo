@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PLS Review 3 · Asset and Send</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#1E1E1E;background:#F7F6F3;padding:36px 16px 60px}
+.wrap{max-width:960px;margin:0 auto}h1{font-size:24px;margin:0 0 4px}.sub{color:#6B6A66;margin-bottom:28px}
+h2{font-size:15px;margin:28px 0 10px;letter-spacing:.04em;text-transform:uppercase;color:#6B6A66}
+.path{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.path a{background:#2D2E41;color:#fff;text-decoration:none;padding:8px 12px;border-radius:2px;font-size:13px}.path span{color:#9A9892}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:8px 10px;border-bottom:1px solid #D3D0CB;background:#F0EEEA}td{padding:8px 10px;border-bottom:1px solid #E6E3DE;vertical-align:top}td a{color:#2D2E41}
+.note{background:#fff;border:1px solid #D3D0CB;padding:14px 16px;margin-bottom:10px}.note b{display:block;margin-bottom:4px}
+ol{padding-left:20px}li{margin-bottom:6px}
+</style></head><body><div class="wrap">
+<h1>Prescott Listing System · Review 3 · Asset and Send Flow</h1>
+<div class="sub">Mockups for Screen PRD v2.3 §5.9 and §18 (Campaign Asset and Send Flow v1.0). Nov 6, 2026, revised after the first review: one asset per campaign, asset card replaces the owner panel on Campaign, and three asset types each get their own Images / Copy / Proof. Everything else in the demo is unchanged from Review 2; the full set is reachable from <a href="Dashboard.html">Dashboard</a>.</div>
+
+<h2>Campaign · two states</h2>
+<div class="path"><a href="Campaign_Detail_NoAsset.html">Campaign · no asset yet</a><span>›</span><a href="Asset_1_Select.html">New asset</a><span>…</span><a href="Campaign_Detail.html">Campaign · asset set</a></div>
+
+<h2>Demo path · MVI letter (per property)</h2>
+<div class="path"><a href="Campaign_Detail.html">Campaign</a><span>›</span><a href="Asset_1_Select.html">1 Select</a><span>›</span><a href="Asset_2_Images.html">2 Images</a><span>›</span><a href="Asset_3_Copy_Loading.html">3 Copy (drafting)</a><span>›</span><a href="Asset_3_Copy.html">3 Copy</a><span>›</span><a href="Asset_4_Proof.html">4 Proof</a><span>›</span><a href="Asset_Ready.html">Ready</a><span>›</span><a href="Send_Config.html">Send</a><span>›</span><a href="Run_Status.html">Run status (rendering)</a><span>›</span><a href="Run_Exceptions.html">Exceptions</a></div>
+
+<h2>Second path · Recent Activity postcard (area, mail)</h2>
+<div class="path"><a href="Asset_1_Select.html">1 Select</a><span>›</span><a href="AssetRP_2_Images.html">2 Images</a><span>›</span><a href="AssetRP_3_Copy.html">3 Copy (over-limit state)</a><span>›</span><a href="AssetRP_4_Proof.html">4 Proof (front / back)</a><span>›</span><a href="AssetRP_Ready.html">Ready</a><span>›</span><a href="Send_Config_Postcard.html">Send</a></div>
+
+<h2>Third path · Recent Activity flyer (area, mail + email)</h2>
+<div class="path"><a href="Asset_1_Select.html">1 Select</a><span>›</span><a href="AssetRA_2_Images.html">2 Images</a><span>›</span><a href="AssetRA_3_Copy.html">3 Copy</a><span>›</span><a href="AssetRA_4_Proof.html">4 Proof</a><span>›</span><a href="AssetRA_Ready.html">Ready</a><span>›</span><a href="Send_Config_Flyer.html">Send (both channels)</a><span>›</span><a href="Run_Status_Flyer.html">Run status (sent, awaiting vendor)</a></div>
+
+<h2>Screens in this round</h2>
+<table><tr><th>PRD</th><th>Screen</th><th>What to look at</th></tr>
+<tr><td>C2</td><td><a href="Campaign_Detail_NoAsset.html">Campaign · no asset</a></td><td>Planning, metrics at 0, empty queue and Mailings, empty asset card on the right, <b>New asset</b> primary.</td></tr>
+<tr><td>C2</td><td><a href="Campaign_Detail.html">Campaign · asset set</a></td><td>Asset card on the right (thumbnail, Ready, built / approved by, View proof, Send). Primary is <b>Send</b>; New asset is gone. Mailings tab lists runs only. Owner panel opens only from a queue row.</td></tr>
+<tr><td>R3·1</td><td><a href="Asset_1_Select.html">Select interest generator</a></td><td>Nine cards in two rows. Three card states: approved master, no master (Upload master link), needs a listing subject. Side panel describes the pick.</td></tr>
+<tr><td>R3·2</td><td><a href="Asset_2_Images.html">Images · MVI letter</a></td><td>Fixed 4-page layout with two outlined slots. Subject slot is per-property with a fallback picker (map tile default). Hero from the image library.</td></tr>
+<tr><td>R3·3</td><td><a href="Asset_3_Copy_Loading.html">Copy · drafting</a></td><td>Loading state while FieldPost drafts. Shows what was and wasn't sent (no owner PII, no values). Auto-advances after 6 s.</td></tr>
+<tr><td>R3·3</td><td><a href="Asset_3_Copy.html">Copy · MVI letter</a></td><td>Run-level fields with Regenerate and character counts; per-property pattern shown applied to three samples; system-filled areas read-only.</td></tr>
+<tr><td>R3·4</td><td><a href="Asset_4_Proof.html">Proof · MVI letter</a></td><td>Four pages, three sample properties plus a picker. Approve vs Submit for approval rule stated inline.</td></tr>
+<tr><td>—</td><td><a href="Asset_Ready.html">Your asset is ready</a></td><td>Confirmation with Go to sending / Back to campaign. Nothing rendered, frozen or sent.</td></tr>
+<tr><td>R3·2–4</td><td><a href="AssetRP_2_Images.html">Images</a> · <a href="AssetRP_3_Copy.html">Copy</a> · <a href="AssetRP_4_Proof.html">Proof</a> · postcard</td><td>6×9 front and back; one full-bleed slot; two short copy areas, headline drawn over its limit so the blocked Next shows; proof flips front / back.</td></tr>
+<tr><td>R3·2–4</td><td><a href="AssetRA_2_Images.html">Images</a> · <a href="AssetRA_3_Copy.html">Copy</a> · <a href="AssetRA_4_Proof.html">Proof</a> · flyer</td><td>Same wizard for a single-piece area asset: one hero, optional thumbnails, two copy areas, one proof.</td></tr>
+<tr><td>R4</td><td><a href="Send_Config.html">Send · MVI letter</a> · <a href="Send_Config_Postcard.html">Send · postcard</a> · <a href="Send_Config_Flyer.html">Send · flyer</a></td><td>Channel cards (only the ones the asset supports), vendor, timing, recipients after suppression, cost estimate, days-to-rank. One Confirm.</td></tr>
+<tr><td>R2</td><td><a href="Run_Status.html">Run status · rendering</a> · <a href="Run_Status_Flyer.html">Run status · sent</a></td><td>Stage tracker: Render with progress and held count, Email live counters, Mail awaiting vendor with Mark as mailed (R5), Responses. Tabs: Recipients, Renders, Costs.</td></tr>
+<tr><td>open 2</td><td><a href="Run_Exceptions.html">Exceptions</a></td><td>Proposal: held pieces with reason, per-row fix action, re-render only the fixed ones.</td></tr>
+<tr><td>R1</td><td><a href="Mailings.html">Mailings</a></td><td>Run list with the v2.3 columns and status pills. No primary action; runs start from a campaign.</td></tr></table>
+
+<h2>Decisions applied in this revision</h2>
+<div class="note"><b>One asset per campaign.</b> The campaign holds exactly one interest generator. The asset card replaces the Assets table; a follow-up is a second run of the same asset; a different piece means a new campaign. The ⋯ menu carries "Replace asset", locked after the first send. This supersedes PRD v2.3 §5.8–5.9 wording about several configurations per campaign.</div>
+<div class="note"><b>Step 1 cards.</b> Only MVI letter, Recent Activity postcard and Recent Activity flyer lead into steps 2–4 in this round; the other six select but disable Next with a note. General market analysis now shows as master-approved.</div>
+<div class="note"><b>Who approves.</b> Unchanged: both gates exclude the creator. Edson builds, Nolan approves.</div>
+<div class="note"><b>Image library</b> stays a picker inside Images (no sub-tab yet). <b>Exceptions queue</b> remains a proposal for open item 2.</div>
+</div></body></html>

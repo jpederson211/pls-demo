@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Absentee 2–4 units · 94609, 94610 · Prescott Listing System</title><style>
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.chart{height:180px;background:#fff;border:1px solid #D3D0CB;padding:10px}
+.chart svg{width:100%;height:100%}
+.lc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.seg{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}
+.seg button{font:inherit;background:#fff;border:none;border-right:1px solid #B5B2AC;padding:6px 12px;cursor:pointer}
+.seg button:last-child{border-right:0}.seg button.on{background:#2D2E41;color:#fff}
+.live{background:#F7F6F3;border:1px solid #D3D0CB;padding:14px}
+.live .big{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.live .split{font-size:12px;color:#6B6A66;margin-top:4px}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px;cursor:pointer}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.excl{background:#fff;border:1px solid #D3D0CB;padding:10px 14px}
+.excl .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #E6E3DE}.excl .row:last-child{border-bottom:0}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.4;color:#1E1E1E;background:#F7F6F3}
+.wftool{background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wftool span.lbl{color:#B5B2AC;margin-right:4px}
+.wftool button{font:inherit;background:#444;color:#fff;border:1px solid #666;padding:3px 10px;cursor:pointer}
+.wftool button.on{background:#fff;color:#1E1E1E}
+.wftool .sep{width:1px;height:18px;background:#666;margin:0 6px}
+.app{display:flex;min-height:calc(100vh - 34px)}
+.rail{width:216px;flex:0 0 216px;background:#fff;border-right:1px solid #D3D0CB;display:flex;flex-direction:column}
+.rail .tenant{padding:14px 16px;border-bottom:1px solid #D3D0CB;display:flex;gap:10px;align-items:center;font-weight:600}
+.logo{width:28px;height:28px;background:#E9E7E2;border:1px solid #B5B2AC;flex:0 0 28px}
+.rail nav{flex:1;padding:8px 0}
+.rail a{display:flex;align-items:center;padding:9px 16px;color:#1E1E1E;text-decoration:none}
+.rail a.cur{background:#2D2E41;color:#fff}
+.rail a.dis{color:#9A9892;cursor:default}
+.tag{font-size:10px;border:1px solid #B5B2AC;padding:0 4px;margin-left:auto;color:#6B6A66;border-radius:2px;line-height:14px}
+.rail .user{padding:12px 16px;border-top:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.rail .user b{display:block;color:#1E1E1E;font-weight:500}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid #D3D0CB;padding:10px 24px;display:flex;align-items:flex-end;justify-content:space-between;min-height:64px}
+.crumb{font-size:12px;color:#6B6A66;margin-bottom:4px}
+.crumb a{color:#2D2E41}
+h1{font-size:18px;font-weight:600;margin:0}
+.btn{font:inherit;font-size:13px;padding:7px 12px;border:1px solid #B5B2AC;background:#fff;color:#1E1E1E;cursor:pointer;border-radius:2px}
+.btn.primary{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.btn.danger{border-color:#B03A2E;color:#B03A2E}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:8px;align-items:center}
+.content{padding:20px 24px;flex:1;display:flex;gap:20px;align-items:flex-start}
+.body{flex:1;min-width:0}
+.panel{width:288px;flex:0 0 288px;background:#fff;border:1px solid #D3D0CB;padding:14px}
+.panel h3{font-size:13px;margin:0 0 8px;font-weight:600}
+.panel dl{margin:0;font-size:12px}.panel dt{color:#6B6A66;margin-top:8px}.panel dd{margin:0}
+h2{font-size:15px;font-weight:600;margin:0 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}
+th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:0 10px;height:36px;border-bottom:1px solid #D3D0CB;background:#F0EEEA;white-space:nowrap}
+td{padding:0 10px;height:40px;border-bottom:1px solid #E6E3DE;white-space:nowrap}
+tr.row{cursor:pointer}tr.row:hover td{background:#F7F6F3}tr.sel td{background:#ECEAE4}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td a{color:#2D2E41}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border:1px solid #B5B2AC;border-radius:10px;background:#fff;white-space:nowrap}
+.pill.ok{border-color:#2E7D4F;color:#2E7D4F}.pill.warn{border-color:#B8860B;color:#8A6500}.pill.err{border-color:#B03A2E;color:#B03A2E}.pill.navy{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.note{background:#FFF3B0;border:1px solid #D9B800;padding:6px 10px;font-size:12px;margin:8px 0;color:#1E1E1E}
+.note::before{content:"PRD gap: ";font-weight:600}
+.box{background:#E9E7E2;border:1px dashed #B5B2AC;color:#6B6A66;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px}
+.field{margin-bottom:14px}.field label{display:block;font-size:12px;color:#6B6A66;margin-bottom:4px}
+.req::after{content:" *";color:#B03A2E}
+input[type=text],input[type=number],input[type=date],select,textarea{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;background:#fff;width:100%;max-width:420px;border-radius:2px}
+input[readonly]{background:#F0EEEA;color:#6B6A66}
+.chk{display:flex;gap:8px;align-items:center;margin:6px 0}
+.chk input{width:auto}
+.empty{background:#fff;border:1px dashed #B5B2AC;padding:40px;text-align:center;color:#6B6A66}
+.empty b{display:block;color:#1E1E1E;margin-bottom:4px}
+.errbox{background:#fff;border:1px solid #B03A2E;padding:16px;color:#B03A2E}
+.errbox b{display:block;margin-bottom:4px}
+.skel{background:#E9E7E2;height:14px;margin:10px 0;border-radius:2px}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.section{background:#fff;border:1px solid #D3D0CB;padding:14px;margin-bottom:16px}
+.section h2{margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facts{display:flex;gap:24px;flex-wrap:wrap}.facts div{font-size:13px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.head h2{font-size:17px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{padding:10px 0;border-bottom:1px solid #E6E3DE;display:grid;grid-template-columns:120px 90px 1fr;gap:12px;align-items:start}
+.tl .when{font-variant-numeric:tabular-nums;color:#6B6A66;font-size:12px}
+.meta{font-size:12px;color:#6B6A66}
+.money,.num{font-variant-numeric:tabular-nums}
+.steps{display:flex;gap:0;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}
+.steps div.on{background:#2D2E41;color:#fff}
+.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.formfoot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid #D3D0CB;margin-top:16px}
+.formfoot .left{margin-right:auto}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:16px;max-width:460px;margin-top:12px;box-shadow:0 2px 0 #D3D0CB}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:14px;cursor:pointer;min-height:96px}
+.tile.dis{color:#9A9892;cursor:default;background:#F7F6F3}
+.tile .n{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;margin:4px 0}
+.tile .stage{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66}
+.toast{position:fixed;bottom:20px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px}
+.pdf{display:flex;gap:16px}
+.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;box-shadow:0 1px 0 #D3D0CB}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}
+.thumbs .box{width:70px;height:96px;cursor:pointer}
+.thumbs .box.on{border:2px solid #2D2E41}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.count{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:6px 12px;font-size:13px}.kv dt{color:#6B6A66}.kv dd{margin:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.totals{display:flex;gap:0;background:#fff;border:1px solid #D3D0CB;margin:14px 0}
+.totals div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.totals div:last-child{border-right:0}
+.totals .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.totals span{font-size:11px;color:#6B6A66;display:block}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:90px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+
+.rail nav{padding:6px 0}
+.rail .grp{margin-top:6px}
+.rail .grp>button{font:inherit;width:100%;text-align:left;background:none;border:none;padding:9px 16px;color:#6B6A66;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center}
+.rail .grp>button::before{content:"▾";font-size:10px;margin-right:6px;color:#9A9892}
+.rail .grp.closed>button::before{content:"▸"}
+.rail .grp.closed .items{display:none}
+.rail .items a{padding-left:34px}
+.rail .user{display:flex;align-items:center;cursor:pointer}
+.rail .user div{flex:1}
+.rail .user .chev{color:#9A9892;font-size:11px}
+
+body{background:#F7F6F3;padding-bottom:30px}
+.app{min-height:calc(100vh - 30px)}
+.note,.note::before{display:none}
+.rail{position:sticky;top:0;height:calc(100vh - 30px)}
+td.nw{white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.subtabs .last{margin-left:auto;font-size:12px;color:#6B6A66}
+.swatch{width:22px;height:22px;border:1px solid #B5B2AC;display:inline-block;vertical-align:middle;margin-right:8px}
+.slot{display:flex;gap:12px;align-items:center;border:1px solid #D3D0CB;background:#fff;padding:10px;margin-bottom:8px}
+.slot .box{width:120px;height:56px;flex:0 0 120px}
+.slot .fn{flex:1;font-size:12px}
+.prints{font-size:11px;color:#6B6A66;margin-top:3px}
+.tog{display:inline-block;width:32px;height:18px;border-radius:9px;background:#2D2E41;position:relative;vertical-align:middle;cursor:pointer}
+.tog::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.tog.off{background:#B5B2AC}.tog.off::after{right:auto;left:2px}
+.tog.dis{opacity:.4;cursor:default}
+.rule{background:#F0EEEA;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px}
+[data-stab]{display:flex;gap:20px;align-items:flex-start;width:100%}
+.content .panel{flex:0 0 288px;position:sticky;top:12px}
+.body{min-width:0}.section{overflow-x:auto}.section:has(.menu){overflow:visible}.menu .dd{z-index:50}.body table td,.body table th{white-space:normal}
+.panel .field{margin-bottom:10px}.panel input,.panel select,.panel textarea{max-width:none}
+.panel h3{display:flex;justify-content:space-between}.panel .x{cursor:pointer;color:#6B6A66}
+.panel table td,.panel table th{height:30px;padding:0 6px;font-size:12px}
+.panel .formfoot{margin-top:12px;padding-top:10px}
+.toast{display:none}
+.toast.show{display:block}
+.demo{position:fixed;left:0;right:0;bottom:0;background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;opacity:.9}
+
+a.btn{text-decoration:none;display:inline-block}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.filters select,.filters input{width:auto;max-width:220px}
+.filters .cnt{margin-left:auto;font-size:12px;color:#6B6A66}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}.facts div{font-size:14px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head h2{font-size:17px}
+.tl li{grid-template-columns:150px 90px 1fr}
+.menu{position:relative;display:inline-block}
+.menu .dd{position:absolute;right:0;top:34px;background:#fff;border:1px solid #B5B2AC;min-width:170px;z-index:5;display:none}
+.menu .dd a{display:block;padding:8px 12px;color:#1E1E1E;text-decoration:none}
+.menu.open .dd{display:block}
+.overlay{position:fixed;inset:0;background:rgba(30,30,30,.35);display:none;align-items:center;justify-content:center;z-index:20}
+.overlay.open{display:flex}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:18px;width:520px;max-width:92vw}
+.dialog h3{margin:0 0 10px;font-size:15px}
+.sbs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sbs .col{border:1px solid #D3D0CB;padding:10px;font-size:12px}
+.sbs .col b{display:block;margin-bottom:6px}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:#6B6A66}
+tr.sel td{background:#ECEAE4}
+.chkcol{width:28px}
+.srch{display:flex;gap:6px}.srch input{max-width:260px}
+.clear{font-size:12px;margin-left:8px}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{background:#fff;border:1px solid #D3D0CB;padding:8px}
+.ph .img{height:130px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px;position:relative}
+.ph .star{position:absolute;top:6px;right:8px;font-size:16px;color:#B5B2AC;cursor:pointer}.ph .star.on{color:#2D2E41}.ph .star.dis{opacity:.35;cursor:not-allowed}
+.ph .cap{font-size:12px;margin-top:6px}.ph .row2{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.ph .acts{font-size:11px;margin-top:6px}.ph .acts a{margin-right:8px}
+.maptile{height:200px;background:#EDEBE6;border:1px solid #D3D0CB;position:relative;overflow:hidden}
+.maptile svg{width:100%;height:100%}
+.maptile .lbl{position:absolute;bottom:8px;left:10px;font-size:12px;color:#6B6A66;background:rgba(255,255,255,.85);padding:2px 6px}
+.dt{display:flex;gap:8px}.dt input{max-width:160px}
+.bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
+.bulk.on{display:flex}
+</style></head><body>
+<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Market_by_ZIP.html">Your Market</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="cur" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
+<div class="main">
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Outreach › <a href="Owner_Lists.html">Owner lists</a> › Absentee 2–4 units</div><h1>Absentee 2–4 units · 94609, 94610</h1></div><div class="actions"></div></div>
+<div class="content"><div data-stab="x"><div class="body">
+<div class="section"><div class="head"><div><h2>Absentee 2–4 units · 94609, 94610</h2><div style="margin-top:8px"><span class="pill ">Filter list</span> <span class="pill ">231 properties</span> <span class="pill navy">212 pieces</span> <span class="pill warn">19 on do-not-contact</span></div><div class="meta" style="margin-top:6px">Created by Edson Ruiz, Jul 2, 2026 · last mailed Oct 16, 2026</div></div>
+<div class="actions"><a class="btn primary" href="#">Start a mailing</a><span class="menu" id="morel"><button class="btn" onclick="toggle('morel')">⋯</button><div class="dd"><a href="Edit_List.html">Edit list</a><a href="#" onclick="toggle('morel');panel('addp');return false">Add properties</a><a href="#" onclick="toggle('morel');save();return false">Export CSV</a><a href="#" onclick="toggle('morel');dlg('arch');return false">Archive</a></div></span></div></div></div>
+<div class="section"><h2>How this list is built</h2>
+<dl class="kv"><dt>ZIPs</dt><dd>94609 Temescal, 94610 Grand Lake</dd><dt>Units</dt><dd>2 to 4</dd><dt>Absentee</dt><dd>Absentee only</dd><dt>Owner type</dt><dd>People and companies</dd><dt>Tier</dt><dd>Any</dd><dt>Portfolio</dt><dd>Any · 188 single-property owners, 43 portfolio owners</dd><dt>Signals</dt><dd>Loan matured, last 365 days</dd><dt>Not touched in</dt><dd>30 days</dd><dt>Mail one piece per</dt><dd>Owner</dd><dt>Excluded</dt><dd>No unit count (12) · Companies with no named contact: included · Provider do-not-mail flag: included</dd></dl></div>
+<div class="section"><div class="head"><h2>Members</h2><span class="meta">231 properties · 212 pieces · showing 10</span></div>
+<table><tr><th>Address</th><th>Owner</th><th>ZIP</th><th>Tier</th><th>Mailing address used</th><th>Portfolio</th><th>Note</th></tr><tr class="row"><td><a href="Property_Detail.html">4512 Telegraph Ave</a></td><td><a href="Owner_Detail.html">Reyes Family Trust</a></td><td>94609</td><td><span class="pill navy">Tier A</span></td><td>1711 Mt Diablo Blvd, Walnut Creek <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Small portfolio (4)</td><td>—</td></tr><tr class="row"><td><a href="Property_Detail.html">5318 Telegraph Ave</a></td><td><a href="Owner_Detail.html">Reyes Family Trust</a></td><td>94609</td><td><span class="pill navy">Tier A</span></td><td>1711 Mt Diablo Blvd, Walnut Creek <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Small portfolio (4)</td><td><span class=meta>Same owner as above · 1 piece</span></td></tr><tr class="row"><td><a href="Property_Detail.html">5210 Telegraph Ave</a></td><td><a href="Owner_Detail.html">Haddad Properties LLC</a></td><td>94609</td><td><span class="pill navy">Tier A</span></td><td>PO Box 2231, Walnut Creek <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Portfolio (6)</td><td>—</td></tr><tr class="row"><td><a href="Property_Detail.html">3024 Grove St</a></td><td><a href="Owner_Detail.html">Patricia Nguyen</a></td><td>94609</td><td><span class="pill ">Tier B</span></td><td>3024 Grove St, Oakland <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Single</td><td>—</td></tr><tr class="row"><td><a href="Property_Detail.html">4007 Shafter Ave</a></td><td><a href="Owner_Detail.html">Linda Okafor</a></td><td>94609</td><td><span class="pill ">Tier B</span></td><td>4007 Shafter Ave, Oakland <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Single</td><td><span class="pill warn">Do not contact · mail · requested</span></td></tr><tr class="row"><td><a href="Property_Detail.html">5531 Manila Ave</a></td><td><a href="Owner_Detail.html">Manila Ave Partners LP</a></td><td>94609</td><td><span class="pill navy">Tier A</span></td><td>100 Railroad Ave, Danville <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Small portfolio (3)</td><td><span class="pill warn">No named contact</span></td></tr><tr class="row"><td><a href="Property_Detail.html">1840 Park Blvd</a></td><td><a href="Owner_Detail.html">1840 Park LLC</a></td><td>94610</td><td><span class="pill ">Tier B</span></td><td>1840 Park Blvd, Oakland <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Single</td><td>—</td></tr><tr class="row"><td><a href="Property_Detail.html">3310 Grand Ave</a></td><td><a href="Owner_Detail.html">Grand Ave Holdings LLC</a></td><td>94610</td><td><span class="pill navy">Tier A</span></td><td>3480 Mt Diablo Blvd, Lafayette <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Portfolio (5)</td><td>—</td></tr><tr class="row"><td><a href="Property_Detail.html">2919 Grand Ave</a></td><td><a href="Owner_Detail.html">Helen Castillo</a></td><td>94610</td><td><span class="pill ">Tier B</span></td><td>2919 Grand Ave, Oakland <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Single</td><td>—</td></tr><tr class="row"><td><a href="Property_Detail.html">610 Alcatraz Ave</a></td><td><a href="Owner_Detail.html">Alcatraz Partners</a></td><td>94609</td><td><span class="pill navy">Tier A</span></td><td>2120 University Ave, Berkeley <a href="#" class="meta" onclick="panel('addr');return false">change</a></td><td>Small portfolio (2)</td><td>—</td></tr></table>
+<div class="pager"><span>Rows 1–10 of 231</span><span><a href="#">Next 50</a></span></div></div>
+<div class="section"><h2>Mailings that used this list</h2><table><tr><th>Mailing</th><th>Piece</th><th>Sent</th><th class="num">Pieces</th><th>Status</th></tr>
+<tr class="row"><td><a href="#">MVI letter · Absentee 94609–94610 · Oct 2026</a></td><td>MVI letter</td><td>Oct 16, 2026</td><td class="num">211</td><td><span class="pill ok">Mailed</span></td></tr>
+<tr class="row"><td><a href="#">Recent activity · Temescal · Jul 2026</a></td><td>Recent activity flyer</td><td>Jul 8, 2026</td><td class="num">204</td><td><span class="pill ok">Complete</span></td></tr></table></div>
+</div><div class="panel" data-panel="addr" style="display:none"><h3>Use a different address <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="meta" style="margin-bottom:10px">Reyes Family Trust · 4512 Telegraph Ave</div>
+<div class="field"><label>Mailing address for this owner</label>
+<div class="chk"><input type="radio" name="ad" checked> <span>1711 Mt Diablo Blvd, Walnut Creek CA 94596<br><span class="meta">Used on 3 of 4 properties · most recent</span></span></div>
+<div class="chk"><input type="radio" name="ad"> <span>4512 Telegraph Ave, Oakland CA 94609<br><span class="meta">Used on 1 property</span></span></div>
+<div class="chk"><input type="radio" name="ad"> <span>Type a different address…</span></div></div>
+<div class="meta">Your choice is remembered for this owner on every list.</div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Save</button></div></div><div class="panel" data-panel="addp" style="display:none"><h3>Add properties <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="meta" style="margin-bottom:10px">Search for a building and add it to this list. Filters on the list are not applied to properties you add by hand.</div>
+<div class="field"><label>Find a property</label><div class="srch"><input type="text" value="2919 Grand"><button class="btn">Search</button></div></div>
+<table><tr><th></th><th>Address</th><th>Owner</th></tr>
+<tr><td><input type="checkbox" checked></td><td>2919 Grand Ave</td><td>Helen Castillo</td></tr>
+<tr><td><input type="checkbox"></td><td>2919 Grand Ave, Unit B</td><td>Helen Castillo</td></tr></table>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Add 1 property</button></div></div></div></div>
+</div></div>
+<div class="overlay" id="arch" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Archive this list</h3><div class="meta">The list is hidden from pickers and can't be used for a new mailing. Past mailings keep their record of it. You can unarchive it later.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn primary" onclick="closeDlg();save()">Archive</button></div></div></div>
+<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px">Saved.</div>
+<div class="demo">Prescott Listing System · demo · Nov 2026 · Buttons respond but nothing is stored.</div>
+<script>
+function grp(b){b.parentNode.classList.toggle('closed')}
+
+function panel(id){document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
+function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
+function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
+function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+
+function tab(group,id,btn){document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(e){e.style.display=(e.dataset.tab===id)?'':'none'});var p=btn.parentNode;Array.prototype.forEach.call(p.children,function(b){b.classList.toggle('on',b===btn)})}
+function toggle(id){var e=document.getElementById(id);if(e)e.classList.toggle('open')}
+document.addEventListener('click',function(ev){document.querySelectorAll('.menu.open').forEach(function(m){if(!m.contains(ev.target))m.classList.remove('open')})});
+function dlg(id){document.querySelectorAll('.overlay').forEach(function(e){e.classList.toggle('open',e.id===id)})}
+function closeDlg(){document.querySelectorAll('.overlay').forEach(function(e){e.classList.remove('open')})}
+function selrow(tr){document.querySelectorAll('tr.sel').forEach(function(r){r.classList.remove('sel')});tr.classList.add('sel');panel('side')}
+function bulk(){var n=document.querySelectorAll('input.rowchk:checked').length;var b=document.getElementById('bulk');if(b){b.classList.toggle('on',n>0);document.getElementById('bulkn').textContent=n}}
+</script></body></html>

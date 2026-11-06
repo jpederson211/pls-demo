@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4512 Telegraph Ave · Prescott Listing System</title><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.4;color:#1E1E1E;background:#F7F6F3}
+.wftool{background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wftool span.lbl{color:#B5B2AC;margin-right:4px}
+.wftool button{font:inherit;background:#444;color:#fff;border:1px solid #666;padding:3px 10px;cursor:pointer}
+.wftool button.on{background:#fff;color:#1E1E1E}
+.wftool .sep{width:1px;height:18px;background:#666;margin:0 6px}
+.app{display:flex;min-height:calc(100vh - 34px)}
+.rail{width:216px;flex:0 0 216px;background:#fff;border-right:1px solid #D3D0CB;display:flex;flex-direction:column}
+.rail .tenant{padding:14px 16px;border-bottom:1px solid #D3D0CB;display:flex;gap:10px;align-items:center;font-weight:600}
+.logo{width:28px;height:28px;background:#E9E7E2;border:1px solid #B5B2AC;flex:0 0 28px}
+.rail nav{flex:1;padding:8px 0}
+.rail a{display:flex;align-items:center;padding:9px 16px;color:#1E1E1E;text-decoration:none}
+.rail a.cur{background:#2D2E41;color:#fff}
+.rail a.dis{color:#9A9892;cursor:default}
+.tag{font-size:10px;border:1px solid #B5B2AC;padding:0 4px;margin-left:auto;color:#6B6A66;border-radius:2px;line-height:14px}
+.rail .user{padding:12px 16px;border-top:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.rail .user b{display:block;color:#1E1E1E;font-weight:500}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid #D3D0CB;padding:10px 24px;display:flex;align-items:flex-end;justify-content:space-between;min-height:64px}
+.crumb{font-size:12px;color:#6B6A66;margin-bottom:4px}
+.crumb a{color:#2D2E41}
+h1{font-size:18px;font-weight:600;margin:0}
+.btn{font:inherit;font-size:13px;padding:7px 12px;border:1px solid #B5B2AC;background:#fff;color:#1E1E1E;cursor:pointer;border-radius:2px}
+.btn.primary{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.btn.danger{border-color:#B03A2E;color:#B03A2E}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:8px;align-items:center}
+.content{padding:20px 24px;flex:1;display:flex;gap:20px;align-items:flex-start}
+.body{flex:1;min-width:0}
+.panel{width:288px;flex:0 0 288px;background:#fff;border:1px solid #D3D0CB;padding:14px}
+.panel h3{font-size:13px;margin:0 0 8px;font-weight:600}
+.panel dl{margin:0;font-size:12px}.panel dt{color:#6B6A66;margin-top:8px}.panel dd{margin:0}
+h2{font-size:15px;font-weight:600;margin:0 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}
+th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:0 10px;height:36px;border-bottom:1px solid #D3D0CB;background:#F0EEEA;white-space:nowrap}
+td{padding:0 10px;height:40px;border-bottom:1px solid #E6E3DE;white-space:nowrap}
+tr.row{cursor:pointer}tr.row:hover td{background:#F7F6F3}tr.sel td{background:#ECEAE4}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td a{color:#2D2E41}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border:1px solid #B5B2AC;border-radius:10px;background:#fff;white-space:nowrap}
+.pill.ok{border-color:#2E7D4F;color:#2E7D4F}.pill.warn{border-color:#B8860B;color:#8A6500}.pill.err{border-color:#B03A2E;color:#B03A2E}.pill.navy{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.note{background:#FFF3B0;border:1px solid #D9B800;padding:6px 10px;font-size:12px;margin:8px 0;color:#1E1E1E}
+.note::before{content:"PRD gap: ";font-weight:600}
+.box{background:#E9E7E2;border:1px dashed #B5B2AC;color:#6B6A66;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px}
+.field{margin-bottom:14px}.field label{display:block;font-size:12px;color:#6B6A66;margin-bottom:4px}
+.req::after{content:" *";color:#B03A2E}
+input[type=text],input[type=number],input[type=date],select,textarea{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;background:#fff;width:100%;max-width:420px;border-radius:2px}
+input[readonly]{background:#F0EEEA;color:#6B6A66}
+.chk{display:flex;gap:8px;align-items:center;margin:6px 0}
+.chk input{width:auto}
+.empty{background:#fff;border:1px dashed #B5B2AC;padding:40px;text-align:center;color:#6B6A66}
+.empty b{display:block;color:#1E1E1E;margin-bottom:4px}
+.errbox{background:#fff;border:1px solid #B03A2E;padding:16px;color:#B03A2E}
+.errbox b{display:block;margin-bottom:4px}
+.skel{background:#E9E7E2;height:14px;margin:10px 0;border-radius:2px}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.section{background:#fff;border:1px solid #D3D0CB;padding:14px;margin-bottom:16px}
+.section h2{margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facts{display:flex;gap:24px;flex-wrap:wrap}.facts div{font-size:13px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.head h2{font-size:17px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{padding:10px 0;border-bottom:1px solid #E6E3DE;display:grid;grid-template-columns:120px 90px 1fr;gap:12px;align-items:start}
+.tl .when{font-variant-numeric:tabular-nums;color:#6B6A66;font-size:12px}
+.meta{font-size:12px;color:#6B6A66}
+.money,.num{font-variant-numeric:tabular-nums}
+.steps{display:flex;gap:0;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}
+.steps div.on{background:#2D2E41;color:#fff}
+.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.formfoot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid #D3D0CB;margin-top:16px}
+.formfoot .left{margin-right:auto}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:16px;max-width:460px;margin-top:12px;box-shadow:0 2px 0 #D3D0CB}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:14px;cursor:pointer;min-height:96px}
+.tile.dis{color:#9A9892;cursor:default;background:#F7F6F3}
+.tile .n{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;margin:4px 0}
+.tile .stage{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66}
+.toast{position:fixed;bottom:20px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px}
+.pdf{display:flex;gap:16px}
+.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;box-shadow:0 1px 0 #D3D0CB}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}
+.thumbs .box{width:70px;height:96px;cursor:pointer}
+.thumbs .box.on{border:2px solid #2D2E41}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.count{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:6px 12px;font-size:13px}.kv dt{color:#6B6A66}.kv dd{margin:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.totals{display:flex;gap:0;background:#fff;border:1px solid #D3D0CB;margin:14px 0}
+.totals div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.totals div:last-child{border-right:0}
+.totals .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.totals span{font-size:11px;color:#6B6A66;display:block}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:90px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+
+.rail nav{padding:6px 0}
+.rail .grp{margin-top:6px}
+.rail .grp>button{font:inherit;width:100%;text-align:left;background:none;border:none;padding:9px 16px;color:#6B6A66;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center}
+.rail .grp>button::before{content:"▾";font-size:10px;margin-right:6px;color:#9A9892}
+.rail .grp.closed>button::before{content:"▸"}
+.rail .grp.closed .items{display:none}
+.rail .items a{padding-left:34px}
+.rail .user{display:flex;align-items:center;cursor:pointer}
+.rail .user div{flex:1}
+.rail .user .chev{color:#9A9892;font-size:11px}
+
+body{background:#F7F6F3;padding-bottom:30px}
+.app{min-height:calc(100vh - 30px)}
+.note,.note::before{display:none}
+.rail{position:sticky;top:0;height:calc(100vh - 30px)}
+td.nw{white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.subtabs .last{margin-left:auto;font-size:12px;color:#6B6A66}
+.swatch{width:22px;height:22px;border:1px solid #B5B2AC;display:inline-block;vertical-align:middle;margin-right:8px}
+.slot{display:flex;gap:12px;align-items:center;border:1px solid #D3D0CB;background:#fff;padding:10px;margin-bottom:8px}
+.slot .box{width:120px;height:56px;flex:0 0 120px}
+.slot .fn{flex:1;font-size:12px}
+.prints{font-size:11px;color:#6B6A66;margin-top:3px}
+.tog{display:inline-block;width:32px;height:18px;border-radius:9px;background:#2D2E41;position:relative;vertical-align:middle;cursor:pointer}
+.tog::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.tog.off{background:#B5B2AC}.tog.off::after{right:auto;left:2px}
+.tog.dis{opacity:.4;cursor:default}
+.rule{background:#F0EEEA;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px}
+[data-stab]{display:flex;gap:20px;align-items:flex-start;width:100%}
+.content .panel{flex:0 0 288px;position:sticky;top:12px}
+.body{min-width:0}.section{overflow-x:auto}.section:has(.menu){overflow:visible}.menu .dd{z-index:50}.body table td,.body table th{white-space:normal}
+.panel .field{margin-bottom:10px}.panel input,.panel select,.panel textarea{max-width:none}
+.panel h3{display:flex;justify-content:space-between}.panel .x{cursor:pointer;color:#6B6A66}
+.panel table td,.panel table th{height:30px;padding:0 6px;font-size:12px}
+.panel .formfoot{margin-top:12px;padding-top:10px}
+.toast{display:none}
+.toast.show{display:block}
+.demo{position:fixed;left:0;right:0;bottom:0;background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;opacity:.9}
+
+a.btn{text-decoration:none;display:inline-block}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.filters select,.filters input{width:auto;max-width:220px}
+.filters .cnt{margin-left:auto;font-size:12px;color:#6B6A66}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}.facts div{font-size:14px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head h2{font-size:17px}
+.tl li{grid-template-columns:150px 90px 1fr}
+.menu{position:relative;display:inline-block}
+.menu .dd{position:absolute;right:0;top:34px;background:#fff;border:1px solid #B5B2AC;min-width:170px;z-index:5;display:none}
+.menu .dd a{display:block;padding:8px 12px;color:#1E1E1E;text-decoration:none}
+.menu.open .dd{display:block}
+.overlay{position:fixed;inset:0;background:rgba(30,30,30,.35);display:none;align-items:center;justify-content:center;z-index:20}
+.overlay.open{display:flex}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:18px;width:520px;max-width:92vw}
+.dialog h3{margin:0 0 10px;font-size:15px}
+.sbs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sbs .col{border:1px solid #D3D0CB;padding:10px;font-size:12px}
+.sbs .col b{display:block;margin-bottom:6px}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:#6B6A66}
+tr.sel td{background:#ECEAE4}
+.chkcol{width:28px}
+.srch{display:flex;gap:6px}.srch input{max-width:260px}
+.clear{font-size:12px;margin-left:8px}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{background:#fff;border:1px solid #D3D0CB;padding:8px}
+.ph .img{height:130px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px;position:relative}
+.ph .star{position:absolute;top:6px;right:8px;font-size:16px;color:#B5B2AC;cursor:pointer}.ph .star.on{color:#2D2E41}.ph .star.dis{opacity:.35;cursor:not-allowed}
+.ph .cap{font-size:12px;margin-top:6px}.ph .row2{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.ph .acts{font-size:11px;margin-top:6px}.ph .acts a{margin-right:8px}
+.maptile{height:200px;background:#EDEBE6;border:1px solid #D3D0CB;position:relative;overflow:hidden}
+.maptile svg{width:100%;height:100%}
+.maptile .lbl{position:absolute;bottom:8px;left:10px;font-size:12px;color:#6B6A66;background:rgba(255,255,255,.85);padding:2px 6px}
+.dt{display:flex;gap:8px}.dt input{max-width:160px}
+.bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
+.bulk.on{display:flex}
+</style></head><body>
+<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="cur" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Market_by_ZIP.html">Your Market</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
+<div class="main">
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › <a href="Properties.html">Properties</a> › 4512 Telegraph Ave</div><h1>4512 Telegraph Ave</h1></div><div class="actions"></div></div>
+<div class="content"><div data-stab="x"><div class="body">
+<div class="section"><div class="head"><div><h2>4512 Telegraph Ave</h2><div class="meta">Oakland 94609</div>
+ <div style="margin-top:8px"><span class="pill ">3 units</span> <span class="pill navy">Tier A</span> <span class="pill warn">Absentee</span></div></div>
+ <div class="actions"><button class="btn primary" onclick="panel('touch')">Log a touch</button><span class="menu" id="more"><button class="btn" onclick="toggle('more')">⋯</button><div class="dd"><a href="#" onclick="toggle('more');panel('edit');return false">Edit</a><a href="#" onclick="toggle('more');dlg('addlist');return false">Add to list</a><a href="#" onclick="toggle('more');dlg('merge');return false">Merge duplicates</a></div></span></div></div>
+ <div class="facts"><div><span>Estimated value</span>$1,425,000</div><div><span>Last sale</span>Jun 12, 2009 · $610,000</div><div><span>Owner's properties</span>4</div><div><span>Signals</span>2</div></div>
+</div>
+<div class="tabs"><button class="on" onclick="tab('p','ov',this)">Overview</button><button onclick="tab('p','ph',this)">Photos</button><button onclick="tab('p','own',this)">Owners</button><button onclick="tab('p','sales',this)">Sales nearby</button><button onclick="tab('p','sig',this)">Signals</button><button onclick="tab('p','tl',this)">Timeline</button></div>
+<div data-tab-group="p" data-tab="ov">
+ <div class="grid2"><div class="section"><h2>Building</h2><dl class="kv"><dt>Units</dt><dd>3</dd><dt>Year built</dt><dd>1912</dd><dt>Building size</dt><dd>3,480 sq ft</dd><dt>Lot size</dt><dd>4,000 sq ft</dd><dt>Parcel number</dt><dd>012-1004-021-00</dd><dt>County</dt><dd>Alameda</dd><dt>Owner lives here</dt><dd>No</dd><dt>Owner out of state</dt><dd>No</dd><dt>Data from</dt><dd>PropertyRadar · Oct 27, 2026</dd></dl></div>
+ <div class="section"><h2>Photo</h2><div class="box" style="height:200px;position:relative">Front elevation · primary photo<span style="position:absolute;top:6px;right:8px;color:#2D2E41;font-size:16px">★</span></div>
+ <div style="display:flex;gap:12px;align-items:center;margin-top:10px"><div style="width:120px;height:60px;flex:0 0 120px" class="maptile"><svg viewBox="0 0 400 200" preserveAspectRatio="none"><g stroke="#B5B2AC" stroke-width="8"><line x1="0" y1="100" x2="400" y2="100"/><line x1="150" y1="0" x2="150" y2="200"/></g><rect x="212" y="66" width="34" height="28" fill="#2D2E41" opacity=".85"/></svg></div><div class="meta">If a property has no primary photo, a map of its parcel is shown here and printed on the mailer instead.</div></div></div></div>
+ <div class="section"><h2>Loans</h2><table><tr><th class="num">Amount</th><th>Loan date</th><th>Type</th><th>Lender</th><th>Matures</th></tr><tr><td class="num">$380,000</td><td>Mar 4, 2016</td><td>Conventional</td><td>Fremont Bank</td><td>Mar 4, 2026 <span class="pill warn">Matured</span></td></tr></table></div>
+</div>
+<div data-tab-group="p" data-tab="ph" style="display:none"><div class="section">
+<div class="head"><div><h2>Photos</h2><div class="meta">Newest first. The starred photo is the primary; it prints on the MVI letter.</div></div><button class="btn primary" onclick="panel('upl')">Upload photos</button></div>
+<div class="photos" style="margin-top:12px">
+ <div class="ph"><div class="img">Front elevation<span class="star on" title="Primary">★</span></div><div class="cap">Front from Telegraph Ave</div><div class="row2"><span class="pill ">Subject</span> <span class="pill ok">Own</span> <span class="meta">Oct 30, 2026</span></div><div class="acts"><a href="#">Edit</a><a href="#" onclick="dlg('rmph');return false">Remove</a></div></div>
+ <div class="ph"><div class="img">Side yard<span class="star" title="Set as primary">☆</span></div><div class="cap">Rear units from 45th St</div><div class="row2"><span class="pill ">Subject</span> <span class="pill ok">Own</span> <span class="meta">Oct 30, 2026</span></div><div class="acts"><a href="#">Set as primary</a><a href="#">Edit</a><a href="#" onclick="dlg('rmph');return false">Remove</a></div></div>
+ <div class="ph"><div class="img">Listing photo<span class="star dis" title="MLS-restricted photos can't be primary; the MVI letter mails it">☆</span></div><div class="cap">From the 2009 listing</div><div class="row2"><span class="pill ">Subject</span> <span class="pill warn">MLS restricted</span> <span class="meta">Oct 23, 2026</span></div><div class="acts"><span class="meta">Can't be primary (MLS restricted)</span> <a href="#">Edit</a><a href="#" onclick="dlg('rmph');return false">Remove</a></div></div>
+ <div class="ph"><div class="img">Aerial<span class="star" title="Set as primary">☆</span></div><div class="cap">Parcel from above</div><div class="row2"><span class="pill ">Aerial</span> <span class="pill ok">Licensed</span> <span class="meta">Sep 2, 2026</span></div><div class="acts"><a href="#">Set as primary</a><a href="#">Edit</a><a href="#" onclick="dlg('rmph');return false">Remove</a></div></div>
+</div></div></div>
+<div data-tab-group="p" data-tab="own" style="display:none"><div class="section"><table><tr><th>Role</th><th>Owner</th><th>Type</th><th>Mailing address</th><th>Phone</th><th>Email</th><th>Past client</th></tr>
+<tr class="row"><td>Primary</td><td><a href="Owner_Detail.html">Reyes Family Trust</a></td><td>Entity</td><td>1711 Mt Diablo Blvd, Walnut Creek CA 94596</td><td>(925) 555-0142</td><td>treyes@example.com</td><td>No</td></tr>
+<tr class="row"><td>Secondary</td><td><a href="#">Teresa Reyes</a></td><td>Person</td><td>1711 Mt Diablo Blvd, Walnut Creek CA 94596</td><td>—</td><td>—</td><td>No</td></tr></table></div></div>
+<div data-tab-group="p" data-tab="sales" style="display:none"><div class="section"><div class="meta" style="margin-bottom:8px">2–4 unit sales in 94609, last 12 months · 7 sales · from bridgeMLS, Oct 23, 2026</div><table><tr><th>Address</th><th class="num">Units</th><th>Closed</th><th class="num">Price</th><th class="num">Per unit</th><th class="num">Days on market</th><th>Our sale</th></tr>
+<tr><td>5210 Telegraph Ave</td><td class="num">4</td><td>Sep 19, 2026</td><td class="num">$1,610,000</td><td class="num">$402,500</td><td class="num">34</td><td>—</td></tr>
+<tr><td>446 45th St</td><td class="num">2</td><td>Aug 2, 2026</td><td class="num">$1,195,000</td><td class="num">$597,500</td><td class="num">21</td><td>Yes</td></tr>
+<tr><td>4007 Shafter Ave</td><td class="num">3</td><td>Jun 27, 2026</td><td class="num">$1,340,000</td><td class="num">$446,667</td><td class="num">58</td><td>—</td></tr>
+<tr><td>5531 Manila Ave</td><td class="num">2</td><td>May 15, 2026</td><td class="num">$1,050,000</td><td class="num">$525,000</td><td class="num">12</td><td>—</td></tr>
+<tr><td>4620 Shattuck Ave</td><td class="num">4</td><td>Mar 3, 2026</td><td class="num">$1,725,000</td><td class="num">$431,250</td><td class="num">41</td><td>—</td></tr>
+<tr><td>5424 Shattuck Ave</td><td class="num">3</td><td>Jan 22, 2026</td><td class="num">$1,290,000</td><td class="num">$430,000</td><td class="num">66</td><td>—</td></tr>
+<tr><td>4231 Webster St</td><td class="num">2</td><td>Nov 14, 2025</td><td class="num">$1,120,000</td><td class="num">$560,000</td><td class="num">27</td><td>Yes</td></tr></table></div></div>
+<div data-tab-group="p" data-tab="sig" style="display:none"><div class="section"><table><tr><th>Detected</th><th>Signal</th><th>What we saw</th><th>Source</th></tr>
+<tr><td>Oct 27, 2026</td><td><span class="pill warn">Loan matured</span></td><td>$380,000 Fremont Bank loan reached its maturity date on Mar 4, 2026; no new loan recorded</td><td>PropertyRadar upload, Oct 27</td></tr>
+<tr><td>Sep 30, 2026</td><td><span class="pill ">Ownership may have changed</span></td><td>Mailing address changed from Oakland to Walnut Creek between uploads</td><td>PropertyRadar uploads, Aug 29 and Sep 30</td></tr></table></div></div>
+<div data-tab-group="p" data-tab="tl" style="display:none"><div class="section"><ul class="tl">
+<li><span class="when">Oct 29, 2026 9:12 AM</span><span>QR scan</span><span>Owner scanned the code on the MVI letter · <a href="#">MVI letter · Absentee 94609–94610 · Oct 2026</a></span></li>
+<li><span class="when">Oct 24, 2026 3:30 PM</span><span>Call</span><span>No answer · Nolan Jones · "Tried main line, no voicemail set up"</span></li>
+<li><span class="when">Oct 21, 2026 2:00 PM</span><span>Mail</span><span>Delivered · MVI letter · <a href="#">MVI letter · Absentee 94609–94610 · Oct 2026</a></span></li>
+<li><span class="when">Oct 16, 2026 10:30 AM</span><span>Mail</span><span>Sent · MVI letter · Edson Ruiz</span></li>
+<li><span class="when">Aug 12, 2026 11:15 AM</span><span>Visit</span><span>Spoke · David Weglarz · "Met the on-site manager; owner lives in Walnut Creek"</span></li>
+<li><span class="when">Jul 9, 2026 11:00 AM</span><span>Email</span><span>Opened · Recent activity flyer · <a href="#">Recent activity · Temescal · Jul 2026</a></span></li>
+<li><span class="when">Jul 8, 2026 9:00 AM</span><span>Email</span><span>Sent · Recent activity flyer · Edson Ruiz</span></li>
+<li><span class="when">Apr 2, 2026 9:00 AM</span><span>Mail</span><span>Returned · General market · <a href="#">General market · Q1 2026</a></span></li>
+</ul></div></div>
+</div><div class="panel" data-panel="edit" style="display:none"><h3>Edit property <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="meta" style="margin-bottom:10px">Each value shows where it came from. Your change is kept until a newer upload replaces it.</div>
+<div class="field"><label>Units</label><input type="text" value="3" ><div class="meta" style="margin-top:4px">PropertyRadar · Oct 27, 2026</div></div><div class="field"><label>Year built</label><input type="text" value="1912" ><div class="meta" style="margin-top:4px">PropertyRadar · Oct 27, 2026</div></div><div class="field"><label>Building size (sq ft)</label><input type="text" value="3,480" ><div class="meta" style="margin-top:4px">PropertyRadar · Oct 27, 2026</div></div>
+<div class="field"><label>Tier</label><select><option selected>A (calculated)</option><option>Override to B</option></select></div><div class="field"><label>Reason for override</label><textarea rows="2" style="max-width:none" ></textarea></div><div class="field"><label>Flags</label><div class="meta">Unit count changed vs. last upload · <a href="#" onclick="this.parentNode.textContent='No flags';return false">clear</a></div></div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Save</button></div></div>
+<div class="panel" data-panel="touch" style="display:none"><h3>Log a touch <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="meta" style="margin-bottom:10px">4512 Telegraph Ave · Reyes Family Trust</div>
+<div class="field"><label>How</label><select onchange="var r=this.closest('.panel').querySelector('option[data-mail]');if(r)r.hidden=this.value!='Mail'"><option>Call</option><option>Visit</option><option>Text</option><option>Mail</option><option>Note</option></select></div>
+<div class="field"><label>Direction</label><select><option selected>We reached out</option><option>They reached out</option></select></div>
+<div class="field"><label>Outcome</label><select><option>No answer</option><option>Left message</option><option>Spoke</option><option>Appointment set</option><option>Not interested</option><option>Wrong number</option><option>Do not contact</option><option>Callback requested</option><option data-mail hidden>Returned (mail came back)</option></select></div>
+<div class="field"><label>When</label><div class="dt"><input type="date" value="2026-11-03"><input type="time" value="18:40"></div></div><div class="field"><label>Notes</label><textarea rows="3" style="max-width:none" ></textarea></div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Save</button></div></div>
+<div class="panel" data-panel="upl" style="display:none"><h3>Upload photos <span class="x" onclick="panel(null)">✕</span></h3>
+<div class="meta" style="margin-bottom:10px">4512 Telegraph Ave</div>
+<div class="box" style="height:90px">Drop photos here or click to choose<br>JPG or PNG</div>
+<div class="filerow" style="margin-top:8px;display:flex;gap:8px;align-items:center;background:#F7F6F3;border:1px solid #D3D0CB;padding:8px"><div style="flex:1;font-size:12px">IMG_4512_front.jpg<br><span class="meta">3.2 MB</span></div></div>
+<div class="field"><label>Kind</label><select><option selected>Subject</option><option>Aerial</option><option>Street</option><option>Interior</option></select></div>
+<div class="field"><label>License</label><select><option selected>Own</option><option>Licensed</option><option>MLS restricted</option><option>Unknown</option></select><div class="meta" style="margin-top:4px">MLS-restricted photos can't be primary.</div></div>
+<div class="field"><label>Caption</label><input type="text" value="" ></div>
+<div class="field"><label>Make this the primary photo</label><span class="tog" onclick="tog(this)"></span></div>
+<div class="formfoot"><button class="btn" onclick="panel(null)">Cancel</button><button class="btn primary" onclick="panel(null);save()">Upload</button></div></div></div></div>
+</div></div>
+<div class="overlay" id="addlist" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Add to an owner list</h3><div class="field"><label>List</label><select onchange="document.getElementById('newname').style.display=this.value=='new'?'':'none'"><option>Absentee 2–4 units · 94609, 94610</option><option>Loan matured 2025–2026 · Alameda</option><option>Fruitvale 94601 · Tier A</option><option value="new">+ New list…</option></select></div>
+<div id="newname" style="display:none"><div class="field"><label>Name the new list</label><input type="text" value="" ><div class="meta" style="margin-top:4px">The list opens after it is created so you can review it.</div></div></div>
+<div class="rule" style="font-size:12px"><b>3 properties</b> will be added. 1 of their owners is on the do-not-contact list and will be skipped at mailing time.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn primary" onclick="closeDlg();save()">Add 3 properties</button></div></div></div><div class="overlay" id="merge" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Merge duplicate properties</h3><div class="field"><label>Merge with</label><input type="text" value="4512 Telegraph Avenue (APN 012-1004-021-01)"></div>
+<div class="sbs"><div class="col"><b>Keep · 4512 Telegraph Ave</b>3 units · 1912 · APN 012-1004-021-00<br>Owner: Reyes Family Trust<br>8 touches · 2 signals</div><div class="col"><b>Merge in · 4512 Telegraph Avenue</b>3 units · — · APN 012-1004-021-01<br>Owner: Reyes Family Tr<br>1 touch · 0 signals</div></div>
+<div class="meta" style="margin-top:10px">Touches and owners from both are kept on the one you keep. This cannot be undone.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn danger" onclick="closeDlg();save()">Merge into 4512 Telegraph Ave</button></div></div></div><div class="overlay" id="rmph" onclick="if(event.target===this)closeDlg()"><div class="dialog"><h3>Remove this photo</h3><div class="meta">The photo is removed from this property and from any future mailers. Pieces already printed are not affected.</div>
+<div class="formfoot"><button class="btn" onclick="closeDlg()">Cancel</button><button class="btn danger" onclick="closeDlg();save()">Remove photo</button></div></div></div>
+<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px">Saved.</div>
+<div class="demo">Prescott Listing System · demo · Nov 2026 · Buttons respond but nothing is stored.</div>
+<script>
+function grp(b){b.parentNode.classList.toggle('closed')}
+
+function panel(id){document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
+function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
+function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
+function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+
+function tab(group,id,btn){document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(e){e.style.display=(e.dataset.tab===id)?'':'none'});var p=btn.parentNode;Array.prototype.forEach.call(p.children,function(b){b.classList.toggle('on',b===btn)})}
+function toggle(id){var e=document.getElementById(id);if(e)e.classList.toggle('open')}
+document.addEventListener('click',function(ev){document.querySelectorAll('.menu.open').forEach(function(m){if(!m.contains(ev.target))m.classList.remove('open')})});
+function dlg(id){document.querySelectorAll('.overlay').forEach(function(e){e.classList.toggle('open',e.id===id)})}
+function closeDlg(){document.querySelectorAll('.overlay').forEach(function(e){e.classList.remove('open')})}
+function selrow(tr){document.querySelectorAll('tr.sel').forEach(function(r){r.classList.remove('sel')});tr.classList.add('sel');panel('side')}
+function bulk(){var n=document.querySelectorAll('input.rowchk:checked').length;var b=document.getElementById('bulk');if(b){b.classList.toggle('on',n>0);document.getElementById('bulkn').textContent=n}}
+</script></body></html>
