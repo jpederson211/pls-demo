@@ -250,7 +250,7 @@ tr.sel td{background:#ECEAE4}
 .avatar{width:64px;height:64px;border-radius:50%;background:#2D2E41;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}
 .avatar.sm{width:30px;height:30px;font-size:12px}
 .bignum{font-size:40px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
-.tp-label{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66}
+.tp-label{font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#1E1E1E}
 .gap{font-size:12.5px;color:#2E7D4F;margin-top:4px}
 .teamtbl{max-height:420px;overflow:auto}
 .teamtbl table{border:none}
@@ -263,7 +263,7 @@ tr.sel td{background:#ECEAE4}
 <div class="main">
 <div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Insights › Your Team</div></div><div class="actions"></div></div>
 <div class="content" style="display:block">
-<div style="margin-bottom:14px"><h2 style="font-size:17px;margin:0">Your Team</h2><div class="meta">How the campaign is doing, and who is doing the work.</div></div>
+<div style="margin-bottom:14px"><h2 style="font-size:17px;margin:0">Your Team</h2></div>
 
 <div class="row1">
 <div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><h2>Current campaign</h2><span class="meta">campaign to date</span></div>
@@ -278,7 +278,7 @@ tr.sel td{background:#ECEAE4}
 <div class="met"><div class="l">Appointments set</div><div class="v">3</div><div class="s">&nbsp;</div></div>
 <div class="met off"><div class="l">Listings won <span class="tag">2A</span></div><div class="v">—</div><div class="s">arrives with attribution</div></div>
 </div></div>
-<div class="card pickbox"><h2>Select a campaign</h2>
+<div class="card pickbox"><h2>Past campaign performance</h2>
 <select id="cpick" onchange="pickCamp(this.value)" style="font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;border-radius:2px;background:#fff;margin-top:10px"><option value="">Pick a campaign…</option><option value="cur">Loan maturity · Telegraph corridor</option><option value="justlisted">Just listed · 3310 Grand Ave</option><option value="q3">General market · Q3 wrap</option><option value="temescal">Recent activity · Temescal · Jul 2026</option></select>
 <div id="cp-empty" class="pickempty">Pick a campaign to compare.</div>
 <div id="cp-body" style="display:none"><div class="pick4">
@@ -288,7 +288,7 @@ tr.sel td{background:#ECEAE4}
 <div class="met"><div class="l">Appointments</div><div class="v" id="cp-appt"></div></div></div>
 <div style="margin-top:12px"><a href="Campaign_Detail.html">View campaign</a></div></div>
 </div></div>
-<div style="display:flex;align-items:center;margin-bottom:10px"><h2 style="font-size:15px;margin:0">The team</h2><span class="seg2" style="margin-left:auto"><button class="on" onclick="setPeriod('d30',this)">Last 30 days</button><button onclick="setPeriod('month',this)">This month</button><button onclick="setPeriod('all',this)">All time</button></span></div>
+<div style="display:flex;align-items:center;margin-bottom:10px"><h2 style="font-size:15px;margin:0">Team Performance</h2><span class="seg2" style="margin-left:auto"><button class="on" onclick="setPeriod('d30',this)">Last 30 days</button><button onclick="setPeriod('d60',this)">Last 60 days</button><button onclick="setPeriod('all',this)">All time</button></span></div>
 <div class="row2">
 <div class="card" style="text-align:center"><div class="tp-label" id="tp-label">Top performer, last 30 days</div>
 <div style="display:flex;justify-content:center;margin:14px 0 8px"><div class="avatar" id="tp-av">MC</div></div>
@@ -297,7 +297,7 @@ tr.sel td{background:#ECEAE4}
 <div class="meta" style="margin-top:6px"><span id="tp-tot">3,186</span> touches all time</div>
 <div class="meta" style="margin-top:8px" id="tp-sub">388 calls · 71 connects · 9 appointments</div>
 <div class="gap" id="tp-gap">68 ahead of next</div></div>
-<div class="card"><h2 style="margin-bottom:8px">Rest of the team</h2>
+<div class="card"><h2 style="margin-bottom:8px">Full Team</h2>
 <div class="teamtbl"><table id="teamtbl"><tr><th>Rank</th><th>Name</th><th class="num" style="cursor:pointer" onclick="sortTeam('per',this)">Touches, <span id="th-period">last 30 days</span> ↕</th><th class="num" style="cursor:pointer" onclick="sortTeam('tot',this)">Total touches ↕</th></tr></table></div>
 <div class="meta" style="margin-top:8px">A touch is a call, a one-to-one email or note, or a handled reply, credited to the person who logged it. Bulk mail and email count toward the campaign, not a person. Inactive users drop off but keep their history in campaign numbers.</div></div>
 </div>
@@ -321,7 +321,7 @@ function closeDlg(){document.querySelectorAll('.overlay').forEach(function(e){e.
 function selrow(tr){document.querySelectorAll('tr.sel').forEach(function(r){r.classList.remove('sel')});tr.classList.add('sel');panel('side')}
 function bulk(){var n=document.querySelectorAll('input.rowchk:checked').length;var b=document.getElementById('bulk');if(b){b.classList.toggle('on',n>0);document.getElementById('bulkn').textContent=n}}
 
-var CAMPS={"cur": {"name": "Loan maturity \u00b7 Telegraph corridor", "sent": 423, "calls": 186, "connects": 41, "appts": 3}, "justlisted": {"name": "Just listed \u00b7 3310 Grand Ave", "sent": 184, "calls": 112, "connects": 24, "appts": 2}, "q3": {"name": "General market \u00b7 Q3 wrap", "sent": 200, "calls": 180, "connects": 31, "appts": 1}, "temescal": {"name": "Recent activity \u00b7 Temescal \u00b7 Jul 2026", "sent": 204, "calls": 164, "connects": 28, "appts": 2}};var TEAM={"d30": {"label": "last 30 days", "top": {"n": "Marissa Chen", "r": "ISA", "per": 412, "tot": 3186, "calls": 388, "conn": 71, "appt": 9, "gap": "168 ahead of next"}, "rest": [["David Weglarz", "Broker", 244, "up", 1908], ["Nolan Jones", "Owner", 156, "down", 4121], ["Edson Ruiz", "Operator", 89, "up", 1377]]}, "month": {"label": "this month", "top": {"n": "Marissa Chen", "r": "ISA", "per": 96, "tot": 3186, "calls": 90, "conn": 17, "appt": 2, "gap": "34 ahead of next"}, "rest": [["David Weglarz", "Broker", 62, "up", 1908], ["Nolan Jones", "Owner", 41, "down", 4121], ["Edson Ruiz", "Operator", 22, "up", 1377]]}, "all": {"label": "all time", "top": {"n": "Nolan Jones", "r": "Owner", "per": 4121, "tot": 4121, "calls": 3650, "conn": 702, "appt": 84, "gap": "935 ahead of next"}, "rest": [["Marissa Chen", "ISA", 3186, "up", 3186], ["David Weglarz", "Broker", 1908, "up", 1908], ["Edson Ruiz", "Operator", 1377, "up", 1377]]}};
+var CAMPS={"cur": {"name": "Loan maturity \u00b7 Telegraph corridor", "sent": 423, "calls": 186, "connects": 41, "appts": 3}, "justlisted": {"name": "Just listed \u00b7 3310 Grand Ave", "sent": 184, "calls": 112, "connects": 24, "appts": 2}, "q3": {"name": "General market \u00b7 Q3 wrap", "sent": 200, "calls": 180, "connects": 31, "appts": 1}, "temescal": {"name": "Recent activity \u00b7 Temescal \u00b7 Jul 2026", "sent": 204, "calls": 164, "connects": 28, "appts": 2}};var TEAM={"d30": {"label": "last 30 days", "top": {"n": "Marissa Chen", "r": "ISA", "per": 412, "tot": 3186, "calls": 388, "conn": 71, "appt": 9, "gap": "168 ahead of next"}, "rest": [["David Weglarz", "Broker", 244, "up", 1908], ["Nolan Jones", "Owner", 156, "down", 4121], ["Edson Ruiz", "Operator", 89, "up", 1377]]}, "d60": {"label": "last 60 days", "top": {"n": "Marissa Chen", "r": "ISA", "per": 745, "tot": 3186, "calls": 702, "conn": 128, "appt": 16, "gap": "281 ahead of next"}, "rest": [["David Weglarz", "Broker", 464, "up", 1908], ["Nolan Jones", "Owner", 299, "down", 4121], ["Edson Ruiz", "Operator", 171, "up", 1377]]}, "all": {"label": "all time", "top": {"n": "Nolan Jones", "r": "Owner", "per": 4121, "tot": 4121, "calls": 3650, "conn": 702, "appt": 84, "gap": "935 ahead of next"}, "rest": [["Marissa Chen", "ISA", 3186, "up", 3186], ["David Weglarz", "Broker", 1908, "up", 1908], ["Edson Ruiz", "Operator", 1377, "up", 1377]]}};
 var PERIOD='d30',SORT='per',DIR=-1;
 function initials(n){return n.split(' ').map(function(x){return x[0]}).join('')}
 function pickCamp(k){var e=document.getElementById('cp-empty'),b=document.getElementById('cp-body');if(!k){e.style.display='';b.style.display='none';return}var c=CAMPS[k];e.style.display='none';b.style.display='';document.getElementById('cp-sent').textContent=c.sent;document.getElementById('cp-calls').textContent=c.calls;document.getElementById('cp-conn').textContent=c.connects;document.getElementById('cp-appt').textContent=c.appts}
@@ -336,11 +336,11 @@ function render(){var t=TEAM[PERIOD];
  document.getElementById('tp-sub').textContent=t.top.calls.toLocaleString()+' calls · '+t.top.conn+' connects · '+t.top.appt+' appointments';
  document.getElementById('tp-gap').textContent=t.top.gap;
  document.getElementById('th-period').textContent=t.label;
- var rows=t.rest.slice();rows.sort(function(a,b){var x=SORT==='per'?a[2]:a[4],y=SORT==='per'?b[2]:b[4];return (x-y)*DIR});
+ var rows=[[t.top.n,t.top.r,t.top.per,'up',t.top.tot]].concat(t.rest);rows.sort(function(a,b){var x=SORT==='per'?a[2]:a[4],y=SORT==='per'?b[2]:b[4];return (x-y)*DIR});
  var tbl=document.getElementById('teamtbl');
  tbl.querySelectorAll('tr.trow').forEach(function(r){r.remove()});
  rows.forEach(function(r,i){var tr=document.createElement('tr');tr.className='trow';
-  tr.innerHTML='<td>#'+(i+2)+'</td><td><span class="avatar sm" style="display:inline-flex;margin-right:8px;vertical-align:middle">'+initials(r[0])+'</span>'+r[0]+' <span class="meta">· '+r[1]+'</span></td><td class="num">'+r[2].toLocaleString()+' <span class="arrow '+r[3]+'">'+(r[3]==='up'?'▲':'▼')+'</span></td><td class="num">'+r[4].toLocaleString()+'</td>';
+  tr.innerHTML='<td>#'+(i+1)+'</td><td><span class="avatar sm" style="display:inline-flex;margin-right:8px;vertical-align:middle">'+initials(r[0])+'</span>'+r[0]+' <span class="meta">· '+r[1]+'</span></td><td class="num">'+r[2].toLocaleString()+' <span class="arrow '+r[3]+'">'+(r[3]==='up'?'▲':'▼')+'</span></td><td class="num">'+r[4].toLocaleString()+'</td>';
   tbl.appendChild(tr)});
 }
 document.addEventListener('DOMContentLoaded',render);
