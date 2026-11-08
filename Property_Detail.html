@@ -186,22 +186,22 @@ tr.sel td{background:#ECEAE4}
 .dt{display:flex;gap:8px}.dt input{max-width:160px}
 .bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
 .bulk.on{display:flex}
+.facts{display:inline-flex!important}.facts div{font-size:13px}
 </style></head><body>
 <div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="cur" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Market_by_ZIP.html">Your Market</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
 <div class="main">
-<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › <a href="Properties.html">Properties</a> › 4512 Telegraph Ave</div><h1>4512 Telegraph Ave</h1></div><div class="actions"></div></div>
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › <a href="Properties.html">Properties</a> › 4512 Telegraph Ave</div></div><div class="actions"></div></div>
 <div class="content"><div data-stab="x"><div class="body">
-<div class="section"><div class="head"><div><h2>4512 Telegraph Ave</h2><div class="meta">Oakland 94609</div>
- <div style="margin-top:8px"><span class="pill ">3 units</span> <span class="pill navy">Tier A</span> <span class="pill warn">Absentee</span></div></div>
+<div class="section"><div class="head"><div><h2>4512 Telegraph Ave</h2>
+ <div style="margin-top:8px;display:flex;align-items:center;gap:18px;flex-wrap:wrap"><span class="meta" style="font-size:13px">Oakland 94609</span><span><span class="pill ">3 units</span> <span class="pill navy">Tier A</span> <span class="pill warn">Absentee</span></span><span class="facts" style="gap:18px"><div><span>Estimated value</span>$1,425,000</div><div><span>Last sale</span>Jun 12, 2009 · $610,000</div><div><span>Owner's properties</span>4</div><div><span>Signals</span>2</div></span></div></div>
  <div class="actions"><button class="btn primary" onclick="panel('touch')">Log a touch</button><span class="menu" id="more"><button class="btn" onclick="toggle('more')">⋯</button><div class="dd"><a href="#" onclick="toggle('more');panel('edit');return false">Edit</a><a href="#" onclick="toggle('more');dlg('addlist');return false">Add to list</a><a href="#" onclick="toggle('more');dlg('merge');return false">Merge duplicates</a></div></span></div></div>
- <div class="facts"><div><span>Estimated value</span>$1,425,000</div><div><span>Last sale</span>Jun 12, 2009 · $610,000</div><div><span>Owner's properties</span>4</div><div><span>Signals</span>2</div></div>
 </div>
-<div class="tabs"><button class="on" onclick="tab('p','ov',this)">Overview</button><button onclick="tab('p','ph',this)">Photos</button><button onclick="tab('p','own',this)">Owners</button><button onclick="tab('p','sales',this)">Sales nearby</button><button onclick="tab('p','sig',this)">Signals</button><button onclick="tab('p','tl',this)">Timeline</button></div>
-<div data-tab-group="p" data-tab="ov">
+<div class="tabs"><button class="on" onclick="tab('p','tl',this)">Touch Timeline</button><button onclick="tab('p','ov',this)">Overview</button><button onclick="tab('p','ph',this)">Photos</button><button onclick="tab('p','own',this)">Owners</button><button onclick="tab('p','loans',this)">Loans</button><button onclick="tab('p','sig',this)">Signals</button><button onclick="tab('p','sales',this)">Nearby Activity</button></div>
+<div data-tab-group="p" data-tab="ov" style="display:none">
  <div class="grid2"><div class="section"><h2>Building</h2><dl class="kv"><dt>Units</dt><dd>3</dd><dt>Year built</dt><dd>1912</dd><dt>Building size</dt><dd>3,480 sq ft</dd><dt>Lot size</dt><dd>4,000 sq ft</dd><dt>Parcel number</dt><dd>012-1004-021-00</dd><dt>County</dt><dd>Alameda</dd><dt>Owner lives here</dt><dd>No</dd><dt>Owner out of state</dt><dd>No</dd><dt>Data from</dt><dd>PropertyRadar · Oct 27, 2026</dd></dl></div>
  <div class="section"><h2>Photo</h2><div class="box" style="height:200px;position:relative">Front elevation · primary photo<span style="position:absolute;top:6px;right:8px;color:#2D2E41;font-size:16px">★</span></div>
  <div style="display:flex;gap:12px;align-items:center;margin-top:10px"><div style="width:120px;height:60px;flex:0 0 120px" class="maptile"><svg viewBox="0 0 400 200" preserveAspectRatio="none"><g stroke="#B5B2AC" stroke-width="8"><line x1="0" y1="100" x2="400" y2="100"/><line x1="150" y1="0" x2="150" y2="200"/></g><rect x="212" y="66" width="34" height="28" fill="#2D2E41" opacity=".85"/></svg></div><div class="meta">If a property has no primary photo, a map of its parcel is shown here and printed on the mailer instead.</div></div></div></div>
- <div class="section"><h2>Loans</h2><table><tr><th class="num">Amount</th><th>Loan date</th><th>Type</th><th>Lender</th><th>Matures</th></tr><tr><td class="num">$380,000</td><td>Mar 4, 2016</td><td>Conventional</td><td>Fremont Bank</td><td>Mar 4, 2026 <span class="pill warn">Matured</span></td></tr></table></div>
+
 </div>
 <div data-tab-group="p" data-tab="ph" style="display:none"><div class="section">
 <div class="head"><div><h2>Photos</h2><div class="meta">Newest first. The starred photo is the primary; it prints on the MVI letter.</div></div><button class="btn primary" onclick="panel('upl')">Upload photos</button></div>
@@ -222,10 +222,11 @@ tr.sel td{background:#ECEAE4}
 <tr><td>4620 Shattuck Ave</td><td class="num">4</td><td>Mar 3, 2026</td><td class="num">$1,725,000</td><td class="num">$431,250</td><td class="num">41</td><td>—</td></tr>
 <tr><td>5424 Shattuck Ave</td><td class="num">3</td><td>Jan 22, 2026</td><td class="num">$1,290,000</td><td class="num">$430,000</td><td class="num">66</td><td>—</td></tr>
 <tr><td>4231 Webster St</td><td class="num">2</td><td>Nov 14, 2025</td><td class="num">$1,120,000</td><td class="num">$560,000</td><td class="num">27</td><td>Yes</td></tr></table></div></div>
+<div data-tab-group="p" data-tab="loans" style="display:none"><div class="section"><h2>Loans</h2><div class="meta" style="margin-bottom:8px">From PropertyRadar · Oct 27, 2026. A matured or maturing loan also fires a signal on the Signals tab.</div><table><tr><th class="num">Amount</th><th>Loan date</th><th>Type</th><th>Lender</th><th>Matures</th></tr><tr><td class="num">$380,000</td><td>Mar 4, 2016</td><td>Conventional</td><td>Fremont Bank</td><td>Mar 4, 2026 <span class="pill warn">Matured</span></td></tr></table></div></div>
 <div data-tab-group="p" data-tab="sig" style="display:none"><div class="section"><table><tr><th>Detected</th><th>Signal</th><th>What we saw</th><th>Source</th></tr>
 <tr><td>Oct 27, 2026</td><td><span class="pill warn">Loan matured</span></td><td>$380,000 Fremont Bank loan reached its maturity date on Mar 4, 2026; no new loan recorded</td><td>PropertyRadar upload, Oct 27</td></tr>
 <tr><td>Sep 30, 2026</td><td><span class="pill ">Ownership may have changed</span></td><td>Mailing address changed from Oakland to Walnut Creek between uploads</td><td>PropertyRadar uploads, Aug 29 and Sep 30</td></tr></table></div></div>
-<div data-tab-group="p" data-tab="tl" style="display:none"><div class="section"><ul class="tl">
+<div data-tab-group="p" data-tab="tl"><div class="section"><ul class="tl">
 <li><span class="when">Oct 29, 2026 9:12 AM</span><span>QR scan</span><span>Owner scanned the code on the MVI letter · <a href="#">MVI letter · Absentee 94609–94610 · Oct 2026</a></span></li>
 <li><span class="when">Oct 24, 2026 3:30 PM</span><span>Call</span><span>No answer · Nolan Jones · "Tried main line, no voicemail set up"</span></li>
 <li><span class="when">Oct 21, 2026 2:00 PM</span><span>Mail</span><span>Delivered · MVI letter · <a href="#">MVI letter · Absentee 94609–94610 · Oct 2026</a></span></li>
