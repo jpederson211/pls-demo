@@ -305,44 +305,37 @@ tr.zrow.hl td{background:#ECEAE4}
 <div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Insights › Your Market</div></div><div class="actions"></div></div>
 <div class="content" style="display:block">
 <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px"><div><h2 style="font-size:17px;margin:0">Your Market</h2><div class="meta">Where the market is moving, and where to run your next campaign.</div></div>
-<div style="margin-left:auto"><label class="meta" style="display:block;margin-bottom:3px">City</label><select id="cityf" onchange="cityFilter()" style="font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;border-radius:2px;background:#fff"><option>All cities</option><option>Oakland</option><option>Berkeley</option><option>Hayward</option><option>San Leandro</option><option>Alameda</option></select></div></div>
-<div class="pulse"><div><b style="font-size:14px">This week</b> <span class="meta">· Week of Nov 9, 2026</span><span class="badge2">Phase 2B</span></div>
+</div>
+<div class="pulse"><div><b style="font-size:14px">This week</b> <span class="meta">· Week of Nov 9, 2026</span></div>
 <div class="items">
 <div><b class="lbl">Rates</b><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
 <div><b class="lbl">Oakland rules</b><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: "Your rents can only rise 2.3% this year. Here's what buyers pay for that upside."</div><a class="src" href="#" onclick="save();return false">Source</a></div>
 <div><b class="lbl">Your ZIPs</b><div class="fact">45% of 94608 sales drew 3+ offers, and most buildings sold empty.</div><div class="act">Act: 94608 is the strongest campaign candidate.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
 <div><b class="lbl">Coming up</b><div class="fact">City Council housing items on Nov 18.</div><div class="act">Act: watch for rule changes.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-</div><div class="meta" style="margin-top:10px">Drafted weekly from public sources. Approved by Edson. Rate figures and the Council date are placeholders.</div></div>
-<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><h2 style="font-size:15px;margin:0">Where to campaign next</h2><span class="badge2" style="margin-left:0">Phase 2A</span><span class="meta">Updated Thursdays. Areas worked in the last 60 days are skipped.</span></div><div class="cards3"><div class="ccard" id="card1"><span class="zz">94608 · Emeryville border</span><h3>2027 loan decisions</h3><div class="why">Buyers are competing here, and 38 owners with loans likely due next year haven't heard from us.</div><ul><li>45% of sales drew 3+ offers</li><li>38 owners, loans likely due 2027</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Market update</div>
-<div class="btns"><a class="btn primary" href="New_List.html#card-94608-market-update">Create this campaign (38)</a><a href="#" onclick="loadZip('94608');return false">View ZIP</a><span class="notnow" id="nn1"><a href="#" onclick="document.getElementById('nn1').classList.toggle('open');return false">Not now</a><div class="dd2"><a href="#" onclick="hideCard(1);return false">Worked recently</a><a href="#" onclick="hideCard(1);return false">Not our area</a><a href="#" onclick="hideCard(1);return false">Wrong timing</a><a href="#" onclick="hideCard(1);return false">Other</a></div></span></div>
-<div class="more"><a href="#" onclick="save();return false">1 more idea</a></div></div><div class="ccard" id="card2"><span class="zz">94702 · West Berkeley</span><h3>Just sold nearby</h3><div class="why">Buildings here drew the most offers in your market, and 64 owners live on streets with a recent sale.</div><ul><li>59% of sales drew 3+ offers</li><li>64 owners near a recent sale</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Just Sold postcard</div>
-<div class="btns"><a class="btn primary" href="New_List.html#card-94702-just-sold">Create this campaign (64)</a><a href="#" onclick="loadZip('94702');return false">View ZIP</a><span class="notnow" id="nn2"><a href="#" onclick="document.getElementById('nn2').classList.toggle('open');return false">Not now</a><div class="dd2"><a href="#" onclick="hideCard(2);return false">Worked recently</a><a href="#" onclick="hideCard(2);return false">Not our area</a><a href="#" onclick="hideCard(2);return false">Wrong timing</a><a href="#" onclick="hideCard(2);return false">Other</a></div></span></div>
+</div><div class="meta" style="margin-top:10px">Drafted weekly from public sources.</div></div>
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><h2 style="font-size:15px;margin:0">Where to campaign next</h2><span class="meta">Updated Thursdays.</span></div><div class="cards3"><div class="ccard" id="card1"><span class="zz">94608 · Emeryville border</span><h3>2027 loan decisions</h3><div class="why">Buyers are competing here, and 38 owners with loans likely due next year haven't heard from us.</div><ul><li>45% of sales drew 3+ offers</li><li>38 owners, loans likely due 2027</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Market update</div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94608-market-update">Create this campaign (38)</a></div>
+</div><div class="ccard" id="card2"><span class="zz">94702 · West Berkeley</span><h3>Just sold nearby</h3><div class="why">Buildings here drew the most offers in your market, and 64 owners live on streets with a recent sale.</div><ul><li>59% of sales drew 3+ offers</li><li>64 owners near a recent sale</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Just Sold postcard</div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94702-just-sold">Create this campaign (64)</a></div>
 </div><div class="ccard" id="card3"><span class="zz">94609 · Temescal</span><h3>Long-time owners</h3><div class="why">The busiest ZIP in your market, with 112 owners who've held 15+ years.</div><ul><li>44 sales in 12 months</li><li>112 owners held 15+ years</li><li>Last campaign: Jul 2026</li></ul><div class="piece">Suggested piece: MVI letter</div>
-<div class="btns"><a class="btn primary" href="New_List.html#card-94609-mvi-letter">Create this campaign (112)</a><a href="#" onclick="loadZip('94609');return false">View ZIP</a><span class="notnow" id="nn3"><a href="#" onclick="document.getElementById('nn3').classList.toggle('open');return false">Not now</a><div class="dd2"><a href="#" onclick="hideCard(3);return false">Worked recently</a><a href="#" onclick="hideCard(3);return false">Not our area</a><a href="#" onclick="hideCard(3);return false">Wrong timing</a><a href="#" onclick="hideCard(3);return false">Other</a></div></span></div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94609-mvi-letter">Create this campaign (112)</a></div>
 </div></div>
 <div class="module" id="zipmod">
 <div class="mhead"><div><label class="meta" style="display:block;margin-bottom:3px">ZIP</label><select id="zippick" onchange="loadZip(this.value)"></select></div>
 <div><h2 class="area" id="m-area">Emeryville border, Oakland</h2><div class="stamp">Sales: bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents: Rentometer, Oct 26, 2026.</div></div>
-<div class="mbtns"><a class="btn" id="m-newlist" href="New_List.html#zip-94608">New list for this ZIP</a><a class="btn primary" id="m-camp" href="New_List.html#card-94608-market-update">Create this campaign <span class="badge2" style="border-color:#fff;color:#fff;margin-left:6px">2A</span></a></div></div>
+<div class="mbtns"><a class="btn" id="m-newlist" href="New_List.html#zip-94608">New list for this ZIP</a><a class="btn primary" id="m-camp" href="New_List.html#card-94608-market-update">Create this campaign</a></div></div>
 <div class="sumline" id="m-sum"></div>
 <div class="tiles6" id="m-tiles"></div>
 <div id="m-charts" class="charts3"></div>
 <div id="m-how"></div>
 <div class="talk" id="m-talk"></div>
-<div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px"><div><h3 style="font-size:13px;margin:0 0 8px">Rents</h3><div class="rentrow" id="m-rents"></div><div class="meta">Rents in recently sold buildings vs. market: coming as more sales include rent data.</div></div>
-<div style="flex:1;min-width:380px"><h3 style="font-size:13px;margin:0 0 8px">What prints on mailers <span class="chip print" style="margin-left:6px">Print-safe</span></h3><div class="printbox" id="m-print"></div></div></div>
-<h3 style="font-size:13px;margin:0 0 8px">Recent sales</h3>
+<div style="margin-bottom:16px"><h3 style="font-size:13px;margin:0 0 8px">Rents</h3><div class="rentrow" id="m-rents"></div><div class="meta">Rents in recently sold buildings vs. market: coming as more sales include rent data.</div></div>
+<h3 style="font-size:13px;margin:0 0 8px">Recent sales · last 30 days</h3>
 <div id="m-salesbox"></div>
 <div style="margin:18px 0 0">
-<div class="fold" id="f-opp"><button onclick="this.parentNode.classList.toggle('open')">Opportunity <span class="badge2">Phase 2A</span><span class="chip team">Team only</span></button><div class="fbody">Owners by ranking: Hot 22 · Warm 61 · Watch 140<br>Loans likely due in 18 months: 38 · Held 15+ years: 96 · Owners from afar: 74 · Not contacted in 90 days: 188<br><div style="margin-top:8px">Best campaign idea: <b>2027 loan decisions (38 owners)</b> <a class="btn primary" style="margin-left:10px" href="New_List.html#card-94608-market-update">Create this campaign</a></div><div class="meta" style="margin-top:6px">All counts are illustrative.</div></div></div>
-<div class="fold" id="f-ev"><button onclick="this.parentNode.classList.toggle('open')">Events <span class="badge2">Phase 2B</span><span class="chip team">Team only</span></button><div class="fbody">Last 90 days: <a href="Owner_Lists.html">1 estate case</a> · <a href="Owner_Lists.html">0 Ellis Act filings</a> · <a href="Owner_Lists.html">1 default notice</a> <span class="meta">(illustrative)</span></div></div>
-<div class="fold" id="f-act"><button onclick="this.parentNode.classList.toggle('open')">Your activity here <span class="badge2">Phase 2A</span></button><div class="fbody">Campaigns sent: 0 · Last send: none · Conversations: 0 · Appointments: 0 · Listings: 0</div></div>
+<div class="fold" id="f-opp"><button onclick="this.parentNode.classList.toggle('open')">Opportunity<span class="chip team">Team only</span></button><div class="fbody">Owners by ranking: Hot 22 · Warm 61 · Watch 140<br>Loans likely due in 18 months: 38 · Held 15+ years: 96 · Owners from afar: 74 · Not contacted in 90 days: 188<br><div style="margin-top:8px">Best campaign idea: <b>2027 loan decisions (38 owners)</b> <a class="btn primary" style="margin-left:10px" href="New_List.html#card-94608-market-update">Create this campaign</a></div><div class="meta" style="margin-top:6px">All counts are illustrative.</div></div></div>
+<div class="fold" id="f-ev"><button onclick="this.parentNode.classList.toggle('open')">Events <span class="chip team">Team only</span></button><div class="fbody">Last 90 days: <a href="Owner_Lists.html">1 estate case</a> · <a href="Owner_Lists.html">0 Ellis Act filings</a> · <a href="Owner_Lists.html">1 default notice</a> <span class="meta">(illustrative)</span></div></div>
 </div></div>
-<div class="section"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px"><h2 style="margin:0">All ZIPs</h2><span class="meta">24 ZIPs</span>
-<span class="seg2" id="views"><button class="on" onclick="setView('mailer',this)">Mailer numbers</button><button onclick="setView('demand',this)">Demand</button><button onclick="setView('rents',this)">Rents</button><button onclick="setView('opp',this)">Opportunity <span class="badge2" style="margin-left:4px">2A</span></button><button onclick="setView('events',this)">Events <span class="badge2" style="margin-left:4px">2B</span></button></span>
-<span style="margin-left:auto;display:flex;gap:8px"><input type="text" placeholder="ZIP or neighborhood" style="width:180px"><select><option>Rent sample: any</option><option>Thin only</option></select><button class="btn" onclick="save()">Search</button></span></div>
-<table id="ziptable"></table>
-<div class="pager"><span>24 ZIPs</span></div></div>
 </div>
 </div></div>
 <div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;cursor:pointer">Saved.</div>
@@ -408,44 +401,15 @@ function loadZip(z,noscroll){
  document.getElementById('m-talk').textContent=d?d.talk:'';
  var rr=document.getElementById('m-rents');var rchip=thin?' <span class="chip thin">Thin sample</span>':'';
  rr.innerHTML='<span><span class="rl">1 bed rent</span><span class="rv">'+(r.r1?money(r.r1):'—')+'</span></span><span><span class="rl">2 bed rent</span><span class="rv">'+(r.r2?money(r.r2):'—')+'</span>'+rchip+'</span><span><span class="rl">Rough yield (2-bed rent vs. price per unit)</span><span class="rv">'+(r.yld?r.yld+'%':'—')+'</span></span>';
- document.getElementById('m-print').innerHTML='<div class="pl">Sales in '+z+', last 12 months: '+r.sold+' · Median price: '+money(r.med)+'</div><div class="pl">Price per unit: '+money(r.ppu)+' · Days on market: '+r.dom+'</div><div class="disc">Based on bridgeMLS data for 2–4 unit sales, Oct 23, 2025 to Oct 23, 2026. Information deemed reliable but not guaranteed.</div>';
  var sb=document.getElementById('m-salesbox');
- if(d){var rows=d.sales.map(function(s){return '<tr><td><a href="Property_Detail.html">'+s.a+'</a></td><td class="nw">'+s.d+'</td><td class="num">'+s.u+'</td><td class="num">'+money(s.p)+'</td><td class="num">'+money(s.pu)+'</td><td class="num">'+s.o+'</td><td>'+s.s+'</td><td class="num">'+s.dm+'</td></tr>'}).join('');
+ if(d){var rows=d.sales.slice(0,5).map(function(s){return '<tr><td><a href="Property_Detail.html">'+s.a+'</a></td><td class="nw">'+s.d+'</td><td class="num">'+s.u+'</td><td class="num">'+money(s.p)+'</td><td class="num">'+money(s.pu)+'</td><td class="num">'+s.o+'</td><td>'+s.s+'</td><td class="num">'+s.dm+'</td></tr>'}).join('');
   sb.innerHTML='<table><tr><th>Address</th><th>Closed</th><th class="num">Units</th><th class="num">Price</th><th class="num">Price per unit</th><th class="num">Offers</th><th>Sold</th><th class="num">Days on market</th></tr>'+rows+'</table><div style="margin-top:8px"><a href="#" onclick="save();return false">Show all '+r.sold+' sales</a></div>'+(d.note?'<div class="meta" style="margin-top:8px">'+d.note+'</div>':'');}
  else{sb.innerHTML='<div class="mod-note">Latest sales for this ZIP load here. (Mockup: drawn for 94608, 94609, 94601 and 94702.)</div>'}
- document.querySelectorAll('tr.zrow').forEach(function(tr){tr.classList.toggle('hl',tr.dataset.z===z)});
  try{history.replaceState(null,'','#zip-'+z)}catch(e){}
  var mod=document.getElementById('zipmod');
  if(!noscroll){mod.classList.add('shimmer');setTimeout(function(){mod.classList.remove('shimmer')},300);mod.scrollIntoView({behavior:'smooth'})}
 }
-var VIEW='mailer';
-function setView(v,btn){VIEW=v;document.querySelectorAll('#views button').forEach(function(b){b.classList.toggle('on',b===btn)});drawTable()}
-function ill(z,a,b){var n=0;for(var i=0;i<z.length;i++)n+=z.charCodeAt(i);return a+((n*7)%(b-a))}
-function drawTable(){
- var city=document.getElementById('cityf').value;
- var head,cells;
- if(VIEW==='mailer'){head=['ZIP','City · area','Sold, 12 mo','Median price','Price per unit','Days on market','1 bed rent','2 bed rent','Rent sample'];}
- if(VIEW==='demand'){head=['ZIP','City · area','Sold, 12 mo','Drew 3+ offers','Sale vs. asking','Sold empty','Paid cash','Days on market'];}
- if(VIEW==='rents'){head=['ZIP','City · area','1 bed rent','2 bed rent','Price per unit','Rough yield','Rent sample'];}
- if(VIEW==='opp'){head=['ZIP','City · area','Hot','Warm','Loans due 2027','Held 15+ years','Not contacted 90 days'];}
- if(VIEW==='events'){head=['ZIP','City · area','Estate cases','Ellis Act filings','Default notices'];}
- var h='<tr>'+head.map(function(x,i){return '<th'+(i>1?' class="num"':'')+'>'+x+'</th>'}).join('')+'<th></th></tr>';
- var body=T.filter(function(r){return city==='All cities'||r.city===city}).map(function(r){
-  var c0='<td><a href="#" onclick="loadZip(\''+r.z+'\');return false">'+r.z+'</a></td><td>'+r.city+' · '+r.area+'</td>';
-  var mid='';
-  var sample=r.thin?'<span class="chip thin">Thin sample</span>':(r.r2?'OK':'—');
-  if(VIEW==='mailer')mid='<td class="num">'+r.sold+'</td><td class="num">'+money(r.med)+'</td><td class="num">'+money(r.ppu)+'</td><td class="num">'+r.dom+'</td><td class="num">'+(r.r1?money(r.r1):'—')+'</td><td class="num">'+(r.r2?money(r.r2):'—')+'</td><td class="num">'+sample+'</td>';
-  if(VIEW==='demand')mid='<td class="num">'+r.sold+'</td><td class="num">'+r.off3+'%</td><td class="num">'+r.sva+'%</td><td class="num">'+r.empty+'%</td><td class="num">'+r.cash+'%</td><td class="num">'+r.dom+'</td>';
-  if(VIEW==='rents')mid='<td class="num">'+(r.r1?money(r.r1):'—')+'</td><td class="num">'+(r.r2?money(r.r2):'—')+'</td><td class="num">'+money(r.ppu)+'</td><td class="num">'+(r.yld?r.yld+'%':'—')+'</td><td class="num">'+sample+'</td>';
-  if(VIEW==='opp')mid='<td class="num">'+ill(r.z,4,28)+'</td><td class="num">'+ill(r.z,20,70)+'</td><td class="num">'+ill(r.z,6,40)+'</td><td class="num">'+ill(r.z,30,120)+'</td><td class="num">'+ill(r.z,60,200)+'</td>';
-  if(VIEW==='events')mid='<td class="num">'+(ill(r.z,0,3))+'</td><td class="num">'+(ill(r.z,0,2))+'</td><td class="num">'+(ill(r.z,0,2))+'</td>';
-  return '<tr class="zrow" data-z="'+r.z+'">'+c0+mid+'<td class="nw"><a href="New_List.html#zip-'+r.z+'">New list</a></td></tr>'}).join('');
- document.getElementById('ziptable').innerHTML=h+body;
- var cur=(location.hash||'#zip-94608').replace('#zip-','');
- document.querySelectorAll('tr.zrow').forEach(function(tr){tr.classList.toggle('hl',tr.dataset.z===cur)});
-}
-function cityFilter(){drawTable();var sel=document.getElementById('zippick');fillPicker();var cur=sel.value;var city=document.getElementById('cityf').value;var r=row(cur);if(city!=='All cities'&&r&&r.city!==city){var first=T.filter(function(x){return x.city===city})[0];if(first)loadZip(first.z,true)}}
-function fillPicker(){var sel=document.getElementById('zippick');var city=document.getElementById('cityf').value;var cities={};T.forEach(function(r){if(city!=='All cities'&&r.city!==city)return;(cities[r.city]=cities[r.city]||[]).push(r)});var out='';Object.keys(cities).forEach(function(c){out+='<optgroup label="'+c+'">'+cities[c].map(function(r){return '<option value="'+r.z+'">'+r.z+' · '+r.area+' · '+r.sold+' sales</option>'}).join('')+'</optgroup>'});var keep=sel.value;sel.innerHTML=out;if(keep)sel.value=keep}
-document.addEventListener('DOMContentLoaded',function(){fillPicker();drawTable();var z=(location.hash||'').replace('#zip-','');loadZip(row(z)?z:'94608',true)});
+function fillPicker(){var sel=document.getElementById('zippick');var cities={};T.forEach(function(r){(cities[r.city]=cities[r.city]||[]).push(r)});var out='';Object.keys(cities).forEach(function(c){out+='<optgroup label="'+c+'">'+cities[c].map(function(r){return '<option value="'+r.z+'">'+r.z+' · '+r.area+' · '+r.sold+' sales</option>'}).join('')+'</optgroup>'});var keep=sel.value;sel.innerHTML=out;if(keep)sel.value=keep}
+document.addEventListener('DOMContentLoaded',function(){fillPicker();var z=(location.hash||'').replace('#zip-','');loadZip(row(z)?z:'94608',true)});
 
 </script></body></html>
