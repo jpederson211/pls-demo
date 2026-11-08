@@ -290,7 +290,7 @@ tr.sel td{background:#ECEAE4}
 </div></div>
 <div style="display:flex;align-items:center;margin-bottom:10px"><h2 style="font-size:15px;margin:0">Team Performance</h2><span class="seg2" style="margin-left:auto"><button class="on" onclick="setPeriod('d30',this)">Last 30 days</button><button onclick="setPeriod('d60',this)">Last 60 days</button><button onclick="setPeriod('all',this)">All time</button></span></div>
 <div class="row2">
-<div class="card" style="text-align:center"><div class="tp-label" id="tp-label">Top performer, last 30 days</div>
+<div class="card" style="text-align:center"><div class="tp-label" id="tp-label">Top performer, last 30 days</div><!-- fixed window; filter does not change this card -->
 <div style="display:flex;justify-content:center;margin:14px 0 8px"><div class="avatar" id="tp-av">MC</div></div>
 <div style="font-size:16px;font-weight:600" id="tp-name">Marissa Chen</div><div class="meta" id="tp-role">ISA</div>
 <div class="bignum" id="tp-per" style="margin-top:10px">412</div><div class="meta">touches in the period</div>
@@ -327,14 +327,14 @@ function initials(n){return n.split(' ').map(function(x){return x[0]}).join('')}
 function pickCamp(k){var e=document.getElementById('cp-empty'),b=document.getElementById('cp-body');if(!k){e.style.display='';b.style.display='none';return}var c=CAMPS[k];e.style.display='none';b.style.display='';document.getElementById('cp-sent').textContent=c.sent;document.getElementById('cp-calls').textContent=c.calls;document.getElementById('cp-conn').textContent=c.connects;document.getElementById('cp-appt').textContent=c.appts}
 function setPeriod(p,btn){PERIOD=p;document.querySelectorAll('.seg2 button').forEach(function(b){b.classList.toggle('on',b===btn)});render()}
 function sortTeam(k,th){if(SORT===k){DIR=-DIR}else{SORT=k;DIR=-1}render()}
-function render(){var t=TEAM[PERIOD];
- document.getElementById('tp-label').textContent='Top performer, '+t.label;
- document.getElementById('tp-av').textContent=initials(t.top.n);
- document.getElementById('tp-name').textContent=t.top.n;document.getElementById('tp-role').textContent=t.top.r;
- document.getElementById('tp-per').textContent=t.top.per.toLocaleString();
- document.getElementById('tp-tot').textContent=t.top.tot.toLocaleString();
- document.getElementById('tp-sub').textContent=t.top.calls.toLocaleString()+' calls · '+t.top.conn+' connects · '+t.top.appt+' appointments';
- document.getElementById('tp-gap').textContent=t.top.gap;
+function render(){var t=TEAM[PERIOD];var tp=TEAM['d30'];
+ document.getElementById('tp-label').textContent='Top performer, last 30 days';
+ document.getElementById('tp-av').textContent=initials(tp.top.n);
+ document.getElementById('tp-name').textContent=tp.top.n;document.getElementById('tp-role').textContent=tp.top.r;
+ document.getElementById('tp-per').textContent=tp.top.per.toLocaleString();
+ document.getElementById('tp-tot').textContent=tp.top.tot.toLocaleString();
+ document.getElementById('tp-sub').textContent=tp.top.calls.toLocaleString()+' calls · '+tp.top.conn+' connects · '+tp.top.appt+' appointments';
+ document.getElementById('tp-gap').textContent=tp.top.gap;
  document.getElementById('th-period').textContent=t.label;
  var rows=[[t.top.n,t.top.r,t.top.per,'up',t.top.tot]].concat(t.rest);rows.sort(function(a,b){var x=SORT==='per'?a[2]:a[4],y=SORT==='per'?b[2]:b[4];return (x-y)*DIR});
  var tbl=document.getElementById('teamtbl');
