@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Properties · Mockup Review · Prescott Listing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <span class="brand">Prescott Listing System · Mockup Review</span>
+  <a href="index.html">← All areas</a>
+</div>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">Mockup Review</a> › Properties</div>
+  <h1>Properties</h1>
+  <p class="lead">Two screens and the panels on them. Updated for the Nov 8 redesign.</p>
+  <div class="btnrow"><a class="btn primary" href="../Properties.html">Open Properties list</a><a class="btn" href="../Property_Detail.html">Open Property detail</a></div>
+
+  <h2>What it is</h2>
+  <p>Properties is where you look up a building. PLS holds 17,324 of them, loaded from PropertyRadar. For each building it knows the owner, the loans, the photos, nearby sales, anything worth flagging, and a full history of every time someone reached out to the owner about it.</p>
+  <p>One word you'll see everywhere: a <strong>touch</strong> just means one logged contact — a call, a visit, a text, a mailing, or a note. Every touch is attached to a building.</p>
+  <p>This is the page the rest of the app keeps pointing back to. Click an owner in a call list, a name on a mailing, or a line on the Dashboard, and you usually land here.</p>
+  <p><strong>How it works.</strong> There are two screens. The list helps you find a building; the detail page tells you everything about it. You search the list, open a building, and read through its tabs. From the detail page you can log a call or visit, add the building to a mailing list, fix a wrong detail, or merge two copies of the same building.</p>
+  <h3>What this area should do for you</h3>
+  <ul>
+    <li>Let you find any building in seconds — by parcel number, address, or owner name.</li>
+    <li>Put everything you'd want before calling an owner on a single page.</li>
+    <li>Keep one honest history per building: every mailing, call, visit, reply, and scan, in one place.</li>
+    <li>Make logging a contact or fixing a detail a one-click job from the page you're already on.</li>
+  </ul>
+
+  <h2>Screen 1 · Properties list</h2>
+  <div class="btnrow"><a class="btn" href="../Properties.html">Open it →</a></div>
+  <p><strong>What it is.</strong> Every building, one per row. This screen was just rebuilt. Search is now four labeled boxes in a row — APN (parcel number), Address (street or ZIP), Owner name, and Tier — with Search and Clear buttons. Fill in any one, or several, and press Search; it doesn't search as you type. The columns are APN, Address, ZIP, Units, Owner, Tier, and Last touch, and you can sort by Tier or Last touch. Click a row and a panel opens on the right with the building's photo, owner, mailing address, its contacts from the last 90 days, and any campaigns it's been in — plus an Open property button.</p>
+  <p>There's no "add to list" or "add property" on this screen anymore — you add a single building to a list from inside that building (Screen 3), and lists are built over in Owner lists.</p>
+  <div class="try"><strong>Try this.</strong> Search by owner name (try "Reyes"), then clear and search by ZIP (94609). Click a row and read the preview panel on the right. Sort the table by Last touch.</div>
+  <div class="callout">
+    <h3>What we want to hear from you</h3>
+    <ul>
+      <li>Four search boxes instead of a single search bar — clearer, or more work?</li>
+      <li>Leading with APN (parcel number) as the first column: useful to you, or would you rather see the address first?</li>
+      <li>The preview panel now shows 90 days of contacts and past campaigns. Is that the right thing to see before opening a building?</li>
+      <li>Anything you used to do on this screen that you now can't find (the old version had filter dropdowns and bulk "add to list")?</li>
+    </ul>
+  </div>
+
+  <h2>Screen 2 · Property detail</h2>
+  <div class="btnrow"><a class="btn" href="../Property_Detail.html">Open it →</a> <span class="subtle" style="align-self:center">4512 Telegraph Ave, our sample building</span></div>
+  <p><strong>What it is.</strong> One building, everything we know about it. The header is now two tight lines: the address, then the city and ZIP with three labels (3 units, Tier A, Absentee) and four facts (estimated value, last sale, how many buildings the owner has, signal count). One main button, Log a touch, and a ⋯ (more) menu with Edit, Add to list, and Merge duplicates. The tabs were reordered — the history now opens first:</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Tab</th><th>What's on it</th><th>What to tell us</th></tr>
+    <tr><td><strong>Touch Timeline</strong> <span class="subtle">(opens first)</span></td><td>Every contact on this building, newest first: when, how, and what happened.</td><td>This is the most-read tab in the app, and it now leads. Right call? Is it easy to read? What's the first thing you look for?</td></tr>
+    <tr><td>Overview</td><td>The building's facts (units, year built, sizes, parcel, county), whether the owner lives there, and the main photo.</td><td>Anything you'd want at first glance that isn't here?</td></tr>
+    <tr><td>Photos</td><td>Every photo, newest first, labeled by type and rights. One starred "primary" prints on the MVI letter; an MLS photo can't be the primary.</td><td>Is it clear why the 2009 MLS photo can't be primary? If there's no photo, PLS prints a map of the lot — okay on a mailer?</td></tr>
+    <tr><td>Owners</td><td>The owners, with role, mailing address, phone, email.</td><td>Is "Primary" vs. "Secondary" owner a distinction you use?</td></tr>
+    <tr><td>Loans</td><td>Each loan: amount, date, type, lender, and when it matures, with a "Matured" tag.</td><td>Loans are now their own tab. The note says a matured loan also shows up as a signal — is that connection clear, or would you want them together?</td></tr>
+    <tr><td>Signals</td><td>What PLS noticed and when — a loan maturing, a possible change of owner — with the source. Two greyed boxes below are reserved for more later.</td><td>Are these the signals that matter most? Do the empty "coming later" boxes help or just clutter?</td></tr>
+    <tr><td>Nearby Activity</td><td>2–4 unit sales in the same ZIP over the last year, from the MLS, with a link out to Your Market for that ZIP. Owners and brokers see the rows; other staff see only the count.</td><td>This used to be called "Sales nearby" and sat higher up. Now it's last, with a market link. Would you use it on a call?</td></tr>
+  </table>
+  </div>
+  <div class="try"><strong>Try this.</strong> It opens on Touch Timeline — read it first. Then click through Overview, Loans, and Signals, and notice how the matured loan shows up in two places. On Nearby Activity, follow the "More market insights" link.</div>
+
+  <h2>Screen 3 · The buttons on Property detail</h2>
+  <p>Three things open right on the page. Open each from <a href="../Property_Detail.html">Property detail</a>.</p>
+  <p><strong>Log a touch</strong> (the main button). A panel slides in from the right: how you reached them (Call, Visit, Text, Mail, Note), which direction, how it went, when (prefilled with now), and a notes box. It adds a line to the Touch Timeline. "Returned (mail came back)" only appears when the contact was Mail; three returns in a year mark the address as bad.</p>
+  <ul>
+    <li>Is this quick enough to fill in right after a call?</li>
+    <li>Are the outcome choices the ones you'd actually reach for?</li>
+  </ul>
+  <p><strong>Add to list</strong> (⋯ menu). Pick a list that exists, or start a new one. (This is the only place to add a single building to a list now — it was removed from the list screen.)</p>
+  <p><strong>Edit</strong> (⋯ menu). Fix the units, year built, size, or tier (with a reason), or clear a flag. Each field shows where the number came from. Your fix is protected — the next upload won't overwrite it. The mailing address can't be changed here; it comes from the upload.</p>
+  <p><strong>Merge duplicates</strong> (⋯ menu). Pick the other copy of the building, see them side by side, choose which to keep. Contacts and owners from both are kept. Can't be undone.</p>
+  <ul><li>Would you be comfortable merging yourself, or should only Edson?</li></ul>
+
+  <h2>Scenario: the QR scan on Telegraph Ave</h2>
+  <p>Optional, but it's the best way to test the screens. Talk out loud as you go. The data is fixed, so you're pretending.</p>
+  <p>It's October 29. The Reyes Family Trust scanned the QR code on the MVI letter for 4512 Telegraph Ave this morning. You have ten minutes before a showing and want to decide whether to call now.</p>
+  <ol>
+    <li><strong>Find it.</strong> On the Properties list, find 4512 Telegraph Ave with the new search boxes. Which box did you use — address, owner, or APN? Did it work the way you expected?</li>
+    <li><strong>Get a feel for it.</strong> Open the building. The page opens on the Touch Timeline. Is that the right first thing to see, or did you want the facts first? Check the header: units, tier, absentee, value, last sale.</li>
+    <li><strong>Why now?</strong> Open Signals, then Loans. The loan came due in March with no refinance, and the owner's mailing address moved to Walnut Creek. What does that tell you?</li>
+    <li><strong>Who am I calling?</strong> Open Owners. It's a trust with a second owner, Teresa Reyes. Phone and email are there. Right person?</li>
+    <li><strong>What have we done already?</strong> Back on Touch Timeline, note Nolan's Oct 24 call — no answer, no voicemail. Does that change your plan?</li>
+    <li><strong>Comps in hand.</strong> Open Nearby Activity. Pick two sales you'd mention on the call, and try the "More market insights" link. Enough, or would you go elsewhere?</li>
+    <li><strong>Make the call and log it.</strong> Press Log a touch and fill it in as if Teresa asked you to call back Friday. Anything awkward?</li>
+    <li><strong>Wrap up.</strong> Did the page do its job in under ten minutes? What slowed you down?</li>
+  </ol>
+
+  <footer>Prescott Listing System · mockup review · Properties. <a href="index.html">Back to all areas</a></footer>
+</div>
+</body>
+</html>

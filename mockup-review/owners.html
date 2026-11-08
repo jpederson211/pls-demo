@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Owners · Mockup Review · Prescott Listing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <span class="brand">Prescott Listing System · Mockup Review</span>
+  <a href="index.html">← All areas</a>
+</div>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">Mockup Review</a> › Owners</div>
+  <h1>Owners</h1>
+  <p class="lead">Two screens and the panels on them. Updated for the Nov 8 redesign.</p>
+  <div class="btnrow"><a class="btn primary" href="../Owners.html">Open Owners list</a><a class="btn" href="../Owner_Detail.html">Open Owner detail</a></div>
+
+  <h2>What it is</h2>
+  <p>Owners is where you look up a person or a company, instead of a building. PLS holds 14,882 owners, each tied to the buildings they own. Properties answers "what do we know about this building." Owners answers "who is this, what do they own, and what has every contact with them looked like across all of it." Someone who owns four buildings is one record here, with one phone number and one history — not four.</p>
+  <p>As in Properties, a <strong>touch</strong> means one logged contact — a call, visit, text, mailing, or note.</p>
+  <p><strong>How it works.</strong> Owners are created by uploads. PLS matches on name plus mailing address, so the same trust that owns property in Oakland and Berkeley becomes one record on its own. The list finds them; the detail page shows their buildings, every contact across all of them, and whether they're on the do-not-contact list. The mailing address comes from the upload and can't be typed over here; the name, phone, email, and past-client flag can.</p>
+  <h3>What this area should do for you</h3>
+  <ul>
+    <li>Let you find any owner by name in seconds, and see whether they're a person or a company, where they get mail, and how many buildings they own.</li>
+    <li>Show the whole relationship on one page: every call, mailing, reply, and visit across every building they own.</li>
+    <li>Make portfolio owners obvious. Someone with six buildings should never look like someone with one.</li>
+    <li>Make "can I contact this person" a glance, not a hunt.</li>
+    <li>Make duplicates something you merge, not something you live with.</li>
+  </ul>
+
+  <h2>Screen 1 · Owners list</h2>
+  <div class="btnrow"><a class="btn" href="../Owners.html">Open it →</a></div>
+  <p><strong>What it is.</strong> Every owner, one per row. This screen was rebuilt to match Properties: search is now a single Name box with Search and Clear buttons — the old People/Entities, do-not-contact, and past-client filters were removed. The columns are Name, Type, Town / City (where they get mail), Properties (how many), Do not contact (with the reason — "Mail · requested," "Email · unsubscribed," "All · past client"), and Last touch. Click a row and a panel opens on the right: their buildings (as links), phone and email, their contacts from the last 90 days, and every campaign any of their buildings has been in — all of it covering the owner's whole portfolio, not one building. Plus an Open owner button.</p>
+  <div class="try"><strong>Try this.</strong> Search "Reyes," click the row, and read the whole preview panel — notice the touches and campaigns span all four of their buildings.</div>
+  <div class="callout">
+    <h3>What we want to hear from you</h3>
+    <ul>
+      <li>One Name box instead of the old filters — simpler, or did you use those filters?</li>
+      <li>The preview panel now rolls up touches and campaigns across all of an owner's buildings. Is that the right way to see a portfolio owner?</li>
+      <li>The Do not contact column still shows the reason inline. Clear enough, or would you want it somewhere else?</li>
+      <li>When you look for an owner, what do you have in hand — a name, a building, a phone number? Does a Name-only search cover it?</li>
+    </ul>
+  </div>
+
+  <h2>Screen 2 · Owner detail</h2>
+  <div class="btnrow"><a class="btn" href="../Owner_Detail.html">Open it →</a> <span class="subtle" style="align-self:center">Reyes Family Trust, our sample owner</span></div>
+  <p><strong>What it is.</strong> One owner, across all their buildings. The header shows the name, a type label (Person / Entity), the building count, a past-client note, and — this is new — a <strong>contact-status chip</strong>: a green "Can Contact" or a red "Do Not Contact" with the channel and date. One main button, Log a touch, and a ⋯ (more) menu with Edit, Add to do-not-contact, and Merge duplicates. There are now just two tabs:</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Tab</th><th>What's on it</th><th>What to tell us</th></tr>
+    <tr><td>Properties</td><td>Their buildings: address, ZIP, units, tier, whether the owner lives there, their role, and the last contact per building. Rows open the building.</td><td>Four buildings, three Tier A. Does this say "portfolio owner, handle accordingly" fast enough?</td></tr>
+    <tr><td>Touches</td><td>Every contact across every building, newest first: when, how, and what happened. A mailing to several buildings shows as one line ("3 properties · MVI letter delivered").</td><td>Is folding a 3-building mailing into one line right, or do you want one line per building? Can you tell which building a call was about?</td></tr>
+  </table>
+  </div>
+  <p>The old "Do not contact" tab is gone — whether you can contact someone is now the green/red chip at the top. If PropertyRadar flagged them "do not mail," that shows in the chip's detail. Adding or changing a suppression is still done from the ⋯ menu and over in Owner lists.</p>
+  <div class="try"><strong>Try this.</strong> Open both tabs. On Properties, click 3201 Adeline St and come back. Look at the "Can Contact" chip in the header and say whether it's obvious what it means.</div>
+
+  <h2>Screen 3 · The buttons on Owner detail</h2>
+  <p>All open right on the page. Open each from <a href="../Owner_Detail.html">Owner detail</a>.</p>
+  <p><strong>Log a touch</strong> (the main button). The same panel as on Property detail, with one extra field at the top: a <em>Which property</em> picker, because a contact is always logged against a building. It starts on their main building.</p>
+  <ul><li>When you call someone who owns four buildings, do you think of the call as being about one building? If not, what should happen here?</li></ul>
+  <p><strong>Edit</strong> (⋯ menu). First and last name, company name, phone, email, past client (which marks every building they own as Tier A), and notes. The mailing address is shown but can't be edited.</p>
+  <ul>
+    <li>Past client automatically making everything Tier A — right rule?</li>
+    <li>Have you ever had to fix a mailing address by hand? If so, this will frustrate you — tell us how often.</li>
+  </ul>
+  <p><strong>Add to do-not-contact</strong> (⋯ menu). Stop mail and email, mail only, or email only; a reason (they asked, unsubscribed, current client, mail came back); an optional end date. The pop-up tells you how many pending mailings they'll be pulled from. Once set, it turns the header chip red.</p>
+  <ul>
+    <li>Are those four reasons the ones you'd use?</li>
+    <li>Should "current client" happen automatically instead of someone setting it?</li>
+  </ul>
+  <p><strong>Merge duplicates</strong> (⋯ menu). Pick the other record, see both side by side, choose which to keep. Can't be undone.</p>
+  <ul><li>The sample shows "Reyes Family Trust" and "Reyes Family Tr" — the kind of duplicate uploads create. Should PLS suggest these, or is finding them by hand fine for now?</li></ul>
+
+  <h2>Scenario: the Reyes Family Trust owns four buildings</h2>
+  <p>Optional. Talk out loud as you go. The data is fixed, so you're pretending.</p>
+  <p>Teresa Reyes calls the office. She got the MVI letter on three of her buildings and scanned the QR code on one. Now she wants to talk — but she mentions she's thinking about selling <em>one</em> building and keeping the rest, and isn't sure which. You want to be ready before you call her back this afternoon.</p>
+  <ol>
+    <li><strong>Find her.</strong> On the Owners list, search "Reyes." Did the single Name box get you there, and did the preview panel tell you enough before opening?</li>
+    <li><strong>How big is this?</strong> Open the owner. Four buildings, three Tier A. From the Properties tab, say which building you'd guess she'd sell, and why — using only what's on the page. Then say what you'd need that isn't there.</li>
+    <li><strong>What has she heard from us?</strong> Open Touches. Walk the sequence: letter sent Oct 16, delivered Oct 21, Nolan's call Oct 24, the QR scan Oct 29, a visit in August. Does it read as one relationship or four?</li>
+    <li><strong>Any reason not to call?</strong> Look at the contact-status chip in the header. It's green "Can Contact." Is that easier or harder to spot than the old separate tab would have been?</li>
+    <li><strong>Who's the right person?</strong> Teresa is a second owner on 4512 Telegraph. From this page, is it obvious she's the one to talk to, or does the trust's name hide her?</li>
+    <li><strong>Log the callback.</strong> Press Log a touch. She asked you to call this afternoon. Which building do you pick in the picker, given she hasn't decided which one she's selling? Say what you did and whether it felt wrong.</li>
+    <li><strong>One more thing.</strong> She mentions her late husband's name is still on some paperwork. Open Merge duplicates and look at the "Reyes Family Tr" record. Merge it now, or leave it to Edson?</li>
+    <li><strong>Wrap up.</strong> Anything you'd want on the owner page before a call that you had to go find somewhere else?</li>
+  </ol>
+
+  <footer>Prescott Listing System · mockup review · Owners. <a href="index.html">Back to all areas</a></footer>
+</div>
+</body>
+</html>
