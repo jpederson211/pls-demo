@@ -1,48 +1,277 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PLS Review 3 · Asset and Send</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#1E1E1E;background:#F7F6F3;padding:36px 16px 60px}
-.wrap{max-width:960px;margin:0 auto}h1{font-size:24px;margin:0 0 4px}.sub{color:#6B6A66;margin-bottom:28px}
-h2{font-size:15px;margin:28px 0 10px;letter-spacing:.04em;text-transform:uppercase;color:#6B6A66}
-.path{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.path a{background:#2D2E41;color:#fff;text-decoration:none;padding:8px 12px;border-radius:2px;font-size:13px}.path span{color:#9A9892}
-table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:8px 10px;border-bottom:1px solid #D3D0CB;background:#F0EEEA}td{padding:8px 10px;border-bottom:1px solid #E6E3DE;vertical-align:top}td a{color:#2D2E41}
-.note{background:#fff;border:1px solid #D3D0CB;padding:14px 16px;margin-bottom:10px}.note b{display:block;margin-bottom:4px}
-ol{padding-left:20px}li{margin-bottom:6px}
-</style></head><body><div class="wrap">
-<h1>Prescott Listing System · Review 3 · Asset and Send Flow</h1>
-<div class="sub">Mockups for Screen PRD v2.3 §5.9 and §18 (Campaign Asset and Send Flow v1.0). Nov 6, 2026, revised after the first review: one asset per campaign, asset card replaces the owner panel on Campaign, and three asset types each get their own Images / Copy / Proof. Everything else in the demo is unchanged from Review 2; the full set is reachable from <a href="Dashboard.html">Dashboard</a>.</div>
+<title>Dashboard · Prescott Listing System</title><style>.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.tile{background:#fff;border:1px solid #E3E1DA;padding:16px 18px;text-decoration:none;color:inherit;display:block}
+.tile:hover{border-color:#2D2E41}.tile .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66}
+.tile .n{font-size:30px;font-weight:600;margin:6px 0 4px}.tile .l{font-size:12.5px;color:#6B6A66;line-height:1.4}
+.tile.dis{color:#9A9892;background:#F7F6F2;pointer-events:none}.tile.dis .n{color:#C9C7C0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}.cols .section{margin:0}
+ul.wait{list-style:none;margin:0;padding:0}ul.wait li{padding:10px 0;border-bottom:1px solid #EDEBE4;display:flex;justify-content:space-between;gap:12px}ul.wait li:last-child{border:0}
+ul.wait .what{font-size:13.5px}ul.wait .who{font-size:12px;color:#6B6A66;white-space:nowrap}
+ul.tl li{grid-template-columns:150px 70px 1fr}
+.top{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:18px}.top .section{margin:0}
+table.sig td.why{color:#6B6A66;font-size:12.5px}
+.mk{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}.mk .st{border-top:1px solid #EDEBE4;padding:10px 0 4px}.mk .st:nth-child(-n+2){border-top:0;padding-top:0}
+.mk .lbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66}.mk .val{font-size:22px;font-weight:600;margin:4px 0 2px}.mk .sub{font-size:12.5px;color:#6B6A66}
+.up{color:#2E7D4F}.dn{color:#B23B3B}
+.steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.counts{display:flex;background:#fff;border:1px solid #D3D0CB;margin-bottom:16px}
+.counts div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.counts div:last-child{border-right:0}
+.counts .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.counts span{font-size:11px;color:#6B6A66;display:block}
+.counts .dis{color:#9A9892;background:#F7F6F3}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:150px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.inline{display:none;background:#F7F6F3;border:1px solid #D3D0CB;padding:10px 14px;margin:-6px 0 12px 0;font-size:12px}.inline.open{display:block}
+.tiles5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:10px;cursor:pointer}.tile.on{border:2px solid #2D2E41}
+.tile .thumb{height:120px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px}
+.pdf{display:flex;gap:16px}.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;flex:0 0 380px}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}.thumbs .box{width:70px;height:96px;cursor:pointer}.thumbs .box.on{border:2px solid #2D2E41}
+.who{font-size:11px;color:#6B6A66;margin-top:4px}
+.formfoot .left{margin-right:auto}
+tr.sel td{background:#EEF1FA}.btn.sm{padding:4px 10px;font-size:12px;white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.chart{height:180px;background:#fff;border:1px solid #D3D0CB;padding:10px}
+.chart svg{width:100%;height:100%}
+.lc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.seg{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}
+.seg button{font:inherit;background:#fff;border:none;border-right:1px solid #B5B2AC;padding:6px 12px;cursor:pointer}
+.seg button:last-child{border-right:0}.seg button.on{background:#2D2E41;color:#fff}
+.live{background:#F7F6F3;border:1px solid #D3D0CB;padding:14px}
+.live .big{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.live .split{font-size:12px;color:#6B6A66;margin-top:4px}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px;cursor:pointer}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.excl{background:#fff;border:1px solid #D3D0CB;padding:10px 14px}
+.excl .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #E6E3DE}.excl .row:last-child{border-bottom:0}
 
-<h2>Campaign · two states</h2>
-<div class="path"><a href="Campaign_Detail_NoAsset.html">Campaign · no asset yet</a><span>›</span><a href="Asset_1_Select.html">New asset</a><span>…</span><a href="Campaign_Detail.html">Campaign · asset set</a></div>
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.4;color:#1E1E1E;background:#F7F6F3}
+.wftool{background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wftool span.lbl{color:#B5B2AC;margin-right:4px}
+.wftool button{font:inherit;background:#444;color:#fff;border:1px solid #666;padding:3px 10px;cursor:pointer}
+.wftool button.on{background:#fff;color:#1E1E1E}
+.wftool .sep{width:1px;height:18px;background:#666;margin:0 6px}
+.app{display:flex;min-height:calc(100vh - 34px)}
+.rail{width:216px;flex:0 0 216px;background:#fff;border-right:1px solid #D3D0CB;display:flex;flex-direction:column}
+.rail .tenant{padding:14px 16px;border-bottom:1px solid #D3D0CB;display:flex;gap:10px;align-items:center;font-weight:600}
+.logo{width:28px;height:28px;background:#E9E7E2;border:1px solid #B5B2AC;flex:0 0 28px}
+.rail nav{flex:1;padding:8px 0}
+.rail a{display:flex;align-items:center;padding:9px 16px;color:#1E1E1E;text-decoration:none}
+.rail a.cur{background:#2D2E41;color:#fff}
+.rail a.dis{color:#9A9892;cursor:default}
+.tag{font-size:10px;border:1px solid #B5B2AC;padding:0 4px;margin-left:auto;color:#6B6A66;border-radius:2px;line-height:14px}
+.rail .user{padding:12px 16px;border-top:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.rail .user b{display:block;color:#1E1E1E;font-weight:500}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid #D3D0CB;padding:10px 24px;display:flex;align-items:flex-end;justify-content:space-between;min-height:64px}
+.crumb{font-size:12px;color:#6B6A66;margin-bottom:4px}
+.crumb a{color:#2D2E41}
+h1{font-size:18px;font-weight:600;margin:0}
+.btn{font:inherit;font-size:13px;padding:7px 12px;border:1px solid #B5B2AC;background:#fff;color:#1E1E1E;cursor:pointer;border-radius:2px}
+.btn.primary{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.btn.danger{border-color:#B03A2E;color:#B03A2E}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:8px;align-items:center}
+.content{padding:20px 24px;flex:1;display:flex;gap:20px;align-items:flex-start}
+.body{flex:1;min-width:0}
+.panel{width:288px;flex:0 0 288px;background:#fff;border:1px solid #D3D0CB;padding:14px}
+.panel h3{font-size:13px;margin:0 0 8px;font-weight:600}
+.panel dl{margin:0;font-size:12px}.panel dt{color:#6B6A66;margin-top:8px}.panel dd{margin:0}
+h2{font-size:15px;font-weight:600;margin:0 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}
+th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:0 10px;height:36px;border-bottom:1px solid #D3D0CB;background:#F0EEEA;white-space:nowrap}
+td{padding:0 10px;height:40px;border-bottom:1px solid #E6E3DE;white-space:nowrap}
+tr.row{cursor:pointer}tr.row:hover td{background:#F7F6F3}tr.sel td{background:#ECEAE4}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td a{color:#2D2E41}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border:1px solid #B5B2AC;border-radius:10px;background:#fff;white-space:nowrap}
+.pill.ok{border-color:#2E7D4F;color:#2E7D4F}.pill.warn{border-color:#B8860B;color:#8A6500}.pill.err{border-color:#B03A2E;color:#B03A2E}.pill.navy{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.note{background:#FFF3B0;border:1px solid #D9B800;padding:6px 10px;font-size:12px;margin:8px 0;color:#1E1E1E}
+.note::before{content:"PRD gap: ";font-weight:600}
+.box{background:#E9E7E2;border:1px dashed #B5B2AC;color:#6B6A66;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px}
+.field{margin-bottom:14px}.field label{display:block;font-size:12px;color:#6B6A66;margin-bottom:4px}
+.req::after{content:" *";color:#B03A2E}
+input[type=text],input[type=number],input[type=date],select,textarea{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;background:#fff;width:100%;max-width:420px;border-radius:2px}
+input[readonly]{background:#F0EEEA;color:#6B6A66}
+.chk{display:flex;gap:8px;align-items:center;margin:6px 0}
+.chk input{width:auto}
+.empty{background:#fff;border:1px dashed #B5B2AC;padding:40px;text-align:center;color:#6B6A66}
+.empty b{display:block;color:#1E1E1E;margin-bottom:4px}
+.errbox{background:#fff;border:1px solid #B03A2E;padding:16px;color:#B03A2E}
+.errbox b{display:block;margin-bottom:4px}
+.skel{background:#E9E7E2;height:14px;margin:10px 0;border-radius:2px}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.section{background:#fff;border:1px solid #D3D0CB;padding:14px;margin-bottom:16px}
+.section h2{margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facts{display:flex;gap:24px;flex-wrap:wrap}.facts div{font-size:13px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.head h2{font-size:17px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{padding:10px 0;border-bottom:1px solid #E6E3DE;display:grid;grid-template-columns:120px 90px 1fr;gap:12px;align-items:start}
+.tl .when{font-variant-numeric:tabular-nums;color:#6B6A66;font-size:12px}
+.meta{font-size:12px;color:#6B6A66}
+.money,.num{font-variant-numeric:tabular-nums}
+.steps{display:flex;gap:0;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}
+.steps div.on{background:#2D2E41;color:#fff}
+.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.formfoot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid #D3D0CB;margin-top:16px}
+.formfoot .left{margin-right:auto}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:16px;max-width:460px;margin-top:12px;box-shadow:0 2px 0 #D3D0CB}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:14px;cursor:pointer;min-height:96px}
+.tile.dis{color:#9A9892;cursor:default;background:#F7F6F3}
+.tile .n{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;margin:4px 0}
+.tile .stage{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66}
+.toast{position:fixed;bottom:20px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px}
+.pdf{display:flex;gap:16px}
+.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;box-shadow:0 1px 0 #D3D0CB}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}
+.thumbs .box{width:70px;height:96px;cursor:pointer}
+.thumbs .box.on{border:2px solid #2D2E41}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.count{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:6px 12px;font-size:13px}.kv dt{color:#6B6A66}.kv dd{margin:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.totals{display:flex;gap:0;background:#fff;border:1px solid #D3D0CB;margin:14px 0}
+.totals div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.totals div:last-child{border-right:0}
+.totals .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.totals span{font-size:11px;color:#6B6A66;display:block}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:90px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
 
-<h2>Demo path · MVI letter (per property)</h2>
-<div class="path"><a href="Campaign_Detail.html">Campaign</a><span>›</span><a href="Asset_1_Select.html">1 Select</a><span>›</span><a href="Asset_2_Images.html">2 Images</a><span>›</span><a href="Asset_3_Copy_Loading.html">3 Copy (drafting)</a><span>›</span><a href="Asset_3_Copy.html">3 Copy</a><span>›</span><a href="Asset_4_Proof.html">4 Proof</a><span>›</span><a href="Asset_Ready.html">Ready</a><span>›</span><a href="Send_Config.html">Send</a><span>›</span><a href="Run_Status.html">Run status (rendering)</a><span>›</span><a href="Run_Exceptions.html">Exceptions</a></div>
+.rail nav{padding:6px 0}
+.rail .grp{margin-top:6px}
+.rail .grp>button{font:inherit;width:100%;text-align:left;background:none;border:none;padding:9px 16px;color:#6B6A66;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center}
+.rail .grp>button::before{content:"▾";font-size:10px;margin-right:6px;color:#9A9892}
+.rail .grp.closed>button::before{content:"▸"}
+.rail .grp.closed .items{display:none}
+.rail .items a{padding-left:34px}
+.rail .user{display:flex;align-items:center;cursor:pointer}
+.rail .user div{flex:1}
+.rail .user .chev{color:#9A9892;font-size:11px}
 
-<h2>Second path · Recent Activity postcard (area, mail)</h2>
-<div class="path"><a href="Asset_1_Select.html">1 Select</a><span>›</span><a href="AssetRP_2_Images.html">2 Images</a><span>›</span><a href="AssetRP_3_Copy.html">3 Copy (over-limit state)</a><span>›</span><a href="AssetRP_4_Proof.html">4 Proof (front / back)</a><span>›</span><a href="AssetRP_Ready.html">Ready</a><span>›</span><a href="Send_Config_Postcard.html">Send</a></div>
+body{background:#F7F6F3;padding-bottom:30px}
+.app{min-height:calc(100vh - 30px)}
+.note,.note::before{display:none}
+.rail{position:sticky;top:0;height:calc(100vh - 30px)}
+td.nw{white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.subtabs .last{margin-left:auto;font-size:12px;color:#6B6A66}
+.swatch{width:22px;height:22px;border:1px solid #B5B2AC;display:inline-block;vertical-align:middle;margin-right:8px}
+.slot{display:flex;gap:12px;align-items:center;border:1px solid #D3D0CB;background:#fff;padding:10px;margin-bottom:8px}
+.slot .box{width:120px;height:56px;flex:0 0 120px}
+.slot .fn{flex:1;font-size:12px}
+.prints{font-size:11px;color:#6B6A66;margin-top:3px}
+.tog{display:inline-block;width:32px;height:18px;border-radius:9px;background:#2D2E41;position:relative;vertical-align:middle;cursor:pointer}
+.tog::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.tog.off{background:#B5B2AC}.tog.off::after{right:auto;left:2px}
+.tog.dis{opacity:.4;cursor:default}
+.rule{background:#F0EEEA;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px}
+[data-stab]{display:flex;gap:20px;align-items:flex-start;width:100%}
+.content .panel{flex:0 0 288px;position:sticky;top:12px}
+.body{min-width:0}.section{overflow-x:auto}.section:has(.menu){overflow:visible}.menu .dd{z-index:50}.body table td,.body table th{white-space:normal}
+.panel .field{margin-bottom:10px}.panel input,.panel select,.panel textarea{max-width:none}
+.panel h3{display:flex;justify-content:space-between}.panel .x{cursor:pointer;color:#6B6A66}
+.panel table td,.panel table th{height:30px;padding:0 6px;font-size:12px}
+.panel .formfoot{margin-top:12px;padding-top:10px}
+.toast{display:none}
+.toast.show{display:block}
+.demo{position:fixed;left:0;right:0;bottom:0;background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;opacity:.9}
 
-<h2>Third path · Recent Activity flyer (area, mail + email)</h2>
-<div class="path"><a href="Asset_1_Select.html">1 Select</a><span>›</span><a href="AssetRA_2_Images.html">2 Images</a><span>›</span><a href="AssetRA_3_Copy.html">3 Copy</a><span>›</span><a href="AssetRA_4_Proof.html">4 Proof</a><span>›</span><a href="AssetRA_Ready.html">Ready</a><span>›</span><a href="Send_Config_Flyer.html">Send (both channels)</a><span>›</span><a href="Run_Status_Flyer.html">Run status (sent, awaiting vendor)</a></div>
+a.btn{text-decoration:none;display:inline-block}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.filters select,.filters input{width:auto;max-width:220px}
+.filters .cnt{margin-left:auto;font-size:12px;color:#6B6A66}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}.facts div{font-size:14px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head h2{font-size:17px}
+.tl li{grid-template-columns:150px 90px 1fr}
+.menu{position:relative;display:inline-block}
+.menu .dd{position:absolute;right:0;top:34px;background:#fff;border:1px solid #B5B2AC;min-width:170px;z-index:5;display:none}
+.menu .dd a{display:block;padding:8px 12px;color:#1E1E1E;text-decoration:none}
+.menu.open .dd{display:block}
+.overlay{position:fixed;inset:0;background:rgba(30,30,30,.35);display:none;align-items:center;justify-content:center;z-index:20}
+.overlay.open{display:flex}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:18px;width:520px;max-width:92vw}
+.dialog h3{margin:0 0 10px;font-size:15px}
+.sbs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sbs .col{border:1px solid #D3D0CB;padding:10px;font-size:12px}
+.sbs .col b{display:block;margin-bottom:6px}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12px;color:#6B6A66}
+tr.sel td{background:#ECEAE4}
+.chkcol{width:28px}
+.srch{display:flex;gap:6px}.srch input{max-width:260px}
+.clear{font-size:12px;margin-left:8px}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{background:#fff;border:1px solid #D3D0CB;padding:8px}
+.ph .img{height:130px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px;position:relative}
+.ph .star{position:absolute;top:6px;right:8px;font-size:16px;color:#B5B2AC;cursor:pointer}.ph .star.on{color:#2D2E41}.ph .star.dis{opacity:.35;cursor:not-allowed}
+.ph .cap{font-size:12px;margin-top:6px}.ph .row2{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.ph .acts{font-size:11px;margin-top:6px}.ph .acts a{margin-right:8px}
+.maptile{height:200px;background:#EDEBE6;border:1px solid #D3D0CB;position:relative;overflow:hidden}
+.maptile svg{width:100%;height:100%}
+.maptile .lbl{position:absolute;bottom:8px;left:10px;font-size:12px;color:#6B6A66;background:rgba(255,255,255,.85);padding:2px 6px}
+.dt{display:flex;gap:8px}.dt input{max-width:160px}
+.bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
+.bulk.on{display:flex}
+</style></head><body>
+<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="cur" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Market_by_ZIP.html">Your Market</a><a class="" href="Your_Team.html">Your Team</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
+<div class="main">
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a></div><h1>Dashboard</h1></div><div class="actions"></div></div>
+<div class="content" style="display:block">
+<style>
+.ph{background:#fff;border:1px solid #D3D0CB;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:#1E1E1E}
+.phrow1{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.phrow1 .ph{min-height:280px}
+.phrow2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.phrow2 .ph{min-height:200px}
+</style>
+<div class="phrow1"><div class="ph">Top signals</div><div class="ph">Active campaigns</div></div>
+<div class="phrow2"><div class="ph">My prospect list</div><div class="ph">This week's velocity</div><div class="ph">Market dynamics</div></div>
+</div>
 
-<h2>Screens in this round</h2>
-<table><tr><th>PRD</th><th>Screen</th><th>What to look at</th></tr>
-<tr><td>C2</td><td><a href="Campaign_Detail_NoAsset.html">Campaign · no asset</a></td><td>Planning, metrics at 0, empty queue and Mailings, empty asset card on the right, <b>New asset</b> primary.</td></tr>
-<tr><td>C2</td><td><a href="Campaign_Detail.html">Campaign · asset set</a></td><td>Asset card on the right (thumbnail, Ready, built / approved by, View proof, Send). Primary is <b>Send</b>; New asset is gone. Mailings tab lists runs only. Owner panel opens only from a queue row.</td></tr>
-<tr><td>R3·1</td><td><a href="Asset_1_Select.html">Select interest generator</a></td><td>Nine cards in two rows. Three card states: approved master, no master (Upload master link), needs a listing subject. Side panel describes the pick.</td></tr>
-<tr><td>R3·2</td><td><a href="Asset_2_Images.html">Images · MVI letter</a></td><td>Fixed 4-page layout with two outlined slots. Subject slot is per-property with a fallback picker (map tile default). Hero from the image library.</td></tr>
-<tr><td>R3·3</td><td><a href="Asset_3_Copy_Loading.html">Copy · drafting</a></td><td>Loading state while FieldPost drafts. Shows what was and wasn't sent (no owner PII, no values). Auto-advances after 6 s.</td></tr>
-<tr><td>R3·3</td><td><a href="Asset_3_Copy.html">Copy · MVI letter</a></td><td>Run-level fields with Regenerate and character counts; per-property pattern shown applied to three samples; system-filled areas read-only.</td></tr>
-<tr><td>R3·4</td><td><a href="Asset_4_Proof.html">Proof · MVI letter</a></td><td>Four pages, three sample properties plus a picker. Approve vs Submit for approval rule stated inline.</td></tr>
-<tr><td>—</td><td><a href="Asset_Ready.html">Your asset is ready</a></td><td>Confirmation with Go to sending / Back to campaign. Nothing rendered, frozen or sent.</td></tr>
-<tr><td>R3·2–4</td><td><a href="AssetRP_2_Images.html">Images</a> · <a href="AssetRP_3_Copy.html">Copy</a> · <a href="AssetRP_4_Proof.html">Proof</a> · postcard</td><td>6×9 front and back; one full-bleed slot; two short copy areas, headline drawn over its limit so the blocked Next shows; proof flips front / back.</td></tr>
-<tr><td>R3·2–4</td><td><a href="AssetRA_2_Images.html">Images</a> · <a href="AssetRA_3_Copy.html">Copy</a> · <a href="AssetRA_4_Proof.html">Proof</a> · flyer</td><td>Same wizard for a single-piece area asset: one hero, optional thumbnails, two copy areas, one proof.</td></tr>
-<tr><td>R4</td><td><a href="Send_Config.html">Send · MVI letter</a> · <a href="Send_Config_Postcard.html">Send · postcard</a> · <a href="Send_Config_Flyer.html">Send · flyer</a></td><td>Channel cards (only the ones the asset supports), vendor, timing, recipients after suppression, cost estimate, days-to-rank. One Confirm.</td></tr>
-<tr><td>R2</td><td><a href="Run_Status.html">Run status · rendering</a> · <a href="Run_Status_Flyer.html">Run status · sent</a></td><td>Stage tracker: Render with progress and held count, Email live counters, Mail awaiting vendor with Mark as mailed (R5), Responses. Tabs: Recipients, Renders, Costs.</td></tr>
-<tr><td>open 2</td><td><a href="Run_Exceptions.html">Exceptions</a></td><td>Proposal: held pieces with reason, per-row fix action, re-render only the fixed ones.</td></tr>
-<tr><td>R1</td><td><a href="Mailings.html">Mailings</a></td><td>Run list with the v2.3 columns and status pills. No primary action; runs start from a campaign.</td></tr></table>
+<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px">Saved.</div>
+<div class="demo">Prescott Listing System · demo · Nov 2026 · Buttons respond but nothing is stored.</div>
+<script>
+function grp(b){b.parentNode.classList.toggle('closed')}
 
-<h2>Decisions applied in this revision</h2>
-<div class="note"><b>One asset per campaign.</b> The campaign holds exactly one interest generator. The asset card replaces the Assets table; a follow-up is a second run of the same asset; a different piece means a new campaign. The ⋯ menu carries "Replace asset", locked after the first send. This supersedes PRD v2.3 §5.8–5.9 wording about several configurations per campaign.</div>
-<div class="note"><b>Step 1 cards.</b> Only MVI letter, Recent Activity postcard and Recent Activity flyer lead into steps 2–4 in this round; the other six select but disable Next with a note. General market analysis now shows as master-approved.</div>
-<div class="note"><b>Who approves.</b> Unchanged: both gates exclude the creator. Edson builds, Nolan approves.</div>
-<div class="note"><b>Image library</b> stays a picker inside Images (no sub-tab yet). <b>Exceptions queue</b> remains a proposal for open item 2.</div>
-</div></body></html>
+function panel(id){document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
+function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
+function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
+function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+
+function tab(group,id,btn){document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(e){e.style.display=(e.dataset.tab===id)?'':'none'});var p=btn.parentNode;Array.prototype.forEach.call(p.children,function(b){b.classList.toggle('on',b===btn)})}
+function toggle(id){var e=document.getElementById(id);if(e)e.classList.toggle('open')}
+document.addEventListener('click',function(ev){document.querySelectorAll('.menu.open').forEach(function(m){if(!m.contains(ev.target))m.classList.remove('open')})});
+function dlg(id){document.querySelectorAll('.overlay').forEach(function(e){e.classList.toggle('open',e.id===id)})}
+function closeDlg(){document.querySelectorAll('.overlay').forEach(function(e){e.classList.remove('open')})}
+function selrow(tr){document.querySelectorAll('tr.sel').forEach(function(r){r.classList.remove('sel')});tr.classList.add('sel');panel('side')}
+function bulk(){var n=document.querySelectorAll('input.rowchk:checked').length;var b=document.getElementById('bulk');if(b){b.classList.toggle('on',n>0);document.getElementById('bulkn').textContent=n}}
+</script><script>function selrow(tr){if(event&&event.target.tagName=="A")return;tr.closest("table").querySelectorAll("tr.sel").forEach(function(x){x.classList.remove("sel")});tr.classList.add("sel")}</script></body></html>
