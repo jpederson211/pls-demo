@@ -1,5 +1,28 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Your Market · Prescott Listing System</title><style>
+.steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.counts{display:flex;background:#fff;border:1px solid #D3D0CB;margin-bottom:16px}
+.counts div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.counts div:last-child{border-right:0}
+.counts .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.counts span{font-size:11px;color:#6B6A66;display:block}
+.counts .dis{color:#9A9892;background:#F7F6F3}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:150px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.inline{display:none;background:#F7F6F3;border:1px solid #D3D0CB;padding:10px 14px;margin:-6px 0 12px 0;font-size:12px}.inline.open{display:block}
+.tiles5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:10px;cursor:pointer}.tile.on{border:2px solid #2D2E41}
+.tile .thumb{height:120px;background:#E9E7E2;border:1px dashed #B5B2AC;display:flex;align-items:center;justify-content:center;color:#6B6A66;font-size:12px}
+.pdf{display:flex;gap:16px}.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;flex:0 0 380px}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}.thumbs .box{width:70px;height:96px;cursor:pointer}.thumbs .box.on{border:2px solid #2D2E41}
+.who{font-size:11px;color:#6B6A66;margin-top:4px}
+.formfoot .left{margin-right:auto}
+tr.sel td{background:#EEF1FA}.btn.sm{padding:4px 10px;font-size:12px;white-space:nowrap}
 .subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
 .subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
 .subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
@@ -205,20 +228,125 @@ tr.sel td{background:#ECEAE4}
 .dt{display:flex;gap:8px}.dt input{max-width:160px}
 .bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
 .bulk.on{display:flex}
+
+.ctx{font-size:12px;color:#6B6A66;margin-top:4px}
+.badge2{display:inline-block;font-size:10px;letter-spacing:.04em;text-transform:uppercase;border:1px solid #B5B2AC;padding:0 6px;border-radius:2px;color:#6B6A66;background:#fff;vertical-align:middle;margin-left:8px}
+.chip{display:inline-block;font-size:10.5px;padding:0 7px;border-radius:9px;border:1px solid;white-space:nowrap}
+.chip.print{border-color:#2E7D4F;color:#2E7D4F;background:#F2F8F4}
+.chip.thin{border-color:#B8860B;color:#8A6500;background:#FFFBEE}
+.chip.team{border-color:#B5B2AC;color:#6B6A66;background:#F7F6F3}
+.pulse{background:#F4F3EF;border:1px solid #D3D0CB;border-left:4px solid #2D2E41;padding:14px 16px;margin-bottom:18px}
+.pulse .items{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
+.pulse b.lbl{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#2D2E41}
+.pulse .fact{margin:4px 0;font-size:13px}
+.pulse .act{font-size:12px;color:#6B6A66;font-style:italic}
+.pulse .src{font-size:11px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.ccard{background:#fff;border:1px solid #D3D0CB;padding:14px;display:flex;flex-direction:column;transition:opacity .4s}
+.ccard.hide{opacity:.15;pointer-events:none}
+.ccard .zz{font-size:12px;color:#6B6A66}
+.ccard h3{font-size:15px;margin:4px 0 6px}
+.ccard .why{font-size:12.5px;margin-bottom:8px}
+.ccard ul{margin:0 0 8px;padding-left:16px;font-size:12.5px}
+.ccard li{margin:2px 0}
+.ccard .piece{font-size:12px;color:#6B6A66;margin-bottom:10px}
+.ccard .btns{margin-top:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ccard .more{font-size:11.5px;margin-top:8px}
+.notnow{position:relative}
+.notnow .dd2{display:none;position:absolute;background:#fff;border:1px solid #1E1E1E;padding:4px 0;z-index:40;min-width:150px}
+.notnow.open .dd2{display:block}
+.notnow .dd2 a{display:block;padding:5px 12px;color:#1E1E1E;text-decoration:none}
+.notnow .dd2 a:hover{background:#F0EEEA}
+.module{background:#fff;border:1px solid #D3D0CB;padding:16px;margin-bottom:18px}
+.module .mhead{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:6px}
+.module select#zippick{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;border-radius:2px;background:#fff;max-width:280px}
+.module h2.area{font-size:19px;margin:2px 0 0}
+.module .stamp{font-size:11.5px;color:#6B6A66;margin-top:4px}
+.module .mbtns{margin-left:auto;display:flex;gap:8px;align-items:flex-start}
+.sumline{font-size:15px;margin:10px 0 14px}
+.tiles6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
+.tile6{border:1px solid #D3D0CB;background:#FBFAF8;padding:10px 12px}
+.tile6 .lbl{font-size:11px;color:#6B6A66}
+.tile6 .v{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;margin:2px 0}
+.tile6 .chg{font-size:11px;color:#6B6A66;margin-bottom:4px;min-height:14px}
+.charts3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+.chartbox{border:1px solid #E6E3DE;padding:10px 12px}
+.chartbox .t{font-size:12px;font-weight:500;margin-bottom:6px}
+.hbars .hb{margin-bottom:10px}
+.hbars .hb .lbl{font-size:12px;margin-bottom:3px;color:#6B6A66}
+.hbar{display:flex;height:22px;border:1px solid #D3D0CB;overflow:hidden}
+.hbar div{display:flex;align-items:center;justify-content:center;font-size:10.5px;color:#fff;white-space:nowrap;overflow:hidden}
+.hbar .s1{background:#2D2E41}.hbar .s2{background:#6B6F8E}.hbar .s3{background:#A6A9BD}.hbar .s4{background:#D3D0CB;color:#1E1E1E}
+.talk{font-style:italic;font-size:13px;color:#2D2E41;margin:8px 0 16px}
+.rentrow{display:flex;gap:28px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+.rentrow .rv{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.rentrow .rl{font-size:11px;color:#6B6A66;display:block}
+.printbox{border:1px solid #B5B2AC;background:#FBFAF8;max-width:460px;padding:14px 16px;box-shadow:0 1px 0 #D3D0CB}
+.printbox .pl{font-size:13px;margin-bottom:4px}
+.printbox .disc{font-size:9px;color:#6B6A66;margin-top:8px;line-height:1.4}
+.fold{border:1px solid #D3D0CB;background:#fff;margin-bottom:10px}
+.fold>button{font:inherit;width:100%;text-align:left;background:none;border:none;padding:10px 14px;cursor:pointer;font-weight:600;font-size:13px;display:flex;align-items:center;gap:8px}
+.fold>button::before{content:"▸";color:#9A9892;font-size:11px}
+.fold.open>button::before{content:"▾"}
+.fold .fbody{display:none;padding:0 14px 12px;font-size:12.5px}
+.fold.open .fbody{display:block}
+.seg2{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}
+.seg2 button{font:inherit;font-size:12.5px;background:#fff;border:none;border-right:1px solid #B5B2AC;padding:6px 12px;cursor:pointer;color:#1E1E1E;white-space:nowrap}
+.seg2 button:last-child{border-right:0}
+.seg2 button.on{background:#2D2E41;color:#fff}
+tr.zrow.hl td{background:#ECEAE4}
+.shimmer .shval{position:relative;color:transparent!important;background:#E9E7E2;border-radius:2px;animation:pulseA 1s infinite}
+@keyframes pulseA{0%{opacity:.6}50%{opacity:1}100%{opacity:.6}}
+#salesmore{display:none}
+.mod-note{border:1px dashed #B5B2AC;background:#FBFAF8;padding:14px;color:#6B6A66;font-size:12.5px;text-align:center}
 </style></head><body>
 <div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="cur" href="Market_by_ZIP.html">Your Market</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
 <div class="main">
-<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Insights › Your Market</div><h1>Your Market</h1></div><div class="actions"></div></div>
-<div class="content"><div data-stab="x"><div class="body"><div class="section">
-<div class="head"><div><h2>Your Market</h2><div class="meta">The numbers that print on your mailers. Sales from bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents from Rentometer, Oct 26, 2026.</div></div></div>
-<div class="filters" style="margin-top:10px"><span class="srch"><input type="text" placeholder="Search ZIP or neighborhood"><button class="btn" onclick="save()">Search</button></span><select><option>All cities</option><option>Oakland</option><option>Berkeley</option><option>San Leandro</option><option>Alameda</option><option>Hayward</option></select><select><option>Any sample</option><option>Thin samples only</option></select><a href="#" class="clear">Clear</a><span class="cnt">30 ZIPs · showing 14</span></div>
-<table><tr><th>ZIP</th><th>City · area</th><th class="num">Sold, 12 mo</th><th class="num">Median price</th><th class="num">Price per unit</th><th class="num">Days on market</th><th class="num">1 bed rent</th><th class="num">2 bed rent</th><th>Rent sample</th></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94609</a></td><td>Oakland · Temescal</td><td class="num">31</td><td class="num">$1,340,000</td><td class="num">$468,200</td><td class="num">36</td><td class="num">$2,150</td><td class="num">$2,890</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94610</a></td><td>Oakland · Grand Lake</td><td class="num">24</td><td class="num">$1,585,000</td><td class="num">$512,900</td><td class="num">29</td><td class="num">$2,275</td><td class="num">$3,050</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94601</a></td><td>Oakland · Fruitvale</td><td class="num">38</td><td class="num">$985,000</td><td class="num">$331,500</td><td class="num">44</td><td class="num">$1,780</td><td class="num">$2,310</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94606</a></td><td>Oakland · Eastlake</td><td class="num">27</td><td class="num">$1,120,000</td><td class="num">$356,400</td><td class="num">41</td><td class="num">$1,895</td><td class="num">$2,460</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94602</a></td><td>Oakland · Glenview</td><td class="num">19</td><td class="num">$1,465,000</td><td class="num">$498,700</td><td class="num">33</td><td class="num">$2,210</td><td class="num">$2,980</td><td><span class="pill warn">Thin sample</span></td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94608</a></td><td>Oakland · Emeryville border</td><td class="num">22</td><td class="num">$1,210,000</td><td class="num">$402,100</td><td class="num">38</td><td class="num">$2,040</td><td class="num">$2,720</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94611</a></td><td>Oakland · Montclair</td><td class="num">9</td><td class="num">$1,890,000</td><td class="num">$612,300</td><td class="num">47</td><td class="num">$2,480</td><td class="num">$3,310</td><td><span class="pill warn">Thin sample</span></td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94612</a></td><td>Oakland · Downtown</td><td class="num">14</td><td class="num">$1,270,000</td><td class="num">$389,600</td><td class="num">52</td><td class="num">$2,120</td><td class="num">$2,850</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94618</a></td><td>Oakland · Rockridge</td><td class="num">11</td><td class="num">$2,040,000</td><td class="num">$655,800</td><td class="num">25</td><td class="num">$2,590</td><td class="num">$3,480</td><td><span class="pill warn">Thin sample</span></td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94702</a></td><td>Berkeley · West</td><td class="num">17</td><td class="num">$1,395,000</td><td class="num">$455,100</td><td class="num">31</td><td class="num">$2,230</td><td class="num">$2,960</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94703</a></td><td>Berkeley · South</td><td class="num">21</td><td class="num">$1,480,000</td><td class="num">$471,200</td><td class="num">28</td><td class="num">$2,310</td><td class="num">$3,040</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94704</a></td><td>Berkeley · Southside</td><td class="num">13</td><td class="num">$1,620,000</td><td class="num">$445,600</td><td class="num">35</td><td class="num">$2,410</td><td class="num">$3,190</td><td><span class="pill warn">Thin sample</span></td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94577</a></td><td>San Leandro</td><td class="num">29</td><td class="num">$905,000</td><td class="num">$298,400</td><td class="num">46</td><td class="num">$1,720</td><td class="num">$2,240</td><td>—</td></tr><tr class="row" onclick="location.href='ZIP_Detail.html'"><td><a href="ZIP_Detail.html">94501</a></td><td>Alameda</td><td class="num">26</td><td class="num">$1,310,000</td><td class="num">$432,700</td><td class="num">39</td><td class="num">$2,090</td><td class="num">$2,780</td><td>—</td></tr></table>
-<div class="pager"><span>Rows 1–14 of 30</span><span><a href="#">Next</a></span></div>
-</div></div></div></div>
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Insights › Your Market</div></div><div class="actions"></div></div>
+<div class="content" style="display:block">
+<div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px"><div><h2 style="font-size:17px;margin:0">Your Market</h2><div class="meta">Where the market is moving, and where to run your next campaign.</div></div>
+<div style="margin-left:auto"><label class="meta" style="display:block;margin-bottom:3px">City</label><select id="cityf" onchange="cityFilter()" style="font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;border-radius:2px;background:#fff"><option>All cities</option><option>Oakland</option><option>Berkeley</option><option>Hayward</option><option>San Leandro</option><option>Alameda</option></select></div></div>
+<div class="pulse"><div><b style="font-size:14px">This week</b> <span class="meta">· Week of Nov 9, 2026</span><span class="badge2">Phase 2B</span></div>
+<div class="items">
+<div><b class="lbl">Rates</b><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Oakland rules</b><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: "Your rents can only rise 2.3% this year. Here's what buyers pay for that upside."</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Your ZIPs</b><div class="fact">45% of 94608 sales drew 3+ offers, and most buildings sold empty.</div><div class="act">Act: 94608 is the strongest campaign candidate.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Coming up</b><div class="fact">City Council housing items on Nov 18.</div><div class="act">Act: watch for rule changes.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+</div><div class="meta" style="margin-top:10px">Drafted weekly from public sources. Approved by Edson. Rate figures and the Council date are placeholders.</div></div>
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><h2 style="font-size:15px;margin:0">Where to campaign next</h2><span class="badge2" style="margin-left:0">Phase 2A</span><span class="meta">Updated Thursdays. Areas worked in the last 60 days are skipped.</span></div><div class="cards3"><div class="ccard" id="card1"><span class="zz">94608 · Emeryville border</span><h3>2027 loan decisions</h3><div class="why">Buyers are competing here, and 38 owners with loans likely due next year haven't heard from us.</div><ul><li>45% of sales drew 3+ offers</li><li>38 owners, loans likely due 2027</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Market update</div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94608-market-update">Create this campaign (38)</a><a href="#" onclick="loadZip('94608');return false">View ZIP</a><span class="notnow" id="nn1"><a href="#" onclick="document.getElementById('nn1').classList.toggle('open');return false">Not now</a><div class="dd2"><a href="#" onclick="hideCard(1);return false">Worked recently</a><a href="#" onclick="hideCard(1);return false">Not our area</a><a href="#" onclick="hideCard(1);return false">Wrong timing</a><a href="#" onclick="hideCard(1);return false">Other</a></div></span></div>
+<div class="more"><a href="#" onclick="save();return false">1 more idea</a></div></div><div class="ccard" id="card2"><span class="zz">94702 · West Berkeley</span><h3>Just sold nearby</h3><div class="why">Buildings here drew the most offers in your market, and 64 owners live on streets with a recent sale.</div><ul><li>59% of sales drew 3+ offers</li><li>64 owners near a recent sale</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Just Sold postcard</div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94702-just-sold">Create this campaign (64)</a><a href="#" onclick="loadZip('94702');return false">View ZIP</a><span class="notnow" id="nn2"><a href="#" onclick="document.getElementById('nn2').classList.toggle('open');return false">Not now</a><div class="dd2"><a href="#" onclick="hideCard(2);return false">Worked recently</a><a href="#" onclick="hideCard(2);return false">Not our area</a><a href="#" onclick="hideCard(2);return false">Wrong timing</a><a href="#" onclick="hideCard(2);return false">Other</a></div></span></div>
+</div><div class="ccard" id="card3"><span class="zz">94609 · Temescal</span><h3>Long-time owners</h3><div class="why">The busiest ZIP in your market, with 112 owners who've held 15+ years.</div><ul><li>44 sales in 12 months</li><li>112 owners held 15+ years</li><li>Last campaign: Jul 2026</li></ul><div class="piece">Suggested piece: MVI letter</div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94609-mvi-letter">Create this campaign (112)</a><a href="#" onclick="loadZip('94609');return false">View ZIP</a><span class="notnow" id="nn3"><a href="#" onclick="document.getElementById('nn3').classList.toggle('open');return false">Not now</a><div class="dd2"><a href="#" onclick="hideCard(3);return false">Worked recently</a><a href="#" onclick="hideCard(3);return false">Not our area</a><a href="#" onclick="hideCard(3);return false">Wrong timing</a><a href="#" onclick="hideCard(3);return false">Other</a></div></span></div>
 </div></div>
-
-<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px">Saved.</div>
-<div class="demo">Prescott Listing System · demo · Nov 2026 · Buttons respond but nothing is stored.</div>
+<div class="module" id="zipmod">
+<div class="mhead"><div><label class="meta" style="display:block;margin-bottom:3px">ZIP</label><select id="zippick" onchange="loadZip(this.value)"></select></div>
+<div><h2 class="area" id="m-area">Emeryville border, Oakland</h2><div class="stamp">Sales: bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents: Rentometer, Oct 26, 2026.</div></div>
+<div class="mbtns"><a class="btn" id="m-newlist" href="New_List.html#zip-94608">New list for this ZIP</a><a class="btn primary" id="m-camp" href="New_List.html#card-94608-market-update">Create this campaign <span class="badge2" style="border-color:#fff;color:#fff;margin-left:6px">2A</span></a></div></div>
+<div class="sumline" id="m-sum"></div>
+<div class="tiles6" id="m-tiles"></div>
+<div id="m-charts" class="charts3"></div>
+<div id="m-how"></div>
+<div class="talk" id="m-talk"></div>
+<div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px"><div><h3 style="font-size:13px;margin:0 0 8px">Rents</h3><div class="rentrow" id="m-rents"></div><div class="meta">Rents in recently sold buildings vs. market: coming as more sales include rent data.</div></div>
+<div style="flex:1;min-width:380px"><h3 style="font-size:13px;margin:0 0 8px">What prints on mailers <span class="chip print" style="margin-left:6px">Print-safe</span></h3><div class="printbox" id="m-print"></div></div></div>
+<h3 style="font-size:13px;margin:0 0 8px">Recent sales</h3>
+<div id="m-salesbox"></div>
+<div style="margin:18px 0 0">
+<div class="fold" id="f-opp"><button onclick="this.parentNode.classList.toggle('open')">Opportunity <span class="badge2">Phase 2A</span><span class="chip team">Team only</span></button><div class="fbody">Owners by ranking: Hot 22 · Warm 61 · Watch 140<br>Loans likely due in 18 months: 38 · Held 15+ years: 96 · Owners from afar: 74 · Not contacted in 90 days: 188<br><div style="margin-top:8px">Best campaign idea: <b>2027 loan decisions (38 owners)</b> <a class="btn primary" style="margin-left:10px" href="New_List.html#card-94608-market-update">Create this campaign</a></div><div class="meta" style="margin-top:6px">All counts are illustrative.</div></div></div>
+<div class="fold" id="f-ev"><button onclick="this.parentNode.classList.toggle('open')">Events <span class="badge2">Phase 2B</span><span class="chip team">Team only</span></button><div class="fbody">Last 90 days: <a href="Owner_Lists.html">1 estate case</a> · <a href="Owner_Lists.html">0 Ellis Act filings</a> · <a href="Owner_Lists.html">1 default notice</a> <span class="meta">(illustrative)</span></div></div>
+<div class="fold" id="f-act"><button onclick="this.parentNode.classList.toggle('open')">Your activity here <span class="badge2">Phase 2A</span></button><div class="fbody">Campaigns sent: 0 · Last send: none · Conversations: 0 · Appointments: 0 · Listings: 0</div></div>
+</div></div>
+<div class="section"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px"><h2 style="margin:0">All ZIPs</h2><span class="meta">24 ZIPs</span>
+<span class="seg2" id="views"><button class="on" onclick="setView('mailer',this)">Mailer numbers</button><button onclick="setView('demand',this)">Demand</button><button onclick="setView('rents',this)">Rents</button><button onclick="setView('opp',this)">Opportunity <span class="badge2" style="margin-left:4px">2A</span></button><button onclick="setView('events',this)">Events <span class="badge2" style="margin-left:4px">2B</span></button></span>
+<span style="margin-left:auto;display:flex;gap:8px"><input type="text" placeholder="ZIP or neighborhood" style="width:180px"><select><option>Rent sample: any</option><option>Thin only</option></select><button class="btn" onclick="save()">Search</button></span></div>
+<table id="ziptable"></table>
+<div class="pager"><span>24 ZIPs</span></div></div>
+</div>
+</div></div>
+<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;cursor:pointer">Saved.</div>
+<div class="demo">Prescott Listing System · demo · Your Market v1.0 · Nov 2026 · Buttons respond but nothing is stored.</div>
 <script>
 function grp(b){b.parentNode.classList.toggle('closed')}
 
@@ -234,4 +362,90 @@ function dlg(id){document.querySelectorAll('.overlay').forEach(function(e){e.cla
 function closeDlg(){document.querySelectorAll('.overlay').forEach(function(e){e.classList.remove('open')})}
 function selrow(tr){document.querySelectorAll('tr.sel').forEach(function(r){r.classList.remove('sel')});tr.classList.add('sel');panel('side')}
 function bulk(){var n=document.querySelectorAll('input.rowchk:checked').length;var b=document.getElementById('bulk');if(b){b.classList.toggle('on',n>0);document.getElementById('bulkn').textContent=n}}
+
+var T=[{"z": "94609", "city": "Oakland", "area": "Temescal", "sold": 44, "off3": 32, "sva": 98, "empty": 39, "cash": 18, "dom": 24, "med": 1060000, "ppu": 360000, "r1": 2150, "r2": 2890, "yld": 9.6, "thin": false}, {"z": "94606", "city": "Oakland", "area": "Eastlake", "sold": 38, "off3": 39, "sva": 100, "empty": 37, "cash": 3, "dom": 21, "med": 770000, "ppu": 274400, "r1": 1895, "r2": 2460, "yld": 10.8, "thin": false}, {"z": "94607", "city": "Oakland", "area": "West Oakland", "sold": 32, "off3": 44, "sva": 100, "empty": 59, "cash": 9, "dom": 25, "med": 690000, "ppu": 325000, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94608", "city": "Oakland", "area": "Emeryville border", "sold": 31, "off3": 45, "sva": 100, "empty": 68, "cash": 19, "dom": 36, "med": 860000, "ppu": 387500, "r1": 2040, "r2": 2720, "yld": 8.4, "thin": false}, {"z": "94541", "city": "Hayward", "area": "Hayward", "sold": 28, "off3": 14, "sva": 94, "empty": 29, "cash": 29, "dom": 26, "med": 928000, "ppu": 339600, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94601", "city": "Oakland", "area": "Fruitvale", "sold": 26, "off3": 42, "sva": 98, "empty": 19, "cash": 12, "dom": 41, "med": 636500, "ppu": 228800, "r1": 1780, "r2": 2310, "yld": 12.1, "thin": false}, {"z": "94703", "city": "Berkeley", "area": "South Berkeley", "sold": 22, "off3": 36, "sva": 108, "empty": 45, "cash": 32, "dom": 21, "med": 1225000, "ppu": 480400, "r1": 2310, "r2": 3040, "yld": 7.6, "thin": false}, {"z": "94702", "city": "Berkeley", "area": "West Berkeley", "sold": 22, "off3": 59, "sva": 99, "empty": 32, "cash": 9, "dom": 22, "med": 890000, "ppu": 357500, "r1": 2230, "r2": 2960, "yld": 9.9, "thin": false}, {"z": "94602", "city": "Oakland", "area": "Dimond", "sold": 20, "off3": 25, "sva": 102, "empty": 60, "cash": 5, "dom": 23, "med": 852500, "ppu": 401900, "r1": 2210, "r2": 2980, "yld": 8.9, "thin": false}, {"z": "94605", "city": "Oakland", "area": "Eastmont", "sold": 19, "off3": 53, "sva": 99, "empty": 32, "cash": 5, "dom": 19, "med": 718000, "ppu": 275000, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94603", "city": "Oakland", "area": "Elmhurst", "sold": 19, "off3": 42, "sva": 100, "empty": 26, "cash": 21, "dom": 23, "med": 690000, "ppu": 233500, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94621", "city": "Oakland", "area": "Coliseum", "sold": 17, "off3": 35, "sva": 101, "empty": 29, "cash": 6, "dom": 30, "med": 560000, "ppu": 217500, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94577", "city": "San Leandro", "area": "San Leandro", "sold": 16, "off3": 31, "sva": 97, "empty": 38, "cash": 12, "dom": 19, "med": 1007500, "ppu": 365600, "r1": 1720, "r2": 2240, "yld": 7.4, "thin": false}, {"z": "94619", "city": "Oakland", "area": "Redwood Heights", "sold": 15, "off3": 33, "sva": 97, "empty": 47, "cash": 0, "dom": 42, "med": 800000, "ppu": 266700, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94705", "city": "Berkeley", "area": "Elmwood", "sold": 15, "off3": 40, "sva": 103, "empty": 60, "cash": 0, "dom": 16, "med": 1685000, "ppu": 591700, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94610", "city": "Oakland", "area": "Grand Lake", "sold": 14, "off3": 43, "sva": 95, "empty": 29, "cash": 14, "dom": 43, "med": 1184000, "ppu": 341700, "r1": 2275, "r2": 3050, "yld": 10.7, "thin": false}, {"z": "94611", "city": "Oakland", "area": "Piedmont Ave", "sold": 14, "off3": 50, "sva": 100, "empty": 43, "cash": 29, "dom": 25, "med": 995000, "ppu": 339900, "r1": 2480, "r2": 3310, "yld": 11.7, "thin": false}, {"z": "94618", "city": "Oakland", "area": "Rockridge", "sold": 12, "off3": 42, "sva": 108, "empty": 50, "cash": 25, "dom": 14, "med": 1350000, "ppu": 606200, "r1": 2590, "r2": 3480, "yld": 6.9, "thin": false}, {"z": "94578", "city": "San Leandro", "area": "Bay-O-Vista", "sold": 9, "off3": 33, "sva": 101, "empty": 33, "cash": 22, "dom": 20, "med": 1040000, "ppu": 373800, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94544", "city": "Hayward", "area": "South Hayward", "sold": 8, "off3": 50, "sva": 97, "empty": 0, "cash": 25, "dom": 25, "med": 957500, "ppu": 367500, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94709", "city": "Berkeley", "area": "North Berkeley", "sold": 7, "off3": 43, "sva": 100, "empty": 71, "cash": 43, "dom": 18, "med": 1610000, "ppu": 667500, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94710", "city": "Berkeley", "area": "Berkeley flats", "sold": 7, "off3": 43, "sva": 98, "empty": 29, "cash": 0, "dom": 19, "med": 1440000, "ppu": 405000, "r1": null, "r2": null, "yld": null, "thin": false}, {"z": "94612", "city": "Oakland", "area": "Downtown", "sold": 6, "off3": 33, "sva": 99, "empty": 17, "cash": 17, "dom": 42, "med": 700000, "ppu": 233800, "r1": 2120, "r2": 2850, "yld": 14.6, "thin": false}, {"z": "94704", "city": "Berkeley", "area": "Southside", "sold": 3, "off3": 67, "sva": 109, "empty": 100, "cash": 33, "dom": 13, "med": 2400000, "ppu": 866700, "r1": 2410, "r2": 3190, "yld": 4.4, "thin": true}];
+var D={"94608": {"summary": "Buyers are competing hard here: nearly half of sales drew 3 or more offers, and most buildings sold empty.", "chg": "\u25bc 9% vs 2025", "years": [["2023", 431000], ["2024", 375000], ["2025", 425000], ["Last 12 mo", 387500]], "quarters": [["Q4'25", 3], ["Q1'26", 7], ["Q2'26", 12], ["Q3'26", 8], ["Q4'26", 1]], "how": {"occ": [["Empty", 68], ["Tenants", 19], ["Owner", 10], ["Unknown", 3]], "fin": [["Cash", 19], ["Financed", 81]], "off": [["1 offer", 30], ["2 offers", 25], ["3\u20134 offers", 30], ["5+ offers", 15]]}, "talk": "Most buildings here sell empty. Buyers pay for the chance to re-rent at market.", "sales": [{"a": "1040 59th St", "d": "Oct 16, 2026", "u": 2, "p": 805000, "pu": 402500, "o": "4", "s": "Empty", "dm": 11}, {"a": "1070\u20131072 Aileen St", "d": "Sep 28, 2026", "u": 2, "p": 900000, "pu": 450000, "o": "2", "s": "Empty", "dm": 41}, {"a": "1020 53rd St", "d": "Sep 14, 2026", "u": 2, "p": 1725000, "pu": 862500, "o": "1", "s": "Empty", "dm": 6}, {"a": "3008 Magnolia St", "d": "Sep 14, 2026", "u": 3, "p": 550000, "pu": 183333, "o": "2", "s": "Owner", "dm": 0}, {"a": "6312 Herzog St", "d": "Sep 14, 2026", "u": 2, "p": 780000, "pu": 390000, "o": "3", "s": "Empty", "dm": 93}, {"a": "961\u2013963 37th St", "d": "Aug 19, 2026", "u": 2, "p": 836000, "pu": 418000, "o": "5", "s": "Empty", "dm": 44}, {"a": "825 57th St", "d": "Aug 6, 2026", "u": 4, "p": 1080000, "pu": 270000, "o": "2", "s": "Empty", "dm": 11}, {"a": "1028 61st St", "d": "Jul 13, 2026", "u": 3, "p": 925000, "pu": 308333, "o": "4", "s": "Empty", "dm": 58}, {"a": "876\u2013880 52nd St", "d": "Jul 8, 2026", "u": 3, "p": 900000, "pu": 300000, "o": "2", "s": "Tenants", "dm": 69}, {"a": "2836 Myrtle St", "d": "Jun 30, 2026", "u": 2, "p": 775000, "pu": 387500, "o": "3", "s": "Empty", "dm": 4}]}, "94609": {"summary": "The busiest ZIP in your market, with 44 sales in a year. Buildings sell in about three weeks, close to asking.", "chg": "\u25bc 14% vs 2025", "years": [["2023", 456000], ["2024", 477000], ["2025", 419000], ["Last 12 mo", 360000]], "quarters": [["Q4'25", 8], ["Q1'26", 8], ["Q2'26", 16], ["Q3'26", 10], ["Q4'26", 2]], "how": {"occ": [["Empty", 39], ["Tenants", 48], ["Owner", 11], ["Unknown", 2]], "fin": [["Cash", 18], ["Financed", 82]], "off": [["1 offer", 38], ["2 offers", 30], ["3\u20134 offers", 24], ["5+ offers", 8]]}, "talk": "Plenty of buyers here, and buildings move in about three weeks.", "sales": [{"a": "566 57th St", "d": "Oct 21, 2026", "u": 3, "p": 1375000, "pu": 458333, "o": "2", "s": "Empty", "dm": 25}, {"a": "446 37th St", "d": "Oct 13, 2026", "u": 3, "p": 1125000, "pu": 375000, "o": "1", "s": "Owner", "dm": 5}, {"a": "712 56th St", "d": "Sep 24, 2026", "u": 4, "p": 1205000, "pu": 301250, "o": "2", "s": "Tenants", "dm": 26}, {"a": "438 65th St", "d": "Sep 17, 2026", "u": 2, "p": 1860000, "pu": 930000, "o": "1", "s": "Empty", "dm": 14}, {"a": "437 51st St", "d": "Sep 12, 2026", "u": 2, "p": 885900, "pu": 442950, "o": "3", "s": "Empty", "dm": 13}, {"a": "515 28th St", "d": "Aug 31, 2026", "u": 3, "p": 820000, "pu": 273333, "o": "3", "s": "Tenants", "dm": 57}, {"a": "5936 Martin Luther King Jr Way", "d": "Aug 28, 2026", "u": 4, "p": 1075000, "pu": 268750, "o": "3", "s": "Tenants", "dm": 43}, {"a": "738 34th St", "d": "Aug 24, 2026", "u": 4, "p": 975000, "pu": 243750, "o": "1", "s": "Tenants", "dm": 1}, {"a": "5963 MacCall St", "d": "Aug 7, 2026", "u": 3, "p": 1060000, "pu": 353333, "o": "2", "s": "Tenants", "dm": 28}, {"a": "5685 Carberry Ave", "d": "Jul 22, 2026", "u": 2, "p": 1030000, "pu": 515000, "o": "3", "s": "Empty", "dm": 34}]}, "94601": {"summary": "Prices here have fallen each year since 2023, but buyers still compete: 42% of sales drew 3+ offers.", "chg": "\u25bc 13% vs 2025", "years": [["2023", 324000], ["2024", 300000], ["2025", 263000], ["Last 12 mo", 228800]], "quarters": [["Q4'25", 3], ["Q1'26", 8], ["Q2'26", 6], ["Q3'26", 9]], "how": {"occ": [["Empty", 19], ["Tenants", 65], ["Owner", 12], ["Unknown", 4]], "fin": [["Cash", 12], ["Financed", 88]], "off": [["1 offer", 35], ["2 offers", 23], ["3\u20134 offers", 27], ["5+ offers", 15]]}, "talk": "Most buildings here sell with tenants in place, to buyers who plan to hold.", "sales": [{"a": "827 34th Ave", "d": "Sep 25, 2026", "u": 4, "p": 590000, "pu": 147500, "o": "1", "s": "Tenants", "dm": 9}, {"a": "2859 E 9th St", "d": "Sep 22, 2026", "u": 2, "p": 345000, "pu": 172500, "o": "3", "s": "Tenants", "dm": 76}, {"a": "4343 Brookdale Ave", "d": "Sep 16, 2026", "u": 4, "p": 590000, "pu": 147500, "o": "2", "s": "Tenants", "dm": 137}, {"a": "3914 Agua Vista St", "d": "Sep 15, 2026", "u": 3, "p": 995000, "pu": 331667, "o": "1", "s": "Tenants", "dm": 8}, {"a": "3101 West St", "d": "Aug 25, 2026", "u": 4, "p": 1143000, "pu": 285750, "o": "0", "s": "\u2014", "dm": 284}, {"a": "4500 San Carlos Ave", "d": "Aug 19, 2026", "u": 2, "p": 450000, "pu": 225000, "o": "8", "s": "Tenants", "dm": 21}, {"a": "5315 Cole St", "d": "Aug 14, 2026", "u": 4, "p": 636000, "pu": 159000, "o": "3", "s": "Empty", "dm": 25}, {"a": "4810 Fairfax Ave", "d": "Jul 29, 2026", "u": 4, "p": 790000, "pu": 197500, "o": "5", "s": "Tenants", "dm": 52}, {"a": "2261 48th Ave", "d": "Jul 10, 2026", "u": 4, "p": 1195000, "pu": 298750, "o": "\u2014", "s": "\u2014", "dm": 52}, {"a": "4422 Ygnacio Ave", "d": "Jun 16, 2026", "u": 4, "p": 550000, "pu": 137500, "o": "0", "s": "\u2014", "dm": 65}]}, "94702": {"summary": "The most competitive ZIP in your market: 59% of sales drew 3 or more offers.", "chg": "\u25bc 28% vs 2025", "years": [["2023", 481000], ["2024", 612000], ["2025", 495000], ["Last 12 mo", 357500]], "quarters": [["Q4'25", 2], ["Q1'26", 3], ["Q2'26", 5], ["Q3'26", 10], ["Q4'26", 2]], "how": {"occ": [["Empty", 32], ["Tenants", 55], ["Owner", 9], ["Unknown", 4]], "fin": [["Cash", 9], ["Financed", 91]], "off": [["1 offer", 23], ["2 offers", 18], ["3\u20134 offers", 27], ["5+ offers", 32]]}, "talk": "Buyers are lining up here. Multiple offers are the norm.", "note": "Team note: the six Sep 14 sales on Sacramento and Ward look like one portfolio sale. They pull this ZIP's price per unit down and its offer share up. A real build should flag sales that close together like this.", "sales": [{"a": "1300 Kains Ave", "d": "Oct 23, 2026", "u": 2, "p": 1775000, "pu": 887500, "o": "2", "s": "Empty", "dm": 7}, {"a": "2221\u20132223 San Pablo Ave", "d": "Oct 6, 2026", "u": 3, "p": 740000, "pu": 246667, "o": "0", "s": "Tenants", "dm": 14}, {"a": "1152\u20131156 Francisco St", "d": "Sep 18, 2026", "u": 3, "p": 1265000, "pu": 421667, "o": "7", "s": "Empty", "dm": 12}, {"a": "2750 Sacramento St", "d": "Sep 14, 2026", "u": 4, "p": 540000, "pu": 135000, "o": "8", "s": "Tenants", "dm": 263}, {"a": "2758 Sacramento St", "d": "Sep 14, 2026", "u": 4, "p": 550000, "pu": 137500, "o": "8", "s": "Tenants", "dm": 263}, {"a": "2774 Sacramento St", "d": "Sep 14, 2026", "u": 4, "p": 525000, "pu": 131250, "o": "12", "s": "Tenants", "dm": 263}, {"a": "2782 Sacramento St", "d": "Sep 14, 2026", "u": 4, "p": 540000, "pu": 135000, "o": "9", "s": "Tenants", "dm": 263}, {"a": "2790 Sacramento St", "d": "Sep 14, 2026", "u": 4, "p": 565000, "pu": 141250, "o": "8", "s": "Tenants", "dm": 263}, {"a": "1450 Ward St", "d": "Sep 14, 2026", "u": 2, "p": 630000, "pu": 315000, "o": "11", "s": "Empty", "dm": 263}, {"a": "1308 Delaware St", "d": "Aug 27, 2026", "u": 2, "p": 1420000, "pu": 710000, "o": "7", "s": "Empty", "dm": 14}]}};
+var AREAS={"94608": "Emeryville border", "94609": "Temescal", "94601": "Fruitvale", "94702": "West Berkeley", "94610": "Grand Lake", "94612": "Downtown", "94618": "Rockridge", "94611": "Piedmont Ave", "94606": "Eastlake", "94607": "West Oakland", "94602": "Dimond", "94605": "Eastmont", "94603": "Elmhurst", "94621": "Coliseum", "94619": "Redwood Heights", "94705": "Elmwood", "94703": "South Berkeley", "94709": "North Berkeley", "94710": "Berkeley flats", "94704": "Southside", "94541": "Hayward", "94544": "South Hayward", "94577": "San Leandro", "94578": "Bay-O-Vista"};
+
+function money(n){return '$'+n.toLocaleString()}
+function row(z){for(var i=0;i<T.length;i++)if(T[i].z===z)return T[i];return null}
+function hideCard(n){document.getElementById('card'+n).classList.add('hide');document.getElementById('nn'+n).classList.remove('open');var t=document.getElementById('toast');t.textContent='Hidden for 30 days. Undo';t.className='toast show';t.onclick=function(){document.getElementById('card'+n).classList.remove('hide');t.className='toast'};setTimeout(function(){t.className='toast'},4000)}
+function svgBars(pairs,fmt,h){
+ var max=0;pairs.forEach(function(p){if(p[1]>max)max=p[1]});if(max===0)max=1;
+ var w=100/pairs.length;var out='<svg viewBox="0 0 300 '+h+'" style="width:100%;height:auto">';
+ pairs.forEach(function(p,i){var bh=(p[1]/max)*(h-34);var x=i*(300/pairs.length)+6;var bw=300/pairs.length-12;
+  out+='<rect x="'+x+'" y="'+(h-18-bh)+'" width="'+bw+'" height="'+bh+'" fill="#2D2E41"></rect>';
+  out+='<text x="'+(x+bw/2)+'" y="'+(h-18-bh-4)+'" text-anchor="middle" font-size="9" fill="#1E1E1E">'+fmt(p[1])+'</text>';
+  out+='<text x="'+(x+bw/2)+'" y="'+(h-5)+'" text-anchor="middle" font-size="9" fill="#6B6A66">'+p[0]+'</text>'});
+ return out+'</svg>'}
+function hbar(segs){var out='<div class="hbar">';segs.forEach(function(s,i){if(s[1]<=0)return;out+='<div class="s'+(i+1)+'" style="width:'+s[1]+'%">'+(s[1]>=8?(s[0]+' '+s[1]+'%'):'')+'</div>'});return out+'</div>'}
+function loadZip(z,noscroll){
+ var r=row(z);if(!r)return;var d=D[z]||null;
+ document.getElementById('zippick').value=z;
+ document.getElementById('m-area').textContent=(AREAS[z]||r.city)+', '+r.city;
+ document.getElementById('m-newlist').href='New_List.html#zip-'+z;
+ var camp={ '94608':'market-update','94702':'just-sold','94609':'mvi-letter'}[z];
+ var cb=document.getElementById('m-camp');cb.style.display=camp?'':'none';if(camp)cb.href='New_List.html#card-'+z+'-'+camp;
+ var thin=r.thin;
+ document.getElementById('m-sum').textContent=d?d.summary:(thin?('Only '+r.sold+' sales in the last 12 months, so treat these numbers as rough.'):(r.sold+' sales in the last 12 months. Buildings sell in about '+(r.dom<=25?'three weeks':(r.dom<=38?'a month':'six weeks'))+(r.sva>=100?', at or above asking.':', close to asking.')));
+ var chip=thin?'<span class="chip thin">Thin sample</span>':'<span class="chip print">Print-safe</span>';
+ var tiles=[['Sales (12 mo)',r.sold,''],['Median price',money(r.med),''],['Price per unit',money(r.ppu),d?d.chg:''],['Days on market',r.dom,''],['Drew 3+ offers',r.off3+'%',''],['Sale vs. asking',r.sva+'%','']];
+ document.getElementById('m-tiles').innerHTML=tiles.map(function(t){return '<div class="tile6"><div class="lbl">'+t[0]+'</div><div class="v">'+t[1]+'</div><div class="chg">'+(t[2]||'')+'</div>'+chip+'</div>'}).join('');
+ var ch=document.getElementById('m-charts');
+ if(thin){ch.innerHTML='<div class="mod-note" style="grid-column:1/-1">Not enough sales to show a trend.</div>'}
+ else if(d){ch.innerHTML='<div class="chartbox"><div class="t">Price per unit by year</div>'+svgBars(d.years,function(v){return '$'+Math.round(v/1000)+'k'},120)+'</div>'
+  +'<div class="chartbox"><div class="t">Sales by quarter</div>'+svgBars(d.quarters,function(v){return v},120)+'</div>'
+  +'<div class="chartbox"><div class="t">Days on market vs. all ZIPs</div>'+svgBars([[r.z,r.dom],['All ZIPs',26]],function(v){return v+' days'},120)+'</div>'}
+ else{ch.innerHTML='<div class="mod-note" style="grid-column:1/-1">Trend charts for this ZIP arrive with the full data load. (Mockup: drawn for 94608, 94609, 94601 and 94702.)</div>'}
+ var how=document.getElementById('m-how');
+ if(thin){how.innerHTML=''}
+ else{var occ=d?d.how.occ:[['Empty',r.empty],['Tenants',Math.max(0,100-r.empty-10)],['Owner',10]];
+  var fin=d?d.how.fin:[['Cash',r.cash],['Financed',100-r.cash]];
+  how.innerHTML='<h3 style="font-size:13px;margin:0 0 8px">How buildings sell</h3><div class="hbars">'
+   +'<div class="hb"><div class="lbl">Sold empty / with tenants / owner-occupied</div>'+hbar(occ)+'</div>'
+   +'<div class="hb"><div class="lbl">Paid cash / financed</div>'+hbar(fin)+'</div>'
+   +(d?'<div class="hb"><div class="lbl">Offers received</div>'+hbar(d.how.off)+'</div>':'')+'</div>'}
+ document.getElementById('m-talk').textContent=d?d.talk:'';
+ var rr=document.getElementById('m-rents');var rchip=thin?' <span class="chip thin">Thin sample</span>':'';
+ rr.innerHTML='<span><span class="rl">1 bed rent</span><span class="rv">'+(r.r1?money(r.r1):'—')+'</span></span><span><span class="rl">2 bed rent</span><span class="rv">'+(r.r2?money(r.r2):'—')+'</span>'+rchip+'</span><span><span class="rl">Rough yield (2-bed rent vs. price per unit)</span><span class="rv">'+(r.yld?r.yld+'%':'—')+'</span></span>';
+ document.getElementById('m-print').innerHTML='<div class="pl">Sales in '+z+', last 12 months: '+r.sold+' · Median price: '+money(r.med)+'</div><div class="pl">Price per unit: '+money(r.ppu)+' · Days on market: '+r.dom+'</div><div class="disc">Based on bridgeMLS data for 2–4 unit sales, Oct 23, 2025 to Oct 23, 2026. Information deemed reliable but not guaranteed.</div>';
+ var sb=document.getElementById('m-salesbox');
+ if(d){var rows=d.sales.map(function(s){return '<tr><td><a href="Property_Detail.html">'+s.a+'</a></td><td class="nw">'+s.d+'</td><td class="num">'+s.u+'</td><td class="num">'+money(s.p)+'</td><td class="num">'+money(s.pu)+'</td><td class="num">'+s.o+'</td><td>'+s.s+'</td><td class="num">'+s.dm+'</td></tr>'}).join('');
+  sb.innerHTML='<table><tr><th>Address</th><th>Closed</th><th class="num">Units</th><th class="num">Price</th><th class="num">Price per unit</th><th class="num">Offers</th><th>Sold</th><th class="num">Days on market</th></tr>'+rows+'</table><div style="margin-top:8px"><a href="#" onclick="save();return false">Show all '+r.sold+' sales</a></div>'+(d.note?'<div class="meta" style="margin-top:8px">'+d.note+'</div>':'');}
+ else{sb.innerHTML='<div class="mod-note">Latest sales for this ZIP load here. (Mockup: drawn for 94608, 94609, 94601 and 94702.)</div>'}
+ document.querySelectorAll('tr.zrow').forEach(function(tr){tr.classList.toggle('hl',tr.dataset.z===z)});
+ try{history.replaceState(null,'','#zip-'+z)}catch(e){}
+ var mod=document.getElementById('zipmod');
+ if(!noscroll){mod.classList.add('shimmer');setTimeout(function(){mod.classList.remove('shimmer')},300);mod.scrollIntoView({behavior:'smooth'})}
+}
+var VIEW='mailer';
+function setView(v,btn){VIEW=v;document.querySelectorAll('#views button').forEach(function(b){b.classList.toggle('on',b===btn)});drawTable()}
+function ill(z,a,b){var n=0;for(var i=0;i<z.length;i++)n+=z.charCodeAt(i);return a+((n*7)%(b-a))}
+function drawTable(){
+ var city=document.getElementById('cityf').value;
+ var head,cells;
+ if(VIEW==='mailer'){head=['ZIP','City · area','Sold, 12 mo','Median price','Price per unit','Days on market','1 bed rent','2 bed rent','Rent sample'];}
+ if(VIEW==='demand'){head=['ZIP','City · area','Sold, 12 mo','Drew 3+ offers','Sale vs. asking','Sold empty','Paid cash','Days on market'];}
+ if(VIEW==='rents'){head=['ZIP','City · area','1 bed rent','2 bed rent','Price per unit','Rough yield','Rent sample'];}
+ if(VIEW==='opp'){head=['ZIP','City · area','Hot','Warm','Loans due 2027','Held 15+ years','Not contacted 90 days'];}
+ if(VIEW==='events'){head=['ZIP','City · area','Estate cases','Ellis Act filings','Default notices'];}
+ var h='<tr>'+head.map(function(x,i){return '<th'+(i>1?' class="num"':'')+'>'+x+'</th>'}).join('')+'<th></th></tr>';
+ var body=T.filter(function(r){return city==='All cities'||r.city===city}).map(function(r){
+  var c0='<td><a href="#" onclick="loadZip(\''+r.z+'\');return false">'+r.z+'</a></td><td>'+r.city+' · '+r.area+'</td>';
+  var mid='';
+  var sample=r.thin?'<span class="chip thin">Thin sample</span>':(r.r2?'OK':'—');
+  if(VIEW==='mailer')mid='<td class="num">'+r.sold+'</td><td class="num">'+money(r.med)+'</td><td class="num">'+money(r.ppu)+'</td><td class="num">'+r.dom+'</td><td class="num">'+(r.r1?money(r.r1):'—')+'</td><td class="num">'+(r.r2?money(r.r2):'—')+'</td><td class="num">'+sample+'</td>';
+  if(VIEW==='demand')mid='<td class="num">'+r.sold+'</td><td class="num">'+r.off3+'%</td><td class="num">'+r.sva+'%</td><td class="num">'+r.empty+'%</td><td class="num">'+r.cash+'%</td><td class="num">'+r.dom+'</td>';
+  if(VIEW==='rents')mid='<td class="num">'+(r.r1?money(r.r1):'—')+'</td><td class="num">'+(r.r2?money(r.r2):'—')+'</td><td class="num">'+money(r.ppu)+'</td><td class="num">'+(r.yld?r.yld+'%':'—')+'</td><td class="num">'+sample+'</td>';
+  if(VIEW==='opp')mid='<td class="num">'+ill(r.z,4,28)+'</td><td class="num">'+ill(r.z,20,70)+'</td><td class="num">'+ill(r.z,6,40)+'</td><td class="num">'+ill(r.z,30,120)+'</td><td class="num">'+ill(r.z,60,200)+'</td>';
+  if(VIEW==='events')mid='<td class="num">'+(ill(r.z,0,3))+'</td><td class="num">'+(ill(r.z,0,2))+'</td><td class="num">'+(ill(r.z,0,2))+'</td>';
+  return '<tr class="zrow" data-z="'+r.z+'">'+c0+mid+'<td class="nw"><a href="New_List.html#zip-'+r.z+'">New list</a></td></tr>'}).join('');
+ document.getElementById('ziptable').innerHTML=h+body;
+ var cur=(location.hash||'#zip-94608').replace('#zip-','');
+ document.querySelectorAll('tr.zrow').forEach(function(tr){tr.classList.toggle('hl',tr.dataset.z===cur)});
+}
+function cityFilter(){drawTable();var sel=document.getElementById('zippick');fillPicker();var cur=sel.value;var city=document.getElementById('cityf').value;var r=row(cur);if(city!=='All cities'&&r&&r.city!==city){var first=T.filter(function(x){return x.city===city})[0];if(first)loadZip(first.z,true)}}
+function fillPicker(){var sel=document.getElementById('zippick');var city=document.getElementById('cityf').value;var cities={};T.forEach(function(r){if(city!=='All cities'&&r.city!==city)return;(cities[r.city]=cities[r.city]||[]).push(r)});var out='';Object.keys(cities).forEach(function(c){out+='<optgroup label="'+c+'">'+cities[c].map(function(r){return '<option value="'+r.z+'">'+r.z+' · '+r.area+' · '+r.sold+' sales</option>'}).join('')+'</optgroup>'});var keep=sel.value;sel.innerHTML=out;if(keep)sel.value=keep}
+document.addEventListener('DOMContentLoaded',function(){fillPicker();drawTable();var z=(location.hash||'').replace('#zip-','');loadZip(row(z)?z:'94608',true)});
+
 </script></body></html>
