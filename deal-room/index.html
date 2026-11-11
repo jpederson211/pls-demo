@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Room Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Manrope:wght@600;800&display=swap">
+<style>
+:root{
+  /* layout: one calm centered column, one card at a time, a soft ambient glow that warms as the day gets done */
+  --ground:#F1F3F6; --surface:#FFFFFF; --ink:#131A26; --muted:#465063; --line:#D9DEE6;
+  --accent:#0B5D52; --accent-soft:#E2EFEC; --signal-bg:#FFF1CC; --signal-ink:#3D2B00;
+  --display:'Manrope','Segoe UI',system-ui,sans-serif; --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,.7,.2,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;display:flex;flex-direction:column}
+button,input{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid #1D6FD8;outline-offset:3px}
+h1,h2,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+
+.glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(60% 50% at 50% 30%,rgba(11,93,82,.10),transparent 70%)}
+.glow::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 35%,rgba(255,176,64,.22),transparent 72%);opacity:var(--p,0);transition:opacity 1.6s ease}
+
+.bar{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:14px 28px;background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em}
+.tabs{display:flex;gap:6px}
+.tab{min-height:46px;padding:0 18px;border:0;border-radius:10px;background:transparent;font-weight:500;color:var(--muted);transition:background .3s var(--ease),color .3s var(--ease)}
+.tab[aria-current="page"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.sound{margin-left:auto;min-height:46px;padding:0 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:15px;font-weight:500;color:var(--muted)}
+
+main{position:relative;z-index:1;flex:1;overflow-y:auto;padding:44px 20px 96px}
+.view{display:none;max-width:740px;margin:0 auto}
+.view.on{display:flex;flex-direction:column;gap:26px}
+.view.anim{animation:rise .5s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,5vw,44px);line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+.sub{font-size:20px;color:var(--muted)}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+.segs{display:flex;gap:8px}
+.seg{flex:1;height:8px;border-radius:4px;background:#DCE1E8;overflow:hidden}
+.seg i{display:block;height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .7s var(--ease)}
+.seg.done i{width:100%}
+
+.rows{display:flex;flex-direction:column;gap:12px}
+.row{width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:20px 22px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;transition:border-color .35s var(--ease),box-shadow .35s var(--ease),transform .35s var(--ease),opacity .5s ease}
+button.row:hover{border-color:var(--accent);box-shadow:0 6px 22px rgba(19,26,38,.08);transform:translateY(-1px)}
+.row.next{border:2px solid var(--accent)}
+.row.fin{opacity:.72}
+.row.new{animation:rise .55s var(--ease) both}
+.num{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:600;background:#E8ECF1;transition:background .4s var(--ease),color .4s var(--ease)}
+.row.next .num,.row.fin .num{background:var(--accent);color:#fff}
+.who{flex:1 1 300px;display:flex;flex-direction:column;gap:3px}
+.who b{font-size:19px;font-weight:600}
+.who span{font-size:16px;color:var(--muted)}
+.chip{padding:6px 12px;border-radius:8px;font-size:14px;font-weight:600;background:#E8ECF1;color:#2B3443;white-space:nowrap}
+.chip.follow{background:var(--signal-bg);color:#5E4200}
+.chip.buyer{background:#E1E9FB;color:#1D3A8A}
+.chip.good{background:var(--accent-soft);color:var(--accent)}
+.go{padding:10px 20px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600}
+
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.foot p{font-size:16px;color:var(--muted)}
+.btn{min-height:52px;padding:0 24px;border-radius:12px;border:1px solid #C6CCD6;background:var(--surface);font-weight:500;transition:transform .2s var(--ease),background .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:scale(.98)}
+.btn.pri{min-height:60px;padding:0 34px;border:0;background:var(--accent);color:#fff;font-size:19px;font-weight:600;box-shadow:0 8px 24px rgba(11,93,82,.22)}
+.btn.pri:hover{background:#094D44}
+.btn.out{border-color:var(--accent);color:var(--accent);font-weight:600;background:transparent}
+.btn.sel{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.link{border:0;background:none;padding:10px 0;min-height:44px;color:var(--accent);font-weight:500}
+.link:hover{text-decoration:underline}
+
+.crumbs{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-weight:600;font-size:16px}
+.flip{perspective:1800px}
+.flip.leave{animation:leave .45s var(--ease) both}
+@keyframes leave{to{opacity:0;transform:translateX(-60px) scale(.97)}}
+.inner{display:grid;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.3,.1,.2,1)}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,38px);display:flex;flex-direction:column;gap:26px;box-shadow:0 18px 50px rgba(19,26,38,.10)}
+.front{transform:rotateY(0deg)}
+.back{transform:rotateY(180deg)}
+.face h2.big{font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,34px);line-height:1.15;letter-spacing:-.02em}
+.why{padding:20px 22px;border-radius:14px;background:var(--signal-bg);color:var(--signal-ink);display:flex;flex-direction:column;gap:8px}
+.why .eyebrow{color:#5E4200}
+.why p{font-size:20px;font-weight:500;line-height:1.45}
+.warm{padding:14px 18px;border-radius:12px;background:var(--accent-soft);color:#083F38;font-size:16px;font-weight:500}
+.say{display:flex;flex-direction:column;gap:10px;padding-left:22px;list-style:disc;font-size:18px}
+.callrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding-top:24px;border-top:1px solid var(--line)}
+.phone{font-family:var(--display);font-weight:800;font-size:32px;font-variant-numeric:tabular-nums}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.outs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.outs .btn{min-height:72px;font-size:18px}
+.stage{display:flex;flex-direction:column;gap:22px}
+.stage.in{animation:rise .4s var(--ease) both}
+.nexts{display:flex;flex-direction:column;gap:12px}
+.quiet{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.stamp{display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;background:var(--accent-soft);color:#083F38;font-size:19px;font-weight:600;animation:settle .6s var(--ease) both}
+.stamp svg{flex:none}
+@keyframes settle{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 22px}
+.panel li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:16px 0;border-bottom:1px solid #E8ECF1}
+.panel li:last-child{border-bottom:0}
+.panel li b{font-weight:600}
+.panel li span{color:var(--muted)}
+.offer{background:var(--surface);border:2px solid var(--accent);border-radius:20px;padding:clamp(20px,4vw,32px);display:flex;flex-direction:column;gap:20px}
+.offer .eyebrow{color:var(--accent)}
+.offer h2{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.15}
+.center{display:flex;justify-content:center}
+
+.addbox{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.addbox label{flex:1 1 300px;display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:600}
+.addbox input{min-height:52px;padding:0 16px;border:1px solid #C6CCD6;border-radius:12px;background:#F7F8FA;font-size:17px;font-weight:400}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:16px;transition:border-color .35s var(--ease)}
+.item.open{border:2px solid var(--accent)}
+.item.out{animation:leave .45s var(--ease) both}
+.item .top{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.item .ends{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid #E8ECF1;animation:rise .4s var(--ease) both}
+.empty{padding:28px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed #C6CCD6;border-radius:16px}
+
+#toast{position:fixed;left:50%;bottom:26px;z-index:5;transform:translate(-50%,20px);max-width:min(560px,calc(100% - 32px));padding:14px 22px;border-radius:14px;background:#131A26;color:#fff;font-size:16px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s var(--ease)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.note{font-size:14px;color:var(--muted);text-align:center}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="glow" id="glow" aria-hidden="true"></div>
+<header class="bar">
+  <div class="brand">Deal Room</div>
+  <nav class="tabs" aria-label="Sections">
+    <button class="tab" id="tab-today" data-act="tab" data-v="today" aria-current="page">Today</button>
+    <button class="tab" id="tab-prog" data-act="tab" data-v="prog">In Progress</button>
+  </nav>
+  <button class="sound" id="sound" data-act="sound" aria-pressed="true">Sound on</button>
+</header>
+<main id="main">
+  <section class="view on" id="v-today" aria-label="Today"></section>
+  <section class="view" id="v-card" aria-label="Conversation card"></section>
+  <section class="view" id="v-wrap" aria-label="Wrap-up"></section>
+  <section class="view" id="v-prog" aria-label="In Progress"></section>
+  <section class="view" id="v-done" aria-label="Done for today"></section>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const CHECK = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+const LEADS = {
+  maria:{name:'Maria Delgado',first:'Maria',prop:'2418 Fruitvale Ave',line:'Owns 12 units at 2418 Fruitvale Ave since 2009.',short:'Her listing with another broker expired Friday.',why:'Her listing with another broker expired Friday after 94 days without a sale.',say:['Two similar buildings nearby sold in the last 60 days. Hers was priced above both.','She got your Quick BOV postcard on October 28, so your name is familiar.','Ask what she would do differently if she listed again.'],phone:'(510) 555-0142',tag:'New'},
+  raymond:{name:'Raymond Okafor',first:'Raymond',prop:'915 E 18th St',line:'Owns 8 units at 915 E 18th St since 2016.',short:'You said you would call back once his refinance closed.',why:'His refinance recorded last Tuesday. You promised a call once it closed.',say:['Congratulate him on getting the refinance done.','He told you in September he might sell if rates settled. Ask where his head is now.','Offer an updated value now that the new loan is in place.'],phone:'(510) 555-0178',tag:'Follow-up'},
+  lindqvist:{name:'The Lindqvist Trust',first:'the trustee',prop:'3340 Adeline St',line:'Holds 16 units at 3340 Adeline St. In the family since 1988.',short:'Probate was filed last week on a 16-unit building.',why:'Probate was filed last week. Heirs often decide to sell within months.',say:['Lead with condolences. Keep it short and human.','Offer a no-pressure opinion of value for the estate paperwork.','Ask who is handling decisions for the property.'],phone:'(510) 555-0111',tag:'New'},
+  priya:{name:'Priya Raman',first:'Priya',prop:'Buyer search, 8 to 16 units',line:'Sold a 10-unit on Park Blvd in September. Has owned 3 buildings.',short:'Sold a 10-unit in September. Likely shopping for a 1031 exchange.',why:'She sold in September, so her 1031 exchange clock is running. She needs a replacement property soon.',say:['Ask if she has identified replacement properties yet.','You know of two buildings in her size range that are not on the market.','Ask what her deadline is and what she will not buy.'],phone:'(510) 555-0163',tag:'Buyer'},
+  daniel:{name:'Daniel Cho',first:'Daniel',prop:'1207 Park Blvd',line:'Owns 6 units at 1207 Park Blvd since 2019.',short:'Asked for a market summary in October. It went out last week.',why:'He asked for a market summary in October. It was delivered last week and he has not heard from you since.',say:['Ask if the summary matched what he expected.','Rents on his block rose this year. That is the number he cares about.','Offer to walk the building for a sharper value.'],phone:'(510) 555-0127',tag:'Follow-up'},
+  gloria:{name:'Gloria Whitfield',first:'Gloria',prop:'4106 Telegraph Ave',line:'Owns 9 units at 4106 Telegraph Ave since 2003.',short:'A soft-story retrofit permit was filed on her building this month.',why:'A soft-story retrofit permit was filed on her building this month. Owners facing that cost often consider selling instead.',say:['Ask how the retrofit bids are coming in.','Some owners sell as-is and let the buyer take on the retrofit.','Offer a value both ways: before and after the work.'],phone:'(510) 555-0190',tag:'New'},
+  bayview:{name:'Bayview Holdings LLC',first:'Bayview',prop:'377 Vernon St',line:'Owns 22 units at 377 Vernon St since 2011.',short:'A competing building two doors down just listed.',why:'A competing building two doors down listed on Monday. Buyers touring it will look at this one too.',say:['Mention the new listing next door and its asking price.','If that one sells well, it sets the price for his.','Ask if he wants to be told what it goes for.'],phone:'(510) 555-0155',tag:'New',warm:'You already have 1840 Lakeshore Ave in progress with this owner. This is a warm call.'},
+  sato:{name:'Kenji Sato',first:'Kenji',prop:'2950 MacArthur Blvd',line:'Owns 5 units at 2950 MacArthur Blvd since 1997.',short:'He has owned for 29 years and just took the building off the rental registry.',why:'He has owned for 29 years and filed to take the building off the rental market. That usually comes before a sale.',say:['Ask what his plans are for the building.','Long-time owners often want to know their tax picture first. Offer an introduction.','Keep it light. He has not heard from you before.'],phone:'(510) 555-0134',tag:'New'},
+  alvarez:{name:'Rosa Alvarez',first:'Rosa',prop:'688 Santa Clara Ave',line:'Owns 10 units at 688 Santa Clara Ave since 2015.',short:'She clicked through your last market email three times.',why:'She opened your last market email three times and clicked the sold comps each time.',say:['Ask if the comps were useful.','Her building is close in size to the one that sold on her street.','Offer a Quick BOV by email.'],phone:'(510) 555-0108',tag:'New'}
+};
+const BASE = ['maria','raymond','lindqvist','priya','daniel'];
+const RESERVE = ['gloria','bayview','sato','alvarez'];
+const LABEL = {talked:'Talked',vm:'Voicemail',na:'No answer',ni:'Not interested',skip:'Skipped',nr:'Not relevant',prog:'In progress'};
+
+let S, view = 'today', cur = null, busy = false, soundOn = true, actx = null;
+function fresh(){
+  S = {queue:[...BASE], reserve:[...RESERVE], st:{}, added:null,
+       prog:[{prop:'1840 Lakeshore Ave',owner:'Bayview Holdings LLC',date:'Oct 22'},{prop:'562 Mandana Blvd',owner:'Thomas Reyes',date:'Sep 9'}]};
+}
+fresh();
+
+/* ---------- sound: low, soft, short ---------- */
+function tone(freq, dur, opt){
+  if(!soundOn) return;
+  try{
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if(actx.state === 'suspended') actx.resume();
+    const o = opt || {}, t = actx.currentTime + (o.at || 0);
+    const osc = actx.createOscillator(), g = actx.createGain(), f = actx.createBiquadFilter();
+    osc.type = o.type || 'sine';
+    osc.frequency.setValueAtTime(freq, t);
+    if(o.to) osc.frequency.exponentialRampToValueAtTime(o.to, t + dur);
+    f.type = 'lowpass'; f.frequency.value = o.cut || 1800;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(o.vol || 0.05, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    osc.connect(f); f.connect(g); g.connect(actx.destination);
+    osc.start(t); osc.stop(t + dur + 0.03);
+  }catch(e){}
+}
+const snd = {
+  tick(){ tone(420, .07, {type:'triangle', vol:.04, cut:1200}); },
+  flip(){ tone(170, .2, {to:88, vol:.09, cut:700}); },
+  saved(){ tone(587, .16, {vol:.045}); tone(784, .26, {vol:.045, at:.11}); },
+  prog(){ tone(392, .2, {vol:.045}); tone(494, .2, {vol:.045, at:.13}); tone(587, .42, {vol:.045, at:.26}); },
+  done(){ tone(523, .4, {vol:.04}); tone(392, .9, {vol:.04, at:.28}); }
+};
+
+/* ---------- helpers ---------- */
+const isProg = id => S.prog.some(p => p.id === id);
+const pending = () => S.queue.filter(id => !S.st[id]);
+const doneCount = () => S.queue.length - pending().length;
+function chipFor(id){
+  const s = S.st[id];
+  if(isProg(id)) return '<span class="chip good">In progress</span>';
+  if(s) return '<span class="chip' + (s.o === 'talked' ? ' good' : '') + '">' + LABEL[s.o] + '</span>';
+  const t = LEADS[id].tag;
+  return t === 'Follow-up' ? '<span class="chip follow">Follow-up</span>' : t === 'Buyer' ? '<span class="chip buyer">Buyer</span>' : '';
+}
+function statusText(id){
+  const s = S.st[id]; if(!s) return '';
+  if(s.o === 'talked') return s.n === 'cb' ? 'You talked. Call back set for 2 weeks.' : s.n === 'bov' ? 'You talked. BOV request sent to Edson.' : s.n === 'prog' ? 'You talked. Marked In progress.' : 'You talked. Nothing more for now.';
+  return {vm:'Voicemail left. Back in Today on Thursday.', na:'No answer. Back in Today on Thursday.', ni:'Not interested. Off your list for 6 months.', skip:'Skipped. Moved to next week.', nr:'Not relevant. Edson will see why this one missed.', prog:'Marked In progress. Outreach paused on this property.'}[s.o];
+}
+let toastT;
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 3600); }
+function glow(){ const p = view === 'done' ? 1 : S.queue.length ? doneCount() / S.queue.length : 0; $('#glow').style.setProperty('--p', p.toFixed(2)); }
+function tabs(){
+  $('#tab-prog').textContent = 'In Progress (' + S.prog.length + ')';
+  const t = view === 'prog' ? 'prog' : 'today';
+  $('#tab-today').toggleAttribute('aria-current', t === 'today'); if(t === 'today') $('#tab-today').setAttribute('aria-current','page');
+  $('#tab-prog').toggleAttribute('aria-current', t === 'prog'); if(t === 'prog') $('#tab-prog').setAttribute('aria-current','page');
+}
+function show(v, animate){
+  view = v;
+  document.querySelectorAll('.view').forEach(e => e.classList.remove('on','anim'));
+  const el = $('#v-' + v); el.classList.add('on');
+  if(animate !== false){ void el.offsetWidth; el.classList.add('anim'); }
+  $('#main').scrollTop = 0; tabs(); glow();
+}
+
+/* ---------- Today ---------- */
+function renderToday(){
+  const p = pending(), n = S.queue.length, d = doneCount(), nextId = p[0];
+  let h = '<div style="display:flex;flex-direction:column;gap:10px"><h1>Good morning, Nolan.</h1><p class="sub">' +
+    (d === 0 ? n + ' conversations today. 2 are follow-ups you promised.' : d === n ? 'All ' + n + ' handled.' : d + ' of ' + n + ' handled. ' + (n - d) + ' to go.') + '</p></div>';
+  h += '<div class="segs" role="img" aria-label="' + d + ' of ' + n + ' handled">' + S.queue.map(id => '<div class="seg' + (S.st[id] ? ' done' : '') + '"><i></i></div>').join('') + '</div>';
+  h += '<ol class="rows">' + S.queue.map((id, i) => {
+    const L = LEADS[id], s = S.st[id], cls = (id === nextId ? ' next' : '') + (s ? ' fin' : '') + (id === S.added ? ' new' : '');
+    const inner = '<span class="num">' + (s ? CHECK : i + 1) + '</span><span class="who"><b>' + L.name + '</b><span>' + (s ? statusText(id) : L.short) + '</span></span>' + chipFor(id) + (id === nextId ? '<span class="go">Start</span>' : '');
+    return '<li>' + (s ? '<div class="row' + cls + '">' + inner + '</div>' : '<button class="row' + cls + '" data-act="open" data-id="' + id + '">' + inner + '</button>') + '</li>';
+  }).join('') + '</ol>';
+  h += '<div class="foot">';
+  if(!p.length) h += '<p>Everything on today\'s list is handled.</p><button class="btn pri" data-act="wrap">See the wrap-up</button>';
+  else if(S.reserve.length) h += '<p>Five is the plan. More are ready whenever you want them.</p><button class="btn out" data-act="more">Get another hot lead</button>';
+  else h += '<p>That is every hot lead for today.</p>';
+  h += '</div><p class="note">Clickable prototype with sample data. Nothing here is real.</p>';
+  $('#v-today').innerHTML = h; S.added = null;
+}
+
+/* ---------- Card ---------- */
+function openCard(id){
+  cur = id; const L = LEADS[id], pos = S.queue.indexOf(id) + 1;
+  let h = '<div class="crumbs"><button class="link" data-act="tab" data-v="today">Back to Today</button><span>' + pos + ' of ' + S.queue.length + '</span></div>';
+  h += '<div class="flip" id="flip"><div class="inner">';
+  h += '<article class="face front" id="front"><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px"><h1 id="cardname" tabindex="-1">' + L.name + '</h1>' + chipFor(id) + '</div><p class="sub" style="font-size:18px">' + L.line + '</p></div>';
+  h += '<div class="why"><span class="eyebrow">Why now</span><p>' + L.why + '</p></div>';
+  if(L.warm) h += '<div class="warm">' + L.warm + '</div>';
+  h += '<div class="stamp" id="stamp" hidden>' + CHECK + '<span id="stamptext"></span></div>';
+  h += '<div class="acts" id="frontacts"><button class="btn pri" data-act="flip">Show me what to say</button></div></article>';
+  h += '<article class="face back" id="back" inert><div class="stage" id="st-say"><h2 class="eyebrow">What to say to ' + L.first + '</h2><ul class="say">' + L.say.map(x => '<li>' + x + '</li>').join('') + '</ul><div class="callrow"><div><div class="eyebrow">Call</div><div class="phone">' + L.phone + '</div></div><button class="btn pri" data-act="called">I made the call</button></div><div><button class="link" data-act="unflip">Flip back</button></div></div>';
+  h += '<div class="stage" id="st-log" hidden><h2 class="big" id="logq" tabindex="-1">How did it go with ' + L.first + '?</h2><div class="outs"><button class="btn" data-act="out" data-o="talked">We talked</button><button class="btn" data-act="out" data-o="vm">Left a voicemail</button><button class="btn" data-act="out" data-o="na">No answer</button><button class="btn" data-act="out" data-o="ni">Not interested</button></div>';
+  h += '<div class="nexts" id="nexts" hidden><h2 class="eyebrow">What happens next</h2><div class="acts"><button class="btn" data-act="next" data-n="cb">Call back in 2 weeks</button><button class="btn" data-act="next" data-n="bov">Send a BOV</button><button class="btn" data-act="next" data-n="prog">Mark In progress</button><button class="btn" data-act="next" data-n="none">Nothing for now</button></div></div></div></article>';
+  h += '</div></div>';
+  h += '<div class="quiet" id="quiet"><button class="btn" data-act="quick" data-o="skip">Skip for today</button><button class="btn" data-act="quick" data-o="nr">Not relevant</button><button class="btn" data-act="quick" data-o="prog">Mark In progress</button></div>';
+  $('#v-card').innerHTML = h; show('card');
+}
+function setFlip(on){
+  $('#flip').classList.toggle('flipped', on);
+  $('#front').inert = on; $('#back').inert = !on; snd.flip();
+}
+function save(o, n){
+  if(busy) return; busy = true;
+  const id = cur, L = LEADS[id];
+  S.st[id] = {o:o, n:n};
+  const toProg = o === 'prog' || n === 'prog';
+  if(toProg && !isProg(id)) S.prog.unshift({id:id, prop:L.prop, owner:L.name, date:'today'});
+  const flipped = $('#flip').classList.contains('flipped');
+  $('#stamptext').textContent = statusText(id);
+  $('#frontacts').hidden = true; $('#quiet').hidden = true;
+  if(flipped) setFlip(false);
+  setTimeout(() => { $('#stamp').hidden = false; toProg ? snd.prog() : snd.saved(); tabs(); glow();
+    if(toProg) toast(L.prop + ' is In progress. Outreach is paused on this property only.'); }, flipped ? 520 : 60);
+  setTimeout(() => $('#flip').classList.add('leave'), flipped ? 1900 : 1400);
+  setTimeout(() => { busy = false; const p = pending(); if(p.length) openCard(p[0]); else { renderWrap(); show('wrap'); } }, flipped ? 2350 : 1850);
+}
+
+/* ---------- Wrap-up and done ---------- */
+function counts(){ const c = {}; S.queue.forEach(id => { const s = S.st[id]; if(s) c[s.o] = (c[s.o] || 0) + 1; }); return c; }
+function renderWrap(){
+  const c = counts(), n = S.queue.length, miss = (c.na || 0) + (c.vm || 0);
+  let h = '<div style="display:flex;flex-direction:column;gap:10px"><h1>' + (n === 5 ? 'That\'s your five.' : 'That\'s all ' + n + '.') + '</h1><p class="sub">' +
+    (c.talked ? c.talked + (c.talked === 1 ? ' real conversation' : ' real conversations') + ' today.' : 'Nobody picked up today. It happens.') + '</p></div>';
+  h += '<ul class="panel">';
+  if(c.talked) h += '<li><b>' + c.talked + ' talked</b><span>Follow-ups are set</span></li>';
+  if(S.queue.some(isProg)) h += '<li><b>' + S.queue.filter(isProg).length + ' marked In progress</b><span>Outreach paused on those properties</span></li>';
+  if(miss) h += '<li><b>' + miss + ' did not connect</b><span>They come back in Today on Thursday</span></li>';
+  if(c.skip) h += '<li><b>' + c.skip + ' skipped</b><span>Moved to next week</span></li>';
+  if(c.ni) h += '<li><b>' + c.ni + ' not interested</b><span>Off your list for 6 months</span></li>';
+  if(c.nr) h += '<li><b>' + c.nr + ' not relevant</b><span>Sent to Edson to tune the list</span></li>';
+  h += '</ul>';
+  if(S.reserve.length){
+    const L = LEADS[S.reserve[0]];
+    h += '<article class="offer"><span class="eyebrow">Next hottest lead, ready now</span><div><h2>' + L.name + '</h2><p class="sub" style="font-size:18px">' + L.line + '</p></div><div class="why"><span class="eyebrow">Why now</span><p>' + L.why + '</p></div><div class="acts"><button class="btn pri" data-act="wrapopen">Open this one</button>' + (S.reserve.length > 1 ? '<button class="btn out" data-act="wrap3">Give me ' + Math.min(3, S.reserve.length) + ' more</button>' : '') + '</div></article>';
+  } else h += '<div class="empty">That is every hot lead for today. The next batch arrives tomorrow morning.</div>';
+  h += '<div class="center"><button class="btn" data-act="done">I\'m done for today</button></div>';
+  $('#v-wrap').innerHTML = h;
+}
+function renderDone(){
+  const c = counts();
+  $('#v-done').innerHTML = '<div style="display:flex;flex-direction:column;gap:14px;padding-top:40px;text-align:center;align-items:center"><h1>Done for today.</h1><p class="sub">' + S.queue.length + ' handled, ' + (c.talked || 0) + ' real ' + ((c.talked || 0) === 1 ? 'conversation' : 'conversations') + ', ' + S.prog.length + ' in progress.</p><p class="sub" style="font-size:17px">Tomorrow\'s five will be waiting.</p></div><div class="center"><button class="btn" data-act="reset">Start the day over (demo only)</button></div>';
+}
+function addLeads(k){ const got = S.reserve.splice(0, k); S.queue.push(...got); return got; }
+
+/* ---------- In Progress ---------- */
+function renderProg(){
+  const avail = Object.keys(LEADS).filter(id => !isProg(id));
+  let h = '<div style="display:flex;flex-direction:column;gap:10px"><h1>In Progress</h1><p class="sub">' + (S.prog.length ? S.prog.length + (S.prog.length === 1 ? ' property' : ' properties') + ' you are working. Outreach is paused on each one.' : 'Nothing marked right now.') + '</p></div>';
+  h += '<div class="addbox"><label for="addin">Add one<input id="addin" list="addlist" placeholder="Type an address or an owner\'s name" autocomplete="off"></label><datalist id="addlist">' + avail.map(id => '<option value="' + LEADS[id].prop + ', ' + LEADS[id].name + '"></option>').join('') + '</datalist><button class="btn pri" style="min-height:52px;font-size:17px" data-act="add">Mark In progress</button></div>';
+  h += S.prog.length ? '<ul class="rows">' + S.prog.map((p, i) => '<li class="item' + (p.open ? ' open' : '') + '" id="item' + i + '"><div class="top"><span class="who"><b>' + p.prop + '</b><span>' + p.owner + '. Marked ' + p.date + '.</span></span>' + (p.open ? '' : '<button class="btn" data-act="clear" data-i="' + i + '">Clear status</button>') + '</div>' + (p.open ? '<div class="ends"><b>How did this one end?</b><div class="acts"><button class="btn sel" data-act="end" data-i="' + i + '" data-c="won">Won</button><button class="btn" data-act="end" data-i="' + i + '" data-c="lost">Lost</button><button class="btn" data-act="end" data-i="' + i + '" data-c="back">Back to prospecting</button><button class="link" data-act="keep" data-i="' + i + '">Keep it In progress</button></div></div>' : '') + '</li>').join('') + '</ul>' : '<div class="empty">Mark a property In progress from any card, or add one above.</div>';
+  $('#v-prog').innerHTML = h;
+}
+function endProg(i, c){
+  if(busy) return; busy = true;
+  const p = S.prog[i], el = $('#item' + i);
+  el.classList.add('out'); c === 'won' ? snd.prog() : snd.saved();
+  setTimeout(() => {
+    S.prog.splice(i, 1);
+    if(p.id && S.st[p.id] && S.st[p.id].o === 'prog') delete S.st[p.id];
+    else if(p.id && S.st[p.id] && S.st[p.id].n === 'prog') S.st[p.id].n = 'none';
+    busy = false; renderProg(); tabs();
+    toast(c === 'won' ? p.prop + ' marked won. Nice work.' : c === 'lost' ? p.prop + ' marked lost. It returns to outreach after the cooling-off period.' : p.prop + ' is back in outreach.');
+  }, 430);
+}
+function addProg(){
+  const v = $('#addin').value.trim().toLowerCase();
+  const id = v && Object.keys(LEADS).find(k => !isProg(k) && (LEADS[k].prop + ', ' + LEADS[k].name).toLowerCase().includes(v));
+  if(!id){ toast('Pick a property or owner from the list. Try typing "Telegraph" or "Sato".'); return; }
+  const L = LEADS[id];
+  S.prog.unshift({id:id, prop:L.prop, owner:L.name, date:'today'});
+  if(S.queue.includes(id) && !S.st[id]) S.st[id] = {o:'prog'};
+  snd.prog(); renderProg(); tabs(); toast(L.prop + ' is In progress. Outreach is paused on this property only.');
+}
+
+/* ---------- clicks ---------- */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if(!b || busy) return;
+  const a = b.dataset.act;
+  if(a === 'sound'){ soundOn = !soundOn; b.setAttribute('aria-pressed', soundOn); b.textContent = soundOn ? 'Sound on' : 'Sound off'; if(soundOn) snd.tick(); return; }
+  if(a === 'tab'){ snd.tick(); if(b.dataset.v === 'prog'){ S.prog.forEach(p => p.open = false); renderProg(); show('prog'); } else { renderToday(); show('today'); } }
+  else if(a === 'open'){ snd.tick(); openCard(b.dataset.id); }
+  else if(a === 'more'){ const got = addLeads(1); S.added = got[0]; snd.saved(); renderToday(); glow(); toast(LEADS[got[0]].name + ' added to today.'); }
+  else if(a === 'flip'){ setFlip(true); }
+  else if(a === 'unflip'){ setFlip(false); }
+  else if(a === 'called'){ snd.tick(); $('#st-say').hidden = true; const s = $('#st-log'); s.hidden = false; s.classList.add('in'); $('#logq').focus({preventScroll:true}); }
+  else if(a === 'out'){
+    if(b.dataset.o === 'talked'){ snd.tick(); document.querySelectorAll('.outs .btn').forEach(x => x.classList.toggle('sel', x === b)); const nx = $('#nexts'); nx.hidden = false; nx.classList.add('stage','in'); }
+    else { b.classList.add('sel'); save(b.dataset.o); }
+  }
+  else if(a === 'next'){ b.classList.add('sel'); save('talked', b.dataset.n); }
+  else if(a === 'quick'){ save(b.dataset.o); }
+  else if(a === 'wrap'){ snd.tick(); renderWrap(); show('wrap'); }
+  else if(a === 'wrapopen'){ snd.tick(); const got = addLeads(1); openCard(got[0]); }
+  else if(a === 'wrap3'){ const got = addLeads(3); S.added = got[0]; snd.saved(); renderToday(); show('today'); toast(got.length + ' more leads added to today.'); }
+  else if(a === 'done'){ snd.done(); renderDone(); show('done'); }
+  else if(a === 'reset'){ snd.tick(); fresh(); renderToday(); show('today'); }
+  else if(a === 'clear'){ snd.tick(); S.prog.forEach((p, i) => p.open = i === +b.dataset.i); renderProg(); }
+  else if(a === 'keep'){ snd.tick(); S.prog[+b.dataset.i].open = false; renderProg(); }
+  else if(a === 'end'){ endProg(+b.dataset.i, b.dataset.c); }
+  else if(a === 'add'){ addProg(); }
+});
+document.addEventListener('keydown', e => { if(e.key === 'Enter' && e.target.id === 'addin'){ e.preventDefault(); addProg(); } });
+
+renderToday(); tabs(); glow();
+</script>
+</body>
+</html>
