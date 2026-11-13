@@ -54,7 +54,7 @@
     prospect: {
       label: 'Prospect with Orbit', name: 'Prospecting', help: 'How can I help you find your next deal?',
       chips: [
-        ['Who should I call first?', 'Your strongest call right now is Haddad Properties LLC (3120 Grand Ave) — loan maturing within 60 days and no touch in 74 days. Then 1840 Park LLC (held 19 years, never contacted).'],
+        ['Who should I call first?', 'Start with Alcatraz Partners. They replied to our letter this morning and asked about sales on Vernon, so they are expecting a call. Then call Helen Castillo, who scanned the QR code on our postcard yesterday.'],
         ['Loans maturing, untouched 60 days', '7 owners in your targets have a loan likely maturing within 12 months and no touch in 60+ days — 4 of them in 94611 (5+ units). Want them added to a call list?'],
         ['Tell me how to attack 94608 Emeryville border to prospect new sellers', 'Here’s a 3-step plan for 94608 Emeryville border:<ol><li><b>Start with the 38 owners whose loans likely come due in 2027.</b> Call the 22 Hot owners first.</li><li><b>Mail a Market update to the whole ZIP.</b> Lead with “nearly half of sales drew 3+ offers” and add a QR code.</li><li><b>Follow up with the 96 long-time owners within 10 days.</b> Offer a free BOV.</li></ol>Want me to build the step 1 call list now?', 'team'],
         ['Build a target → Build this list → Plan the campaign', 'Recipe started. Step 1, target: 5+ unit owners in 94611 with a signal and no touch in 60 days (23 owners). Step 2, list: saved as “94611 · 5+ units · signals”. Step 3, campaign: a Market update mailer, then calls within 5 days. Want me to open the campaign draft?', 'recipe']
