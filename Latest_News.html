@@ -311,43 +311,103 @@ tr.zrow.hl td{background:#ECEAE4}
 <div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Insights › Latest News</div></div><div class="actions"></div></div>
 <div class="content" style="display:block">
 <style>
-.nx{max-width:860px}
-.nws{border:1px solid #D3D0CB;background:#fff;padding:14px 16px;margin-bottom:12px}
-.nws .k{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66;margin-bottom:3px}
-.nws h4{margin:0 0 4px;font-size:15px}
-.nws .src{font-size:12px;color:#6B6A66;margin-bottom:6px}
-.nws p{margin:0 0 7px;font-size:13.5px}
-.nws .why{font-size:12.5px;background:#F7F6F3;border-left:3px solid #2D2E41;padding:6px 9px}
-.sechd{display:flex;align-items:baseline;gap:10px;margin:22px 0 8px}.sechd h2{font-size:15px;margin:0}
+.nx{max-width:1040px}
+.sechd{display:flex;align-items:baseline;gap:10px;margin:22px 0 4px}.sechd h2{font-size:15px;margin:0}
+.secsub{font-size:12.5px;color:#6B6A66;margin:0 0 12px}
+.lgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.lcard{border:1px solid #D3D0CB;background:#fff;padding:14px 16px;display:flex;flex-direction:column}
+.k{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66;margin-bottom:4px}
+.lcard h4,.nrow h4{margin:0 0 4px;font-size:15px;line-height:1.35}
+.src{font-size:12px;color:#6B6A66;margin-bottom:6px}
+.lcard p,.nrow p{margin:0 0 10px;font-size:13.5px;line-height:1.5}
+.lcard .more{margin-top:auto;align-self:flex-start}
+.nrow{border:1px solid #D3D0CB;background:#fff;padding:14px 16px;margin-bottom:10px;display:flex;gap:16px;align-items:flex-start}
+.nrow .tx{flex:1}
+.nm .sum{font-size:14px;line-height:1.6;margin:0 0 12px}
+.nm .srcl{font-size:12.5px;margin-bottom:14px;padding:8px 10px;background:#F7F6F3;border:1px solid #E6E3DE}
+.nm .wtm{border-left:3px solid #2D2E41;padding:4px 0 2px 14px}
+.nm .wtm h4{margin:0 0 8px;font-size:14px}
+.nm .wtm .r{margin:0 0 10px;font-size:13.5px;line-height:1.55}
+.nm .wtm .r b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#6B6A66;margin-bottom:2px}
+@media(max-width:760px){.lgrid{grid-template-columns:1fr}.nrow{flex-direction:column}}
 </style>
-<div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px"><div><h2 style="font-size:17px;margin:0">Latest News</h2><div class="meta">General news relevant to your market — your geography, your property focus, and the wider CRE world. Fuller spec coming.</div></div></div>
-
-<div class="sechd"><h2>What is happening — applies everywhere</h2><span class="meta">· Week of Nov 9, 2026</span></div>
-<div class="pulse nx"><div class="items five">
-<div><b class="lbl">Rates</b><span class="scope">All markets</span><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">Oakland rules</b><span class="scope">Oakland</span><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: your rents can only rise 2.3% this year — here is what buyers pay for that upside.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">National news</b><span class="scope">National</span><div class="fact">Fed signals a pause; national CRE lending outlook steadies into Q1.</div><div class="act">Act: owners sitting on 2027 maturities have a window to refi or sell.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-
-<div><b class="lbl">Sales by city</b><span class="scope">Oakland · Berkeley</span><div class="cchips"><button class="on" onclick="city('oak',this)">Oakland</button><button onclick="city('brk',this)">Berkeley</button><button onclick="city('emv',this)">Emeryville</button><button onclick="city('wo',this)">West Oakland</button><button onclick="city('tem',this)">Temescal</button></div><div class="fact" id="city-f">Oakland: 2–4 unit sales up 6% vs last quarter; median $498k per unit.</div><div class="act">Act: lead with the city trend, then the owner’s ZIP.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-</div><div class="meta" style="margin-top:10px">Updated weekly · last updated Nov 9, 2026 · from public sources.</div></div>
-
-<div class="sechd"><h2>More this week</h2><span class="meta">Geography · property focus · CRE at large.</span></div>
 <div class="nx">
-<div class="nws"><div class="k">Oakland · local rules</div><h4>Oakland extends seismic retrofit deadline for soft-story buildings</h4><div class="src">Oakland city council · Nov 10, 2026</div><p>Owners of soft-story multifamily buildings get an extra 12 months to complete retrofits, but must file an intent-to-comply by March.</p><div class="why">Why it matters: a talking point for every 5+ unit owner in your targets — retrofit cost is a reason owners sell.</div></div>
-<div class="nws"><div class="k">Bay Area · sales</div><h4>East Bay 2–4 unit sales tick up as rates ease</h4><div class="src">bridgeMLS data · Nov 9, 2026</div><p>Small-multifamily sales rose 6% in Oakland and held flat in Berkeley over the past quarter, with more buildings selling vacant.</p><div class="why">Why it matters: supports a "now is a good window" message for owner-occupant duplex sellers.</div></div>
-<div class="nws"><div class="k">California · property focus</div><h4>New state ADU law broadens what small-multifamily owners can build</h4><div class="src">CA HCD · Nov 6, 2026</div><p>Owners of 2–4 unit buildings can now add up to two detached ADUs by right in most zones, raising income potential.</p><div class="why">Why it matters: a value-add angle for duplex and triplex owners — more units, more NOI, higher sale price.</div></div>
-<div class="nws"><div class="k">CRE · national</div><h4>Small-multifamily cap rates compress slightly as lenders return</h4><div class="src">National CRE wire · Nov 5, 2026</div><p>Regional banks are quoting again on 5–20 unit deals, nudging cap rates down ~15 bps quarter over quarter.</p><div class="why">Why it matters: use with owners who think financing is frozen — buyers can get deals done again.</div></div>
+<div style="margin-bottom:6px"><h2 style="font-size:17px;margin:0">Latest News</h2><div class="meta">News that touches your business, with what it means for you. Updated weekly · last updated Nov 9, 2026. Sales activity lives in <a href="Market_by_ZIP.html">Your Market</a>.</div></div>
+
+<div class="sechd"><h2>What's happening in your market</h2><span class="meta">Oakland · Berkeley · East Bay</span></div>
+<div class="secsub">Local rules, council actions and neighborhood news for the areas you farm.</div>
+<div class="lgrid">
+<div class="lcard"><div class="k">Oakland · local rules</div><h4>Oakland extends soft-story retrofit deadline by 12 months</h4><div class="src">City of Oakland · Nov 10, 2026</div><p>Owners of soft-story apartment buildings get another year to finish seismic work, but must file an intent-to-comply by March.</p><button class="btn sm more" onclick="news('l1')">More</button></div>
+<div class="lcard"><div class="k">Oakland · rent rules</div><h4>Allowed rent increase for rent-controlled units rises to 2.3%</h4><div class="src">Oakland Rent Adjustment Program · Nov 1, 2026</div><p>Owners can raise rents on covered units by up to 2.3% this year, up from 0.8% last year.</p><button class="btn sm more" onclick="news('l2')">More</button></div>
+<div class="lcard"><div class="k">Oakland · council</div><h4>Council to hear vacancy tax changes on Nov 18</h4><div class="src">Oakland City Council agenda · Nov 7, 2026</div><p>Proposed amendments would raise the vacant-unit tax on multifamily buildings and tighten exemptions.</p><button class="btn sm more" onclick="news('l3')">More</button></div>
+<div class="lcard"><div class="k">Berkeley · local rules</div><h4>Berkeley proposes higher rental registration fee for 2027</h4><div class="src">City of Berkeley · Nov 5, 2026</div><p>The yearly per-unit registration fee would rise about 15%, with public comment open through December.</p><button class="btn sm more" onclick="news('l4')">More</button></div>
 </div>
-<div class="meta nx" style="margin-top:6px">Sample articles. The live feed will be tuned to the tenant's geography and property focus.</div>
+
+<div class="sechd" style="margin-top:30px"><h2>What's happening outside your market</h2><span class="meta">State · national</span></div>
+<div class="secsub">California and national news that shapes what your owners and buyers do.</div>
+<div class="nrow"><div class="tx"><div class="k">California · property focus</div><h4>New state ADU law broadens what small-multifamily owners can build</h4><div class="src">CA Dept. of Housing and Community Development · Nov 6, 2026</div><p>Owners of 2–4 unit buildings can now add up to two detached ADUs by right in most zones.</p></div><button class="btn sm" onclick="news('o1')">More</button></div>
+<div class="nrow"><div class="tx"><div class="k">National · rates</div><h4>Fed signals a pause as the 30-year fixed falls to 6.18%</h4><div class="src">Federal Reserve · Freddie Mac · Nov 7, 2026</div><p>Mortgage rates are down 0.24 points in four weeks, the lowest level since spring.</p></div><button class="btn sm" onclick="news('o2')">More</button></div>
+<div class="nrow"><div class="tx"><div class="k">National · CRE lending</div><h4>Small-multifamily cap rates compress as regional banks return</h4><div class="src">National CRE wire · Nov 5, 2026</div><p>Regional banks are quoting again on 5–20 unit deals, pushing cap rates down about 15 basis points.</p></div><button class="btn sm" onclick="news('o3')">More</button></div>
+<div class="nrow"><div class="tx"><div class="k">California · insurance</div><h4>State approves a 9% average increase on FAIR Plan policies</h4><div class="src">CA Department of Insurance · Nov 3, 2026</div><p>Owners who rely on the state's insurer of last resort will see higher premiums at renewal starting in 2027.</p></div><button class="btn sm" onclick="news('o4')">More</button></div>
+<div class="meta" style="margin-top:4px">Sample articles for the demo. Source links go to the publisher's site.</div>
+</div>
 
 </div></div>
 <div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;cursor:pointer;display:none">Saved.</div>
-<div class="demo">Prescott Listing System · demo · Latest News v0.1 · Nov 2026 · Buttons respond but nothing is stored.</div>
+<div class="demo">Prescott Listing System · demo · Latest News v0.2 · Nov 2026 · Buttons respond but nothing is stored.</div>
 <script>
 function grp(b){b.parentNode.classList.toggle('closed')}
 function save(){var t=document.getElementById('toast');t.style.display='block';clearTimeout(window._t);window._t=setTimeout(function(){t.style.display='none'},1400)}
-</script><script>
-var CITY={oak:'Oakland: 2–4 unit sales up 6% vs last quarter; median $498k per unit.',brk:'Berkeley: sales flat vs last quarter; median $611k per unit and the most competitive offers.',emv:'Emeryville: small sample — 4 sales this quarter, 3 drew multiple offers.',wo:'West Oakland: sales up 9%; more buildings selling vacant.',tem:'Temescal: busiest neighborhood — 44 sales in 12 months, prices steady.'};
-function city(k,b){document.getElementById('city-f').textContent=CITY[k];b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)})}
-function pz(w,b){b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});document.getElementById('pz-w').style.display=w==='w'?'':'none';document.getElementById('pz-m').style.display=w==='m'?'':'none';document.getElementById('pz-title').textContent=w==='w'?'This week':'Last 30 days';document.getElementById('pz-sub').textContent=w==='w'?'· Week of Nov 9, 2026':'· Oct 11 – Nov 9, 2026 snapshot'}
+var NEWS={
+l1:{t:"Oakland extends soft-story retrofit deadline by 12 months",s:"City of Oakland Planning & Building",d:"Nov 10, 2026",u:"https://www.oaklandca.gov",
+ sum:"Oakland gave owners of soft-story apartment buildings, usually wood-frame buildings with parking or open space on the ground floor, an extra 12 months to finish required seismic retrofits. To get the extension, owners must file an intent-to-comply form by March 31. Buildings that miss the new deadline face fines and a notice recorded on the property.",
+ act:"Pull the 5+ unit owners in your targets built before 1978 with open ground floors; about 37 of your owners are likely affected. Call them before March with a retrofit-cost versus sale-price comparison.",
+ say:"“The city just gave you another year on the retrofit. That buys time to decide: spend the money and hold, or sell to a buyer who prices the work in. Want me to run both numbers?”",
+ watch:"Contractor pricing as the new deadline approaches, and whether buyers start discounting un-retrofitted buildings more heavily."},
+l2:{t:"Allowed rent increase for rent-controlled units rises to 2.3%",s:"Oakland Rent Adjustment Program",d:"Nov 1, 2026",u:"https://www.oaklandca.gov",
+ sum:"Oakland set the allowed yearly increase for rent-controlled units at 2.3%, up from 0.8% last year. The cap follows inflation and applies to most multifamily buildings built before 1983. Owners can bank increases they did not take in earlier years, within limits.",
+ act:"Use this with long-time owners whose rents are far below market; the gap between their rents and market rents is what a buyer pays for.",
+ say:"“Your rents can only go up 2.3% this year, but a buyer looks at the upside over time. Buildings like yours are trading on that gap. Curious what yours would bring?”",
+ watch:"Any council effort to lower the cap or change banking rules, which would change how buyers value rent-controlled buildings."},
+l3:{t:"Council to hear vacancy tax changes on Nov 18",s:"Oakland City Council agenda",d:"Nov 7, 2026",u:"https://www.oaklandca.gov",
+ sum:"The council will consider changes to Oakland's vacant property tax that would raise the yearly charge on vacant multifamily units and narrow some exemptions. The item is scheduled for first reading on Nov 18. If it passes, the new rates would apply starting next tax year.",
+ act:"Flag owners with vacant units or recent vacant sales; higher carrying costs on empty units are a reason to sell or lease up.",
+ say:"“The city is looking at raising the tax on vacant units. If you have units sitting empty, it may be worth deciding before the new rate kicks in.”",
+ watch:"The Nov 18 vote and the final rate. A second reading would make it final."},
+l4:{t:"Berkeley proposes higher rental registration fee for 2027",s:"City of Berkeley Rent Board",d:"Nov 5, 2026",u:"https://berkeleyca.gov",
+ sum:"Berkeley's rent board proposed raising the yearly per-unit registration fee by about 15% for 2027 to cover program costs. Owners pay the fee for each covered unit. Public comment is open through December before the board votes.",
+ act:"A small cost on its own, but useful as one more data point for Berkeley owners already frustrated with regulation.",
+ say:"“Between the fee increase and everything else, a lot of Berkeley owners are asking whether holding still makes sense. Happy to walk through your options.”",
+ watch:"The board vote in December, and whether owners push back during comment."},
+o1:{t:"New state ADU law broadens what small-multifamily owners can build",s:"CA Department of Housing and Community Development",d:"Nov 6, 2026",u:"https://www.hcd.ca.gov",
+ sum:"A new California law lets owners of 2–4 unit buildings add up to two detached accessory dwelling units by right in most zones, with faster permit review. Cities must approve qualifying plans within 60 days. The change takes effect January 1.",
+ act:"This is a value-add story for duplex and triplex owners: more units means more income and a higher sale price. About 212 owners in your targets could qualify.",
+ say:"“Starting January, you may be able to add two units to your lot without a fight with the city. That changes what your building is worth, whether you build them or sell to someone who will.”",
+ watch:"How quickly Oakland and Berkeley update their local rules, and early permit timelines."},
+o2:{t:"Fed signals a pause as the 30-year fixed falls to 6.18%",s:"Federal Reserve · Freddie Mac",d:"Nov 7, 2026",u:"https://www.freddiemac.com/pmms",
+ sum:"The Federal Reserve signaled it expects to hold rates steady into early next year. Mortgage rates have followed, with the 30-year fixed falling to 6.18%, down 0.24 points in four weeks and the lowest since spring.",
+ act:"Move buyers who bought in 2023–24 at higher rates up your call list; some will want to refinance or trade up. Lower rates also widen the buyer pool for your sellers.",
+ say:"“Rates are the lowest they've been since spring, and buyers are coming back. If you've been waiting for a better window to sell, this is one.”",
+ watch:"The next Fed meeting and weekly rate reports. A reversal would cool buyer demand quickly."},
+o3:{t:"Small-multifamily cap rates compress as regional banks return",s:"National CRE wire",d:"Nov 5, 2026",u:"https://www.federalreserve.gov",
+ sum:"Regional banks are quoting again on 5–20 unit apartment loans after a year of pulling back. More financing has pushed small-multifamily cap rates down about 15 basis points quarter over quarter, which means higher prices for the same income.",
+ act:"Use this with 5+ unit owners who think the market is frozen; financing is back, so buyers can close again.",
+ say:"“Banks are lending on buildings your size again, and that's pushing prices up. It's a better market for sellers than it was six months ago.”",
+ watch:"Whether local lenders follow, and any sign of tightening if rates move again."},
+o4:{t:"State approves a 9% average increase on FAIR Plan policies",s:"CA Department of Insurance",d:"Nov 3, 2026",u:"https://www.insurance.ca.gov",
+ sum:"California approved an average 9% rate increase for the FAIR Plan, the state's insurer of last resort for owners who cannot get regular coverage. The increase applies at renewal starting in 2027. Older buildings in higher-risk areas are most likely to be on the plan.",
+ act:"Rising insurance is a carrying-cost pain point. Ask owners of older buildings how their renewals are going; it often opens a conversation about selling.",
+ say:"“A lot of owners are getting hit at insurance renewal this year. How's yours looking? For some, it's tipping the math toward selling.”",
+ watch:"Further rate filings and whether regular insurers return to the Bay Area market."}
+};
+function news(id){var n=NEWS[id];
+ var h='<div class="nm"><div class="src" style="margin-bottom:10px">'+n.s+' · '+n.d+'</div>'+
+ '<p class="sum">'+n.sum+'</p>'+
+ '<div class="srcl">Source: '+n.s+' — <a href="'+n.u+'" target="_blank" rel="noopener">Read the full story ↗</a></div>'+
+ '<div class="wtm"><h4>What this means for you</h4>'+
+ '<div class="r"><b>How to act on it</b>'+n.act+'</div>'+
+ '<div class="r"><b>In a client conversation</b>'+n.say+'</div>'+
+ '<div class="r"><b>What to watch for</b>'+n.watch+'</div></div></div>';
+ openModal(n.t,h,'<button class="btn" onclick="closeModal()">Close</button> <a class="btn primary" href="'+n.u+'" target="_blank" rel="noopener">Read the source ↗</a>');
+}
 </script></body></html>
