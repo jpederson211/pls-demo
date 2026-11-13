@@ -242,7 +242,9 @@ tr.sel td{background:#ECEAE4}
 .chip.thin{border-color:#B8860B;color:#8A6500;background:#FFFBEE}
 .chip.team{border-color:#B5B2AC;color:#6B6A66;background:#F7F6F3}
 .pulse{background:#F4F3EF;border:1px solid #D3D0CB;border-left:4px solid #2D2E41;padding:14px 16px;margin-bottom:18px}
-.pulse .items{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
+.pulse .items{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.pulse .items>div{background:#fff;border:1px solid #D3D0CB;padding:12px 14px}
+@media(max-width:900px){.pulse .items{grid-template-columns:1fr}}
 .pulse b.lbl{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#2D2E41}
 .pulse .fact{margin:4px 0;font-size:13px}
 .pulse .act{font-size:12px;color:#6B6A66;font-style:italic}
@@ -271,8 +273,8 @@ tr.sel td{background:#ECEAE4}
 .module .mbtns{margin-left:auto;display:flex;gap:8px;align-items:flex-start}
 .sumline{font-size:15px;margin:10px 0 14px}
 .module .mtitle{font-size:20px;margin:0;font-weight:700}
-.module .mhead .attack{margin-left:auto;display:inline-flex;align-items:center;gap:7px}.attack svg{width:15px;height:15px}
-.module .mhead2{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;margin:12px 0 6px;padding-top:12px;border-top:1px solid #E6E3DE}.module .mhead2 .area{font-size:15px;margin:0 0 2px}
+.module .mhead2 .attack{margin-left:auto;align-self:center;display:inline-flex;align-items:center;gap:7px}.attack svg{width:15px;height:15px}
+.module .mhead2{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;margin:12px 0 6px;padding-top:12px;border-top:1px solid #E6E3DE}.module .mhead2 .area{font-size:15px;margin:0 0 2px}.module .mhead2>div:nth-child(2){flex:1;min-width:240px}
 .sumline.orb{background:#F4F3F8;border-left:3px solid #2D2E41;padding:10px 14px;line-height:1.55}.orbl{font-weight:700;color:#2D2E41;display:inline-flex;align-items:center;gap:5px}.orbl svg{width:13px;height:13px}
 
 .tiles6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:16px}
@@ -328,9 +330,9 @@ tr.zrow.hl td{background:#ECEAE4}
 <div><b class="lbl">Sales by city</b><span class="scope">Oakland · Berkeley</span><div class="fact">Oakland: 41 sales in 30 days, up 6%. Berkeley: 18 sales, flat.</div><div class="act">Trend: Oakland picking up; Berkeley steady.</div></div>
 <div><b class="lbl">Your ZIPs</b><span class="scope z">94608</span><div class="fact">Share of 94608 sales with 3+ offers rose from 38% to 45%.</div><div class="act">Trend: competition rising.</div></div>
 </div>
-<div class="meta" style="margin-top:10px">Updated weekly · last updated Nov 9, 2026 · from public sources. Local rules and council news are in <a href="Latest_News.html">Latest News</a>. A Last 30 days snapshot is kept each week so you can compare.</div></div>
+</div>
 <div class="module" id="zipmod">
-<div class="mhead"><h2 class="mtitle">Market Analysis by Zip</h2><button class="btn primary attack" onclick="attackZip()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2zM19 14l.9 2.6L22.5 17l-2.6.9L19 20.5l-.9-2.6L15.5 17l2.6-.9L19 14z"/></svg>How To Attack This</button></div><div class="mhead2"><div><label class="meta" style="display:block;margin-bottom:3px">ZIP</label><select id="zippick" onchange="loadZip(this.value)"></select></div><div><h3 class="area" id="m-area">Emeryville border, Oakland</h3><div class="stamp">Updated weekly · last updated Nov 9, 2026. Sales: bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents: Rentometer, Oct 26, 2026.</div></div></div>
+<div class="mhead"><h2 class="mtitle">Market Analysis by Zip</h2></div><div class="mhead2"><div><label class="meta" style="display:block;margin-bottom:3px">ZIP</label><select id="zippick" onchange="loadZip(this.value)"></select></div><div><h3 class="area" id="m-area">Emeryville border, Oakland</h3><div class="stamp">Updated weekly · last updated Nov 9, 2026. Sales: bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents: Rentometer, Oct 26, 2026.</div></div><button class="btn primary attack" onclick="attackZip()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2zM19 14l.9 2.6L22.5 17l-2.6.9L19 20.5l-.9-2.6L15.5 17l2.6-.9L19 14z"/></svg>How To Attack This</button></div>
 <div class="sumline orb"><span class="orbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>Orbit AI Summary:</span> <span id="m-sum"></span></div>
 <div class="tiles6" id="m-tiles"></div>
 <div id="m-charts" class="charts3"></div>
@@ -344,11 +346,11 @@ tr.zrow.hl td{background:#ECEAE4}
 <div class="fold" id="f-ev"><button onclick="this.parentNode.classList.toggle('open')">Events </button><div class="fbody">Last 90 days: <a href="Owner_Lists.html">1 estate case</a> · <a href="Owner_Lists.html">0 Ellis Act filings</a> · <a href="Owner_Lists.html">1 default notice</a> <span class="meta">(illustrative)</span></div></div>
 </div></div>
 <div style="display:flex;align-items:baseline;gap:10px;margin:28px 0 8px"><h2 style="font-size:15px;margin:0">Ideas for Future Campaigns</h2><span class="meta">Updated weekly (Thursdays) · last updated Nov 6, 2026.</span></div><div class="cards3"><div class="ccard" id="card1"><span class="zz">94608 · Emeryville border</span><h3>2027 loan decisions</h3><div class="why">Buyers are competing here, and 38 owners with loans likely due next year haven't heard from us.</div><ul><li>45% of sales drew 3+ offers</li><li>38 owners, loans likely due 2027</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Market update</div>
-<div class="btns"><a class="btn primary" href="New_List.html#card-94608-market-update">Create this campaign (38)</a></div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94608-market-update">Create this campaign</a></div>
 </div><div class="ccard" id="card2"><span class="zz">94702 · West Berkeley</span><h3>Just sold nearby</h3><div class="why">Buildings here drew the most offers in your market, and 64 owners live on streets with a recent sale.</div><ul><li>59% of sales drew 3+ offers</li><li>64 owners near a recent sale</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Just Sold postcard</div>
-<div class="btns"><a class="btn primary" href="New_List.html#card-94702-just-sold">Create this campaign (64)</a></div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94702-just-sold">Create this campaign</a></div>
 </div><div class="ccard" id="card3"><span class="zz">94609 · Temescal</span><h3>Long-time owners</h3><div class="why">The busiest ZIP in your market, with 112 owners who've held 15+ years.</div><ul><li>44 sales in 12 months</li><li>112 owners held 15+ years</li><li>Last campaign: Jul 2026</li></ul><div class="piece">Suggested piece: MVI letter</div>
-<div class="btns"><a class="btn primary" href="New_List.html#card-94609-mvi-letter">Create this campaign (112)</a></div>
+<div class="btns"><a class="btn primary" href="New_List.html#card-94609-mvi-letter">Create this campaign</a></div>
 </div></div>
 </div>
 </div></div>
@@ -395,7 +397,7 @@ function planFor(z){var r=row(z);var nm=z+' '+(AREAS[z]||r.city);var st=PLAN[z]|
  ["Call within 10 days of the mailer","Start with owners who scanned or replied, then long-time owners. Offer a free value estimate (BOV)."]];
  return '<div class="pl-h">Here’s a 3-step plan for '+nm+':</div><ol>'+st.map(function(s){return '<li><b>'+s[0]+'.</b> '+s[1]+'</li>'}).join('')+'</ol>Want me to build the step 1 call list now?';}
 function attackPrompt(z){return 'Tell me how to attack '+z+' '+(AREAS[z]||row(z).city)+' to prospect new sellers';}
-function attackZip(){var z=document.getElementById('zippick').value;openOrbit([z+' · '+(AREAS[z]||row(z).city)],attackPrompt(z));}
+function attackZip(){var z=document.getElementById('zippick').value;openOrbit(null,attackPrompt(z),{noGreet:true,top:true});}
 window.orbitAnswer=function(q){var m=/how to attack (\d{5})/i.exec(q||'');if(m&&row(m[1]))return planFor(m[1]);return null;};
 
 function money(n){return '$'+n.toLocaleString()}

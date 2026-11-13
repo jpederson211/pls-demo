@@ -325,6 +325,8 @@ tr.zrow.hl td{background:#ECEAE4}
 .nrow .tx{flex:1}
 .nm .sum{font-size:14px;line-height:1.6;margin:0 0 12px}
 .nm .srcl{font-size:12.5px;margin-bottom:14px;padding:8px 10px;background:#F7F6F3;border:1px solid #E6E3DE}
+.nm .aisum{background:#F4F3F8;border-left:3px solid #2D2E41;padding:10px 14px;font-size:14px;line-height:1.6;margin:0 0 16px}
+.orbl{font-weight:700;color:#2D2E41;display:inline-flex;align-items:center;gap:5px}.orbl svg{width:13px;height:13px}
 .nm .wtm{border-left:3px solid #2D2E41;padding:4px 0 2px 14px}
 .nm .wtm h4{margin:0 0 8px;font-size:14px}
 .nm .wtm .r{margin:0 0 10px;font-size:13.5px;line-height:1.55}
@@ -402,8 +404,8 @@ o4:{t:"State approves a 9% average increase on FAIR Plan policies",s:"CA Departm
 };
 function news(id){var n=NEWS[id];
  var h='<div class="nm"><div class="src" style="margin-bottom:10px">'+n.s+' · '+n.d+'</div>'+
- '<p class="sum">'+n.sum+'</p>'+
  '<div class="srcl">Source: '+n.s+' — <a href="'+n.u+'" target="_blank" rel="noopener">Read the full story ↗</a></div>'+
+ '<div class="aisum"><span class="orbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>Orbit AI Summary:</span> '+n.sum+'</div>'+
  '<div class="wtm"><h4>What this means for you</h4>'+
  '<div class="r"><b>How to act on it</b>'+n.act+'</div>'+
  '<div class="r"><b>In a client conversation</b>'+n.say+'</div>'+

@@ -267,7 +267,7 @@
 
   var logEl, inEl, panelEl, ovEl, floatEl;
   function addMsg(cls, html) { var m = el('div', 'orbit-msg ' + cls, html); logEl.appendChild(m); logEl.scrollTop = logEl.scrollHeight; }
-  function ask(q) { if (!q) { q = inEl.value.trim(); if (!q) return; } addMsg('u', esc(q)); inEl.value = ''; var a = answerFor(q); setTimeout(function () { addMsg('a', a); }, 280); }
+  function ask(q, top) { if (!q) { q = inEl.value.trim(); if (!q) return; } addMsg('u', esc(q)); var um = logEl.lastChild; inEl.value = ''; var a = answerFor(q); setTimeout(function () { addMsg('a', a); if (top) logEl.scrollTop = Math.max(0, um.offsetTop - logEl.offsetTop - 8); }, 280); }
 
   function showHelp() {
     var b = '<div class="orbit-cap"><p class="i">' + A.intro + '</p><ul>' + A.caps.map(function (c, i) {
@@ -310,16 +310,17 @@
     document.body.appendChild(ovEl); document.body.appendChild(panelEl);
   }
 
-  window.openOrbit = function (ctxChips, seed) {
+  window.openOrbit = function (ctxChips, seed, opts) {
+    opts = opts || {};
     if (IS_ADMIN || !panelEl) return;
     var ctx = document.getElementById('orbit-ctx'); ctx.innerHTML = '';
     if (ctxChips && ctxChips.length) ctxChips.forEach(function (c) { ctx.appendChild(el('span', 'c', esc(c))); });
-    if (!logEl.dataset.greeted) {
+    if (!logEl.dataset.greeted && !opts.noGreet) {
       addMsg('a', 'Hi Nolan — welcome to Orbit.');
       addMsg('a', A.help);
       logEl.dataset.greeted = '1';
     }
-    if (seed) ask(seed);
+    if (seed) ask(seed, opts.top);
     ovEl.classList.add('on'); panelEl.classList.add('on'); floatEl.classList.add('hide');
     setTimeout(function () { inEl.focus(); }, 300);
   };
