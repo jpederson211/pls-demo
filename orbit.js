@@ -220,6 +220,7 @@
   .orbit-log{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
   .orbit-msg{max-width:86%;padding:8px 11px;border-radius:12px;font-size:13px;line-height:1.5}
   .orbit-msg.u{align-self:flex-end;background:#2D2E41;color:#fff;border-bottom-right-radius:3px}
+  .orbit-msg ol{margin:6px 0 4px;padding-left:18px}.orbit-msg ol li{margin-bottom:7px}.orbit-msg .pl-h{font-weight:600;margin-bottom:2px}
   .orbit-msg.a{align-self:flex-start;background:#F0EEEA;color:#1E1E1E;border-bottom-left-radius:3px}
   .orbit-sugg{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:0 16px 12px}
   .orbit-sugg .lbl{font-size:11px;color:#6B6A66;text-transform:uppercase;letter-spacing:.05em}
@@ -252,6 +253,7 @@
 
   /* ---------- Answers ---------- */
   function answerFor(q) {
+    if (typeof window.orbitAnswer === 'function') { var pa = window.orbitAnswer(q); if (pa) return pa; }
     var ql = (q || '').toLowerCase().trim();
     for (var i = 0; i < A.chips.length; i++) { if (A.chips[i][0].toLowerCase() === ql) return A.chips[i][1]; }
     if (ql.indexOf('call first') > -1 || ql.indexOf('who should') > -1 || ql.indexOf('call next') > -1) return 'Your strongest call right now is Haddad Properties LLC (3120 Grand Ave) — loan maturing within 60 days and no touch in 74 days. Then 1840 Park LLC (held 19 years, never contacted).';
