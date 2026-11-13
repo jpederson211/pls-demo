@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prospecting · Prescott Listing System</title><style>
+<title>Prospecting · Prescott Listing System</title><script defer src="orbit.js"></script><style>
 .steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
 .steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
 .steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
@@ -300,105 +300,92 @@ tr.zrow.hl td{background:#ECEAE4}
 #salesmore{display:none}
 .mod-note{border:1px dashed #B5B2AC;background:#FBFAF8;padding:14px;color:#6B6A66;font-size:12.5px;text-align:center}
 </style></head><body>
-<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="cur" href="Prospecting.html">Prospecting</a><a class="" href="Market_by_ZIP.html">Your Market</a><a class="" href="Your_Team.html">Your Team</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
+<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><a class="cur" href="Prospecting.html">Prospecting</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Latest_News.html">Latest News</a><a class="" href="Market_by_ZIP.html">Your Market</a><a class="" href="Your_Team.html">Your Team</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
 <div class="main">
-<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Insights › Prospecting</div></div><div class="actions"></div></div>
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Prospecting</div></div><div class="actions"></div></div>
 <div class="content" style="display:block">
 <style>
-.px{max-width:860px}
-.tb{border:1px solid #D3D0CB;background:#fff;padding:14px}
-.tbrow{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #E6E3DE;flex-wrap:wrap}
-.tbrow:last-of-type{border-bottom:0}
-.tbrow .z{max-width:120px}.tbrow .u{max-width:150px}
-.seg{font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:9px;border:1px solid;white-space:nowrap}
-.seg.res{border-color:#2E7D4F;color:#2E7D4F;background:#F2F8F4}
-.seg.com{border-color:#2D2E41;color:#2D2E41;background:#EEF1FA}
-.lcx{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:4px 0 20px}
-.lcard{border:1px solid #D3D0CB;background:#fff;padding:14px}
-.lcard h4{margin:0 0 2px;font-size:14px}
-.lcard .snap{font-size:12px;color:#6B6A66;margin-bottom:8px}
-.lcard ul{margin:0 0 8px;padding-left:18px;font-size:13px}.lcard li{margin:3px 0}
-.lcard .tt{font-size:12.5px;background:#F7F6F3;border-left:3px solid #2D2E41;padding:7px 9px}
-.chatwrap{border:1px solid #D3D0CB;background:#fff}
-.chatlog{padding:14px;display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto}
-.msg{max-width:82%;padding:8px 11px;border-radius:11px;font-size:13px;line-height:1.5}
-.msg.u{align-self:flex-end;background:#2D2E41;color:#fff;border-bottom-right-radius:3px}
-.msg.a{align-self:flex-start;background:#F0EEEA;color:#1E1E1E;border-bottom-left-radius:3px}
-.chatin{display:flex;gap:8px;padding:12px 14px;border-top:1px solid #E6E3DE}
-.chatin input{flex:1;max-width:none}
-.sugg{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px}
-.warnnote{font-size:11px;color:#8A6500;background:#FFFBEE;border:1px solid #F0E3B8;padding:1px 7px;border-radius:9px;white-space:nowrap}
-.sechd{display:flex;align-items:baseline;gap:10px;margin:22px 0 8px}.sechd h2{font-size:15px;margin:0}
+.px{max-width:1040px}
+.sechd{display:flex;align-items:baseline;gap:10px;margin:24px 0 8px}.sechd h2{font-size:15px;margin:0}.sechd:first-of-type{margin-top:4px}
+.obox{border:1px solid #2D2E41;background:#EEF1FA;padding:16px;max-width:900px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.obox .lead{flex:1;min-width:240px}.obox h3{margin:0 0 3px;font-size:15px}.obox .m{font-size:12.5px;color:#4a4b5e}
+.obox .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.obox .chip{font-size:11.5px;border:1px solid #B5B2AC;background:#fff;border-radius:999px;padding:2px 9px}
+.ip{max-width:900px}
+.iprow{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid #E6E3DE;flex-wrap:wrap}.iprow:last-child{border-bottom:0}
+.iprow .nm{font-weight:600;min-width:200px}.iprow .m{font-size:12px;color:#6B6A66}
+.prog{height:6px;background:#E6E3DE;border-radius:3px;overflow:hidden;width:150px}.prog i{display:block;height:100%;background:#2D2E41}
+.lcards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:900px}
+.lc{border:1px solid #D3D0CB;background:#fff;padding:14px}.lc h4{margin:0 0 3px;font-size:14px}
+.lc .d{font-size:12.5px;color:#6B6A66;margin-bottom:8px}.lc .st{font-size:12px;margin-bottom:11px}
+.lc .acts{display:flex;gap:8px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid #D3D0CB;margin-bottom:14px;max-width:900px}
+.tabs button{font:inherit;font-size:13px;background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;color:#6B6A66}
+.tabs button.on{color:#1E1E1E;border-bottom-color:#2D2E41;font-weight:600}
 </style>
 
-<div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px"><div><h2 style="font-size:17px;margin:0">Prospecting</h2><div class="meta">Build a target, get the market context for it, and work your focused call list.</div></div></div>
+<div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:6px"><div><h2 style="font-size:17px;margin:0">Prospecting</h2><div class="meta">Your call list for today, what you are working, and a new target whenever you want one.</div></div></div>
 
-<div class="sechd"><h2>Your targets today</h2><span class="meta">Residential is 2–4 units · commercial is 5+ units.</span></div>
-<div class="tb px">
-<div class="tbrow"><input class="z" type="text" value="94610" readonly><select class="u"><option>2 units</option><option>2–4 units</option><option>Single unit</option></select><span class="seg res">Residential</span><span class="meta" style="margin-left:auto">Rockridge / Grand Lake</span></div>
-<div class="tbrow"><input class="z" type="text" value="94611" readonly><select class="u"><option>5+ units</option><option>5–20 units</option><option>20+ units</option></select><span class="seg com">Commercial</span><span class="meta" style="margin-left:auto">Piedmont Ave / Montclair</span></div>
-<div style="display:flex;gap:10px;align-items:center;margin-top:12px"><button class="btn" style="background:none;border:1px dashed #B5B2AC;color:#6B6A66" onclick="save()">+ Add target</button><button class="btn primary" style="margin-left:auto" onclick="save()">Prospect this</button><button class="btn" onclick="save()">Save this list</button></div>
-</div>
-
-<div class="sechd"><h2>What is happening — applies everywhere</h2><span class="meta">· Week of Nov 9, 2026</span></div>
-<div class="pulse px"><div class="items">
-<div><b class="lbl">Rates</b><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">Oakland rules</b><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: your rents can only rise 2.3% this year — here is what buyers pay for that upside.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">National news</b><div class="fact">Fed signals a pause; national CRE lending outlook steadies into Q1.</div><div class="act">Act: owners sitting on 2027 maturities have a window to refi or sell.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-</div><div class="meta" style="margin-top:10px">Drafted weekly from public sources.</div></div>
-
-<div class="sechd"><h2>What is happening — in your targets</h2><span class="meta">Specific to the ZIPs and unit types above.</span></div>
-<div class="lcx px">
-<div class="lcard"><h4>94610 · 2-unit <span class="seg res">Residential</span></h4><div class="snap">Median $/unit $512k · DOM 24 · sales +6% vs last quarter</div>
-<ul><li>Two duplexes on Walavista sold over ask in the last 30 days.</li><li>Grand Lake rents up ~4% YoY for 2-beds.</li><li>Estate case filed on a Rockridge 2-unit — possible off-market.</li></ul>
-<div class="tt">Talk track: "Duplexes near you just sold over ask — buyers want the Grand Lake rent upside. Have you thought about what yours would bring?"</div></div>
-<div class="lcard"><h4>94611 · 5+ unit <span class="seg com">Commercial</span></h4><div class="snap">Median $/unit $291k · DOM 61 · sales flat</div>
-<ul><li>A 12-unit on Piedmont Ave traded at a 5.4% cap — a local benchmark.</li><li>4 owners here have loans likely maturing in 2027.</li><li>New seismic retrofit deadline notices went out this month.</li></ul>
-<div class="tt">Talk track: "The Piedmont Ave 12-unit set a new benchmark. With your 2027 loan and the retrofit rules, now is the time to run the numbers."</div></div>
-</div>
-
-<div class="sechd"><h2>Ask Orbit</h2><span class="meta">Natural-language questions about your targets, owners, and the market.</span></div>
-<div class="chatwrap px">
-<div class="chatlog" id="chatlog">
-<div class="msg u">Who should I call first in 94610?</div>
-<div class="msg a">In 94610 (2-unit), your strongest call today is <b>Haddad Properties LLC</b> — a loan maturing within 60 days and no touch in 74 days. After that, <b>1840 Park LLC</b> (held 19 years, never contacted). Both are on your call list below.</div>
-</div>
-<div class="sugg">
-<button class="chip" onclick="ask('Any loans maturing I have not touched in 60 days?')">Loans maturing, untouched 60 days?</button>
-<button class="chip" onclick="ask('Give me a talk track for Temescal this week')">Talk track for Temescal</button>
-<button class="chip" onclick="ask('Who did the team touch recently?')">Who did the team touch recently?</button>
-</div>
-<div class="chatin"><input type="text" id="q" placeholder="Ask about owners, signals, sales, or talk tracks…" onkeydown="if(event.key==='Enter')ask()"><button class="btn primary" onclick="ask()">Ask</button></div>
-</div>
-
-<div class="sechd"><h2>Your call list</h2><span class="meta">Focused broker list · suggested by the copilot from recent signals, owners not touched in 60+ days.</span></div>
-<div style="display:flex;align-items:center;gap:10px;max-width:980px;margin:0 0 10px"><span class="meta">11 owners suggested · showing top 6</span><a class="btn primary" href="Calls.html" style="margin-left:auto">Start calling</a><a class="btn" href="Calls.html">Resume where you left off</a></div>
-<div class="section" style="max-width:1100px">
+<div class="sechd"><h2>Today's call list</h2><span class="meta">New and hot leads with a fresh signal — surfaced by the copilot.</span></div>
+<div style="display:flex;align-items:center;gap:10px;max-width:1040px;margin:0 0 10px"><span class="meta">6 new leads today</span><a class="btn primary" href="Calls.html" style="margin-left:auto">Start calling</a><a class="btn" href="Calls.html">Resume where you left off</a></div>
+<div class="section px">
 <table>
 <tr><th>Owner</th><th>Property</th><th class="num">Units</th><th>Tier</th><th>Signal</th><th>Last team touch</th></tr>
-<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Haddad Properties LLC</a></td><td>3120 Grand Ave</td><td class="num">6</td><td>A</td><td><span class="pill warn">Loan maturing · 58d</span></td><td class="nw">Marissa · call · 2 days ago <span class="warnnote">recently contacted</span></td></tr>
+<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Haddad Properties LLC</a></td><td>3120 Grand Ave</td><td class="num">6</td><td>A</td><td><span class="pill warn">Loan maturing · 58d</span></td><td class="nw">Marissa · call · 2 days ago <span class="pill warn" style="font-size:10px">recently contacted</span></td></tr>
+<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Alcatraz Partners</a></td><td>88 Vernon St</td><td class="num">5</td><td>B</td><td><span class="pill ok">Replied today</span></td><td class="nw">Edson · email · 5 days ago</td></tr>
 <tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">1840 Park LLC</a></td><td>1840 Park Blvd</td><td class="num">8</td><td>A</td><td><span class="pill warn">Held 19 yrs</span></td><td class="nw">—</td></tr>
-<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Manila Ave Partners LP</a></td><td>540 Manila Ave</td><td class="num">12</td><td>A</td><td><span class="pill warn">Loan maturing · 2027</span></td><td class="nw">Jul 9, 2026 · Email</td></tr>
 <tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Grand Ave Holdings LLC</a></td><td>475 Grand Ave</td><td class="num">9</td><td>B</td><td><span class="pill warn">Ownership change?</span></td><td class="nw">—</td></tr>
-<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Alcatraz Partners</a></td><td>88 Vernon St</td><td class="num">5</td><td>B</td><td><span class="pill ok">Replied</span></td><td class="nw">Edson · email · 5 days ago <span class="warnnote">recently contacted</span></td></tr>
-<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Helen Castillo</a></td><td>612 Walavista Ave</td><td class="num">2</td><td>B</td><td><span class="pill warn">No touch · 112d</span></td><td class="nw">—</td></tr>
+<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Helen Castillo</a></td><td>612 Walavista Ave</td><td class="num">2</td><td>B</td><td><span class="pill warn">QR scan · 1d</span></td><td class="nw">—</td></tr>
+<tr class="row" onclick="selrow(this)"><td><a href="Owner_Detail.html">Manila Ave Partners LP</a></td><td>540 Manila Ave</td><td class="num">12</td><td>A</td><td><span class="pill warn">Loan maturing · 2027</span></td><td class="nw">Jul 9, 2026 · Email</td></tr>
 </table>
 </div>
-<div class="meta px" style="margin-top:8px">Accounts a teammate contacted recently are still shown, with the history, so you decide — not hidden. Counts are illustrative.</div>
+<div class="meta px" style="margin-top:8px">Recently-contacted accounts are still shown, with the history, so you decide — not hidden.</div>
+
+<div class="sechd"><h2>In progress</h2><span class="meta">Lists you are part-way through.</span></div>
+<div class="ip">
+<div class="iprow"><span class="nm">Loan maturity · 94611</span><div class="prog"><i style="width:37%"></i></div><span class="m">41 of 112 called</span><a class="btn sm" href="Calls.html" style="margin-left:auto">Continue</a></div>
+<div class="iprow"><span class="nm">Long-time owners · 94610</span><div class="prog"><i style="width:68%"></i></div><span class="m">61 of 90 called</span><a class="btn sm" href="Calls.html" style="margin-left:auto">Continue</a></div>
+<div class="iprow"><span class="nm">Just sold near Berkeley</span><div class="prog"><i style="width:12%"></i></div><span class="m">8 of 64 called</span><a class="btn sm" href="Calls.html" style="margin-left:auto">Continue</a></div>
+</div>
+
+<div class="sechd"><h2>Prospect with Orbit</h2></div>
+<div class="obox">
+<div class="lead"><h3>Build a new target</h3><div class="m">Tell Orbit what you want to work today and it pulls the owners, the market context, and a call list.</div>
+<div class="chips"><span class="chip">2-unit · 94610</span><span class="chip">5+ unit · 94611</span><span class="chip">Loans maturing 2027</span><span class="chip">Owners from afar</span></div></div>
+<button class="btn primary" onclick="openOrbit(['2-unit · 94610','5+ unit · 94611','Loans maturing 2027','Owners from afar'])">✦ Ask Orbit</button>
+</div>
+
+<div class="sechd"><h2>Your target lists</h2></div>
+<div class="tabs"><button class="on" onclick="ptab(this,'cur')">Your targets today</button><button onclick="ptab(this,'past')">Past target lists</button></div>
+
+<div id="tab-cur">
+<div class="lcards" id="curlist">
+<div class="lc"><h4>Loan maturity · 94611</h4><div class="d">5+ unit owners with loans likely maturing in 2027.</div><div class="st">112 properties · 41 touched</div><div class="acts"><button class="btn sm" onclick="manage('loan-94611')">Manage</button><button class="btn sm" onclick="archiveList(this,'Loan maturity · 94611','5+ unit owners with 2027 maturities','112')">Archive</button></div></div>
+<div class="lc"><h4>Long-time owners · 94610</h4><div class="d">2–4 unit owners who have held 15+ years.</div><div class="st">90 properties · 61 touched</div><div class="acts"><button class="btn sm" onclick="manage('longtime-94610')">Manage</button><button class="btn sm" onclick="archiveList(this,'Long-time owners · 94610','2–4 unit owners held 15+ years','90')">Archive</button></div></div>
+<div class="lc"><h4>Just sold near Berkeley</h4><div class="d">Owners on streets with a recent competitive sale.</div><div class="st">64 properties · 8 touched</div><div class="acts"><button class="btn sm" onclick="manage('justsold')">Manage</button><button class="btn sm" onclick="archiveList(this,'Just sold near Berkeley','Owners near a recent sale','64')">Archive</button></div></div>
+</div>
+</div>
+
+<div id="tab-past" style="display:none">
+<div class="lcards" id="pastlist">
+<div class="lc"><h4>Absentee owners · 94609</h4><div class="d">Out-of-state owners in Temescal.</div><div class="st">74 properties · completed Sep 2026</div></div>
+<div class="lc"><h4>Estate cases · Q3</h4><div class="d">Owners with a probate or estate filing.</div><div class="st">19 properties · completed Aug 2026</div></div>
+</div>
+</div>
 
 </div></div>
 <div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;cursor:pointer;display:none">Saved.</div>
-<div class="demo">Prescott Listing System · demo · Prospecting v0.1 · Nov 2026 · Buttons respond but nothing is stored.</div>
+<div class="demo">Prescott Listing System · demo · Prospecting v0.2 · Nov 2026 · Buttons respond but nothing is stored.</div>
 <script>
 function grp(b){b.parentNode.classList.toggle('closed')}
 function save(){var t=document.getElementById('toast');t.style.display='block';clearTimeout(window._t);window._t=setTimeout(function(){t.style.display='none'},1400)}
 function selrow(r){r.parentNode.querySelectorAll('tr').forEach(function(x){x.classList.remove('sel')});r.classList.add('sel')}
-function addMsg(cls,html){var log=document.getElementById('chatlog');var d=document.createElement('div');d.className='msg '+cls;d.innerHTML=html;log.appendChild(d);log.scrollTop=log.scrollHeight}
-function answerFor(q){q=(q||'').toLowerCase();
- if(q.indexOf('call first')>-1||q.indexOf('who should')>-1)return 'In 94610 (2-unit), your strongest call is <b>Haddad Properties LLC</b> — loan maturing within 60 days, no touch in 74 days. Then <b>1840 Park LLC</b> (held 19 years, never contacted).';
- if(q.indexOf('matur')>-1||q.indexOf('loan')>-1)return '7 owners in your targets have a loan likely maturing within 12 months and no touch in 60+ days — 4 of them in 94611 (5+ unit): Manila Ave Partners, Piedmont Grove LLC, and two others. Add them to your call list?';
- if(q.indexOf('talk track')>-1||q.indexOf('temescal')>-1||q.indexOf('say')>-1)return 'For Temescal this week: "Rents on rent-controlled units can only rise 2.3% this year, and buyers are paying up for that upside — 45% of nearby sales drew 3+ offers."';
- if(q.indexOf('touch')>-1||q.indexOf('recent')>-1||q.indexOf('team')>-1)return '2 owners on your list were contacted by a teammate in the last 7 days: <b>Haddad</b> (Marissa · call · 2 days ago) and <b>Alcatraz Partners</b> (Edson · email · 5 days ago). Both stay on your list so you have the history.';
- return 'I can pull owners, signals, recent sales, and talk tracks for your targets. Try asking who to call first, which loans are maturing, or for a talk track for a ZIP.';}
-function ask(q){var inp=document.getElementById('q');if(!q){q=inp.value.trim();if(!q)return;}addMsg('u',q);var a=answerFor(q);setTimeout(function(){addMsg('a',a)},260);inp.value=''}
+function ptab(btn,which){document.querySelectorAll('.tabs button').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');document.getElementById('tab-cur').style.display=which==='cur'?'':'none';document.getElementById('tab-past').style.display=which==='past'?'':'none'}
+var LISTS={
+ 'loan-94611':{name:'Loan maturity · 94611',rows:[['Manila Ave Partners LP','540 Manila Ave','12','A','Loan maturing · 2027','Jul 9 · Email'],['Piedmont Grove LLC','4210 Piedmont Ave','16','A','Loan maturing · 2027','—'],['Haddad Properties LLC','3120 Grand Ave','6','A','Loan maturing · 58d','Marissa · 2d'],['Montclair Holdings','6020 Medau Pl','7','B','Loan maturing · 2027','—']]},
+ 'longtime-94610':{name:'Long-time owners · 94610',rows:[['1840 Park LLC','1840 Park Blvd','8','A','Held 19 yrs','—'],['Helen Castillo','612 Walavista Ave','2','B','Held 22 yrs','—'],['Daniel & Mira Sato','455 Mandana Blvd','3','B','Held 17 yrs','Oct 27 · Email']]},
+ 'justsold':{name:'Just sold near Berkeley',rows:[['Alcatraz Partners','88 Vernon St','5','B','Near recent sale','Edson · 5d'],['Grand Ave Holdings LLC','475 Grand Ave','9','B','Near recent sale','—']]}
+};
+function manage(id){var l=LISTS[id];var h='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;border:1px solid #D3D0CB"><tr><th style="text-align:left;border:1px solid #D3D0CB;padding:7px 9px">Owner</th><th style="text-align:left;border:1px solid #D3D0CB;padding:7px 9px">Property</th><th style="text-align:left;border:1px solid #D3D0CB;padding:7px 9px">Units</th><th style="text-align:left;border:1px solid #D3D0CB;padding:7px 9px">Tier</th><th style="text-align:left;border:1px solid #D3D0CB;padding:7px 9px">Signal</th><th style="text-align:left;border:1px solid #D3D0CB;padding:7px 9px">Last touch</th></tr>'+l.rows.map(function(r){return '<tr><td style="border:1px solid #D3D0CB;padding:7px 9px">'+r[0]+'</td><td style="border:1px solid #D3D0CB;padding:7px 9px">'+r[1]+'</td><td style="border:1px solid #D3D0CB;padding:7px 9px">'+r[2]+'</td><td style="border:1px solid #D3D0CB;padding:7px 9px">'+r[3]+'</td><td style="border:1px solid #D3D0CB;padding:7px 9px">'+r[4]+'</td><td style="border:1px solid #D3D0CB;padding:7px 9px">'+r[5]+'</td></tr>'}).join('')+'</table></div>';openModal(l.name+' — '+l.rows.length+' properties',h,'<button class="btn" onclick="closeModal()">Close</button> <button class="btn primary" onclick="save();closeModal()">Start calling this list</button>')}
+function archiveList(btn,name,desc,n){var card=btn.closest('.lc');if(card)card.parentNode.removeChild(card);var past=document.getElementById('pastlist');var row=document.createElement('div');row.className='lc';row.innerHTML='<h4>'+name+'</h4><div class="d">'+desc+'</div><div class="st">'+n+' properties · archived just now</div>';past.appendChild(row);save()}
 </script></body></html>
