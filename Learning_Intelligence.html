@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learning Intelligence · Prescott Listing System</title><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.4;color:#1E1E1E;background:#F7F6F3}
+.wftool{background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wftool span.lbl{color:#B5B2AC;margin-right:4px}
+.wftool button{font:inherit;background:#444;color:#fff;border:1px solid #666;padding:3px 10px;cursor:pointer}
+.wftool button.on{background:#fff;color:#1E1E1E}
+.wftool .sep{width:1px;height:18px;background:#666;margin:0 6px}
+.app{display:flex;min-height:calc(100vh - 34px)}
+.rail{width:216px;flex:0 0 216px;background:#fff;border-right:1px solid #D3D0CB;display:flex;flex-direction:column}
+.rail .tenant{padding:14px 16px;border-bottom:1px solid #D3D0CB;display:flex;gap:10px;align-items:center;font-weight:600}
+.logo{width:28px;height:28px;background:#E9E7E2;border:1px solid #B5B2AC;flex:0 0 28px}
+.rail nav{flex:1;padding:8px 0}
+.rail a{display:flex;align-items:center;padding:9px 16px;color:#1E1E1E;text-decoration:none}
+.rail a.cur{background:#2D2E41;color:#fff}
+.rail a.dis{color:#9A9892;cursor:default}
+.tag{font-size:10px;border:1px solid #B5B2AC;padding:0 4px;margin-left:auto;color:#6B6A66;border-radius:2px;line-height:14px}
+.rail .user{padding:12px 16px;border-top:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.rail .user b{display:block;color:#1E1E1E;font-weight:500}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid #D3D0CB;padding:10px 24px;display:flex;align-items:flex-end;justify-content:space-between;min-height:64px}
+.crumb{font-size:12px;color:#6B6A66;margin-bottom:4px}
+.crumb a{color:#2D2E41}
+h1{font-size:18px;font-weight:600;margin:0}
+.btn{font:inherit;font-size:13px;padding:7px 12px;border:1px solid #B5B2AC;background:#fff;color:#1E1E1E;cursor:pointer;border-radius:2px}
+.btn.primary{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.btn.danger{border-color:#B03A2E;color:#B03A2E}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.actions{display:flex;gap:8px;align-items:center}
+.content{padding:20px 24px;flex:1;display:flex;gap:20px;align-items:flex-start}
+.body{flex:1;min-width:0}
+.panel{width:288px;flex:0 0 288px;background:#fff;border:1px solid #D3D0CB;padding:14px}
+.panel h3{font-size:13px;margin:0 0 8px;font-weight:600}
+.panel dl{margin:0;font-size:12px}.panel dt{color:#6B6A66;margin-top:8px}.panel dd{margin:0}
+h2{font-size:15px;font-weight:600;margin:0 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #D3D0CB}
+th{text-align:left;font-weight:500;font-size:12px;color:#6B6A66;padding:0 10px;height:36px;border-bottom:1px solid #D3D0CB;background:#F0EEEA;white-space:nowrap}
+td{padding:0 10px;height:40px;border-bottom:1px solid #E6E3DE;white-space:nowrap}
+tr.row{cursor:pointer}tr.row:hover td{background:#F7F6F3}tr.sel td{background:#ECEAE4}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td a{color:#2D2E41}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border:1px solid #B5B2AC;border-radius:10px;background:#fff;white-space:nowrap}
+.pill.ok{border-color:#2E7D4F;color:#2E7D4F}.pill.warn{border-color:#B8860B;color:#8A6500}.pill.err{border-color:#B03A2E;color:#B03A2E}.pill.navy{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.note{background:#FFF3B0;border:1px solid #D9B800;padding:6px 10px;font-size:12px;margin:8px 0;color:#1E1E1E}
+.note::before{content:"PRD gap: ";font-weight:600}
+.box{background:#E9E7E2;border:1px dashed #B5B2AC;color:#6B6A66;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px}
+.field{margin-bottom:14px}.field label{display:block;font-size:12px;color:#6B6A66;margin-bottom:4px}
+.req::after{content:" *";color:#B03A2E}
+input[type=text],input[type=number],input[type=date],select,textarea{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;background:#fff;width:100%;max-width:420px;border-radius:2px}
+input[readonly]{background:#F0EEEA;color:#6B6A66}
+.chk{display:flex;gap:8px;align-items:center;margin:6px 0}
+.chk input{width:auto}
+.empty{background:#fff;border:1px dashed #B5B2AC;padding:40px;text-align:center;color:#6B6A66}
+.empty b{display:block;color:#1E1E1E;margin-bottom:4px}
+.errbox{background:#fff;border:1px solid #B03A2E;padding:16px;color:#B03A2E}
+.errbox b{display:block;margin-bottom:4px}
+.skel{background:#E9E7E2;height:14px;margin:10px 0;border-radius:2px}
+.tabs{display:flex;border-bottom:1px solid #D3D0CB;margin:16px 0}
+.tabs button{font:inherit;background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px;cursor:pointer;color:#6B6A66;margin-bottom:-1px}
+.tabs button.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.section{background:#fff;border:1px solid #D3D0CB;padding:14px;margin-bottom:16px}
+.section h2{margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.facts{display:flex;gap:24px;flex-wrap:wrap}.facts div{font-size:13px}.facts span{display:block;font-size:11px;color:#6B6A66}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.head h2{font-size:17px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{padding:10px 0;border-bottom:1px solid #E6E3DE;display:grid;grid-template-columns:120px 90px 1fr;gap:12px;align-items:start}
+.tl .when{font-variant-numeric:tabular-nums;color:#6B6A66;font-size:12px}
+.meta{font-size:12px;color:#6B6A66}
+.money,.num{font-variant-numeric:tabular-nums}
+.steps{display:flex;gap:0;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}
+.steps div.on{background:#2D2E41;color:#fff}
+.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.formfoot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid #D3D0CB;margin-top:16px}
+.formfoot .left{margin-right:auto}
+.dialog{background:#fff;border:1px solid #1E1E1E;padding:16px;max-width:460px;margin-top:12px;box-shadow:0 2px 0 #D3D0CB}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.tile{background:#fff;border:1px solid #D3D0CB;padding:14px;cursor:pointer;min-height:96px}
+.tile.dis{color:#9A9892;cursor:default;background:#F7F6F3}
+.tile .n{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;margin:4px 0}
+.tile .stage{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6B6A66}
+.toast{position:fixed;bottom:20px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px}
+.pdf{display:flex;gap:16px}
+.pdf .page{width:380px;height:520px;background:#fff;border:1px solid #B5B2AC;position:relative;box-shadow:0 1px 0 #D3D0CB}
+.pdf .page .box{position:absolute}
+.thumbs{display:flex;flex-direction:column;gap:8px}
+.thumbs .box{width:70px;height:96px;cursor:pointer}
+.thumbs .box.on{border:2px solid #2D2E41}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid #B5B2AC;padding:2px 8px;border-radius:2px;background:#fff;font-size:12px}
+.chip.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.count{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:6px 12px;font-size:13px}.kv dt{color:#6B6A66}.kv dd{margin:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.totals{display:flex;gap:0;background:#fff;border:1px solid #D3D0CB;margin:14px 0}
+.totals div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.totals div:last-child{border-right:0}
+.totals .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.totals span{font-size:11px;color:#6B6A66;display:block}
+.vtl{position:relative;padding-left:28px}
+.vtl::before{content:"";position:absolute;left:9px;top:0;bottom:0;border-left:2px solid #D3D0CB}
+.vtl .step{position:relative;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px;display:grid;grid-template-columns:90px 110px 1fr auto;gap:12px;align-items:center}
+.vtl .step::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #2D2E41}
+.vtl .step.pend::before{border-color:#B5B2AC}
+.icon{display:inline-block;width:18px;height:18px;border:1px solid #B5B2AC;background:#E9E7E2;vertical-align:middle;margin-right:6px;font-size:10px;text-align:center;line-height:16px}
+
+.rail nav{padding:6px 0}
+.rail .grp{margin-top:6px}
+.rail .grp>button{font:inherit;width:100%;text-align:left;background:none;border:none;padding:9px 16px;color:#6B6A66;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center}
+.rail .grp>button::before{content:"▾";font-size:10px;margin-right:6px;color:#9A9892}
+.rail .grp.closed>button::before{content:"▸"}
+.rail .grp.closed .items{display:none}
+.rail .items a{padding-left:34px}
+.rail .user{display:flex;align-items:center;cursor:pointer}
+.rail .user div{flex:1}
+.rail .user .chev{color:#9A9892;font-size:11px}
+
+body{background:#F7F6F3;padding-bottom:30px}
+.app{min-height:calc(100vh - 30px)}
+.note,.note::before{display:none}
+.rail{position:sticky;top:0;height:calc(100vh - 30px)}
+td.nw{white-space:nowrap}
+.subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
+.subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
+.subtabs .last{margin-left:auto;font-size:12px;color:#6B6A66}
+.swatch{width:22px;height:22px;border:1px solid #B5B2AC;display:inline-block;vertical-align:middle;margin-right:8px}
+.slot{display:flex;gap:12px;align-items:center;border:1px solid #D3D0CB;background:#fff;padding:10px;margin-bottom:8px}
+.slot .box{width:120px;height:56px;flex:0 0 120px}
+.slot .fn{flex:1;font-size:12px}
+.prints{font-size:11px;color:#6B6A66;margin-top:3px}
+.tog{display:inline-block;width:32px;height:18px;border-radius:9px;background:#2D2E41;position:relative;vertical-align:middle;cursor:pointer}
+.tog::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.tog.off{background:#B5B2AC}.tog.off::after{right:auto;left:2px}
+.tog.dis{opacity:.4;cursor:default}
+.rule{background:#F0EEEA;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:12px}
+[data-stab]{display:flex;gap:20px;align-items:flex-start;width:100%}
+.content .panel{flex:0 0 288px;position:sticky;top:12px}
+.body{min-width:0}.section{overflow-x:auto}.section:has(.menu){overflow:visible}.menu .dd{z-index:50}.body table td,.body table th{white-space:normal}
+.panel .field{margin-bottom:10px}.panel input,.panel select,.panel textarea{max-width:none}
+.panel h3{display:flex;justify-content:space-between}.panel .x{cursor:pointer;color:#6B6A66}
+.panel table td,.panel table th{height:30px;padding:0 6px;font-size:12px}
+.panel .formfoot{margin-top:12px;padding-top:10px}
+.toast{display:none}
+.toast.show{display:block}
+.demo{position:fixed;left:0;right:0;bottom:0;background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;opacity:.9}
+
+.subtabs a.dis{color:#9A9892;cursor:default}
+a.btn{text-decoration:none;display:inline-block}
+.inline{display:none;background:#F7F6F3;border:1px solid #D3D0CB;padding:10px 14px;font-size:12px}.inline.open{display:block}
+.counts{display:flex;background:#fff;border:1px solid #D3D0CB;margin-bottom:16px}
+.counts div{flex:1;padding:10px 14px;border-right:1px solid #D3D0CB}.counts div:last-child{border-right:0}
+.counts .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.counts span{font-size:11px;color:#6B6A66;display:block}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.filters select,.filters input{width:auto;max-width:220px}
+.steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
+.steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
+.steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
+.steps div span{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.formfoot{display:flex;justify-content:flex-end;gap:8px;padding-top:14px;border-top:1px solid #D3D0CB;margin-top:16px}
+.formfoot .left{margin-right:auto}
+.drop{border:2px dashed #B5B2AC;background:#fff;padding:28px;text-align:center;color:#6B6A66}
+.filerow{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid #D3D0CB;padding:10px 14px;margin-bottom:8px}
+.filerow .fn{flex:1}
+.verdict{font-weight:500}
+.srcpick{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.srcpick label{display:block;background:#fff;border:1px solid #D3D0CB;padding:12px;cursor:pointer}
+.srcpick label.on{border:2px solid #2D2E41}
+.srcpick b{display:block;margin-bottom:4px}
+.srcpick .meta{font-size:11px}
+</style></head><body>
+<div class="app"><aside class="rail"><div class="tenant"><div class="logo"></div>The Prescott Team</div><nav><a class="" href="Dashboard.html">Dashboard</a><a class="" href="Properties.html">Properties</a><a class="" href="Owners.html">Owners</a><a class="" href="Prospecting.html">Prospecting</a><div class="grp"><button onclick="grp(this)">Insights</button><div class="items"><a class="" href="Latest_News.html">Latest News</a><a class="" href="Market_by_ZIP.html">Your Market</a><a class="" href="Your_Team.html">Your Team</a></div></div><div class="grp"><button onclick="grp(this)">Outreach</button><div class="items"><a class="" href="Owner_Lists.html">Owner lists</a><a class="" href="Campaigns.html">Campaigns</a><a class="" href="Mailings.html">Mailings</a><a class="" href="Calls.html">Calls</a><a class="dis">Social Media<span class="tag">Phase 3</span></a></div></div><div class="grp"><button onclick="grp(this)">Admin</button><div class="items"><a class="" href="DataMgmt_Uploads.html">Data Management</a><a class="cur" href="Learning_Intelligence.html">Learning Intelligence</a><a class="" href="Settings_Brand.html">Settings</a></div></div></nav><div class="user"><div><b>Nolan Jones</b>Owner</div><span class="chev">▴</span></div></aside>
+<div class="main">
+<div class="topbar"><div><div class="crumb"><a href="Dashboard.html">Dashboard</a> › Admin › Learning Intelligence</div><h1>Learning Intelligence</h1></div><div class="actions"></div></div>
+<div class="content" style="display:block">
+<style>
+.li{max-width:1180px}
+.li .lead{font-size:13.5px;color:#4A4945;margin:0 0 16px;max-width:760px;line-height:1.5}
+.li .card{background:#fff;border:1px solid #D3D0CB;padding:16px;margin-bottom:18px}
+.li h2.sh{font-size:16px;margin:0 0 4px}
+.li .sub{font-size:12.5px;color:#6B6A66;margin:0 0 12px}
+.stchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.stc{border:1px solid #D3D0CB;background:#FBFAF8;padding:8px 12px;min-width:140px;flex:1}
+.stc .a{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#6B6A66}
+.stc .s{font-weight:600;font-size:13.5px;margin-top:2px;display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.d-t{background:#2E7D4F}.d-l{background:#B8860B}.d-s{background:#B5B2AC}
+.sumgrid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.proof{background:#F4F3F8;border-left:3px solid #2D2E41;padding:14px 16px}
+.proof .orbl{font-weight:700;color:#2D2E41;display:inline-flex;align-items:center;gap:5px;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.orbl svg{width:13px;height:13px}
+.proof .big{font-size:17px;line-height:1.45;margin:6px 0 4px;font-weight:500}
+.counters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ctr{border:1px solid #E6E3DE;padding:8px 10px}.ctr .v{font-size:18px;font-weight:600}.ctr .l{font-size:11px;color:#6B6A66}
+.ctr.link{cursor:pointer;border-color:#2D2E41;background:#EEF1FA}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.filters select{font:inherit;font-size:12.5px;padding:5px 8px;border:1px solid #B5B2AC;background:#fff;border-radius:2px}
+.dec{border:1px solid #D3D0CB;padding:12px 14px;margin-bottom:10px;display:grid;grid-template-columns:120px 1fr;gap:4px 14px;font-size:13px}
+.dec .k{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#6B6A66;padding-top:2px}
+.dec .head{grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.dec .what{font-weight:600;font-size:14px}
+.tg{font-size:10.5px;border:1px solid #B5B2AC;border-radius:9px;padding:0 7px;color:#6B6A66;background:#fff}
+.tg.early{border-color:#B8860B;color:#8A6500;background:#FFF8E6}
+.st-a{color:#2E7D4F;font-weight:600}.st-r{color:#B03A2E;font-weight:600}.st-s{color:#6B6A66;font-weight:600}
+.up{color:#2E7D4F;font-weight:600}.dn{color:#B03A2E;font-weight:600}
+.pb{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pbc{border:1px solid #D3D0CB;padding:12px 14px;background:#fff}
+.pbc h3{font-size:13.5px;margin:0 0 8px}
+.wrow{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center;font-size:12px;margin-bottom:6px}
+.wbars{display:flex;flex-direction:column;gap:2px}
+.wb{height:7px;background:#C9C6C0}.wb.c{background:#2D2E41}
+.pbc ol{margin:0;padding-left:18px;font-size:12.5px;line-height:1.55}
+.pbc .m{font-size:11.5px;color:#6B6A66}
+.legend{font-size:11px;color:#6B6A66;display:flex;gap:12px;margin-top:6px}.legend i{display:inline-block;width:10px;height:7px;margin-right:4px;vertical-align:middle}
+.dh li{margin-bottom:8px;font-size:13px}
+.dh{margin:0;padding-left:18px}
+.rep table{width:100%;border-collapse:collapse;font-size:13px}.rep td,.rep th{border-bottom:1px solid #E6E3DE;padding:8px 6px;text-align:left}.rep th{font-size:11px;color:#6B6A66;font-weight:500}
+.dg h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#6B6A66;margin:16px 0 6px}
+.dg p,.dg li{font-size:14px;line-height:1.55}.dg ul{padding-left:18px;margin:0}
+.dg .hl{font-size:16px;font-weight:600;line-height:1.45;background:#F4F3F8;border-left:3px solid #2D2E41;padding:10px 14px;margin:0}
+.dg table{border-collapse:collapse;font-size:13.5px}.dg td,.dg th{padding:5px 12px 5px 0;text-align:left}.dg th{font-size:11.5px;color:#6B6A66;font-weight:500}
+@media(max-width:1000px){.sumgrid,.pb{grid-template-columns:1fr}.dec{grid-template-columns:1fr}}
+</style>
+<div class="li">
+<p class="lead">PLS learns from how your team works and what gets results, then tunes itself to fit. Every change happens automatically. This page shows what changed, why, and the data behind it. <span class="meta">Visible to the Owner and admins only.</span></p>
+
+<!-- 4.1 Summary strip -->
+<div class="card">
+<div class="stchips">
+<div class="stc"><div class="a">Targeting</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
+<div class="stc"><div class="a">Outreach</div><div class="s"><span class="dot d-l"></span>Learning</div></div>
+<div class="stc"><div class="a">Calling</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
+<div class="stc"><div class="a">Content</div><div class="s"><span class="dot d-l"></span>Learning</div></div>
+<div class="stc"><div class="a">Data</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
+<div class="stc"><div class="a">Orbit</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
+</div>
+<div class="sumgrid">
+<div class="proof"><span class="orbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>Biggest effect so far</span>
+<div class="big">Your call list has been ranked by 14 weeks of your team’s results. Contact rate on ranked calls is up 22% since the default.</div>
+<div class="meta">Based on 1,846 calls · Aug 4 to Nov 10, 2026 · <a href="#" onclick="filt('area','calling');return false">See the changes behind this</a></div></div>
+<div class="counters">
+<div class="ctr"><div class="v">1,846</div><div class="l">calls analyzed</div></div>
+<div class="ctr"><div class="v">3,412</div><div class="l">touches analyzed</div></div>
+<div class="ctr"><div class="v">9</div><div class="l">campaigns analyzed</div></div>
+<div class="ctr"><div class="v">6</div><div class="l">listings traced back</div></div>
+<div class="ctr"><div class="v">612</div><div class="l">Orbit questions</div></div>
+<div class="ctr link" onclick="filt('month','nov')"><div class="v">6</div><div class="l">changes this month →</div></div>
+</div></div>
+<div class="legend" style="margin-top:10px"><span><span class="dot d-s"></span> Starting out: running defaults</span><span><span class="dot d-l"></span> Learning: pattern forming</span><span><span class="dot d-t"></span> Tuned: changes active</span></div>
+</div>
+
+<!-- 4.2 Decision log -->
+<div class="card" id="log">
+<h2 class="sh">Decision log</h2><p class="sub">Every change PLS made for your team, newest first. Changes apply automatically and are re-checked after their window; if results get worse, PLS reverts them on its own.</p>
+<div class="filters">
+<select id="f-area" onchange="apply()"><option value="">All areas</option><option value="targeting">Targeting</option><option value="outreach">Outreach</option><option value="calling">Calling</option><option value="content">Content</option><option value="data">Data</option><option value="orbit">Orbit</option></select>
+<select id="f-mod" onchange="apply()"><option value="">All modules</option></select>
+<select id="f-st" onchange="apply()"><option value="">Any status</option><option value="active">Active</option><option value="reverted">Reverted by PLS</option><option value="superseded">Superseded</option></select>
+<select id="f-dt" onchange="apply()"><option value="">All dates</option><option value="nov">This month (Nov)</option><option value="oct">October</option><option value="sep">September and earlier</option></select>
+<a href="#" onclick="clr();return false" style="font-size:12.5px">Clear</a>
+<span class="meta" id="f-n" style="margin-left:auto"></span>
+</div>
+<div id="decs"></div>
+</div>
+
+<!-- 4.3 Playbook -->
+<div class="card">
+<h2 class="sh">Your team’s playbook</h2><p class="sub">What PLS is running for your team right now, compared with where it started.</p>
+<div class="pb">
+<div class="pbc"><h3>Signal weights</h3><div id="weights"></div><div class="legend"><span><i style="background:#C9C6C0"></i>Default</span><span><i style="background:#2D2E41"></i>Now</span></div></div>
+<div class="pbc"><h3>Best angles and assets</h3>
+<ol><li><b>Loan decision · Market update</b> — 2–4 units, local owners<div class="m">4.1% response · 3 runs, 612 owners</div></li>
+<li><b>Just sold nearby · Postcard</b> — all owner types<div class="m">3.4% response · 4 runs, 803 owners</div></li>
+<li><b>Long-time owner · MVI letter</b> — held 15+ years<div class="m">2.2% response · 3 runs, 498 owners</div></li></ol></div>
+<div class="pbc"><h3>Timing</h3>
+<div style="font-size:12.5px;line-height:1.7"><b>Best send day:</b> Tuesday (lands Thu–Fri)<br><b>Best call hours, individual owners:</b> 4–6 pm<br><b>Best call hours, LLC owners:</b> 10 am–12 pm<br><b>Call window after a mailing:</b> 5 days <span class="m">(default 3)</span></div></div>
+<div class="pbc"><h3>Voice</h3><div class="m" style="margin-bottom:4px">How much your team edits FieldPost drafts before approving. Lower is better.</div>
+<svg viewBox="0 0 240 70" style="width:100%;height:80px"><polyline fill="none" stroke="#2D2E41" stroke-width="2" points="5,10 45,18 85,26 125,34 165,44 205,50 235,54"/><g font-size="9" fill="#6B6A66"><text x="2" y="66">Aug</text><text x="80" y="66">Sep</text><text x="155" y="66">Oct</text><text x="214" y="66">Nov</text></g></svg>
+<div style="font-size:12.5px"><b>34% → 12%</b> of words changed · 27 approved drafts</div></div>
+<div class="pbc"><h3>Orbit</h3>
+<ol style="font-size:12px"><li>Who should I call first?</li><li>Build a target for [ZIP] [unit type]</li><li>Give me an opener for [signal]</li><li>Tell me how to attack [ZIP]</li><li>Who on the team called [owner] recently?</li><li>Draft a reply to [owner]</li><li>What moved this week?</li><li>Which owners had a new signal?</li><li>Are we on pace for calls?</li><li>Summarize [campaign] results</li></ol>
+<div class="m" style="margin-top:6px"><b>Recipe in use:</b> Build a target → Build this list → Plan the campaign (used 9 times)</div></div>
+<div class="pbc"><h3>Territory</h3><div class="m" style="margin-bottom:6px">ZIPs ranked by owner response to your campaigns.</div>
+<table style="width:100%;font-size:12.5px;border-collapse:collapse"><tr><td>1. <a href="Market_by_ZIP.html#zip-94702">94702 West Berkeley</a></td><td style="text-align:right">5.1%</td></tr><tr><td>2. <a href="Market_by_ZIP.html#zip-94608">94608 Emeryville border</a></td><td style="text-align:right">3.9%</td></tr><tr><td>3. <a href="Market_by_ZIP.html#zip-94609">94609 Temescal</a></td><td style="text-align:right">2.8%</td></tr><tr><td>4. <a href="Market_by_ZIP.html#zip-94601">94601 Fruitvale</a></td><td style="text-align:right">1.9%</td></tr></table>
+<div class="m" style="margin-top:6px">Drives the order of Ideas for Future Campaigns on Your Market.</div></div>
+</div></div>
+
+<!-- 4.4 Data health -->
+<div class="card">
+<h2 class="sh">Data health</h2><p class="sub">What is slowing PLS down, and where to fix it.</p>
+<ul class="dh">
+<li><b>Call outcomes are missing on 18% of calls.</b> PLS can’t learn from a call with no outcome. <a href="Calls.html">Go to Calls</a></li>
+<li><b>41 touches this month have no channel logged.</b> <a href="Your_Team.html">Go to Your Team</a></li>
+<li><b>One contact source has a 14% email bounce rate</b> (Skip-trace batch, Sep 2026). <a href="DataMgmt_Uploads.html">Go to Data Management</a></li>
+<li><b>Waiting on data:</b> Winning angles needs 3 more campaigns with an angle set · Caller patterns starts in Phase 6 · Owner responsiveness needs 60 more owner-type outcomes.</li>
+</ul></div>
+
+<!-- 4.5 Monthly report -->
+<div class="card rep">
+<h2 class="sh">Monthly report</h2><p class="sub">The same digest emailed to the Owner and brokers on the first business day of each month.</p>
+<table><tr><th>Month</th><th>Headline</th><th>Sent</th><th></th></tr>
+<tr><td>November 2026</td><td>Call list ranking lifted contact rate 22%</td><td>Nov 2, 2026</td><td style="text-align:right;white-space:nowrap"><button class="btn" onclick="digest('nov')">View</button> <button class="btn" onclick="pdf('November 2026')">Export PDF</button></td></tr>
+<tr><td>October 2026</td><td>Just Sold postcards now lead in West Berkeley</td><td>Oct 1, 2026</td><td style="text-align:right;white-space:nowrap"><button class="btn" onclick="digest('oct')">View</button> <button class="btn" onclick="pdf('October 2026')">Export PDF</button></td></tr>
+<tr><td>September 2026</td><td>PLS started tuning your call list</td><td>Sep 1, 2026</td><td style="text-align:right;white-space:nowrap"><button class="btn" onclick="digest('sep')">View</button> <button class="btn" onclick="pdf('September 2026')">Export PDF</button></td></tr>
+</table></div>
+<div class="meta" style="margin:-6px 0 20px">Sample data for the demo. PLS started learning for The Prescott Team on Aug 4, 2026.</div>
+</div>
+</div></div>
+<div id="toast" class="toast" style="position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;display:none"></div>
+<div class="demo">Prescott Listing System · demo · Learning Intelligence v0.1 · Nov 2026 · Read-only. Changes apply automatically.</div>
+<script>
+function grp(b){b.parentNode.classList.toggle('closed')}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(window._t);window._t=setTimeout(function(){t.style.display='none'},1800)}
+function save(){toast('Saved.')}
+function pdf(m){toast('Downloading the '+m+' digest (PDF)…')}
+var MODS={M1:'M1 Signal weighting',M2:'M2 Territory heat',M5:'M5 Asset performance',M6:'M6 Send and call timing',M7:'M7 Voice',M8:'M8 Orbit prompts',M13:'M13 Contact data reliability',M14:'M14 Entity resolution'};
+var DEC=[
+{m:'M1',a:'calling',dt:'nov',d:'Nov 10, 2026',what:'Loan maturity now ranks above long hold time',old:'Long hold time 1.0 · Loan maturity 0.8',nw:'Loan maturity 1.0 · Long hold time 0.85',why:'4 of your last 6 listings started from a loan-maturity signal, and owners with a maturing loan picked up 1.4× as often.',on:'312 calls · Aug 4 to Nov 10',link:'Calls.html',eff:'Measuring, results by Dec 8',st:'active'},
+{m:'M6',a:'calling',dt:'nov',d:'Nov 6, 2026',what:'LLC owners move to morning call slots',old:'Same order all day',nw:'LLC owners first 10 am–12 pm; individuals first 4–6 pm',why:'LLC owners answered twice as often before noon; individual owners answered most after 4 pm.',on:'486 call attempts with times · Sep 1 to Nov 5',link:'Calls.html',eff:'Answer rate <span class="up">12% → 15%</span>',st:'active'},
+{m:'M8',a:'orbit',dt:'nov',d:'Nov 4, 2026',what:'“Tell me how to attack [ZIP]” added to Your Market suggestions',old:'3 default suggestions',nw:'3 defaults + 1 team suggestion',why:'Nolan and Edson asked this 7 times in 3 weeks, and 4 of those led to a new list.',on:'7 Orbit questions by 2 people · Oct 14 to Nov 3',link:'Market_by_ZIP.html',eff:'Clicked 11 times since',st:'active'},
+{m:'M7',a:'content',dt:'nov',d:'Nov 3, 2026',what:'Drafts drop “I hope this finds you well” and lead with the number',old:'Default opener',nw:'Open with the local stat, no pleasantries',why:'Your team deleted the opening pleasantry in 19 of 22 approved drafts and moved the stat up.',on:'22 approved drafts · Sep 15 to Nov 1',link:'Mailings.html',eff:'Edit rate <span class="up">19% → 12%</span>',st:'active'},
+{m:'M13',a:'data',dt:'nov',d:'Nov 2, 2026',what:'Skip-trace batch (Sep 2026) is now the last choice for email',old:'All email sources equal',nw:'Sep 2026 skip-trace batch used only when no other email exists',why:'Emails from that batch bounced 14% of the time, compared with 2% from other sources.',on:'1,204 emails sent · Sep 10 to Oct 31',link:'DataMgmt_Uploads.html',eff:'Bounce rate <span class="up">6% → 2%</span>',st:'active'},
+{m:'M2',a:'targeting',dt:'nov',d:'Nov 1, 2026',what:'94702 West Berkeley moves to the top of Ideas for Future Campaigns',old:'94608 first',nw:'94702 first, then 94608',why:'Owners in 94702 responded at 5.1%, the highest of any ZIP you mailed.',on:'4 campaigns across 3 ZIPs · Jun to Oct',link:'Market_by_ZIP.html',eff:'Measuring, results by Dec 13',st:'active',early:'4 campaigns'},
+{m:'M1',a:'calling',dt:'oct',d:'Oct 20, 2026',what:'Out-of-area owners boosted on the call list — reverted',old:'Out-of-area weight 0.7',nw:'0.9 (now back to 0.7)',why:'Reverted by PLS on Nov 10: out-of-area owners were harder to reach, and contact rate on the list dipped from 11% to 9%.',on:'228 calls · Aug 4 to Oct 19',link:'Calls.html',eff:'Contact rate <span class="dn">11% → 9%</span>',st:'reverted'},
+{m:'M5',a:'outreach',dt:'oct',d:'Oct 1, 2026',what:'Just Sold postcard suggested first in West Berkeley',old:'Market update first',nw:'Just Sold postcard first for 94702 lists',why:'Just Sold postcards drew 3.4% response in 94702 vs 2.1% for market updates.',on:'4 runs, 803 owners · Jun to Sep',link:'Campaigns.html',eff:'Response <span class="up">2.1% → 3.4%</span>',st:'active',early:'4 runs'},
+{m:'M14',a:'data',dt:'sep',d:'Sep 22, 2026',what:'Auto-merge owners when name and mailing address match',old:'Merge needs operator review at 90% match',nw:'Auto-merge at 96% match; review between 85% and 96%',why:'Edson confirmed 31 of 31 suggested merges at this match level.',on:'31 confirmed merges · Aug 4 to Sep 20',link:'Owners.html',eff:'Review queue <span class="up">48 → 12 a week</span>',st:'active'},
+{m:'M1',a:'calling',dt:'sep',d:'Sep 1, 2026',what:'Recent reply weight raised',old:'Reply 1.0',nw:'Reply 1.2 (now replaced by the Nov 10 change)',why:'Owners who replied in the last 30 days became conversations 3× as often.',on:'204 calls · Aug 4 to Aug 31',link:'Calls.html',eff:'Contact rate <span class="up">8% → 10%</span>',st:'superseded'}
+];
+var STL={active:'<span class="st-a">Active</span>',reverted:'<span class="st-r">Reverted by PLS</span>',superseded:'<span class="st-s">Superseded</span>'};
+(function(){var s=document.getElementById('f-mod');Object.keys(MODS).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=MODS[k];s.appendChild(o)})})();
+function card(x){return '<div class="dec"><div class="head"><span class="what">'+x.what+'</span><span class="tg">'+MODS[x.m]+'</span><span class="tg">'+x.a.charAt(0).toUpperCase()+x.a.slice(1)+'</span>'+(x.early?'<span class="tg early">Early signal · '+x.early+'</span>':'')+'<span class="meta" style="margin-left:auto">'+x.d+'</span></div>'
+ +'<div class="k">What changed</div><div>'+x.old+' → <b>'+x.nw+'</b></div>'
+ +'<div class="k">Why</div><div>'+x.why+'</div>'
+ +'<div class="k">Based on</div><div>'+x.on+' · <a href="'+x.link+'">View records</a></div>'
+ +'<div class="k">Effect</div><div>'+x.eff+'</div>'
+ +'<div class="k">Status</div><div>'+STL[x.st]+(x.st==='active'?' since '+x.d.replace(', 2026',''):'')+'</div></div>'}
+function apply(){var a=v('f-area'),m=v('f-mod'),s=v('f-st'),d=v('f-dt');var r=DEC.filter(function(x){return(!a||x.a===a)&&(!m||x.m===m)&&(!s||x.st===s)&&(!d||x.dt===d)});
+ document.getElementById('decs').innerHTML=r.length?r.map(card).join(''):'<div class="meta" style="padding:14px;border:1px dashed #B5B2AC;text-align:center">No changes match these filters.</div>';
+ document.getElementById('f-n').textContent=r.length+' of '+DEC.length+' changes'}
+function v(id){return document.getElementById(id).value}
+function clr(){['f-area','f-mod','f-st','f-dt'].forEach(function(i){document.getElementById(i).value=''});apply()}
+function filt(k,val){clr();document.getElementById(k==='area'?'f-area':'f-dt').value=val;apply();document.getElementById('log').scrollIntoView({behavior:'smooth'})}
+apply();
+var W=[['Loan maturity',.8,1.0],['Long hold time',1.0,.85],['Recent reply',1.0,1.2],['QR scan',.9,1.0],['Out of area',.7,.7],['Ownership change',.8,.75]];
+document.getElementById('weights').innerHTML=W.map(function(w){return '<div class="wrow"><span>'+w[0]+'</span><div class="wbars"><div class="wb" style="width:'+(w[1]*80)+'%"></div><div class="wb c" style="width:'+(w[2]*80)+'%"></div></div></div>'}).join('');
+var DG={
+nov:{t:'Your PLS learning digest · November 2026',hl:'Ranking your call list by your own team’s results lifted contact rate 22% since the default.',
+ ch:['Loan maturity now ranks above long hold time on the call list, because 4 of your last 6 listings started there.','LLC owners now come up in the morning and individual owners after 4 pm, when each picks up most.','Drafts now open with the local number and skip the pleasantries, matching how your team edits them.','A skip-trace batch with a 14% bounce rate is now the last choice for email.','94702 West Berkeley now tops your campaign ideas, at 5.1% response.'],
+ wk:[['Best signal','Loan maturity'],['Best angle','Loan decision · Market update (4.1%)'],['Best asset','Just Sold postcard (3.4%)'],['Best area','94702 West Berkeley'],['Best call time','4–6 pm for individual owners']],
+ rs:[['Contacts',96,78],['Appointments',7,5],['Listings',2,1]],
+ ask:['Log an outcome on every call. 18% of calls have none, and PLS can’t learn from them.','Set an angle on your next campaign so PLS can compare angles.']},
+oct:{t:'Your PLS learning digest · October 2026',hl:'Just Sold postcards now lead in West Berkeley, where they drew 3.4% response.',
+ ch:['Just Sold postcards are suggested first for 94702 lists.','Out-of-area owners got a small boost on the call list (PLS is checking whether it helps).','Owner merges at 96% match now happen automatically.'],
+ wk:[['Best signal','Recent reply'],['Best angle','Just sold nearby'],['Best asset','Just Sold postcard'],['Best area','94702 West Berkeley'],['Best call time','4–6 pm']],
+ rs:[['Contacts',78,71],['Appointments',5,4],['Listings',1,1]],
+ ask:['Log a channel on every touch.']},
+sep:{t:'Your PLS learning digest · September 2026',hl:'PLS has started tuning your call list to your team’s results.',
+ ch:['Owners who replied in the last 30 days now rank higher on the call list.','Owner merges are learning from Edson’s reviews.'],
+ wk:[['Best signal','Recent reply'],['Best angle','Still learning'],['Best asset','Still learning'],['Best area','94608 Emeryville border'],['Best call time','Still learning']],
+ rs:[['Contacts',71,null],['Appointments',4,null],['Listings',1,null]],
+ ask:['Log outcomes on calls. After about 200 logged calls, PLS can tune timing too.']}};
+function digest(k){var g=DG[k];
+ var h='<div class="dg"><div class="meta" style="margin-bottom:10px">To: Nolan Jones, David Weglarz · From: PLS</div><p class="hl">'+g.hl+'</p>'
+ +'<h3>What PLS changed this month</h3><ul>'+g.ch.map(function(c){return '<li>'+c+'</li>'}).join('')+'</ul>'
+ +'<h3>What’s working for your team</h3><table>'+g.wk.map(function(w){return '<tr><th>'+w[0]+'</th><td>'+w[1]+'</td></tr>'}).join('')+'</table>'
+ +'<h3>Results</h3><table><tr><th></th><th>This month</th><th>Last month</th></tr>'+g.rs.map(function(r){return '<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+(r[2]==null?'—':r[2])+'</td></tr>'}).join('')+'</table>'
+ +'<h3>What would help PLS learn faster</h3><ul>'+g.ask.map(function(a){return '<li>'+a+'</li>'}).join('')+'</ul></div>';
+ openModal(g.t,h,'<button class="btn" onclick="closeModal()">Close</button> <button class="btn primary" onclick="pdf(\''+g.t.split('· ')[1]+'\')">Export PDF</button>');}
+</script></body></html>

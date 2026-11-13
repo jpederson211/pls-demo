@@ -8,7 +8,8 @@
       chips: [
         ['What needs me today?', '3 things: approve the Just Listed · 3310 Grand mailing (184 pieces), call back the Reyes Family Trust at 11:00, and Alcatraz Partners replied overnight.'],
         ['Who is behind on calls?', 'The team is at 412 of 500 calls this week — 88 behind. Marissa is on pace; David is about 40 short.'],
-        ['Any hot replies?', '2 since yesterday: Patricia Nguyen (web form, wants a value) and Alcatraz Partners (email reply about 88 Vernon St).']
+        ['Any hot replies?', '2 since yesterday: Patricia Nguyen (web form, wants a value) and Alcatraz Partners (email reply about 88 Vernon St).'],
+        ['Who replied overnight?', '3 replies overnight: Alcatraz Partners (email, 88 Vernon St), Patricia Nguyen (web form, wants a value) and one QR scan from 1840 Park LLC.', 'team']
       ],
       intro: 'Orbit watches everything happening across PLS — signals, replies, calls, mailings, and team activity. On the Dashboard it pulls that together into what needs your attention today. Ask it to triage your morning instead of clicking through every screen.',
       caps: [
@@ -23,7 +24,8 @@
       chips: [
         ['Who owns 4512 Telegraph?', 'The Reyes Family Trust (Walnut Creek), with Teresa Reyes as secondary owner. They own 4 buildings; the last touch was a QR scan on Oct 29.'],
         ['Buildings with a maturing loan', '14 buildings in your ZIPs have a loan that matured or matures within 12 months. 9 have not been touched in 60+ days — the top one is 3120 Grand Ave.'],
-        ['Find 2–4 units in 94610', '1,284 buildings with 2–4 units in 94610. 212 are absentee-owned and 61 are Tier A. Want me to save them as a list?']
+        ['Find 2–4 units in 94610', '1,284 buildings with 2–4 units in 94610. 212 are absentee-owned and 61 are Tier A. Want me to save them as a list?'],
+        ['Which buildings sold near my listings?', '4 sales within half a mile of your active listings in the last 60 days, led by 1040 59th St (2 units, $805k, 4 offers).', 'team']
       ],
       intro: 'Orbit knows every building in PLS — owners, loans, photos, nearby sales, signals, and the full touch history. On Properties it helps you find the right building fast and size it up before you call. Ask in plain language instead of stacking filters.',
       caps: [
@@ -38,7 +40,8 @@
       chips: [
         ['Owners not touched in 60 days', '188 owners have not been touched in 60+ days. 22 are Tier A — the biggest is Haddad Properties LLC with 6 buildings.'],
         ['Who are my portfolio owners?', '41 owners hold 3+ buildings. Top three: Haddad Properties LLC (6), Grand Ave Holdings LLC (5), Reyes Family Trust (4).'],
-        ['Draft an intro to this owner', 'Here is a draft: “Hi Teresa — I work with owners near Telegraph and noticed your loan matured this spring. Happy to share what similar buildings are trading for. Do you have 10 minutes this week?”']
+        ['Draft an intro to this owner', 'Here is a draft: “Hi Teresa — I work with owners near Telegraph and noticed your loan matured this spring. Happy to share what similar buildings are trading for. Do you have 10 minutes this week?”'],
+        ['Who on the team called this owner recently?', 'Marissa called this owner on Nov 6 (left a voicemail). No other touches in the last 60 days.', 'team']
       ],
       intro: 'Orbit sees each owner across all of their buildings — every call, mailing, reply, and visit in one history. On Owners it helps you understand the relationship and plan the right next touch. Ask about a person or a portfolio the way you would ask a colleague.',
       caps: [
@@ -53,7 +56,8 @@
       chips: [
         ['Who should I call first?', 'Your strongest call right now is Haddad Properties LLC (3120 Grand Ave) — loan maturing within 60 days and no touch in 74 days. Then 1840 Park LLC (held 19 years, never contacted).'],
         ['Loans maturing, untouched 60 days', '7 owners in your targets have a loan likely maturing within 12 months and no touch in 60+ days — 4 of them in 94611 (5+ units). Want them added to a call list?'],
-        ['Build a 94611 target', 'Built: 5+ unit owners in 94611 with a signal and no touch in 60 days — 23 owners, 4 with 2027 loans. Want me to add it to Your targets today?']
+        ['Tell me how to attack 94608 Emeryville border to prospect new sellers', 'Here’s a 3-step plan for 94608 Emeryville border:<ol><li><b>Start with the 38 owners whose loans likely come due in 2027.</b> Call the 22 Hot owners first.</li><li><b>Mail a Market update to the whole ZIP.</b> Lead with “nearly half of sales drew 3+ offers” and add a QR code.</li><li><b>Follow up with the 96 long-time owners within 10 days.</b> Offer a free BOV.</li></ol>Want me to build the step 1 call list now?', 'team'],
+        ['Build a target → Build this list → Plan the campaign', 'Recipe started. Step 1, target: 5+ unit owners in 94611 with a signal and no touch in 60 days (23 owners). Step 2, list: saved as “94611 · 5+ units · signals”. Step 3, campaign: a Market update mailer, then calls within 5 days. Want me to open the campaign draft?', 'recipe']
       ],
       intro: 'Orbit ranks owners by fresh signals, time since last touch, and what your team has already done. On Prospecting it builds targets, picks who to call first, and gives you the market context for each call. Let it do the list-building so you can spend your time on the phone.',
       caps: [
@@ -68,7 +72,8 @@
       chips: [
         ['Where should I campaign next?', '94608 (Emeryville border): 45% of sales drew 3+ offers and 38 owners have loans due in 2027 with no recent touch. Suggested piece: Market update.'],
         ['What moved this week?', 'Rates fell 0.24 to 6.18% over four weeks, Oakland’s allowed rent increase rose to 2.3%, and a Piedmont Ave 12-unit set a 5.4% cap benchmark.'],
-        ['Cap rates in 94611', 'Recent 5+ unit trades in 94611 averaged about a 5.6% cap; the Piedmont Ave 12-unit at 5.4% is the new low.']
+        ['Cap rates in 94611', 'Recent 5+ unit trades in 94611 averaged about a 5.6% cap; the Piedmont Ave 12-unit at 5.4% is the new low.'],
+        ['Tell me how to attack 94608 Emeryville border to prospect new sellers', '', 'team']
       ],
       intro: 'Orbit reads sales, rents, loan patterns, and local news for the ZIPs you work. On Your Market it turns that data into where and when to campaign, and what to say. Ask about any ZIP instead of digging through charts.',
       caps: [
@@ -83,7 +88,8 @@
       chips: [
         ['Summarize this week', 'Three things matter: rates are easing (6.18%), Oakland’s allowed rent increase is 2.3%, and the soft-story retrofit deadline moved out 12 months.'],
         ['What affects my owners?', 'The retrofit extension touches 37 of your 5+ unit owners, and the new ADU law is relevant to 212 duplex and triplex owners in your targets.'],
-        ['Give me a talk track', '“Rates have come down and buyers are back — and with the new ADU rules, your building may be worth more than you think. Want a quick number?”']
+        ['Give me a talk track', '“Rates have come down and buyers are back — and with the new ADU rules, your building may be worth more than you think. Want a quick number?”'],
+        ['Which of my owners does the retrofit deadline affect?', 'About 37 owners in your targets own soft-story buildings built before 1978. 12 of them have no touch in 90 days — want a call list?', 'team']
       ],
       intro: 'Orbit tracks the news that touches your market — rates, local rules, state law, and national CRE trends. On Latest News it connects each story to your owners and turns it into something to say on the phone. Ask what a story means for your business, not just what it says.',
       caps: [
@@ -98,7 +104,8 @@
       chips: [
         ['Who is top this month?', 'Marissa Chen leads with 412 touches in 30 days — 68 ahead of David Weglarz. She is also first on appointments (9).'],
         ['Are we on pace?', 'No — 412 of 500 calls this week, 88 behind. At the current daily rate the team finishes around 470.'],
-        ['Compare to last campaign', 'Loan maturity · Telegraph is ahead of Just Listed · 3310 Grand on connects (41 vs 29) but behind on appointments (3 vs 5).']
+        ['Compare to last campaign', 'Loan maturity · Telegraph is ahead of Just Listed · 3310 Grand on connects (41 vs 29) but behind on appointments (3 vs 5).'],
+        ['Who is using Orbit the most?', 'Over the last 30 days: Marissa asked Orbit 142 questions and built 6 targets; David 58; Nolan 31; Edson 9.', 'team']
       ],
       intro: 'Orbit sees every touch, call, and campaign result your team logs. It turns that activity into a read on who is working, what is working, and where the team is falling behind. Ask it in plain language instead of building a report.',
       caps: [
@@ -113,7 +120,8 @@
       chips: [
         ['Build a list of absentee owners', 'Built: absentee owners of 2–4 units in 94609–94610 — 318 owners, 41 with a signal. Want to save it as “Absentee 94609–10”?'],
         ['Who is on do-not-contact?', '62 owners are on do-not-contact: 38 mail only, 17 email only, 7 all channels. 3 were added this week.'],
-        ['Clean duplicates', 'I found 9 likely duplicate owners, like “Reyes Family Trust” and “Reyes Family Tr”. Want to review them for merging?']
+        ['Clean duplicates', 'I found 9 likely duplicate owners, like “Reyes Family Trust” and “Reyes Family Tr”. Want to review them for merging?'],
+        ['Owners with a loan due in 2027', '38 owners on your lists have a loan likely due in 2027, mostly in 94608 and 94609. Want them saved as a list?', 'team']
       ],
       intro: 'Orbit knows who is in every list, who is suppressed, and who overlaps across lists. On Owner lists it helps you build clean audiences fast and keep do-not-contact honored. Describe the audience you want and let Orbit assemble it.',
       caps: [
@@ -128,7 +136,8 @@
       chips: [
         ['How is this campaign doing?', 'Loan maturity · Telegraph: 423 mailed, 14 replies or scans, 41 connects, 3 appointments. Calls are 88 behind this week’s pace.'],
         ['Who has not been called?', '225 owners on this campaign have not been called yet. 31 have a fresh signal — start with Haddad Properties and 1840 Park LLC.'],
-        ['Suggest the next piece', 'A follow-up Market update to non-responders in 94609, about 3 weeks after the first letter landed.']
+        ['Suggest the next piece', 'A follow-up Market update to non-responders in 94609, about 3 weeks after the first letter landed.'],
+        ['Summarize this campaign’s results', 'Telegraph corridor: 423 mailed, 14 replies and scans, 41 connects, 3 appointments and 2 BOVs so far. Calls are the gap: 225 still to make.', 'team']
       ],
       intro: 'Orbit follows each campaign from list to mailing to calls to appointments. On Campaigns it tells you how a campaign is really doing and what to do next. Ask about results or next steps instead of reading every tab.',
       caps: [
@@ -143,7 +152,8 @@
       chips: [
         ['Draft a Just Sold postcard', 'Headline: “Just sold near you — 2 offers over ask.” Body: a short note on the 3310 Grand sale and an invitation to get a value. Want me to drop it into a new asset?'],
         ['What is ready to send?', '1 mailing is waiting for approval: MVI letter · follow-up · Nov 2026 (211 pieces, $1,287). Nothing else is queued.'],
-        ['Cost to mail this list', 'Mailing 231 letters runs about $1,410 at current rates — roughly $6.10 a piece including postage.']
+        ['Cost to mail this list', 'Mailing 231 letters runs about $1,410 at current rates — roughly $6.10 a piece including postage.'],
+        ['What angle works best for my team?', 'Loan decision letters have done best for your team (4.1% response over 3 runs). Just Sold postcards lead in West Berkeley.', 'team']
       ],
       intro: 'Orbit knows your templates, your brand, your lists, and what each piece costs. On Mailings it helps you draft copy, check what is ready, and estimate cost before you send. Ask for a draft or a number instead of building it by hand.',
       caps: [
@@ -158,7 +168,8 @@
       chips: [
         ['Who is next in the queue?', 'Next up: Haddad Properties LLC (3120 Grand Ave) — loan maturing in 58 days. Note: Marissa called them 2 days ago, no answer.'],
         ['Today’s appointments', '2 today: Reyes Family Trust at 11:00 (callback) and a walk-through at 1840 Park Blvd at 3:30.'],
-        ['A good opener for this owner', '“Hi, this is Nolan with Prescott — I am calling owners near Grand Ave whose loans are coming due. Have you thought about what is next for the building?”']
+        ['A good opener for this owner', '“Hi, this is Nolan with Prescott — I am calling owners near Grand Ave whose loans are coming due. Have you thought about what is next for the building?”'],
+        ['When should I call LLC owners?', 'Your LLC owners pick up most between 10 am and noon. Individual owners answer best after 4 pm.', 'team']
       ],
       intro: 'Orbit knows your call queue, each owner’s history, and what was said last time. On Calls it gets you ready for the next conversation and keeps the queue moving. Ask for the next call, an opener, or a recap without leaving the screen.',
       caps: [
@@ -172,7 +183,7 @@
 
   function areaFor(file) {
     var f = (file || '').replace(/\.html$/, '');
-    if (/^(Settings_|DataMgmt_)/.test(f)) return 'admin';
+    if (/^(Settings_|DataMgmt_|Learning_)/.test(f)) return 'admin';
     var map = {
       Dashboard: 'dash', index: 'dash',
       Properties: 'props', Property_Detail: 'props', Add_Property: 'props',
@@ -226,6 +237,8 @@
   .orbit-sugg{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:0 16px 12px}
   .orbit-sugg .lbl{font-size:11px;color:#6B6A66;text-transform:uppercase;letter-spacing:.05em}
   .orbit-sugg button{font:inherit;font-size:12px;border:1px solid #B5B2AC;background:#fff;color:#2D2E41;border-radius:999px;padding:4px 11px;cursor:pointer;text-align:left}
+  .orbit-sugg .st{font-size:10px;color:#6B6A66;border:1px solid #D3D0CB;border-radius:8px;padding:0 5px;margin-left:4px;white-space:nowrap}.orbit-sugg .st.rc{color:#2D2E41;border-color:#2D2E41}
+  .orbit-sugg button.k-recipe{border-color:#2D2E41;background:#EEF1FA}
   .orbit-sugg button:hover{background:#F7F6F3}
   .orbit-in{display:flex;gap:8px;padding:12px 16px;border-top:1px solid #E6E3DE}
   .orbit-in input{flex:1;font:inherit;font-size:13px;padding:8px 10px;border:1px solid #B5B2AC;border-radius:6px}
@@ -301,7 +314,7 @@
     var ctx = el('div', 'orbit-ctx'); ctx.id = 'orbit-ctx'; panelEl.appendChild(ctx);
     logEl = el('div', 'orbit-log'); panelEl.appendChild(logEl);
     var sugg = el('div', 'orbit-sugg'); sugg.appendChild(el('span', 'lbl', 'Try asking'));
-    A.chips.forEach(function (c) { var b = el('button', null, esc(c[0])); b.onclick = function () { ask(c[0]); }; sugg.appendChild(b); });
+    A.chips.forEach(function (c) { var tag = c[2] === 'team' ? ' <span class="st">Popular with your team</span>' : (c[2] === 'recipe' ? ' <span class="st rc">Recipe</span>' : ''); var b = el('button', c[2] ? 'k-' + c[2] : null, (c[2] === 'recipe' ? '↻ ' : '') + esc(c[0]) + tag); b.onclick = function () { ask(c[0]); }; sugg.appendChild(b); });
     panelEl.appendChild(sugg);
     var inWrap = el('div', 'orbit-in');
     inEl = el('input'); inEl.type = 'text'; inEl.placeholder = 'Ask Orbit about ' + A.name.toLowerCase() + '…';
