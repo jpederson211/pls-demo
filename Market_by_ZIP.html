@@ -1,5 +1,11 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your Market · Prescott Listing System</title><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
+<title>Your Market · Prescott Listing System</title><style>.pulse .scope{display:inline-block;font-size:10.5px;font-weight:400;border:1px solid #B5B2AC;border-radius:9px;padding:0 7px;color:#6B6A66;background:#fff;margin:4px 0 2px;text-transform:none;letter-spacing:0}
+.pulse .scope.z{border-color:#2D2E41;color:#2D2E41;background:#EEF1FA}
+.pulse .items.five{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.cchips{display:flex;flex-wrap:wrap;gap:4px;margin:5px 0}
+.cchips button{font:inherit;font-size:11px;border:1px solid #B5B2AC;background:#fff;border-radius:9px;padding:1px 7px;cursor:pointer;color:#1E1E1E}
+.cchips button.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.pz{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}.pz button{font:inherit;font-size:12px;border:0;background:#fff;padding:4px 10px;cursor:pointer;color:#6B6A66}.pz button.on{background:#2D2E41;color:#fff}</style><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
 .steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
 .steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
 .steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
@@ -306,14 +312,23 @@ tr.zrow.hl td{background:#ECEAE4}
 <div class="content" style="display:block">
 <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px"><div><h2 style="font-size:17px;margin:0">Your Market</h2><div class="meta">Where the market is moving, and where to run your next campaign.</div></div>
 </div>
-<div class="pulse"><div><b style="font-size:14px">This week</b> <span class="meta">· Week of Nov 9, 2026</span></div>
-<div class="items">
-<div><b class="lbl">Rates</b><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">Oakland rules</b><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: "Your rents can only rise 2.3% this year. Here's what buyers pay for that upside."</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">Your ZIPs</b><div class="fact">45% of 94608 sales drew 3+ offers, and most buildings sold empty.</div><div class="act">Act: 94608 is the strongest campaign candidate.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">Coming up</b><div class="fact">City Council housing items on Nov 18.</div><div class="act">Act: watch for rule changes.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-</div><div class="meta" style="margin-top:10px">Drafted weekly from public sources.</div></div>
-<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><h2 style="font-size:15px;margin:0">Where to campaign next</h2><span class="meta">Updated Thursdays.</span></div><div class="cards3"><div class="ccard" id="card1"><span class="zz">94608 · Emeryville border</span><h3>2027 loan decisions</h3><div class="why">Buyers are competing here, and 38 owners with loans likely due next year haven't heard from us.</div><ul><li>45% of sales drew 3+ offers</li><li>38 owners, loans likely due 2027</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Market update</div>
+<div class="pulse"><div style="display:flex;align-items:center;gap:10px"><b style="font-size:14px" id="pz-title">This week</b> <span class="meta" id="pz-sub">· Week of Nov 9, 2026</span><span class="pz" style="margin-left:auto"><button class="on" onclick="pz('w',this)">This week</button><button onclick="pz('m',this)">Last 30 days</button></span></div>
+<div class="items five" id="pz-w">
+<div><b class="lbl">Rates</b><span class="scope">All markets</span><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Oakland rules</b><span class="scope">Oakland</span><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: "Your rents can only rise 2.3% this year. Here's what buyers pay for that upside."</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Sales by city</b><span class="scope">Oakland · Berkeley</span><div class="cchips"><button class="on" onclick="city('oak',this)">Oakland</button><button onclick="city('brk',this)">Berkeley</button><button onclick="city('emv',this)">Emeryville</button><button onclick="city('wo',this)">West Oakland</button><button onclick="city('tem',this)">Temescal</button></div><div class="fact" id="city-f">Oakland: 2–4 unit sales up 6% vs last quarter; median $498k per unit.</div><div class="act">Act: lead with the city trend, then the owner’s ZIP.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Your ZIPs</b><span class="scope z">94608</span><div class="fact">45% of 94608 sales drew 3+ offers, and most buildings sold empty.</div><div class="act">Act: 94608 is the strongest campaign candidate.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Coming up</b><span class="scope">Oakland</span><div class="fact">City Council housing items on Nov 18.</div><div class="act">Act: watch for rule changes.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+</div>
+<div class="items five" id="pz-m" style="display:none">
+<div><b class="lbl">Rates</b><span class="scope">All markets</span><div class="fact">30-year fixed went from 6.42% to 6.18% over 30 days — the lowest since spring.</div><div class="act">Trend: easing for four straight weeks.</div></div>
+<div><b class="lbl">Oakland rules</b><span class="scope">Oakland</span><div class="fact">Rent cap set at 2.3% (Oct 1); soft-story retrofit deadline extended 12 months (Nov 10).</div><div class="act">Trend: two owner-friendly changes this month.</div></div>
+<div><b class="lbl">Sales by city</b><span class="scope">Oakland · Berkeley</span><div class="fact">Oakland: 41 sales in 30 days, up 6%. Berkeley: 18 sales, flat.</div><div class="act">Trend: Oakland picking up; Berkeley steady.</div></div>
+<div><b class="lbl">Your ZIPs</b><span class="scope z">94608</span><div class="fact">Share of 94608 sales with 3+ offers rose from 38% to 45%.</div><div class="act">Trend: competition rising.</div></div>
+<div><b class="lbl">Coming up</b><span class="scope">Oakland</span><div class="fact">2 Council housing items heard; 1 more on Nov 18.</div><div class="act">Trend: rules are active — keep watching.</div></div>
+</div>
+<div class="meta" style="margin-top:10px">Updated weekly · last updated Nov 9, 2026 · from public sources. A Last 30 days snapshot is kept each week so you can compare.</div></div>
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><h2 style="font-size:15px;margin:0">Where to campaign next</h2><span class="meta">Updated weekly (Thursdays) · last updated Nov 6, 2026.</span></div><div class="cards3"><div class="ccard" id="card1"><span class="zz">94608 · Emeryville border</span><h3>2027 loan decisions</h3><div class="why">Buyers are competing here, and 38 owners with loans likely due next year haven't heard from us.</div><ul><li>45% of sales drew 3+ offers</li><li>38 owners, loans likely due 2027</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Market update</div>
 <div class="btns"><a class="btn primary" href="New_List.html#card-94608-market-update">Create this campaign (38)</a></div>
 </div><div class="ccard" id="card2"><span class="zz">94702 · West Berkeley</span><h3>Just sold nearby</h3><div class="why">Buildings here drew the most offers in your market, and 64 owners live on streets with a recent sale.</div><ul><li>59% of sales drew 3+ offers</li><li>64 owners near a recent sale</li><li>Last campaign here: none</li></ul><div class="piece">Suggested piece: Just Sold postcard</div>
 <div class="btns"><a class="btn primary" href="New_List.html#card-94702-just-sold">Create this campaign (64)</a></div>
@@ -322,7 +337,7 @@ tr.zrow.hl td{background:#ECEAE4}
 </div></div>
 <div class="module" id="zipmod">
 <div class="mhead"><div><label class="meta" style="display:block;margin-bottom:3px">ZIP</label><select id="zippick" onchange="loadZip(this.value)"></select></div>
-<div><h2 class="area" id="m-area">Emeryville border, Oakland</h2><div class="stamp">Sales: bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents: Rentometer, Oct 26, 2026.</div></div>
+<div><h2 class="area" id="m-area">Emeryville border, Oakland</h2><div class="stamp">Updated weekly · last updated Nov 9, 2026. Sales: bridgeMLS, 2–4 units, last 12 months, as of Oct 23, 2026. Rents: Rentometer, Oct 26, 2026.</div></div>
 <div class="mbtns"><a class="btn" id="m-newlist" href="New_List.html#zip-94608">New list for this ZIP</a><a class="btn primary" id="m-camp" href="New_List.html#card-94608-market-update">Create this campaign</a></div></div>
 <div class="sumline" id="m-sum"></div>
 <div class="tiles6" id="m-tiles"></div>
@@ -333,7 +348,7 @@ tr.zrow.hl td{background:#ECEAE4}
 <h3 style="font-size:13px;margin:0 0 8px">Recent sales · last 30 days</h3>
 <div id="m-salesbox"></div>
 <div style="margin:18px 0 0">
-<div class="fold" id="f-opp"><button onclick="this.parentNode.classList.toggle('open')">Opportunity</button><div class="fbody">Owners by ranking: Hot 22 · Warm 61 · Watch 140<br>Loans likely due in 18 months: 38 · Held 15+ years: 96 · Owners from afar: 74 · Not contacted in 90 days: 188<br><div style="margin-top:8px">Best campaign idea: <b>2027 loan decisions (38 owners)</b> <a class="btn primary" style="margin-left:10px" href="New_List.html#card-94608-market-update">Create this campaign</a></div><div class="meta" style="margin-top:6px">All counts are illustrative.</div></div></div>
+<div class="fold" id="f-opp"><button onclick="this.parentNode.classList.toggle('open')">Opportunity</button><div class="fbody">Owners by ranking <span class="xi" data-tip="Hot owners have a strong, fresh signal and no recent touch; Warm owners have a weaker or older signal; Watch owners are worth tracking but not calling yet.">i</span>: Hot 22 · Warm 61 · Watch 140<br>Loans likely due in 18 months: 38 · Held 15+ years: 96 · Owners from afar: 74 · Not contacted in 90 days: 188<br><div style="margin-top:8px">Best campaign idea: <b>2027 loan decisions (38 owners)</b> <a class="btn primary" style="margin-left:10px" href="New_List.html#card-94608-market-update">Create this campaign</a></div><div class="meta" style="margin-top:6px">All counts are illustrative.</div></div></div>
 <div class="fold" id="f-ev"><button onclick="this.parentNode.classList.toggle('open')">Events </button><div class="fbody">Last 90 days: <a href="Owner_Lists.html">1 estate case</a> · <a href="Owner_Lists.html">0 Ellis Act filings</a> · <a href="Owner_Lists.html">1 default notice</a> <span class="meta">(illustrative)</span></div></div>
 </div></div>
 </div>
@@ -412,4 +427,8 @@ function loadZip(z,noscroll){
 function fillPicker(){var sel=document.getElementById('zippick');var cities={};T.forEach(function(r){(cities[r.city]=cities[r.city]||[]).push(r)});var out='';Object.keys(cities).forEach(function(c){out+='<optgroup label="'+c+'">'+cities[c].map(function(r){return '<option value="'+r.z+'">'+r.z+' · '+r.area+' · '+r.sold+' sales</option>'}).join('')+'</optgroup>'});var keep=sel.value;sel.innerHTML=out;if(keep)sel.value=keep}
 document.addEventListener('DOMContentLoaded',function(){fillPicker();var z=(location.hash||'').replace('#zip-','');loadZip(row(z)?z:'94608',true)});
 
+</script><script>
+var CITY={oak:'Oakland: 2–4 unit sales up 6% vs last quarter; median $498k per unit.',brk:'Berkeley: sales flat vs last quarter; median $611k per unit and the most competitive offers.',emv:'Emeryville: small sample — 4 sales this quarter, 3 drew multiple offers.',wo:'West Oakland: sales up 9%; more buildings selling vacant.',tem:'Temescal: busiest neighborhood — 44 sales in 12 months, prices steady.'};
+function city(k,b){document.getElementById('city-f').textContent=CITY[k];b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)})}
+function pz(w,b){b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});document.getElementById('pz-w').style.display=w==='w'?'':'none';document.getElementById('pz-m').style.display=w==='m'?'':'none';document.getElementById('pz-title').textContent=w==='w'?'This week':'Last 30 days';document.getElementById('pz-sub').textContent=w==='w'?'· Week of Nov 9, 2026':'· Oct 11 – Nov 9, 2026 snapshot'}
 </script></body></html>

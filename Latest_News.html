@@ -1,5 +1,11 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Latest News · Prescott Listing System</title><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
+<title>Latest News · Prescott Listing System</title><style>.pulse .scope{display:inline-block;font-size:10.5px;font-weight:400;border:1px solid #B5B2AC;border-radius:9px;padding:0 7px;color:#6B6A66;background:#fff;margin:4px 0 2px;text-transform:none;letter-spacing:0}
+.pulse .scope.z{border-color:#2D2E41;color:#2D2E41;background:#EEF1FA}
+.pulse .items.five{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.cchips{display:flex;flex-wrap:wrap;gap:4px;margin:5px 0}
+.cchips button{font:inherit;font-size:11px;border:1px solid #B5B2AC;background:#fff;border-radius:9px;padding:1px 7px;cursor:pointer;color:#1E1E1E}
+.cchips button.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
+.pz{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}.pz button{font:inherit;font-size:12px;border:0;background:#fff;padding:4px 10px;cursor:pointer;color:#6B6A66}.pz button.on{background:#2D2E41;color:#fff}</style><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
 .steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
 .steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
 .steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
@@ -317,11 +323,13 @@ tr.zrow.hl td{background:#ECEAE4}
 <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:14px"><div><h2 style="font-size:17px;margin:0">Latest News</h2><div class="meta">General news relevant to your market — your geography, your property focus, and the wider CRE world. Fuller spec coming.</div></div></div>
 
 <div class="sechd"><h2>What is happening — applies everywhere</h2><span class="meta">· Week of Nov 9, 2026</span></div>
-<div class="pulse nx"><div class="items">
-<div><b class="lbl">Rates</b><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">Oakland rules</b><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: your rents can only rise 2.3% this year — here is what buyers pay for that upside.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-<div><b class="lbl">National news</b><div class="fact">Fed signals a pause; national CRE lending outlook steadies into Q1.</div><div class="act">Act: owners sitting on 2027 maturities have a window to refi or sell.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
-</div><div class="meta" style="margin-top:10px">Drafted weekly from public sources.</div></div>
+<div class="pulse nx"><div class="items five">
+<div><b class="lbl">Rates</b><span class="scope">All markets</span><div class="fact">30-year fixed at 6.18%, down 0.24 in four weeks.</div><div class="act">Act: move 2023–24 buyers up the call list.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">Oakland rules</b><span class="scope">Oakland</span><div class="fact">Allowed rent increase for rent-controlled units is 2.3% this year, up from 0.8%.</div><div class="act">Talk track: your rents can only rise 2.3% this year — here is what buyers pay for that upside.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+<div><b class="lbl">National news</b><span class="scope">National</span><div class="fact">Fed signals a pause; national CRE lending outlook steadies into Q1.</div><div class="act">Act: owners sitting on 2027 maturities have a window to refi or sell.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+
+<div><b class="lbl">Sales by city</b><span class="scope">Oakland · Berkeley</span><div class="cchips"><button class="on" onclick="city('oak',this)">Oakland</button><button onclick="city('brk',this)">Berkeley</button><button onclick="city('emv',this)">Emeryville</button><button onclick="city('wo',this)">West Oakland</button><button onclick="city('tem',this)">Temescal</button></div><div class="fact" id="city-f">Oakland: 2–4 unit sales up 6% vs last quarter; median $498k per unit.</div><div class="act">Act: lead with the city trend, then the owner’s ZIP.</div><a class="src" href="#" onclick="save();return false">Source</a></div>
+</div><div class="meta" style="margin-top:10px">Updated weekly · last updated Nov 9, 2026 · from public sources.</div></div>
 
 <div class="sechd"><h2>More this week</h2><span class="meta">Geography · property focus · CRE at large.</span></div>
 <div class="nx">
@@ -338,4 +346,8 @@ tr.zrow.hl td{background:#ECEAE4}
 <script>
 function grp(b){b.parentNode.classList.toggle('closed')}
 function save(){var t=document.getElementById('toast');t.style.display='block';clearTimeout(window._t);window._t=setTimeout(function(){t.style.display='none'},1400)}
+</script><script>
+var CITY={oak:'Oakland: 2–4 unit sales up 6% vs last quarter; median $498k per unit.',brk:'Berkeley: sales flat vs last quarter; median $611k per unit and the most competitive offers.',emv:'Emeryville: small sample — 4 sales this quarter, 3 drew multiple offers.',wo:'West Oakland: sales up 9%; more buildings selling vacant.',tem:'Temescal: busiest neighborhood — 44 sales in 12 months, prices steady.'};
+function city(k,b){document.getElementById('city-f').textContent=CITY[k];b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)})}
+function pz(w,b){b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});document.getElementById('pz-w').style.display=w==='w'?'':'none';document.getElementById('pz-m').style.display=w==='m'?'':'none';document.getElementById('pz-title').textContent=w==='w'?'This week':'Last 30 days';document.getElementById('pz-sub').textContent=w==='w'?'· Week of Nov 9, 2026':'· Oct 11 – Nov 9, 2026 snapshot'}
 </script></body></html>

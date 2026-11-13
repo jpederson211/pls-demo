@@ -49,4 +49,30 @@
     };
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install); else install();
+
+  /* ---------- ⓘ explainer tooltips: <span class="xi" data-tip="One sentence.">i</span> ---------- */
+  var XCSS = '.xi{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #9A9892;color:#6B6A66;font:600 9.5px/1 Georgia,serif;font-style:italic;margin-left:4px;cursor:help;vertical-align:1px;background:#fff;text-transform:none;letter-spacing:0}' +
+    '.xi:hover,.xi.on{border-color:#2D2E41;color:#2D2E41}' +
+    '#xi-tip{position:fixed;z-index:1000;max-width:260px;background:#1E1E1E;color:#fff;font:400 12px/1.45 inherit;font-family:inherit;padding:8px 10px;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.2);pointer-events:none;opacity:0;transition:opacity .12s;text-transform:none;letter-spacing:0;font-style:normal;text-align:left;white-space:normal}' +
+    '#xi-tip.on{opacity:1}';
+  var xs = document.createElement('style'); xs.textContent = XCSS; (document.head || document.documentElement).appendChild(xs);
+  var tip = null, pinned = null;
+  function showTip(x) {
+    if (!tip) { tip = document.createElement('div'); tip.id = 'xi-tip'; document.body.appendChild(tip); }
+    tip.textContent = x.getAttribute('data-tip') || '';
+    tip.classList.add('on');
+    var r = x.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), window.innerWidth - w - 8);
+    var top = r.top - h - 8; if (top < 8) top = r.bottom + 8;
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+  }
+  function hideTip() { if (tip) tip.classList.remove('on'); if (pinned) { pinned.classList.remove('on'); pinned = null; } }
+  document.addEventListener('mouseover', function (e) { var x = e.target.closest && e.target.closest('.xi'); if (x) showTip(x); });
+  document.addEventListener('mouseout', function (e) { var x = e.target.closest && e.target.closest('.xi'); if (x && !pinned) hideTip(); });
+  document.addEventListener('click', function (e) {
+    var x = e.target.closest && e.target.closest('.xi');
+    if (x) { e.stopPropagation(); e.preventDefault(); if (pinned === x) { hideTip(); return; } hideTip(); pinned = x; x.classList.add('on'); showTip(x); return; }
+    if (pinned) hideTip();
+  }, true);
+  window.addEventListener('scroll', function () { if (!pinned) hideTip(); else showTip(pinned); }, true);
 })();
