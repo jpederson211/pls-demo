@@ -240,6 +240,7 @@
   .orbit-sugg .st{font-size:10px;color:#6B6A66;border:1px solid #D3D0CB;border-radius:8px;padding:0 5px;margin-left:4px;white-space:nowrap}.orbit-sugg .st.rc{color:#2D2E41;border-color:#2D2E41}
   .orbit-sugg button.k-recipe{border-color:#2D2E41;background:#EEF1FA}
   .orbit-sugg button:hover{background:#F7F6F3}
+  .orbit-plans{padding-bottom:6px}.orbit-plans button.k-plan{border-color:#2D2E41;background:#F2F1FA;font-weight:500}
   .orbit-in{display:flex;gap:8px;padding:12px 16px;border-top:1px solid #E6E3DE}
   .orbit-in input{flex:1;font:inherit;font-size:13px;padding:8px 10px;border:1px solid #B5B2AC;border-radius:6px}
   .orbit-in button{font:inherit;font-size:13px;font-weight:600;padding:8px 13px;border:1px solid #2D2E41;background:#2D2E41;color:#fff;border-radius:6px;cursor:pointer}
@@ -265,8 +266,44 @@
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
+  /* ---------- Saved attack plans (written by the How To Attack This modal) ---------- */
+  var PKEY = 'pls.orbitPlans';
+  function loadPlans() { try { return JSON.parse(localStorage.getItem(PKEY) || '[]'); } catch (e) { return window.__orbitPlans || []; } }
+  window.orbitLoadPlans = loadPlans;
+  window.orbitSavePlan = function (p) {
+    var ps = loadPlans().filter(function (x) { return x.name !== p.name; }); ps.unshift(p);
+    try { localStorage.setItem(PKEY, JSON.stringify(ps)); } catch (e) { window.__orbitPlans = ps; }
+    renderPlanChips();
+  };
+  window.orbitPlanOutline = function (p) {
+    return '<div class="pl-h">' + esc(p.name) + '</div><div style="font-size:11.5px;color:#6B6A66;margin-bottom:6px">Saved ' + esc(p.saved || '') + ' · ' + esc(p.zip + ' ' + p.area) + '</div>' +
+      '<div><b>Goal.</b> ' + p.goal + '</div><ol>' + p.steps.map(function (st) {
+        return '<li><b>' + st.t + '</b>' + (st.when ? ' <span style="color:#6B6A66">(' + st.when + ')</span>' : '') + (st.who ? '<br>' + st.who : (st.body ? '<br>' + st.body : '')) + '</li>';
+      }).join('') + '</ol><div><b>What to track.</b> ' + p.track + '</div><div style="margin-top:8px">Ask me to expand any step, or tell me what you’ve done so far and I’ll mark it.</div>';
+  };
+  function planFor(q) {
+    var ql = (q || '').toLowerCase(), ps = loadPlans();
+    var hit = ps.filter(function (p) { return ql.indexOf(p.name.toLowerCase()) > -1 || (ql.indexOf(p.zip) > -1 && ql.indexOf('plan') > -1); })[0];
+    if (!hit && /\b(attack )?plans?\b/.test(ql) && /(my|saved|attack|the) /.test(ql)) {
+      if (ps.length === 1) hit = ps[0];
+      else if (ps.length > 1) return 'You have ' + ps.length + ' saved plans: ' + ps.map(function (p) { return '<b>' + esc(p.name) + '</b>'; }).join(', ') + '. Which one do you want?';
+      else return 'You don’t have a saved attack plan yet. Open Your Market, pick a ZIP and press <b>How To Attack This</b>. I’ll save the plan so you can pull it up here from any screen.';
+    }
+    return hit ? window.orbitPlanOutline(hit) : null;
+  }
+  var plansEl = null;
+  function renderPlanChips() {
+    if (!plansEl) return;
+    var ps = loadPlans(); plansEl.innerHTML = '';
+    if (!ps.length) { plansEl.style.display = 'none'; return; }
+    plansEl.style.display = '';
+    plansEl.appendChild(el('span', 'lbl', 'Your saved plans'));
+    ps.forEach(function (p) { var b = el('button', 'k-plan', '▤ ' + esc(p.name)); b.onclick = function () { ask(p.name); }; plansEl.appendChild(b); });
+  }
+
   /* ---------- Answers ---------- */
   function answerFor(q) {
+    var pl = planFor(q); if (pl) return pl;
     if (typeof window.orbitAnswer === 'function') { var pa = window.orbitAnswer(q); if (pa) return pa; }
     var ql = (q || '').toLowerCase().trim();
     for (var i = 0; i < A.chips.length; i++) { if (A.chips[i][0].toLowerCase() === ql) return A.chips[i][1]; }
@@ -313,6 +350,7 @@
     panelEl.appendChild(head);
     var ctx = el('div', 'orbit-ctx'); ctx.id = 'orbit-ctx'; panelEl.appendChild(ctx);
     logEl = el('div', 'orbit-log'); panelEl.appendChild(logEl);
+    plansEl = el('div', 'orbit-sugg orbit-plans'); panelEl.appendChild(plansEl);
     var sugg = el('div', 'orbit-sugg'); sugg.appendChild(el('span', 'lbl', 'Try asking'));
     A.chips.forEach(function (c) { var tag = c[2] === 'team' ? ' <span class="st">Popular with your team</span>' : (c[2] === 'recipe' ? ' <span class="st rc">Recipe</span>' : ''); var b = el('button', c[2] ? 'k-' + c[2] : null, (c[2] === 'recipe' ? '↻ ' : '') + esc(c[0]) + tag); b.onclick = function () { ask(c[0]); }; sugg.appendChild(b); });
     panelEl.appendChild(sugg);
@@ -334,6 +372,7 @@
       addMsg('a', A.help);
       logEl.dataset.greeted = '1';
     }
+    renderPlanChips();
     if (seed) ask(seed, opts.top);
     ovEl.classList.add('on'); panelEl.classList.add('on'); floatEl.classList.add('hide');
     setTimeout(function () { inEl.focus(); }, 300);

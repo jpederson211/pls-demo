@@ -82,6 +82,21 @@
   .om-foot .lft{margin-right:auto}
   li.new{background:#F7F7FD;animation:nw 2.4s ease}
   @keyframes nw{0%{background:#E6E4F7}100%{background:#F7F7FD}}
+  .pc{background:#fff;border:1px solid #E6E3DE;border-radius:8px;padding:14px 16px;margin-top:6px}
+  .pc .pch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pc h4{margin:0;font-size:15px}
+  .pc .sv{font-size:11px;color:#2E7D4F;border:1px solid #2E7D4F;border-radius:10px;padding:0 8px;background:#fff}
+  .pc .sub{font-size:12px;color:#6B6A66;margin:3px 0 10px}
+  .pc .gl{font-size:13px;line-height:1.55;margin-bottom:6px}
+  .pc .gl b{color:#2D2E41}
+  .ps{display:grid;grid-template-columns:28px 1fr;gap:4px 10px;border-top:1px solid #E6E3DE;padding:12px 0 4px}
+  .ps .n{width:24px;height:24px;border-radius:50%;background:#2D2E41;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .ps .tt{font-weight:600;font-size:13.5px;line-height:1.4}
+  .ps .wh{display:inline-block;font-size:11px;font-weight:500;color:#2D2E41;background:#F2F1FA;border:1px solid #D6D4EA;border-radius:10px;padding:0 8px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+  .ps dl{grid-column:2;margin:4px 0 0;display:grid;grid-template-columns:86px 1fr;gap:4px 10px;font-size:12.5px;line-height:1.5}
+  .ps dt{color:#6B6A66}.ps dd{margin:0}
+  .ps .bd{grid-column:2;font-size:12.5px;line-height:1.5}
+  .ps.new{background:#F7F7FD}
   .ob-toast{position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
   .ob-toast.on{opacity:1}
   `;
@@ -452,6 +467,56 @@
     var tb = document.getElementById('tl4') ? tabs[0] : tabs[1];
     if (tb && !tb.classList.contains('on')) tb.click();
   }
+
+
+  /* ================= Moment 4: How To Attack This (plan in a modal, saved by name) ================= */
+  function planCard(P) {
+    var h = '<div class="pc"><div class="pch"><h4>' + P.name + '</h4><span class="sv">✓ Saved</span></div><div class="sub">' + P.zip + ' ' + P.area + ' · saved ' + P.saved + ' · built from sales, loans, signals and your team’s touches in this ZIP</div>' +
+      '<div class="gl"><b>Goal.</b> ' + P.goal + '</div><div class="gl"><b>Why this ZIP now.</b> ' + P.why + '</div>';
+    P.steps.forEach(function (st, i) {
+      h += '<div class="ps' + (st.added ? ' new' : '') + '"><div class="n">' + (i + 1) + '</div><div class="tt">' + st.t + (st.when ? '<span class="wh">' + st.when + '</span>' : '') + '</div>' +
+        (st.who ? '<dl><dt>Who</dt><dd>' + st.who + '</dd><dt>What to say</dt><dd>' + st.say + '</dd><dt>Target</dt><dd>' + st.target + '</dd></dl>' : '<div class="bd">' + st.body + '</div>') + '</div>';
+    });
+    return h + '<div class="gl" style="border-top:1px solid #E6E3DE;padding-top:10px;margin:6px 0 0"><b>What to track.</b> ' + P.track + '</div></div>';
+  }
+  window.attackPlan = function (P) {
+    P.saved = 'Nov 13, 2026';
+    if (window.orbitSavePlan) window.orbitSavePlan(P);
+    window.openModal('✦ How To Attack This · ' + P.zip + ' ' + P.area, '', '');
+    body().innerHTML = '<div class="ox-log" id="ox-log"><div class="ox-msg u">' + P.prompt + '</div>' +
+      '<div class="ox-who">✦ Orbit</div><div class="ox-msg a" style="max-width:100%;background:#F7F6F3">Here’s a plan for ' + P.zip + ' ' + P.area + '. Ask me to change anything, or expand a step.<div id="pcard">' + planCard(P) + '</div></div>' +
+      '<div class="ox-who">✦ Orbit</div><div class="ox-msg a">I saved this as <b>' + P.name + '</b>. You don’t need to keep this window open. While you build the list, set up the campaign or make the calls, open Orbit from any screen and ask for “' + P.name + '” to see it again.</div></div>' +
+      '<div class="ox-sugg" id="ox-sugg"><span class="lbl">Ask a follow-up</span></div>' +
+      '<div class="ox-in"><input type="text" id="ox-q" placeholder="Ask Orbit about this plan…"><button id="ox-go">Ask</button></div>';
+    var log = $('#ox-log'), sugg = $('#ox-sugg');
+    function save() { if (window.orbitSavePlan) window.orbitSavePlan(P); $('#pcard').innerHTML = planCard(P); }
+    var F = [
+      ['Add a step for owners who don’t respond', function () {
+        P.steps.push({ added: true, t: 'Send a second letter to owners who didn’t scan, reply or pick up', when: 'Week 5', body: 'Use a different angle from the first piece, such as a recent nearby sale. Then call the Tier A owners on that list one more time.' });
+        save(); return 'Added step ' + P.steps.length + ' and updated <b>' + P.name + '</b>. Owners who have already said no or asked not to be contacted are left out of it.';
+      }],
+      ['Turn step 1 into a call script', function () {
+        var s1 = P.steps[0];
+        return '<b>Opening.</b> ' + (s1.say || '“Hi, this is Nolan with Prescott. I work with owners in ' + P.zip + ' and wanted to share what buildings near yours are selling for.”') + '<br><b>If they’re curious.</b> “I can put together a free, no-obligation look at where your building stands. Would next week work?”<br><b>If they’re not selling.</b> “Totally fair. Can I send you the recent sales on your street so you have them?”<br>Say “add this to the plan” if you want it saved with step 1.';
+      }],
+      ['Shorten the plan to two weeks', function () {
+        var w = ['Days 1 to 5', 'Day 3', 'Days 8 to 14', 'Day 14'];
+        P.steps.forEach(function (st, i) { st.when = w[i] || st.when; }); save();
+        return 'Done. Calls start right away, the mailer goes out on day 3, and BOV follow-ups run in the second week. I updated the timing in <b>' + P.name + '</b>. Expect fewer BOV meetings, because owners get less time to respond to the mailer.';
+      }],
+      ['What should I do first today?', function () {
+        return 'Start step 1. Build the call list of the ' + (P.zip === '94608' ? '38 owners with 2027 loans' : 'Hot and Warm owners') + ' from Prospecting or Owner lists, then call the Hot owners first. Come back and tell me how the first calls went, and I’ll mark step 1 as started.';
+      }]
+    ];
+    F.forEach(function (f) { var b = document.createElement('button'); b.textContent = f[0]; b.onclick = function () { b.remove(); askP(f[0], f[1]); }; sugg.appendChild(b); });
+    function askP(q, fnA) {
+      msg(log, 'u', q.replace(/</g, '&lt;'));
+      setTimeout(function () { who(log); msg(log, 'a', fnA ? fnA() : 'In the live product I’d answer this from your ' + P.zip + ' data and update the plan if you ask me to. In this demo, try one of the suggested follow-ups.'); }, 350);
+    }
+    $('#ox-go').onclick = function () { var v = $('#ox-q').value.trim(); if (!v) return; $('#ox-q').value = ''; askP(v); };
+    $('#ox-q').onkeydown = function (e) { if (e.key === 'Enter') $('#ox-go').click(); };
+    foot().innerHTML = '<span class="meta lft" style="font-size:12px;color:#6B6A66">Saved as ' + P.name + ' · find it in Orbit on any screen</span><button class="btn primary" onclick="closeModal()">Done</button>';
+  };
 
   var styled = false;
   function init() {

@@ -5,7 +5,7 @@
 .cchips{display:flex;flex-wrap:wrap;gap:4px;margin:5px 0}
 .cchips button{font:inherit;font-size:11px;border:1px solid #B5B2AC;background:#fff;border-radius:9px;padding:1px 7px;cursor:pointer;color:#1E1E1E}
 .cchips button.on{background:#2D2E41;color:#fff;border-color:#2D2E41}
-.pz{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}.pz button{font:inherit;font-size:12px;border:0;background:#fff;padding:4px 10px;cursor:pointer;color:#6B6A66}.pz button.on{background:#2D2E41;color:#fff}</style><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
+.pz{display:inline-flex;border:1px solid #B5B2AC;border-radius:2px;overflow:hidden}.pz button{font:inherit;font-size:12px;border:0;background:#fff;padding:4px 10px;cursor:pointer;color:#6B6A66}.pz button.on{background:#2D2E41;color:#fff}</style><script defer src="orbit.js"></script><script defer src="modals.js"></script><script defer src="orbit-moments.js"></script><style>
 .steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
 .steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
 .steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
@@ -397,7 +397,24 @@ function planFor(z){var r=row(z);var nm=z+' '+(AREAS[z]||r.city);var st=PLAN[z]|
  ["Call within 10 days of the mailer","Start with owners who scanned or replied, then long-time owners. Offer a free value estimate (BOV)."]];
  return '<div class="pl-h">Here’s a 3-step plan for '+nm+':</div><ol>'+st.map(function(s){return '<li><b>'+s[0]+'.</b> '+s[1]+'</li>'}).join('')+'</ol>Want me to build the step 1 call list now?';}
 function attackPrompt(z){return 'Tell me how to attack '+z+' '+(AREAS[z]||row(z).city)+' to prospect new sellers';}
-function attackZip(){var z=document.getElementById('zippick').value;openOrbit(null,attackPrompt(z),{noGreet:true,top:true});}
+function buildPlan(z){var r=row(z);var nm=AREAS[z]||r.city;var P={zip:z,area:nm,name:'Pederson - '+z+' Attack Plan',prompt:attackPrompt(z)};
+if(z==='94608'){
+P.goal='Start conversations with 94608 owners who have a reason to think about selling in the next 6 to 12 months, beginning with the owners whose loans come due in 2027.';
+P.why='Buyers are competing here: 45% of 2–4 unit sales in the last 12 months drew 3 or more offers, and 68% of buildings sold empty. Owners facing a loan decision in 2027 have the most reason to hear that now.';
+P.steps=[
+{t:'Call the 38 owners whose loans likely come due in 2027',when:'Week 1 to 2',who:'38 owners in 94608 with a loan likely due in 2027. Call the 22 Hot owners first.',say:'“Buildings like yours on the Emeryville border are drawing multiple offers. With your loan coming up next year, it may be worth knowing what yours would bring.”',target:'10 conversations and 2 BOV meetings booked.'},
+{t:'Mail a Market update to every 2–4 unit owner in the ZIP',when:'Week 2',who:'Every 2–4 unit owner in 94608, minus anyone on do-not-contact.',say:'Lead with two facts: nearly half of sales drew 3+ offers, and most sold empty. Add a QR code so you can see who scans.',target:'Owners who scan move to the top of your call list the same day.'},
+{t:'Offer a free BOV to the 96 long-time owners',when:'Within 10 days of the mailer landing',who:'96 owners who have held 15 years or more. Start with anyone who scanned or replied.',say:'“You’ve owned this building a long time and the market has moved a lot. Want a free, no-obligation look at where it stands today?”',target:'3 more BOV meetings booked.'}];
+P.track='Conversations, QR scans and BOV meetings booked. Check in with Orbit after three weeks to see what is working.';
+}else{
+var st=PLAN[z]||[["Pull the Hot and Warm owners in "+z,"Start with owners who have a fresh signal and no touch in 60 days. Orbit can build and rank this list for you."],["Mail a Market update to the ZIP","Lead with the local numbers: "+r.sold+" sales in 12 months and about "+r.dom+" days on market. Add a QR code to see who scans."],["Call within 10 days of the mailer","Start with owners who scanned or replied, then long-time owners. Offer a free value estimate (BOV)."]];
+var wk=['Week 1 to 2','Week 2','Within 10 days of the mailer landing'];
+P.goal='Start conversations with '+z+' '+nm+' owners who have a reason to think about selling in the next 6 to 12 months.';
+P.why=r.sold+' 2–4 unit buildings sold here in the last 12 months, '+r.off3+'% drew 3 or more offers, and the typical sale took about '+r.dom+' days.';
+P.steps=st.map(function(s,i){return {t:s[0],when:wk[i]||'',body:s[1]}});
+P.track='Conversations, QR scans and BOV meetings booked. Check in with Orbit after three weeks to see what is working.';}
+return P;}
+function attackZip(){var z=document.getElementById('zippick').value;attackPlan(buildPlan(z));}
 window.orbitAnswer=function(q){var m=/how to attack (\d{5})/i.exec(q||'');if(m&&row(m[1]))return planFor(m[1]);return null;};
 
 function money(n){return '$'+n.toLocaleString()}
