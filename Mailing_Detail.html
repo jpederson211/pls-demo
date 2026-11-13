@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MVI letter · follow-up · Nov 2026 · Prescott Listing System</title><script defer src="orbit.js"></script><style>
+<title>MVI letter · follow-up · Nov 2026 · Prescott Listing System</title><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
 .steps{display:flex;margin-bottom:18px;background:#fff;border:1px solid #D3D0CB}
 .steps div{flex:1;padding:8px 12px;border-right:1px solid #D3D0CB;font-size:12px;color:#6B6A66}
 .steps div:last-child{border-right:0}.steps div.on{background:#2D2E41;color:#fff}.steps div.done{color:#1E1E1E}
@@ -264,7 +264,7 @@ function grp(b){b.parentNode.classList.toggle('closed')}
 function panel(id){document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
 function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
 function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
-function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+function confirmContact(el){if(el.classList.contains('off')){M.confirm('Replace Nolan Jones as the contact on mailers?',function(){el.classList.remove('off')})}else{el.classList.add('off')}}
 
 function tab(group,id,btn){document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(e){e.style.display=(e.dataset.tab===id)?'':'none'});var p=btn.parentNode;Array.prototype.forEach.call(p.children,function(b){b.classList.toggle('on',b===btn)})}
 function toggle(id){var e=document.getElementById(id);if(e)e.classList.toggle('open')}

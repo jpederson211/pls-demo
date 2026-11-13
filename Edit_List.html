@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Edit list · Prescott Listing System</title><script defer src="orbit.js"></script><style>
+<title>Edit list · Prescott Listing System</title><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
 .subtabs{display:flex;border-bottom:1px solid #D3D0CB;background:#fff;padding:0 24px;align-items:center}
 .subtabs a{text-decoration:none;color:#6B6A66;padding:10px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
 .subtabs a.on{color:#2D2E41;border-bottom-color:#2D2E41;font-weight:500}
@@ -247,7 +247,7 @@ function grp(b){b.parentNode.classList.toggle('closed')}
 function panel(id){document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
 function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
 function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
-function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+function confirmContact(el){if(el.classList.contains('off')){M.confirm('Replace Nolan Jones as the contact on mailers?',function(){el.classList.remove('off')})}else{el.classList.add('off')}}
 
 function tab(group,id,btn){document.querySelectorAll('[data-tab-group="'+group+'"]').forEach(function(e){e.style.display=(e.dataset.tab===id)?'':'none'});var p=btn.parentNode;Array.prototype.forEach.call(p.children,function(b){b.classList.toggle('on',b===btn)})}
 function toggle(id){var e=document.getElementById(id);if(e)e.classList.toggle('open')}

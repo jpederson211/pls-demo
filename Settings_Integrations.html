@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Settings · Integrations · Prescott Listing System</title><script defer src="orbit.js"></script><style>
+<title>Settings · Integrations · Prescott Listing System</title><script defer src="orbit.js"></script><script defer src="modals.js"></script><style>
 *{box-sizing:border-box}
 body{margin:0;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.4;color:#1E1E1E;background:#F7F6F3}
 .wftool{background:#1E1E1E;color:#fff;font-size:12px;padding:6px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -171,5 +171,5 @@ function grp(b){b.parentNode.classList.toggle('closed')}
 function panel(id){document.querySelectorAll('[data-panel]').forEach(function(e){e.style.display=(e.dataset.panel===id)?'':'none'});}
 function tog(el){if(el.classList.contains('dis'))return;el.classList.toggle('off')}
 function save(){var t=document.getElementById('toast');t.className='toast show';setTimeout(function(){t.className='toast'},2500)}
-function confirmContact(el){if(el.classList.contains('off')){if(confirm('Replace Nolan Jones as the contact on mailers?')){el.classList.remove('off')}}else{el.classList.add('off')}}
+function confirmContact(el){if(el.classList.contains('off')){M.confirm('Replace Nolan Jones as the contact on mailers?',function(){el.classList.remove('off')})}else{el.classList.add('off')}}
 </script></body></html>
