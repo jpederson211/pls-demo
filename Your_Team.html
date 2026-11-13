@@ -229,7 +229,11 @@ tr.sel td{background:#ECEAE4}
 .bulk{display:none;gap:8px;align-items:center;margin-bottom:8px}
 .bulk.on{display:flex}
 
-.row1{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:18px}
+.row1{margin-bottom:18px}
+.pastgrid{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+.aisum{background:#F4F3F8;border-left:3px solid #2D2E41;padding:12px 14px}.aisum p{font-size:13.5px;line-height:1.55;margin:6px 0 10px}
+.orbl{font-weight:700;color:#2D2E41;display:inline-flex;align-items:center;gap:5px;font-size:13px}.orbl svg{width:13px;height:13px}
+@media(max-width:900px){.pastgrid{grid-template-columns:1fr}}
 .row2{display:grid;grid-template-columns:1fr 2fr;gap:14px}
 .card{background:#fff;border:1px solid #D3D0CB;padding:16px}
 .card h2{font-size:15px;margin:0}
@@ -255,7 +259,7 @@ tr.sel td{background:#ECEAE4}
 .teamtbl{max-height:420px;overflow:auto}
 .teamtbl table{border:none}
 .arrow.up{color:#2E7D4F}.arrow.down{color:#B03A2E}
-.pickbox{min-height:210px;display:flex;flex-direction:column}
+.pickbox{display:flex;flex-direction:column}
 .pickempty{flex:1;display:flex;align-items:center;justify-content:center;color:#6B6A66;border:1px dashed #B5B2AC;background:#FBFAF8;margin-top:12px;font-size:13px;text-align:center;padding:14px}
 .pick4{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 </style></head><body>
@@ -281,17 +285,11 @@ tr.sel td{background:#ECEAE4}
 <div class="met" style="grid-column:3/5"><div class="l" style="display:flex;align-items:center;gap:6px"><span id="pace-l">Team pace vs goal</span><span class="xi" data-tip="Pace compares calls made so far this week with the weekly goal, either for the whole team or for you.">i</span><span class="seg2" style="margin-left:auto"><button class="on" onclick="setPace('team',this)">Team</button><button onclick="setPace('mine',this)">Mine</button></span></div><div class="v pace bad" id="pace-v">Behind by 88</div><div class="s" id="pace-s">412 calls this week · team goal 500</div></div>
 <div class="met off"><div class="l">Listings won <span class="tag">2A</span></div><div class="v">—</div><div class="s">arrives with attribution</div></div>
 </div></div></div>
-<div class="card pickbox"><h2>Past campaign performance</h2>
-<select id="cpick" onchange="pickCamp(this.value)" style="font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;border-radius:2px;background:#fff;margin-top:10px"><option value="">Pick a campaign…</option><option value="cur">Loan maturity · Telegraph corridor</option><option value="justlisted">Just listed · 3310 Grand Ave</option><option value="q3">General market · Q3 wrap</option><option value="temescal">Recent activity · Temescal · Jul 2026</option></select>
-<div id="cp-empty" class="pickempty">Pick a campaign to compare.</div>
-<div id="cp-body" style="display:none"><div class="pick4">
-<div class="met"><div class="l">Sent</div><div class="v" id="cp-sent"></div></div>
-<div class="met"><div class="l">Calls made</div><div class="v" id="cp-calls"></div></div>
-<div class="met"><div class="l">Connects</div><div class="v" id="cp-conn"></div></div>
-<div class="met"><div class="l">Appointments</div><div class="v" id="cp-appt"></div></div>
-<div class="met"><div class="l">Proposals / BOVs</div><div class="v" id="cp-bov"></div></div></div>
-<div style="margin-top:12px"><a href="Campaign_Detail.html">View campaign</a></div></div>
-</div></div>
+<div class="card pickbox" style="margin-bottom:18px"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><h2>Past campaign performance</h2><select id="cpick" onchange="pickCamp(this.value)" style="font:inherit;font-size:13px;padding:6px 8px;border:1px solid #B5B2AC;border-radius:2px;background:#fff;margin-left:auto"><option value="">Pick a campaign…</option><option value="cur">Loan maturity · Telegraph corridor</option><option value="justlisted">Just listed · 3310 Grand Ave</option><option value="q3">General market · Q3 wrap</option><option value="temescal">Recent activity · Temescal · Jul 2026</option></select></div>
+<div id="cp-empty" class="pickempty">Pick a campaign to compare with the current one.</div>
+<div id="cp-body" style="display:none;margin-top:14px"><div class="pastgrid"><div><div class="chd"><div class="thumb" id="cp-thumb"></div><div><a href="Campaign_Detail.html" id="cp-name" style="font-size:15px;font-weight:600;color:#2D2E41"></a><div class="meta" id="cp-meta"></div></div></div><div class="mets"><div class="met"><div class="l">Sent by mail</div><div class="v" id="cp-mail"></div><div class="s" id="cp-mail-s"></div></div><div class="met"><div class="l">Sent by email</div><div class="v" id="cp-email"></div><div class="s" id="cp-email-s"></div></div><div class="met"><div class="l">Email opens / link clicks</div><div class="v" id="cp-open"></div><div class="s" id="cp-open-s"></div></div><div class="met"><div class="l">Replies and QR scans</div><div class="v" id="cp-rep"></div><div class="s" id="cp-rep-s"></div></div><div class="met"><div class="l">Connects</div><div class="v" id="cp-conn"></div><div class="s" id="cp-conn-s"></div></div><div class="met"><div class="l">Appointments set</div><div class="v" id="cp-appt"></div><div class="s" id="cp-appt-s"></div></div><div class="met"><div class="l">Proposals / BOVs</div><div class="v" id="cp-bov"></div><div class="s" id="cp-bov-s"></div></div><div class="met"><div class="l">Deals underwritten</div><div class="v" id="cp-deal"></div><div class="s" id="cp-deal-s"></div></div><div class="met" style="grid-column:1/3"><div class="l">Calls made</div><div class="v" id="cp-calls"></div><div class="pbar"><i id="cp-bar"></i></div><div class="s" id="cp-calls-s"></div></div><div class="met off"><div class="l">Listings won <span class="tag">2A</span></div><div class="v">—</div><div class="s">arrives with attribution</div></div></div></div>
+<div class="aisum"><div class="orbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>Orbit AI Summary</div><p id="cp-ai"></p><a href="Campaign_Detail.html" style="font-size:12.5px">View campaign</a></div></div></div>
+</div>
 <div style="display:flex;align-items:center;margin-bottom:10px"><h2 style="font-size:15px;margin:0">Team Performance</h2><span class="seg2" style="margin-left:auto"><button class="on" onclick="setPeriod('d30',this)">Last 30 days</button><button onclick="setPeriod('d60',this)">Last 60 days</button><button onclick="setPeriod('all',this)">All time</button></span></div>
 <div class="row2">
 <div class="card" style="text-align:center"><div class="tp-label"><span id="tp-label">Top performer, last 30 days</span><span class="xi" data-tip="Top performer is the team member with the most touches in the last 30 days, with a minimum of 10 touches to qualify.">i</span></div><!-- fixed window; filter does not change this card -->
@@ -331,7 +329,13 @@ var GOAL={'Marissa Chen':[231,200],'David Weglarz':[96,120],'Nolan Jones':[23,60
 function setPace(w,btn){btn.parentNode.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b===btn)});var team=w==='team';document.getElementById('pace-l').textContent=team?'Team pace vs goal':'My pace vs goal';document.getElementById('pace-v').textContent=team?'Behind by 88':'Behind by 37';document.getElementById('pace-s').textContent=team?'412 calls this week · team goal 500':'23 calls this week · my goal 60 (Nolan Jones)'}
 var PERIOD='d30',SORT='per',DIR=-1;
 function initials(n){return n.split(' ').map(function(x){return x[0]}).join('')}
-function pickCamp(k){var e=document.getElementById('cp-empty'),b=document.getElementById('cp-body');if(!k){e.style.display='';b.style.display='none';return}var c=CAMPS[k];e.style.display='none';b.style.display='';document.getElementById('cp-sent').textContent=c.sent;document.getElementById('cp-calls').textContent=c.calls;document.getElementById('cp-conn').textContent=c.connects;document.getElementById('cp-appt').textContent=c.appts;document.getElementById('cp-bov').textContent=c.bovs}
+var PAST={"cur": {"name": "Loan maturity · Telegraph corridor", "piece": "MVI letter", "dates": "Oct 12, 2026 – now", "mail": 423, "mailS": "371 delivered · 9 returned", "email": 61, "emailS": "59 delivered · 2 bounced", "op": 34, "cl": 12, "opS": "58% opened · 20% clicked", "rep": 14, "conn": 41, "appt": 3, "bov": 2, "deal": 1, "calls": 186, "of": 411, "ai": "Strongest so far on owners with loans due: replies and connects are running ahead of past campaigns at this stage. The weak spot is call coverage, with more than half the list still to call. Finishing the queue matters more than adding owners."}, "justlisted": {"name": "Just listed · 3310 Grand Ave", "piece": "Just Listed postcard", "dates": "Aug 4 – Sep 15, 2026", "mail": 184, "mailS": "179 delivered · 5 returned", "email": 42, "emailS": "41 delivered · 1 bounced", "op": 29, "cl": 14, "opS": "71% opened · 34% clicked", "rep": 19, "conn": 24, "appt": 2, "bov": 3, "deal": 1, "calls": 112, "of": 150, "ai": "The best response rate of any campaign: a nearby listing gave owners a reason to reply, and email clicks were the highest on record. It turned only 24 connects into 3 BOVs. The lesson is to send a Just Listed piece within a week of every new listing."}, "q3": {"name": "General market · Q3 wrap", "piece": "Market update", "dates": "Jul 1 – Sep 30, 2026", "mail": 200, "mailS": "192 delivered · 8 returned", "email": 0, "emailS": "no email sent", "op": 0, "cl": 0, "opS": "—", "rep": 6, "conn": 31, "appt": 1, "bov": 1, "deal": 0, "calls": 180, "of": 200, "ai": "The team called almost the whole list, but a general market update gave owners little reason to act, so only 1 appointment came from 31 connects. No email was sent, so there was no early read on interest. Next time, narrow the list to owners with a signal."}, "temescal": {"name": "Recent activity · Temescal · Jul 2026", "piece": "MVI letter", "dates": "Jul 8 – Aug 30, 2026", "mail": 204, "mailS": "198 delivered · 6 returned", "email": 38, "emailS": "36 delivered · 2 bounced", "op": 19, "cl": 6, "opS": "53% opened · 17% clicked", "rep": 9, "conn": 28, "appt": 2, "bov": 1, "deal": 0, "calls": 164, "of": 204, "ai": "Solid connect rate among long-time Temescal owners, and 2 appointments came from calls made after an email open. Replies were low, so the letter itself did less of the work. Calling owners who open the email first is the pattern worth repeating."}};
+function pickCamp(k){var e=document.getElementById('cp-empty'),b=document.getElementById('cp-body');if(!k){e.style.display='';b.style.display='none';return}var c=PAST[k];e.style.display='none';b.style.display='';
+ function t(i,v){document.getElementById('cp-'+i).innerHTML=v}
+ t('thumb',c.piece.replace(' ','<br>'));t('name',c.name);t('meta',c.piece+' · '+c.dates);
+ t('mail',c.mail);t('mail-s',c.mailS);t('email',c.email);t('email-s',c.emailS);t('open',c.op+' <span style="font-size:13px;font-weight:400;color:#6B6A66">/ '+c.cl+'</span>');t('open-s',c.opS);
+ t('rep',c.rep);t('rep-s','inbound, campaign to date');t('conn',c.connects||c.conn);t('conn-s','spoke with an owner');t('appt',c.appt);t('appt-s','&nbsp;');t('bov',c.bov);t('bov-s','broker opinions of value sent');t('deal',c.deal);t('deal-s','&nbsp;');
+ t('calls',c.calls+' <span style="font-size:13px;font-weight:400;color:#6B6A66">of '+c.of+'</span>');document.getElementById('cp-bar').style.width=Math.round(100*c.calls/c.of)+'%';t('calls-s',Math.round(100*c.calls/c.of)+'% of the list called');t('ai',c.ai)}
 function setPeriod(p,btn){PERIOD=p;document.querySelectorAll('.seg2 button').forEach(function(b){b.classList.toggle('on',b===btn)});render()}
 function sortTeam(k,th){if(SORT===k){DIR=-DIR}else{SORT=k;DIR=-1}render()}
 function render(){var t=TEAM[PERIOD];var tp=TEAM['d30'];
