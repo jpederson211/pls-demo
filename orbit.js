@@ -268,7 +268,7 @@
 
   /* ---------- Saved attack plans (written by the How To Attack This modal) ---------- */
   var PKEY = 'pls.orbitPlans';
-  function loadPlans() { try { return JSON.parse(localStorage.getItem(PKEY) || '[]'); } catch (e) { return window.__orbitPlans || []; } }
+  function loadPlans() { var ps; try { ps = JSON.parse(localStorage.getItem(PKEY) || '[]'); } catch (e) { ps = window.__orbitPlans || []; } ps.forEach(function (p) { p.name = p.name.replace(/^Pederson - /, 'Nolan - '); }); return ps; }
   window.orbitLoadPlans = loadPlans;
   window.orbitSavePlan = function (p) {
     var ps = loadPlans().filter(function (x) { return x.name !== p.name; }); ps.unshift(p);

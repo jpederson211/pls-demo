@@ -397,7 +397,7 @@ function planFor(z){var r=row(z);var nm=z+' '+(AREAS[z]||r.city);var st=PLAN[z]|
  ["Call within 10 days of the mailer","Start with owners who scanned or replied, then long-time owners. Offer a free value estimate (BOV)."]];
  return '<div class="pl-h">Here’s a 3-step plan for '+nm+':</div><ol>'+st.map(function(s){return '<li><b>'+s[0]+'.</b> '+s[1]+'</li>'}).join('')+'</ol>Want me to build the step 1 call list now?';}
 function attackPrompt(z){return 'Tell me how to attack '+z+' '+(AREAS[z]||row(z).city)+' to prospect new sellers';}
-function buildPlan(z){var r=row(z);var nm=AREAS[z]||r.city;var P={zip:z,area:nm,name:'Pederson - '+z+' Attack Plan',prompt:attackPrompt(z)};
+function buildPlan(z){var r=row(z);var nm=AREAS[z]||r.city;var P={zip:z,area:nm,name:'Nolan - '+z+' Attack Plan',prompt:attackPrompt(z)};
 if(z==='94608'){
 P.goal='Start conversations with 94608 owners who have a reason to think about selling in the next 6 to 12 months, beginning with the owners whose loans come due in 2027.';
 P.why='Buyers are competing here: 45% of 2–4 unit sales in the last 12 months drew 3 or more offers, and 68% of buildings sold empty. Owners facing a loan decision in 2027 have the most reason to hear that now.';
