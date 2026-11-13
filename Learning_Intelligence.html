@@ -194,7 +194,8 @@ a.btn{text-decoration:none;display:inline-block}
 .proof{background:#F4F3F8;border-left:3px solid #2D2E41;padding:14px 16px}
 .proof .orbl{font-weight:700;color:#2D2E41;display:inline-flex;align-items:center;gap:5px;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.orbl svg{width:13px;height:13px}
 .proof .big{font-size:15px;line-height:1.6;margin:8px 0 6px;font-weight:400}
-.counters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.counters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.proof{margin-bottom:14px}
 .ctr{border:1px solid #E6E3DE;padding:8px 10px}.ctr .v{font-size:18px;font-weight:600}.ctr .l{font-size:11px;color:#6B6A66}
 .ctr.link{cursor:pointer;border-color:#2D2E41;background:#EEF1FA}
 .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
@@ -223,13 +224,17 @@ a.btn{text-decoration:none;display:inline-block}
 .dg p,.dg li{font-size:14px;line-height:1.55}.dg ul{padding-left:18px;margin:0}
 .dg .hl{font-size:16px;font-weight:600;line-height:1.45;background:#F4F3F8;border-left:3px solid #2D2E41;padding:10px 14px;margin:0}
 .dg table{border-collapse:collapse;font-size:13.5px}.dg td,.dg th{padding:5px 12px 5px 0;text-align:left}.dg th{font-size:11.5px;color:#6B6A66;font-weight:500}
-@media(max-width:1000px){.sumgrid,.pb{grid-template-columns:1fr}.dec{grid-template-columns:1fr}}
+@media(max-width:1000px){.counters{grid-template-columns:repeat(3,1fr)}.sumgrid,.pb{grid-template-columns:1fr}.dec{grid-template-columns:1fr}}
 </style>
 <div class="li">
 <p class="lead">Orbit AI is the intelligence inside PLS. It learns from how your team works and what gets results, then tunes PLS to fit your team. Every learning applies automatically. This page shows what Orbit AI learned, why, and the data behind it. <span class="meta">Visible to the Owner and admins only.</span></p>
 
 <!-- 4.1 Summary strip -->
 <div class="card">
+<div class="proof"><span class="orbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>How Orbit Is Learning</span>
+<div class="big">Over the last 14 weeks, Orbit has watched 1,846 of your team’s calls and 9 campaigns to see which owners pick up, which mailers get replies, and which leads turn into listings. It used that to put the most promising owners at the top of your call list and to call each type of owner at the time they answer most. The result: your team reaches 22% more owners for the same number of calls, which means more conversations, more appointments and more listings.</div>
+<div class="meta">Based on 1,846 calls · Aug 4 to Nov 10, 2026 · <a href="#log">See the learnings behind this</a></div></div>
+
 <div class="stchips">
 <div class="stc"><div class="a">Targeting</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
 <div class="stc"><div class="a">Outreach</div><div class="s"><span class="dot d-l"></span>Learning</div></div>
@@ -238,10 +243,6 @@ a.btn{text-decoration:none;display:inline-block}
 <div class="stc"><div class="a">Data</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
 <div class="stc"><div class="a">Orbit</div><div class="s"><span class="dot d-t"></span>Tuned</div></div>
 </div>
-<div class="sumgrid">
-<div class="proof"><span class="orbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>How Orbit Is Learning</span>
-<div class="big">Over the last 14 weeks, Orbit has watched 1,846 of your team’s calls and 9 campaigns to see which owners pick up, which mailers get replies, and which leads turn into listings. It used that to put the most promising owners at the top of your call list and to call each type of owner at the time they answer most. The result: your team reaches 22% more owners for the same number of calls, which means more conversations, more appointments and more listings.</div>
-<div class="meta">Based on 1,846 calls · Aug 4 to Nov 10, 2026 · <a href="#log">See the learnings behind this</a></div></div>
 <div class="counters">
 <div class="ctr"><div class="v">1,846</div><div class="l">calls analyzed</div></div>
 <div class="ctr"><div class="v">3,412</div><div class="l">touches analyzed</div></div>
@@ -249,7 +250,7 @@ a.btn{text-decoration:none;display:inline-block}
 <div class="ctr"><div class="v">6</div><div class="l">listings traced back</div></div>
 <div class="ctr"><div class="v">612</div><div class="l">Orbit questions</div></div>
 <div class="ctr link" onclick="document.getElementById('log').scrollIntoView({behavior:'smooth'})"><div class="v">6</div><div class="l">learnings this month →</div></div>
-</div></div>
+</div>
 <div class="legend" style="margin-top:10px"><span><span class="dot d-s"></span> Starting out: running defaults</span><span><span class="dot d-l"></span> Learning: pattern forming</span><span><span class="dot d-t"></span> Tuned: learnings active</span></div>
 </div>
 
