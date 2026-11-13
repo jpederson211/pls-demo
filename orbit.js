@@ -195,6 +195,7 @@
 
   /* ---------- Styles ---------- */
   var CSS = `
+  .rail nav{flex:1 1 auto!important;min-height:0;overflow-y:auto}.rail .user{flex:0 0 auto}.rail .tenant{flex:0 0 auto}
   .orbit-float{position:fixed;top:12px;right:20px;z-index:800;display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:13px;font-weight:600;
     padding:8px 14px;border:1px solid #2D2E41;background:#2D2E41;color:#fff;border-radius:999px;cursor:pointer;box-shadow:0 4px 14px rgba(45,46,65,.28)}
   .orbit-float:hover{background:#3b3c54}
