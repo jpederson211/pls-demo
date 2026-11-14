@@ -295,7 +295,7 @@
   function renderPlanChips() {
     if (!plansEl) return;
     var ps = loadPlans(); plansEl.innerHTML = '';
-    if (!ps.length) { plansEl.style.display = 'none'; return; }
+    if (!ps.length || AREA_KEY !== 'prospect') { plansEl.style.display = 'none'; return; }
     plansEl.style.display = '';
     plansEl.appendChild(el('span', 'lbl', 'Your saved plans'));
     ps.forEach(function (p) { var b = el('button', 'k-plan', '▤ ' + esc(p.name)); b.onclick = function () { ask(p.name); }; plansEl.appendChild(b); });
