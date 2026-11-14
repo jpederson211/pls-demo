@@ -368,7 +368,6 @@
     var ctx = document.getElementById('orbit-ctx'); ctx.innerHTML = '';
     if (ctxChips && ctxChips.length) ctxChips.forEach(function (c) { ctx.appendChild(el('span', 'c', esc(c))); });
     if (!logEl.dataset.greeted && !opts.noGreet) {
-      addMsg('a', 'Hi Nolan — welcome to Orbit.');
       addMsg('a', A.help);
       logEl.dataset.greeted = '1';
     }
