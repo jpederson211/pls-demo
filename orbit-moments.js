@@ -6,7 +6,7 @@
 (function () {
   var CSS = `
   .om{width:760px}
-  .ob-sec{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;border-color:#2D2E41!important;color:#2D2E41!important;font-weight:500}
+  .ob-sec{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;border-radius:999px!important;background:#fff!important;border-color:#2D2E41!important;color:#2D2E41!important;font-weight:500}
   .ob-sec:hover{background:#F2F1FA!important}
   .ob-sm{font:inherit;font-size:12px;padding:3px 9px;border:1px solid #2D2E41;background:#fff;color:#2D2E41;border-radius:999px;cursor:pointer;white-space:nowrap}
   .ob-sm:hover{background:#F2F1FA}
