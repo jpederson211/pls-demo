@@ -6,7 +6,7 @@
 (function () {
   var CSS = `
   .om{width:760px}
-  .ob-sec{display:inline-flex;align-items:center;gap:6px;border-color:#2D2E41!important;color:#2D2E41!important;font-weight:500}
+  .ob-sec{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;border-color:#2D2E41!important;color:#2D2E41!important;font-weight:500}
   .ob-sec:hover{background:#F2F1FA!important}
   .ob-sm{font:inherit;font-size:12px;padding:3px 9px;border:1px solid #2D2E41;background:#fff;color:#2D2E41;border-radius:999px;cursor:pointer;white-space:nowrap}
   .ob-sm:hover{background:#F2F1FA}
@@ -97,6 +97,12 @@
   .ps dt{color:#6B6A66}.ps dd{margin:0}
   .ps .bd{grid-column:2;font-size:12.5px;line-height:1.5}
   .ps.new{background:#F7F7FD}
+  .fn{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid #E6E3DE;border-radius:6px;margin:8px 0 10px;background:#fff}
+  .fn div{padding:8px 10px;border-right:1px solid #E6E3DE}.fn div:last-child{border-right:0}
+  .fn b{display:block;font-size:17px}.fn span{display:block;font-size:11.5px;color:#6B6A66;line-height:1.35}
+  .br ul{margin:4px 0 0;padding-left:18px;font-size:12.5px;line-height:1.55}.br ul li{margin-bottom:3px}
+  .br .sh{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6B6A66;margin:12px 0 2px}
+  .thm{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.thm span{font-size:12px;border:1px solid #D3D0CB;border-radius:12px;padding:2px 10px;background:#fff}.thm b{margin-left:4px}
   .ob-toast{position:fixed;bottom:40px;right:20px;background:#1E1E1E;color:#fff;padding:10px 14px;font-size:12px;border-radius:2px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
   .ob-toast.on{opacity:1}
   `;
@@ -516,6 +522,54 @@
     $('#ox-go').onclick = function () { var v = $('#ox-q').value.trim(); if (!v) return; $('#ox-q').value = ''; askP(v); };
     $('#ox-q').onkeydown = function (e) { if (e.key === 'Enter') $('#ox-go').click(); };
     foot().innerHTML = '<span class="meta lft" style="font-size:12px;color:#6B6A66">Saved as ' + P.name + ' · find it in Orbit on any screen</span><button class="btn primary" onclick="closeModal()">Done</button>';
+  };
+
+
+  /* ================= Moment 8: Campaign Orbit AI Summary (chat modal) ================= */
+  var CAMPAIGNS = {
+    telegraph: {
+      name: 'Loan maturity · Telegraph corridor', status: 'Calling · about 1 week to go',
+      meta: 'Owner list: Absentee 2–4 units · 94609, 94610 · MVI letter plus a follow-up letter · Goal: 3 listing appointments by Dec 15',
+      lead: 'This campaign is still running. The letters have landed, the team has called a little under half the list, and it has booked 3 appointments so far, which matches the goal of 3 by Dec 15. None has turned into a listing yet.',
+      funnel: [['423', 'letters sent'], ['371', 'delivered (88%)'], ['186', 'owners called, 45% of 411'], ['41', 'spoke, 22% of called'], ['3', 'appointments, 7% of spoke'], ['0', 'listings so far']],
+      stood: [
+        'Owners in 94609 picked up more often than owners in 94610. The team spoke with 27 of the 104 called in 94609 (26%), compared with 14 of 82 in 94610 (17%).',
+        'All 3 appointments came from Tier A owners, who are about a third of the list.',
+        'Calls made within 5 days of a letter landing reached the owner 31% of the time. Calls made later reached them 15% of the time.',
+        '29 owners scanned the QR code on the letter. 18 of them have not been reached by phone yet.',
+        '52 letters came back undeliverable, mostly to old mailing addresses.'
+      ],
+      themes: [['Not selling, asked about rents', 14], ['Refinancing with their current lender', 9], ['Wants to know what the building is worth', 6], ['Call back after the new year', 5]],
+      src: 'From this campaign’s mailings, call log, QR scans and call notes · updated today at 6:00 AM. Groups smaller than 5 owners are not shown as rates.',
+      sugg: [
+        ['Give me suggestions for how we can improve', '<b>Here’s what I’d try, based on this campaign’s own numbers.</b> These are suggestions, not certainties.<ol style="margin:6px 0 0;padding-left:18px"><li><b>Call the 18 owners who scanned the QR code but haven’t been reached.</b> They looked at the letter on purpose, so they’re the warmest people left on the list.</li><li><b>Call sooner after each letter lands.</b> Calls in the first 5 days reached owners about twice as often. For the follow-up letter, plan the calling days around the delivery date.</li><li><b>Give the 9 owners who are refinancing a reason to compare.</b> A short note showing what a sale would net next to what the new loan would cost gives them something useful instead of a pitch.</li><li><b>Send the 14 owners who asked about rents a rent update for their block.</b> They told us what they care about.</li><li><b>Fix the 52 returned addresses before the next run.</b> That’s about 1 in 8 letters that never reached anyone.</li></ol>'],
+        ['What does this campaign tell me for future campaigns?', '<b>Four lessons worth carrying forward.</b> This is one campaign, so treat them as early signs rather than rules.<ol style="margin:6px 0 0;padding-left:18px"><li><b>The loan-maturity angle works better in 94609 than in 94610.</b> Next time in 94610, try leading with recent sales or rents instead.</li><li><b>Tier A owners are where the appointments come from.</b> Call them first in every campaign, and consider sending them a second letter.</li><li><b>Timing matters as much as the letter.</b> Line up the calling days with the expected delivery date when you schedule a send.</li><li><b>Refinancing is the most common reason owners aren’t selling.</b> A refinance-versus-sell comparison could become a standard follow-up piece.</li></ol>Orbit AI Learning will also pick these up as more campaigns finish.'],
+        ['Who should we call next?', 'Start with the <b>18 owners who scanned the QR code but haven’t been reached</b>, then the <b>Tier A owners in 94609</b> who haven’t been called yet (23 of them). After that, keep working down the call queue. At the current pace the team will finish the list in about a week.']
+      ]
+    }
+  };
+  window.campaignSummary = function (key) {
+    var c = CAMPAIGNS[key]; if (!c) return;
+    window.openModal('✦ Orbit AI Summary · ' + c.name, '', '');
+    body().innerHTML = '<div class="ox-log" id="ox-log"><div class="ox-who">✦ Orbit</div>' +
+      '<div class="ox-msg a" style="max-width:100%;background:#F7F6F3">Here’s where this campaign stands. Ask me anything below.' +
+      '<div class="br"><h4>' + c.name + '</h4><div class="ct">' + c.status + ' · ' + c.meta + '</div>' +
+      '<div style="font-size:13px;line-height:1.55">' + c.lead + '</div>' +
+      '<div class="fn">' + c.funnel.map(function (f) { return '<div><b>' + f[0] + '</b><span>' + f[1] + '</span></div>'; }).join('') + '</div>' +
+      '<div class="sh">What stood out</div><ul>' + c.stood.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+      '<div class="sh">What owners told us on the phone</div><div class="thm">' + c.themes.map(function (t) { return '<span>' + t[0] + '<b>' + t[1] + '</b></span>'; }).join('') + '</div>' +
+      '<div class="src">' + c.src + '</div></div></div></div>' +
+      '<div class="ox-sugg" id="ox-sugg"><span class="lbl">Ask a follow-up</span></div>' +
+      '<div class="ox-in"><input type="text" id="ox-q" placeholder="Ask Orbit about this campaign…"><button id="ox-go">Ask</button></div>';
+    var sugg = $('#ox-sugg'), log = $('#ox-log');
+    c.sugg.forEach(function (s) { var bt = document.createElement('button'); bt.textContent = s[0]; bt.onclick = function () { bt.remove(); askC(s[0], s[1]); }; sugg.appendChild(bt); });
+    function askC(q, a) {
+      msg(log, 'u', q.replace(/</g, '&lt;'));
+      setTimeout(function () { who(log); msg(log, 'a', a || 'In the live product I’d answer this from this campaign’s records. In this demo, try one of the suggested questions.'); }, 350);
+    }
+    $('#ox-go').onclick = function () { var v = $('#ox-q').value.trim(); if (!v) return; $('#ox-q').value = ''; askC(v); };
+    $('#ox-q').onkeydown = function (e) { if (e.key === 'Enter') $('#ox-go').click(); };
+    foot().innerHTML = '<button class="btn primary" onclick="closeModal()">Done</button>';
   };
 
   var styled = false;
