@@ -161,6 +161,22 @@ a{color:var(--navy)}
 .bsec li:last-child{margin:0}
 .bsec .stmt{margin:8px 0 0}
 .bsec .stmt:first-of-type{margin-top:0}
+.strat{background:#fff;border:1.5px solid var(--navy);border-radius:16px;padding:16px;margin:4px 0 16px}
+.strat .h{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.strat .h b{font-size:16px;white-space:nowrap}
+.strat .h .pill{margin-left:auto}
+.strat .status{background:var(--lav);border:1px solid var(--lavline);border-radius:10px;padding:9px 12px;font-size:14px;line-height:1.45;margin-bottom:14px}
+.strat .status b{display:block;font-size:14.5px;color:var(--navy)}
+.strat ol{margin:0;padding:0;list-style:none;counter-reset:st}
+.strat ol li{counter-increment:st;position:relative;padding:0 0 12px 36px;font-size:15px;line-height:1.55}
+.strat ol li::before{content:counter(st);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.strat ol li b{display:block}
+.strat .say{display:block;border-left:3px solid var(--lavline);padding-left:10px;margin-top:4px;color:#3A3A48;font-style:italic}
+.strat .avoid{background:#FFF8D6;border:1px solid #E6CF5C;border-radius:10px;padding:9px 12px;font-size:14px;line-height:1.45;margin:2px 0 14px}
+.strat .basis{border-top:1px solid var(--soft);padding-top:10px}
+.strat .basis h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600}
+.strat .basis div{display:flex;gap:8px;font-size:13.5px;line-height:1.45;margin:0 0 6px}
+.strat .basis div i{font-style:normal;color:var(--navy);flex:0 0 14px}
 .watch{background:#FFF8D6;border:1px solid #E6CF5C;border-radius:12px;padding:11px 14px;font-size:14px;line-height:1.5;margin:4px 0 18px}
 .opener{border-left:3px solid var(--navy);padding:4px 0 4px 10px;font-size:14.5px;margin:0}
 .chat{margin-top:6px}
@@ -513,13 +529,12 @@ function brief(k){
   var asked=S.chat[k].map(function(m){return m[0]}); var chips=b.chips.filter(function(c){return asked.indexOf(c[0])<0});
   $app.innerHTML=hdr('Attack Brief',{right:'<span class="orb">✦</span>'})+'<div class="scroll" id="bscroll">'+
     '<div class="rhead" style="margin-bottom:10px"><h1 style="font-size:20px">'+esc(o.name)+'</h1><div class="who">'+esc(o.contact)+'</div></div>'+contactRow(o)+'<div style="height:12px"></div>'+
-    '<div class="watch">⚑ '+esc(b.watch)+'</div>'+
+    strategyHtml(k)+
     bs('Who they are','<p>'+esc(b.who)+'</p>')+
     bs('What they own','<ul>'+b.own.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>')+
     bs('What we’ve sent and said','<p>'+esc(b.sent)+'</p>')+
     bs('Why now','<p>'+esc(b.why)+'</p>')+
     bs('What they’ve told us',told.length?told.map(function(s){return '<div class="stmt">“'+esc(s.t)+'” '+(s.verified?'<span class="pill ok">verified</span>':'<span class="pill warn">unverified</span>')+(s.old?' <span class="pill warn">may be out of date</span>':'')+'<div class="by">'+esc(s.by)+'</div></div>'}).join(''):'<p class="mute">Nothing on file yet. Debriefs add to this.</p>')+
-    bs('Talking points','<ul>'+b.points.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>')+
     bs('Who on the team has the relationship','<p>'+esc(b.team)+'</p>')+
     '<div class="xs mute">'+esc(b.src)+'. Orbit never predicts who will sell or gives a value.</div>'+
     '<div class="sec">Ask the brief</div><div class="chat" id="chat">'+S.chat[k].map(function(m){return '<div class="msg u">'+esc(m[0])+'</div><div class="msg a">'+esc(m[1])+'<div class="src">Source: '+esc(m[2])+'</div></div>'}).join('')+'</div>'+
@@ -527,6 +542,58 @@ function brief(k){
   '</div>'+
   '<div class="askbar"><input id="askq" placeholder="Ask about '+esc(o.first)+'…" onkeydown="if(event.key===\'Enter\')askTyped(\''+k+'\')"><button class="mic" onclick="askVoice(\''+k+'\')">'+ICON.mic+'</button><button class="send" onclick="askTyped(\''+k+'\')">↑</button></div>'+
   '<div class="bfoot"><button class="btn ghost" onclick="back()">Done</button><button class="btn primary" onclick="startDebrief(\''+k+'\')">Log this touch →</button></div>';
+}
+/* Suggested Strategy: depends on where the conversation stands */
+var STRAT={
+  haddad:{
+    open:{tag:'Re-open the conversation',status:'No broker conversation in 5 months (David, Jun 18). Marissa’s voicemail on Nov 11 hasn’t been returned. The Grand loan matures in 58 days.',
+      steps:[
+        ['Open with the voicemail, not a pitch','So this doesn’t feel like a second cold call.','“Sam, it’s Nolan with Prescott. Marissa on my team left you a message this week about Grand.”'],
+        ['Ask how he’s handling the Jan 10 maturity','Refinance, sell, or hold. Let him tell you which.','“With the Grand loan coming due in January, how are you thinking about it?”'],
+        ['Bring one useful fact','Regional banks are lending again and cap rates are tightening. It was the lead in the Oct 21 letter he received.',null],
+        ['Offer a BOV as a comparison, not a listing pitch','A refinance and a sale, side by side, before he signs new loan terms.',null],
+        ['Widen to the portfolio only if he engages','Lakeshore and Mandana have loans estimated for 2027.',null],
+        ['Close by text','He prefers texts. Offer to text him the recent 6-unit sales near Lake Merritt.',null]],
+      avoid:'His Aug 2025 “hold Grand long term” comment is over a year old. Test it; don’t assume it. Don’t quote a number for any of his buildings.',
+      basis:['Loan on 3120 Grand matures Jan 10, 2027; no new loan recorded','2 more buildings with loans estimated for 2027','Email flyer Sep 3 not opened: phone and text work better','Prefers text messages (told David, Jun 18)','No broker has met him at a building']},
+    follow:{tag:'Continue from today’s meeting',status:'You met Sam at 3120 Grand today. He’s talking to his lender about a refinance and hasn’t decided. Insurance is up about 40% and his son Adam is taking over the books.',
+      steps:[
+        ['Send what he asked for, by text, by Monday','The recent 6-unit sales around Lake Merritt. Keeps the thread warm without a pitch.',null],
+        ['Bring something on insurance','He raised the 40% increase himself. A short note on what other Grand-area owners are seeing is useful to him.',null],
+        ['Include Adam next time','He’s taking over the books, so the next conversation should include him.','“Would it help if Adam joined us next time?”'],
+        ['In March, open with the refinance','Ask where the refinance landed before anything else.','“Sam, last time you were waiting on the refi numbers. How did they come in?”'],
+        ['If the numbers didn’t work, offer the BOV','He said he’d think about selling Grand next year in that case. A BOV lets him compare.',null]],
+      avoid:'He told you he hasn’t decided. Don’t treat “might sell next year” as a listing lead yet, and don’t quote a number.',
+      basis:['Today’s debrief (Nov 13): refinance undecided, possible sale next year','Insurance up ~40% and son Adam involved (Sam told you today)','Callback set for March','Loan on 3120 Grand matures Jan 10, 2027']}
+  },
+  reyes:{follow:{tag:'Follow up on her QR scan',status:'Teresa scanned the code on the MVI letter on Oct 29. Your Oct 24 call went unanswered (no voicemail set up). The 4512 Telegraph loan matured in March.',
+      steps:[['Lead with the letter she scanned','She looked for herself, so start there.','“Teresa, you scanned the code on our Telegraph letter. Most owners who do want to know where their building stands.”'],
+        ['Offer a BOV','It answers her question without quoting a number on the phone.',null],
+        ['Offer to email the recent Telegraph sales','Something concrete to send right after the call.',null]],
+      avoid:'Don’t quote a value on the call. Her on-site manager isn’t the decision maker.',
+      basis:['QR scan Oct 29, 8 days after delivery','Loan on 4512 Telegraph matured Mar 4, 2026; no new loan recorded','Owns 3 more buildings in 94608–94609']}}
+};
+function strategyFor(k){
+  var cfg=STRAT[k]||{}, added=(S.added[k]||[]).length>0;
+  if(added&&cfg.follow&&k==='haddad') return cfg.follow;
+  if(cfg.open&&!added) return cfg.open;
+  if(cfg.follow) return cfg.follow;
+  var o=OWNERS[k], t=ownerTouches(k).filter(function(x){return !x.bulk})[0];
+  var recent=t&&/Today|Yesterday|Nov|Oct/.test(t.date);
+  return recent?{tag:'Pick up where it left off',status:'Last touch: '+t.date+' · '+t.who+' · '+t.sum,
+      steps:[['Refer back to the last touch','Start from what they last said or did.',null],['Answer what they asked for','If they asked a question, lead with the answer.',null],['Offer a BOV or recent sales','Something concrete to send after the call.',null]],
+      avoid:'Don’t quote a number on the call.',basis:[o.signal[0],o.signal[1]]}:
+    {tag:'Open the conversation',status:t?'No conversation since '+t.date+'.':'The team hasn’t spoken with them yet.',
+      steps:[['Introduce yourself with a reason','Use the signal below as the reason for calling.',null],['Ask how they’re thinking about the building','Let them tell you their plans.',null],['Offer recent nearby sales','Easy to say yes to.',null]],
+      avoid:'Don’t quote a number on the call.',basis:[o.signal[0],o.signal[1]]};
+}
+function strategyHtml(k){var g=strategyFor(k);
+  return '<div class="strat"><div class="h"><span class="orb">✦</span><b>Suggested Strategy</b><span class="pill lav">'+esc(g.tag)+'</span></div>'+
+    '<div class="status"><b>Where it stands</b>'+esc(g.status)+'</div>'+
+    '<ol>'+g.steps.map(function(x){return '<li><b>'+esc(x[0])+'</b>'+esc(x[1])+(x[2]?'<span class="say">'+esc(x[2])+'</span>':'')+'</li>'}).join('')+'</ol>'+
+    '<div class="avoid"><b>Avoid:</b> '+esc(g.avoid)+'</div>'+
+    '<div class="basis"><h4>Intelligence behind this</h4>'+g.basis.map(function(x){return '<div><i>•</i><span>'+esc(x)+'</span></div>'}).join('')+'</div>'+
+    '<div class="xs mute" style="margin-top:8px">A suggested approach, not a prediction. Orbit never predicts who will sell.</div></div>';
 }
 function bs(h,body){return '<div class="bsec"><h3>'+h+'</h3>'+body+'</div>'}
 function askChip(k,i){var b=BRIEF[k]||genericBrief(k);var c=b.chips[i];S.chat[k].push([c[0],c[1],c[2]]);brief(k);scrollEnd()}
@@ -769,11 +836,12 @@ var STEPS=[
     ['1 · Home','Search, Debrief, My active prospects (My list / In progress)',function(){fresh();go('home')}],
     ['2 · Find an owner','Type “Haddad” or tap the mic',function(){fresh();go('search/Haddad')}],
     ['3 · Owner record','Signal, buildings, team touch history, statements',function(){fresh();go('owner/haddad')}],
-    ['4 · Attack Brief','Brief for the meeting, with “What they’ve told us”',function(){fresh();go('brief/haddad')}],
+    ['4 · Attack Brief','Suggested Strategy first: how to re-open a cold owner',function(){fresh();go('brief/haddad')}],
     ['5 · Ask the brief','Tap a question chip, type, or use the mic',function(){fresh();S.chat.haddad=[BRIEF.haddad.chips[3]];go('brief/haddad')}],
     ['6 · Debrief after the meeting','Record → transcript → 2 questions',function(){fresh();startDebrief('haddad')}],
     ['7 · Review and save this Debrief','One touch with its follow-ups and what Sam told us',function(){fresh();jumpCard('haddad')}],
-    ['8 · Saved → updated record','View updated record shows the new touch on top',function(){fresh();jumpCard('haddad');saveAll()}]
+    ['8 · Saved → updated record','View updated record shows the new touch on top',function(){fresh();jumpCard('haddad');saveAll()}],
+    ['9 · Brief after the debrief','Suggested Strategy switches to continuing the conversation',function(){fresh();jumpCard('haddad');saveAll();S.db=null;go('brief/haddad')}]
   ]],
   ['Other states',[
     ['Property record','3120 Grand Ave: touches for this building only',function(){fresh();go('property/grand3120')}],
