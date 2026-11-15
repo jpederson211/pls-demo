@@ -324,6 +324,8 @@ var OWNERS = {
   castillo:{ name:'Helen Castillo', contact:'Helen Castillo', first:'Helen', phone:'(510) 555-0129', kind:'Individual · out of area',
     signal:['Scanned the QR code yesterday','Recent activity postcard, delivered Nov 9'], props:['walavista612'],
     touches:[{id:'c1',date:'Yesterday',who:'Owner',how:'QR',prop:'612 Walavista Ave',out:'Scanned',sum:'Viewed the 94610 sales page for about two minutes.',notes:'Opened the 2-unit sale at 544 Lester Ave.'}] },
+  park1840:{ name:'1840 Park LLC', contact:'No named contact on file', first:'the owner', phone:'(510) 555-0150', kind:'LLC · single building',
+    signal:['Long hold, never contacted','Owned 1840 Park Blvd for 19 years'], props:['park1840'], touches:[] },
   manila:{ name:'Manila Ave Partners LP', contact:'Robert Lin', first:'Robert', phone:'(510) 555-0174', kind:'Limited partnership',
     signal:['Loan likely comes due in 2027','Last touch was a July email'], props:['manila540'],
     touches:[{id:'m1',date:'Jul 9',who:'Edson Ruiz',how:'Email',prop:'540 Manila Ave',out:'Opened',sum:'Recent activity flyer.',notes:'Opened.'}] }
@@ -343,6 +345,7 @@ var PROPS = {
   lee412:{a:'412 Lee St',z:'94610',u:4,o:'alcatraz',held:'since 2017',apn:'010-0799-024'},
   grand475:{a:'475 Grand Ave',z:'94610',u:12,o:'grandave',held:'since 2004',apn:'010-0806-002',sig:'Mailing address changed'},
   walavista612:{a:'612 Walavista Ave',z:'94610',u:2,o:'castillo',held:'since 1998',apn:'011-0870-012',sig:'QR scan yesterday'},
+  park1840:{a:'1840 Park Blvd',z:'94606',u:8,o:'park1840',held:'since 2007',apn:'022-0341-015',sig:'Held 19 years; never contacted'},
   manila540:{a:'540 Manila Ave',z:'94609',u:12,o:'manila',held:'since 2010',apn:'013-1131-008',sig:'Loan likely due 2027'}
 };
 var BRIEF = {
@@ -427,12 +430,13 @@ function home(){
     else b+='<div class="banner"><div><b>Uploading your debrief…</b>Recorded '+S.queued.at+' · '+S.queued.len+'</div></div>';
   }
   if(S.draft) b+='<div class="banner"><div style="flex:1"><b>Finish your debrief</b>'+esc(S.draft.label)+'</div><button class="btn sm primary" onclick="resumeDraft()">Finish</button></div>';
-  var tab=S.homeTab||'mine';
-  var MY=['grand3120','lakeshore3301','telegraph4512','vernon88','walavista612','manila540'];
-  var INP=[['telegraph4512','BOV meeting Tue, Nov 17'],['vernon88','Owner replied; sending Vernon sales'],['grand475','Confirming new owner contact']];
-  var rec=tab==='mine'?MY.map(function(k){return liProp(k)}).join(''):
-    INP.map(function(x){var p=PROPS[x[0]];return '<div class="li" onclick="go(\'property/'+x[0]+'\')"><span class="ic">▣</span><span class="tx"><b>'+esc(p.a)+'</b><span>'+esc(OWNERS[p.o].name)+'</span><span style="color:var(--navy)">In progress · '+esc(x[1])+'</span></span><span class="chev">›</span></div>'}).join('');
-  var seg='<div class="seg"><button class="'+(tab==='mine'?'on':'')+'" onclick="S.homeTab=\'mine\';home()">My Property List <span>6</span></button><button class="'+(tab==='inp'?'on':'')+'" onclick="S.homeTab=\'inp\';home()">In progress <span>3</span></button></div>';
+  var tab=S.homeTab||'active';
+  var ACTIVE=[['telegraph4512','BOV meeting Tue, Nov 17'],['vernon88','Owner replied; sending Vernon sales'],['grand475','Confirming new owner contact']];
+  var ENGAGE=[['grand3120','Loan matures in 58 days; no broker conversation in 5 months'],['walavista612','Owner scanned the postcard QR code yesterday'],['manila540','Loan likely due 2027; last touch was a July email'],['lakeshore3301','Loan estimated for 2027; never called'],['park1840','Held 19 years; never contacted']];
+  function row(x,label){var p=PROPS[x[0]];return '<div class="li" onclick="go(\'property/'+x[0]+'\')"><span class="ic">'+(tab==='engage'?'✦':'▣')+'</span><span class="tx"><b>'+esc(p.a)+'</b><span>'+esc(OWNERS[p.o].name)+'</span><span style="color:var(--navy);white-space:normal">'+label+esc(x[1])+'</span></span><span class="chev">›</span></div>'}
+  var rec=tab==='active'?ACTIVE.map(function(x){return row(x,'In progress · ')}).join(''):ENGAGE.map(function(x){return row(x,'Why: ')}).join('');
+  var seg='<div class="seg"><button class="'+(tab==='active'?'on':'')+'" onclick="S.homeTab=\'active\';home()">Active Leads <span>'+ACTIVE.length+'</span></button><button class="'+(tab==='engage'?'on':'')+'" onclick="S.homeTab=\'engage\';home()">Leads to Engage <span>'+ENGAGE.length+'</span></button></div>'+
+    '<div class="xs mute" style="margin:-4px 2px 8px">'+(tab==='active'?'Properties you’ve marked In progress.':'Suggested by Orbit AI from recent signals. Not touched by the team in about 60 days.')+'</div>';
   $app.innerHTML='<div class="scroll" style="padding-top:8px">'+
     '<div class="hello"><h1>Orbit AI Mobile</h1><div class="avatar">NJ</div></div>'+
     '<div class="search"><span class="mute">⌕</span><input id="q" placeholder="Owner, address or APN" autocomplete="off" onkeydown="if(event.key===\'Enter\')go(\'search/\'+encodeURIComponent(this.value))" oninput="liveSearch(this.value)"><button class="mic" aria-label="Search by voice" onclick="voiceSearch()">'+ICON.mic+'</button></div>'+
@@ -833,7 +837,7 @@ function iosAlert(){var a=document.createElement('div');a.className='alert';a.in
 /* ---------------- review guide ---------------- */
 var STEPS=[
   ['Main path',[
-    ['1 · Home','Search, Debrief, My active prospects (My list / In progress)',function(){fresh();go('home')}],
+    ['1 · Home','Search, Debrief, Active Leads / Leads to Engage',function(){fresh();go('home')}],
     ['2 · Find an owner','Type “Haddad” or tap the mic',function(){fresh();go('search/Haddad')}],
     ['3 · Owner record','Signal, buildings, team touch history, statements',function(){fresh();go('owner/haddad')}],
     ['4 · Attack Brief','Suggested Strategy first: how to re-open a cold owner',function(){fresh();go('brief/haddad')}],
