@@ -577,18 +577,18 @@ function debrief(){
   }
   if(d.step==='owner'){
     var picked=d.ownerGuess; var o=OWNERS[picked];
-    var body='<div class="orbmsg"><span class="o">✦</span><div class="b">This sounds like <b>'+esc(o.contact.split(',')[0])+'</b> of '+esc(o.name)+', owner of '+esc(PROPS[o.props[0]].a)+', '+esc(PROPS[o.props[1]].a)+' and '+(o.props.length-2)+' more. Right?</div></div>';
+    var body='<div class="orbmsg"><span class="o">✦</span><div class="b">This sounds like <b>'+esc(o.contact.split(',')[0])+'</b> of '+esc(o.name)+', about <b>'+esc(PROPS[o.props[0]].a)+'</b>. Right?</div></div>';
     if(d.picking){
       body+='<div class="opts"><div class="xs mute">Top matches from what you said</div>'+['haddad','grandave','alcatraz'].map(function(k){return '<button onclick="pickOwner(\''+k+'\')">'+esc(OWNERS[k].name)+'<span class="s">'+esc(OWNERS[k].contact)+' · '+OWNERS[k].props.length+' building(s)</span></button>'}).join('')+
         '<div class="search" style="margin-top:4px"><span class="mute">⌕</span><input placeholder="Search another owner" oninput="pickSearch(this.value)"></div><div id="pickres"></div></div>';
     } else {
       body+='<div class="opts"><button class="on" onclick="pickOwner(\''+picked+'\')">Yes, '+esc(o.contact.split(',')[0])+'</button><button onclick="S.db.picking=true;debrief()">Pick another</button></div>';
     }
-    $app.innerHTML=H+'<div class="scroll"><div class="sec" style="margin-top:4px">Who was this with?</div>'+body+'<div class="ro">One owner per debrief. Orbit never creates a new owner from a debrief.</div></div>';
+    $app.innerHTML=H+'<div class="scroll"><div class="sec" style="margin-top:4px">Who and which property?</div>'+body+'<div class="ro">One owner and one property per debrief. Orbit never creates a new owner from a debrief.</div></div>';
     return;
   }
   if(d.step==='two'){
-    $app.innerHTML=H+'<div class="scroll"><div class="orbmsg"><span class="o">✦</span><div class="b">You also mentioned <b>Michael Tran</b> (Grand Ave Holdings). A debrief covers one owner, so I’ll keep this one to Sam Haddad. Want a separate debrief for Michael after this?</div></div>'+
+    $app.innerHTML=H+'<div class="scroll"><div class="orbmsg"><span class="o">✦</span><div class="b">You also mentioned <b>Michael Tran</b> (Grand Ave Holdings). A debrief covers one owner and one property, so I’ll keep this one to Sam Haddad and 3120 Grand. Want a separate debrief for Michael after this?</div></div>'+
       '<div class="opts"><button onclick="S.pendingTran=true;S.db.step=\'qs\';debrief()">Yes, after this one</button><button onclick="S.pendingTran=false;S.db.step=\'qs\';debrief()">No, skip Michael</button></div></div>';
     return;
   }
