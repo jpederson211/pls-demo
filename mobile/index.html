@@ -107,6 +107,10 @@ a{color:var(--navy)}
 .banner.off{background:#FFF8D6;border-color:#E6CF5C}
 .banner b{display:block;font-size:14px}
 .banner .btn{margin-left:auto;flex:0 0 auto}
+.seg{display:flex;background:#E6E3DE;border-radius:10px;padding:3px;margin:0 0 10px}
+.seg button{flex:1;border:none;background:none;border-radius:8px;min-height:36px;font-size:14px;font-weight:500;color:var(--mute)}
+.seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.seg button span{font-size:12px;color:var(--mute);margin-left:4px}
 .list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--soft);cursor:pointer;min-height:56px}
 .li:last-child{border-bottom:none}
@@ -402,14 +406,19 @@ function home(){
     else b+='<div class="banner"><div><b>Uploading your debrief…</b>Recorded '+S.queued.at+' · '+S.queued.len+'</div></div>';
   }
   if(S.draft) b+='<div class="banner"><div style="flex:1"><b>Finish your debrief</b>'+esc(S.draft.label)+'</div><button class="btn sm primary" onclick="resumeDraft()">Finish</button></div>';
-  var rec=S.recents.map(function(k){return OWNERS[k]?liOwner(k):liProp(k)}).join('');
+  var tab=S.homeTab||'mine';
+  var MY=['grand3120','lakeshore3301','telegraph4512','vernon88','walavista612','manila540'];
+  var INP=[['telegraph4512','BOV meeting Tue, Nov 17'],['vernon88','Owner replied; sending Vernon sales'],['grand475','Confirming new owner contact']];
+  var rec=tab==='mine'?MY.map(function(k){return liProp(k)}).join(''):
+    INP.map(function(x){var p=PROPS[x[0]];return '<div class="li" onclick="go(\'property/'+x[0]+'\')"><span class="ic">▣</span><span class="tx"><b>'+esc(p.a)+'</b><span>'+esc(OWNERS[p.o].name)+'</span><span style="color:var(--navy)">In progress · '+esc(x[1])+'</span></span><span class="chev">›</span></div>'}).join('');
+  var seg='<div class="seg"><button class="'+(tab==='mine'?'on':'')+'" onclick="S.homeTab=\'mine\';home()">My Property List <span>6</span></button><button class="'+(tab==='inp'?'on':'')+'" onclick="S.homeTab=\'inp\';home()">In progress <span>3</span></button></div>';
   $app.innerHTML='<div class="scroll" style="padding-top:8px">'+
     '<div class="hello"><h1>Orbit AI Mobile</h1><div class="avatar">NJ</div></div>'+
     '<div class="search"><span class="mute">⌕</span><input id="q" placeholder="Owner, address or APN" autocomplete="off" onkeydown="if(event.key===\'Enter\')go(\'search/\'+encodeURIComponent(this.value))" oninput="liveSearch(this.value)"><button class="mic" aria-label="Search by voice" onclick="voiceSearch()">'+ICON.mic+'</button></div>'+
     '<div id="live"></div>'+
     '<button class="debriefbtn" onclick="startDebrief(null)"><span class="big">'+ICON.mic+'</span><span><b>Debrief</b><span>Just finished a call or meeting? Say what happened.</span></span></button>'+
     b+
-    '<div class="sec">My active prospects</div><div class="list">'+rec+'</div>'+
+    '<div class="sec">My active prospects</div>'+seg+'<div class="list">'+rec+'</div>'+
     '<div class="ro">Orbit AI Mobile is for meetings: look up, prepare, debrief.<br>Lists, campaigns and settings live on desktop.</div>'+
   '</div>';
 }
@@ -748,7 +757,7 @@ function iosAlert(){var a=document.createElement('div');a.className='alert';a.in
 /* ---------------- review guide ---------------- */
 var STEPS=[
   ['Main path',[
-    ['1 · Home','Search, voice search, Debrief button, my active prospects',function(){fresh();go('home')}],
+    ['1 · Home','Search, Debrief, My active prospects (My list / In progress)',function(){fresh();go('home')}],
     ['2 · Find an owner','Type “Haddad” or tap the mic',function(){fresh();go('search/Haddad')}],
     ['3 · Owner record','Signal, buildings, team touch history, statements',function(){fresh();go('owner/haddad')}],
     ['4 · Attack Brief','Brief for the meeting, with “What they’ve told us”',function(){fresh();go('brief/haddad')}],
