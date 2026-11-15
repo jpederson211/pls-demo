@@ -62,7 +62,7 @@ a{color:var(--navy)}
 .hdr{display:flex;align-items:center;gap:8px;padding:6px 12px 8px;min-height:48px;background:var(--ground)}
 .hdr .back{all:unset;cursor:pointer;font-size:16px;color:var(--navy);display:flex;align-items:center;gap:2px;padding:6px 4px;min-width:44px}
 .hdr .back::before{content:"‹";font-size:28px;line-height:16px;margin-right:2px}
-.hdr .t{flex:1;font-weight:600;text-align:center;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr .t{flex:1;font-weight:600;text-align:center;font-size:16px;line-height:1.25}
 .hdr .sp{min-width:44px}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 28px}
 .foot{padding:10px 16px 26px;background:var(--ground);border-top:1px solid var(--line);display:flex;gap:10px}
@@ -144,11 +144,15 @@ a{color:var(--navy)}
 .ro{font-size:12px;color:var(--mute);text-align:center;margin:16px 0 4px}
 
 /* brief */
-.bsec{margin:0 0 14px}
-.bsec h3{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin:0 0 4px;font-weight:600}
-.bsec p{margin:0;font-size:14.5px}
-.bsec ul{margin:4px 0 0;padding-left:18px;font-size:14.5px}
-.watch{background:#FFF8D6;border:1px solid #E6CF5C;border-radius:10px;padding:9px 11px;font-size:13.5px;margin:0 0 14px}
+.bsec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 14px}
+.bsec h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 8px;font-weight:600}
+.bsec p{margin:0;font-size:15px;line-height:1.6}
+.bsec ul{margin:0;padding-left:18px;font-size:15px;line-height:1.6}
+.bsec li{margin:0 0 6px}
+.bsec li:last-child{margin:0}
+.bsec .stmt{margin:8px 0 0}
+.bsec .stmt:first-of-type{margin-top:0}
+.watch{background:#FFF8D6;border:1px solid #E6CF5C;border-radius:12px;padding:11px 14px;font-size:14px;line-height:1.5;margin:4px 0 18px}
 .opener{border-left:3px solid var(--navy);padding:4px 0 4px 10px;font-size:14.5px;margin:0}
 .chat{margin-top:6px}
 .msg{max-width:88%;padding:9px 12px;border-radius:14px;font-size:14px;margin:0 0 8px}
@@ -174,7 +178,7 @@ a{color:var(--navy)}
 .wave i{display:block;width:4px;border-radius:2px;background:#B03A2E;animation:wv 0.9s ease-in-out infinite}
 @keyframes wv{0%,100%{height:6px}50%{height:30px}}
 .keepopen{font-size:13px;color:var(--mute);background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:14px}
-.ta{width:100%;min-height:200px;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;line-height:1.5;background:#fff;resize:vertical}
+.ta{width:100%;min-height:120px;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;line-height:1.5;background:#fff;resize:none;overflow:hidden;display:block}
 .spinner{width:28px;height:28px;border:3px solid var(--lavline);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .orbmsg{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
@@ -347,9 +351,9 @@ function genericBrief(k){
 
 /* the debrief scripts */
 var SCRIPT = {
-  full:'Just met Sam Haddad at 3120 Grand. He’s going ahead with the refi on Grand, so that one’s off the table for now. But Lakeshore is a different story. His insurance on Lakeshore went up about forty percent, and his son Adam is starting to take over the books. He said he’d think about selling Lakeshore next year. He also mentioned the Lakeshore loan resets next fall. He wants me to send him the eight-unit sales around the lake, and he’d rather I text him than email. Let’s check back in March.',
-  part:'Just met Sam Haddad at 3120 Grand. He’s going ahead with the refi on Grand, so that one’s off the table for now. But Lakeshore is a different story. His insurance on Lakeshore went up about forty percent, and his son Adam is starting to take over the books.',
-  rest:' He said he’d think about selling Lakeshore next year. He also mentioned the Lakeshore loan resets next fall. He wants me to send him the eight-unit sales around the lake, and he’d rather I text him than email. Let’s check back in March.',
+  full:'Just met Sam Haddad at 3120 Grand. He’s talking to his lender about a refi but hasn’t decided. Insurance on the building went up about forty percent, and his son Adam is starting to take over the books. He said if the refi numbers don’t work he’d think about selling Grand next year. He wants me to send him the six-unit sales around the lake, and he’d rather I text him than email. Let’s check back in March.',
+  part:'Just met Sam Haddad at 3120 Grand. He’s talking to his lender about a refi but hasn’t decided. Insurance on the building went up about forty percent, and his son Adam is starting to take over the books.',
+  rest:' He said if the refi numbers don’t work he’d think about selling Grand next year. He wants me to send him the six-unit sales around the lake, and he’d rather I text him than email. Let’s check back in March.',
   twoTail:' Oh, and I ran into Michael Tran from Grand Ave Holdings on the way out. He says the PO box in Piedmont is his new office.',
   tran:'Ran into Michael Tran from Grand Ave Holdings outside 3120 Grand. The PO box in Piedmont is his new office, he still owns 475 Grand, and he’s happy to hear about sales near the lake. Not selling.'
 };
@@ -540,7 +544,7 @@ function debrief(){
   if(d.step==='ready'||d.step==='rec'){
     var on=d.step==='rec';
     $app.innerHTML=H+'<div class="scroll"><div class="recwrap">'+
-      '<h2>'+(on?'Listening…':'What happened?')+'</h2><div class="mute sm">'+(on?'Talk the way you would to Edson. Tap stop when you’re done.':(who?'Tell Orbit about your conversation with '+esc(who)+'.':'Say who you talked to and what happened.'))+'</div>'+
+      '<h2>'+(on?'Listening…':'What happened?')+'</h2><div class="mute sm">'+(on?'Talk it through like you’re telling a colleague. Tap stop when you’re done.':(who?'Tell Orbit about your conversation with '+esc(who)+'.':'Say who you talked to and what happened.'))+'</div>'+
       '<button class="recbtn'+(on?' on':'')+'" onclick="'+(on?'stopRec()':'startRec()')+'">'+(on?ICON.stop:ICON.mic)+'</button>'+
       '<div class="timer" id="tmr">'+fmt(d.sec)+'</div>'+(on?'<div class="wave">'+'<i></i>'.repeat(14)+'</div>':'')+
       (on?'<div class="keepopen">Keep Orbit open while you talk. On iPhone, recording stops if the screen locks.</div>':'<button class="link" style="margin-top:16px" onclick="typeInstead()">Type instead</button>')+
@@ -566,8 +570,9 @@ function debrief(){
   }
   if(d.step==='transcript'){
     $app.innerHTML=H+'<div class="scroll"><div class="sec" style="margin-top:4px">Your debrief <span class="xs" style="margin-left:auto;text-transform:none;letter-spacing:0;font-weight:400">Fix anything Orbit misheard</span></div>'+
-      '<textarea class="ta" id="tx">'+esc(d.text)+'</textarea><div class="xs mute" style="margin-top:6px">Orbit keeps this text with the touch. The audio is deleted once it’s transcribed.</div></div>'+
+      '<textarea class="ta" id="tx" oninput="grow(this)">'+esc(d.text)+'</textarea><div class="xs mute" style="margin-top:6px">Orbit keeps this text with the touch. The audio is deleted once it’s transcribed.</div></div>'+
       '<div class="foot"><button class="btn ghost" onclick="S.db.sec=0;S.db.step=\'ready\';debrief()">Re-record</button><button class="btn primary" onclick="S.db.text=document.getElementById(\'tx\').value;afterTranscript()"><span class="orb">✦</span> Continue</button></div>';
+    var tx=document.getElementById('tx'); if(tx) grow(tx);
     return;
   }
   if(d.step==='owner'){
@@ -602,6 +607,7 @@ function debrief(){
   if(d.step==='card'){ return card(); }
   if(d.step==='saved'){ return receipt(); }
 }
+function grow(t){t.style.height='auto';t.style.height=t.scrollHeight+'px'}
 function fmt(s){return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2)}
 function startRec(){
   var d=S.db; d.step='rec'; if(!d.cutResume) d.sec=0; debrief();
@@ -639,8 +645,8 @@ function pickOwner(k){var d=S.db;d.owner=k;d.picking=false;d.step=(d.variant==='
 function pickSearch(v){var r=find(v);document.getElementById('pickres').innerHTML=r.o.slice(0,4).map(function(k){return '<button onclick="pickOwner(\''+k+'\')">'+esc(OWNERS[k].name)+'<span class="s">'+esc(OWNERS[k].contact)+'</span></button>'}).join('')}
 function questionsFor(d){
   if(d.owner==='haddad'&&!d.isTran){
-    var q=[['When in March should I set the callback about Lakeshore?',['Mon, Mar 1','Mon, Mar 15','Wed, Mar 31']],
-           ['When should I remind you to text Sam the 8-unit sales near the lake?',['Today, 4:00 PM','Mon, Nov 16, 9:00 AM','No, I’ll send it now']]];
+    var q=[['When in March should I set the callback?',['Mon, Mar 1','Mon, Mar 15','Wed, Mar 31']],
+           ['When should I remind you to text Sam the 6-unit sales near the lake?',['Today, 4:00 PM','Mon, Nov 16, 9:00 AM','No, I’ll send it now']]];
     if(!/text him/i.test(d.text)) q=q.slice(0,1);
     return q;
   }
@@ -654,77 +660,75 @@ function buildItems(){
   var d=S.db, k=d.owner, o=OWNERS[k], it=[];
   var by=o.contact.split(',')[0]+' · told Nolan Jones · Nov 13, 2026';
   if(k==='haddad'&&!d.isTran){
-    var full=/selling Lakeshore/i.test(d.text);
-    it.push({g:'Touches',type:'touch',on:true,t:'Log a touch · 3120 Grand Ave',how:'Meeting',out:'Not selling now',d:'Meeting · Not selling now',notes:'Met Sam Haddad at 3120 Grand. Going ahead with a refinance on Grand, so no sale for now.',tags:['Refinancing','Not selling now'],prop:'3120 Grand Ave'});
-    it.push({g:'Touches',type:'touch',on:true,t:'Log a touch · 3301 Lakeshore Ave',how:'Meeting',out:full?'Interested later':'Spoke',d:'Meeting · '+(full?'Interested later':'Spoke'),notes:full?'Insurance on Lakeshore up about 40%. Son Adam taking over the books. Would think about selling Lakeshore next year. Wants the 8-unit sales around the lake by text.':'Insurance on Lakeshore up about 40%. Son Adam taking over the books.',tags:full?['Insurance costs','Succession','Open next year']:['Insurance costs','Succession'],prop:'3301 Lakeshore Ave'});
+    var full=/selling Grand/i.test(d.text);
+    d.prop='grand3120';
+    it.push({g:'touch',type:'touch',on:true,how:'Meeting',when:'Today · 1:00 PM',out:full?'Interested later':'Spoke',prop:'3120 Grand Ave',
+      notes:full?'Met Sam at the building. He is talking to his lender about a refinance but hasn’t decided. Insurance on the building went up about 40%, and his son Adam is starting to take over the books. If the refinance numbers don’t work, he would think about selling next year. He asked for the recent 6-unit sales around Lake Merritt, sent by text.':
+                 'Met Sam at the building. He is talking to his lender about a refinance but hasn’t decided. Insurance on the building went up about 40%, and his son Adam is starting to take over the books.'});
     var a0=d.answers[0]||'Mon, Mar 15';
-    it.push({g:'Follow-ups',type:'cb',on:true,t:'Set a callback',d:a0+', 2027 · 10:00 AM · 3301 Lakeshore Ave',m:'Call Sam about Lakeshore · Nolan Jones',sel:['Mon, Mar 1','Mon, Mar 15','Wed, Mar 31'],val:a0});
-    if(d.answers[1]&&d.answers[1]!=='No, I’ll send it now') it.push({g:'Follow-ups',type:'fu',on:true,t:'Set a reminder',d:d.answers[1]+' · Text Sam the 8-unit sales near Lake Merritt',m:'Assigned to Nolan Jones'});
-    it.push({g:'What Sam told us',type:'st',on:true,k:'Insurance',t:'Insurance on 3301 Lakeshore went up about 40%',m:by});
+    it.push({g:'Follow-ups',type:'cb',on:true,t:'Set a callback',d:a0+', 2027 · 10:00 AM',m:'Call Sam about the refinance and 3120 Grand · Nolan Jones',sel:['Mon, Mar 1','Mon, Mar 15','Wed, Mar 31'],val:a0});
+    if(d.answers[1]&&d.answers[1]!=='No, I’ll send it now') it.push({g:'Follow-ups',type:'fu',on:true,t:'Set a reminder',d:d.answers[1]+' · Text Sam the 6-unit sales near Lake Merritt',m:'Assigned to Nolan Jones'});
+    it.push({g:'What Sam told us',type:'st',on:true,k:'Insurance',t:'Insurance on 3120 Grand went up about 40%',m:by});
     it.push({g:'What Sam told us',type:'st',on:true,k:'Family or succession',t:'His son Adam is starting to take over the books',m:by});
     if(full){
-      it.push({g:'What Sam told us',type:'st',on:true,k:'Intent',t:'Would think about selling 3301 Lakeshore next year',m:by,note:'Saved as what Sam said. Orbit doesn’t turn this into a score or prediction.'});
-      it.push({g:'What Sam told us',type:'st',on:true,k:'Financing',t:'The Lakeshore loan resets next fall',m:by,note:'Not written to the loan record. County data only estimates 2027.'});
+      it.push({g:'What Sam told us',type:'st',on:true,k:'Intent',t:'Would think about selling 3120 Grand next year if the refinance doesn’t work',m:by,note:'Saved as what Sam said. Orbit doesn’t turn this into a score or prediction.'});
       it.push({g:'What Sam told us',type:'st',on:true,k:'Preference',t:'Prefers texts to email',m:by,note:'Already on file from David (Jun 18). Saving confirms it’s still true.'});
-      it.push({g:'Suggested check',type:'verify',on:false,t:'Check the Lakeshore loan date against county records',d:'Callback task · Edson Ruiz · next week',m:'Optional. Sam’s date and the record don’t match exactly.'});
     }
   } else if(d.isTran){
-    it.push({g:'Touches',type:'touch',on:true,t:'Log a touch · 475 Grand Ave',how:'Drop-by',out:'Spoke',d:'Drop-by · Spoke',notes:'Ran into Michael Tran outside 3120 Grand. Still owns 475 Grand. Not selling. Happy to hear about sales near the lake.',tags:['Not selling now'],prop:'475 Grand Ave'});
+    d.prop='grand475';
+    it.push({g:'touch',type:'touch',on:true,how:'Drop-by',when:'Today · 1:40 PM',out:'Spoke',notes:'Ran into Michael Tran outside 3120 Grand. He still owns 475 Grand and is not selling, but is happy to hear about sales near the lake.',prop:'475 Grand Ave'});
     it.push({g:'What Michael told us',type:'st',on:true,k:'Operations',t:'The Piedmont PO box is his new office',m:'Michael Tran · told Nolan Jones · Nov 13, 2026',note:'The mailing address on the record is not changed.'});
     it.push({g:'Suggested check',type:'verify',on:false,t:'Confirm the new mailing address before the next mailing',d:'Task · Edson Ruiz',m:'Optional'});
   } else {
-    var p=PROPS[d.prop||o.props[0]];
-    it.push({g:'Touches',type:'touch',on:true,t:'Log a touch · '+p.a,how:'Call',out:'Spoke',d:'Call · Spoke',notes:'Not ready to sell. Open to hearing about recent sales nearby.',tags:['Not selling now'],prop:p.a});
-    it.push({g:'Follow-ups',type:'cb',on:true,t:'Set a callback',d:(d.answers[0]||'Mon, Mar 15')+', 2027 · 10:00 AM · '+p.a,m:'Nolan Jones',sel:['Mon, Mar 1','Mon, Mar 15','Wed, Mar 31'],val:d.answers[0]||'Mon, Mar 15'});
+    d.prop=d.prop||o.props[0]; var p=PROPS[d.prop];
+    it.push({g:'touch',type:'touch',on:true,how:'Call',when:'Today · 2:05 PM',out:'Spoke',notes:'Not ready to sell right now, but open to hearing about recent sales nearby.',prop:p.a});
+    it.push({g:'Follow-ups',type:'cb',on:true,t:'Set a callback',d:(d.answers[0]||'Mon, Mar 15')+', 2027 · 10:00 AM',m:'Nolan Jones',sel:['Mon, Mar 1','Mon, Mar 15','Wed, Mar 31'],val:d.answers[0]||'Mon, Mar 15'});
     it.push({g:'What '+o.first+' told us',type:'st',on:true,k:'Preference',t:'Prefers email',m:o.contact.split(',')[0]+' · told Nolan Jones · Nov 13, 2026'});
   }
   d.items=it;
 }
 function card(){
-  var d=S.db, n=d.items.filter(function(i){return i.on}).length, lastG='';
-  var html='<div class="bundle"><div class="bh"><span class="orb">✦</span><b>Orbit will save these</b><span class="pill">'+esc(OWNERS[d.owner].name)+'</span></div>';
-  d.items.forEach(function(i,ix){
+  var d=S.db, o=OWNERS[d.owner], T=d.items[0], rest=d.items.slice(1), lastG='';
+  var n=1+rest.filter(function(i){return i.on}).length;
+  var html='<div class="bundle"><div class="bh"><span class="orb">✦</span><b>One touch · '+esc(T.prop)+'</b></div>'+
+    '<div class="bi" style="display:block"><div class="bt">'+
+      '<div class="m" style="margin:0 0 6px">'+esc(o.contact.split(',')[0])+' · '+esc(o.name)+'</div>'+
+      '<b>'+esc(T.how)+' · '+esc(T.out)+'</b><div class="m">'+esc(T.when)+' · logged by Nolan Jones</div>'+
+      (T.editing?'<select onchange="S.db.items[0].out=this.value">'+['Spoke','Interested later','Not selling now','Appointment set','Callback requested'].map(function(x){return '<option'+(x===T.out?' selected':'')+'>'+x+'</option>'}).join('')+'</select><textarea oninput="S.db.items[0].notes=this.value;grow(this)">'+esc(T.notes)+'</textarea><div class="edit"><button class="link" onclick="S.db.items[0].editing=false;card()">Done editing</button></div>':
+        '<div class="xs mute" style="margin:10px 0 4px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Call notes</div><div class="d" style="font-size:15px;line-height:1.55">'+esc(T.notes)+'</div><div class="edit"><button class="link" onclick="S.db.items[0].editing=true;card()">Edit notes</button></div>')+
+    '</div></div>';
+  rest.forEach(function(i,j){ var ix=j+1;
     if(i.g!==lastG){html+='<div class="bgrp">'+esc(i.g)+'</div>';lastG=i.g}
-    var body='<b>'+esc(i.t)+'</b>';
-    if(i.type==='touch'){
-      body+='<div class="d">'+esc(i.how)+' · '+esc(i.out)+'</div><div class="m">'+esc(i.notes)+'</div><div class="tags">'+i.tags.map(function(t){return '<span class="pill">'+esc(t)+'</span>'}).join('')+'</div>';
-      body+=i.editing?'<select onchange="S.db.items['+ix+'].out=this.value">'+['Spoke','Not selling now','Interested later','Appointment set','Callback requested'].map(function(x){return '<option'+(x===i.out?' selected':'')+'>'+x+'</option>'}).join('')+'</select><textarea oninput="S.db.items['+ix+'].notes=this.value">'+esc(i.notes)+'</textarea><div class="edit"><button class="link" onclick="S.db.items['+ix+'].editing=false;card()">Done editing</button></div>':'<div class="edit"><button class="link" onclick="S.db.items['+ix+'].editing=true;card()">Edit</button></div>';
-    } else if(i.type==='st'){
-      body='<b>“'+esc(i.t)+'”</b><div class="tags"><span class="pill">'+esc(i.k)+'</span><span class="pill warn">Owner said · unverified</span></div><div class="m">'+esc(i.m)+'</div>'+(i.note?'<div class="m">'+esc(i.note)+'</div>':'');
+    var body;
+    if(i.type==='st'){
+      body='<b>“'+esc(i.t)+'”</b><div class="m">'+esc(i.m)+' · unverified</div>'+(i.note?'<div class="m">'+esc(i.note)+'</div>':'');
     } else if(i.type==='cb'){
-      body+='<div class="d">'+esc(i.d)+'</div><div class="m">'+esc(i.m)+'</div>'+(i.editing?'<select onchange="var x=S.db.items['+ix+'];x.d=x.d.replace(x.val,this.value);x.val=this.value;x.editing=false;card()">'+i.sel.map(function(x){return '<option'+(x===i.val?' selected':'')+'>'+x+'</option>'}).join('')+'</select>':'<div class="edit"><button class="link" onclick="S.db.items['+ix+'].editing=true;card()">Change date</button></div>');
+      body='<b>'+esc(i.t)+'</b><div class="d">'+esc(i.d)+'</div><div class="m">'+esc(i.m)+'</div>'+(i.editing?'<select onchange="var x=S.db.items['+ix+'];x.d=x.d.replace(x.val,this.value);x.val=this.value;x.editing=false;card()">'+i.sel.map(function(x){return '<option'+(x===i.val?' selected':'')+'>'+x+'</option>'}).join('')+'</select>':'<div class="edit"><button class="link" onclick="S.db.items['+ix+'].editing=true;card()">Change date</button></div>');
     } else {
-      body+='<div class="d">'+esc(i.d)+'</div><div class="m">'+esc(i.m)+'</div>';
+      body='<b>'+esc(i.t)+'</b><div class="d">'+esc(i.d)+'</div><div class="m">'+esc(i.m)+'</div>';
     }
     html+='<div class="bi'+(i.on?'':' offitem')+'"><span class="cb'+(i.on?' on':'')+'" onclick="S.db.items['+ix+'].on=!S.db.items['+ix+'].on;card()">'+(i.on?'✓':'')+'</span><div class="bt">'+body+'</div></div>';
   });
-  html+='</div><div class="xs mute" style="margin:10px 2px 0">Nothing is saved until you tap Save all. Untick anything that’s wrong. Owner statements never change property or loan records.</div>';
-  $app.innerHTML=hdr('Review and save',{backLabel:'Close'})+'<div class="scroll" style="padding-top:4px">'+html+'</div>'+
-    '<div class="foot"><button class="btn ghost" style="flex:0 0 96px" onclick="S.db.step=\'qs\';debrief()">Back</button><button class="btn primary" '+(n?'':'disabled')+' onclick="saveAll()">Save all ('+n+')</button></div>';
+  html+='</div><div class="xs mute" style="margin:10px 2px 0">Nothing is saved until you tap Save all. Untick anything that’s wrong. What the owner told us never changes property or loan records.</div>';
+  $app.innerHTML=hdr('Review and save this Debrief',{backLabel:'Close'})+'<div class="scroll" style="padding-top:4px">'+html+'</div>'+
+    '<div class="foot"><button class="btn ghost" style="flex:0 0 96px" onclick="S.db.step=\'qs\';debrief()">Back</button><button class="btn primary" onclick="saveAll()">Save all ('+n+')</button></div>';
+  [].forEach.call($app.querySelectorAll('.bt textarea'),grow);
 }
 function saveAll(){
-  var d=S.db, k=d.owner, on=d.items.filter(function(i){return i.on});
-  var stm=on.filter(function(i){return i.type==='st'}).map(function(i){return {t:i.t,by:i.m,verify:true}});
-  var tch=on.filter(function(i){return i.type==='touch'});
-  var newT=tch.map(function(i,ix){return {id:'n'+Date.now()+ix,date:'Today',who:'Nolan Jones',how:i.how==='Drop-by'?'Drop-by':i.how,prop:i.prop,out:i.out,sum:i.notes.split('. ')[0]+'.',notes:i.notes,isNew:true,transcript:ix===0?d.text:null,stmts:ix===tch.length-1?stm:[]}});
-  if(!newT.length&&stm.length){newT=[{id:'ns',date:'Today',who:'Nolan Jones',how:'Meeting',prop:PROPS[OWNERS[k].props[0]].a,out:'Spoke',sum:'Debrief notes.',notes:'Debrief notes.',isNew:true,transcript:d.text,stmts:stm}]}
-  d.saved={k:k,touches:newT};
-  S.added[k]=newT.concat(S.added[k]||[]);
-  var c={t:tch.length,cb:on.filter(function(i){return i.type==='cb'||i.type==='fu'||i.type==='verify'}).length,s:stm.length};
-  d.summary=[c.t?c.t+' touch'+(c.t>1?'es':''):null,c.cb?c.cb+' follow-up'+(c.cb>1?'s':''):null,c.s?c.s+' thing'+(c.s>1?'s':'')+' '+OWNERS[k].first+' told us':null].filter(Boolean).join(', ');
-  d.step='saved'; d.undo=10; debrief();
+  var d=S.db, k=d.owner, T=d.items[0], on=d.items.slice(1).filter(function(i){return i.on});
+  var stm=on.filter(function(i){return i.type==='st'}).map(function(i){return {t:i.t,by:i.m}});
+  var t={id:'n'+Date.now(),date:'Today',who:'Nolan Jones',how:T.how,prop:T.prop,out:T.out,sum:T.notes.split('. ')[0]+'.',notes:T.notes,isNew:true,transcript:d.text,stmts:stm};
+  S.added[k]=[t].concat(S.added[k]||[]);
+  var fu=on.filter(function(i){return i.type==='cb'||i.type==='fu'}).length;
+  d.summary=['1 touch on '+T.prop,fu?fu+' follow-up'+(fu>1?'s':''):null,stm.length?stm.length+' thing'+(stm.length>1?'s':'')+' '+OWNERS[k].first+' told us':null].filter(Boolean).join(', ');
+  d.step='saved'; debrief();
 }
 function receipt(){
   var d=S.db,k=d.owner;
-  $app.innerHTML=hdr('Saved',{noBack:true})+'<div class="scroll"><div class="receipt"><div class="ok">✓</div><h2>Saved</h2><div class="mute">'+esc(d.summary)+'</div></div>'+
-    (d.undo>0?'<div class="undo"><div style="flex:1">Saved to '+esc(OWNERS[k].name)+'<div class="bar" id="ubar" style="width:'+(d.undo*10)+'%"></div></div><button onclick="undoSave()">Undo</button></div>':'')+
+  $app.innerHTML=hdr('Saved',{noBack:true})+'<div class="scroll"><div class="receipt"><div class="ok">✓</div><h2>Debrief saved</h2><div class="mute">'+esc(d.summary)+'</div></div>'+
     (S.pendingTran&&!d.isTran?'<div class="banner"><div style="flex:1"><b>Next: debrief Michael Tran</b>You asked for a separate debrief for Grand Ave Holdings.</div><button class="btn sm primary" onclick="startTran()">Start</button></div>':'')+
-    '</div><div class="foot"><button class="btn ghost" onclick="S.db=null;go(\'owner/'+k+'\')">Open record</button><button class="btn primary" onclick="S.db=null;go(\'home\')">Back to Home</button></div>';
-  clearInterval(S.undoTimer);
-  if(d.undo>0) S.undoTimer=setInterval(function(){ if(!S.db||S.db.step!=='saved'){clearInterval(S.undoTimer);return}
-    d.undo--; var b=document.getElementById('ubar'); if(b) b.style.width=(d.undo*10)+'%'; if(d.undo<=0){clearInterval(S.undoTimer);receipt()} },1000);
+    '</div><div class="foot" style="flex-direction:column"><button class="btn primary" onclick="var p=S.db.prop;S.db=null;go(\'property/\'+p)">View updated record</button><button class="btn ghost" onclick="S.db=null;go(\'home\')">Back to Home</button></div>';
 }
-function undoSave(){var d=S.db;clearInterval(S.undoTimer);var ids=d.saved.touches.map(function(t){return t.id});S.added[d.owner]=(S.added[d.owner]||[]).filter(function(t){return ids.indexOf(t.id)<0});d.step='card';toast('Undone. Nothing was saved.');debrief()}
 function startTran(){S.pendingTran=false;S.db={owner:'grandave',from:'record',step:'transcribing',variant:'normal',text:'',answers:[],items:null,sec:38,isTran:true};go('debrief');setTimeout(function(){if(S.db){S.db.text=SCRIPT.tran;S.db.step='transcript';debrief()}},900)}
 
 /* ---------------- first run ---------------- */
@@ -750,8 +754,8 @@ var STEPS=[
     ['4 · Attack Brief','Brief for the meeting, with “What they’ve told us”',function(){fresh();go('brief/haddad')}],
     ['5 · Ask the brief','Tap a question chip, type, or use the mic',function(){fresh();S.chat.haddad=[BRIEF.haddad.chips[3]];go('brief/haddad')}],
     ['6 · Debrief after the meeting','Record → transcript → 2 questions',function(){fresh();startDebrief('haddad')}],
-    ['7 · Review and Save all','Bundled card: touches, follow-ups, statements',function(){fresh();jumpCard('haddad')}],
-    ['8 · Saved, with Undo','Then the new touch shows on the record',function(){fresh();jumpCard('haddad');saveAll()}]
+    ['7 · Review and save this Debrief','One touch with its follow-ups and what Sam told us',function(){fresh();jumpCard('haddad')}],
+    ['8 · Saved → updated record','View updated record shows the new touch on top',function(){fresh();jumpCard('haddad');saveAll()}]
   ]],
   ['Other states',[
     ['Property record','3120 Grand Ave: touches for this building only',function(){fresh();go('property/grand3120')}],
