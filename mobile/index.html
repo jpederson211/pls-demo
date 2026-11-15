@@ -127,6 +127,11 @@ a{color:var(--navy)}
 .rhead .who a{text-decoration:none}
 .signal{display:flex;gap:10px;background:var(--lav);border:1px solid var(--lavline);border-radius:12px;padding:10px 12px;margin:12px 0;font-size:13.5px}
 .signal b{display:block;font-size:14px}
+.callrow{display:flex;gap:10px;margin:12px 0 0}
+.callbtn{flex:1;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-height:48px}
+.callbtn span{width:30px;height:30px;border-radius:50%;background:var(--lav);display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 30px}
+.callbtn b{font-size:15px}
+.callbtn em{font-style:normal;font-size:12.5px;color:var(--mute);margin-left:auto;white-space:nowrap}
 .twobtn{display:flex;gap:10px;margin:4px 0 6px}
 .twobtn .btn{flex:1}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
@@ -467,7 +472,8 @@ function owner(k){
   var fl=ts.filter(function(t){ if(f==='All')return true; if(f==='Calls')return t.how==='Call'; if(f==='Meetings')return t.how==='Meeting'||t.how==='Drop-by'; if(f==='Mail & email')return t.how==='Mail'||t.how==='Email'; return true});
   var nst=ts.reduce(function(n,t){return n+((t.stmts||[]).length)},0);
   $app.innerHTML=hdr('Owner')+'<div class="scroll">'+
-    '<div class="rhead"><h1>'+esc(o.name)+'</h1><div class="who">'+esc(o.contact)+' · <a href="tel:'+o.phone.replace(/\D/g,'')+'">'+o.phone+'</a></div><div class="who xs" style="margin-top:2px">'+esc(o.kind)+' · '+o.props.length+' building'+(o.props.length>1?'s':'')+'</div></div>'+
+    '<div class="rhead"><h1>'+esc(o.name)+'</h1><div class="who">'+esc(o.contact)+'</div><div class="who xs" style="margin-top:2px">'+esc(o.kind)+' · '+o.props.length+' building'+(o.props.length>1?'s':'')+'</div></div>'+
+    contactRow(o)+
     '<div class="signal"><span class="orb">✦</span><div><b>'+esc(o.signal[0])+'</b>'+esc(o.signal[1])+'</div></div>'+
     '<div class="twobtn"><button class="btn primary" onclick="go(\'brief/'+k+'\')"><span class="orb">✦</span> Attack Brief</button><button class="btn" onclick="startDebrief(\''+k+'\')">Log a touch</button></div>'+
     '<div class="sec">Touch history · '+ts.length+(nst?'<span class="pill lav" style="margin-left:8px;text-transform:none;letter-spacing:0">'+nst+' thing'+(nst>1?'s':'')+' '+esc(o.first)+' told us</span>':'')+'</div>'+
@@ -476,6 +482,9 @@ function owner(k){
     '<div class="sec">Buildings · '+o.props.length+(o.props.length>3&&!S.allProps?'<button class="link" onclick="S.allProps=true;owner(\''+k+'\')">Show all</button>':'')+'</div><div class="list">'+(S.allProps?o.props:o.props.slice(0,3)).map(liProp).join('')+'</div>'+
     '<div class="ro">Read only. Edit owner details on desktop.</div></div>';
 }
+function contactRow(o){var n=o.phone.replace(/\D/g,'');
+  return '<div class="callrow"><a class="callbtn" href="tel:+1'+n+'" onclick="dialed(event,\'Calling '+esc(o.first)+'…\')"><span>☏</span><b>Call</b><em>'+o.phone+'</em></a><a class="callbtn" href="sms:+1'+n+'" onclick="dialed(event,\'Opening Messages…\')"><span>✎</span><b>Text</b><em>'+esc(o.first)+'</em></a></div>'}
+function dialed(e,msg){ if(!/iPhone|Android/i.test(navigator.userAgent)){e.preventDefault();toast(msg+' (opens the phone app on an iPhone)')} }
 function te(t){
   var st=(t.stmts||[]).map(function(s){return '<div class="stmt">“'+esc(s.t)+'” '+(s.verified?'<span class="pill ok">verified</span>':'<span class="pill warn">unverified</span>')+(s.old?' <span class="pill warn">may be out of date</span>':'')+'<div class="by">'+esc(s.by)+'</div></div>'}).join('');
   return '<div class="te'+(t.isNew?' new':'')+'" onclick="this.classList.toggle(\'open\')"><div class="top"><span class="ch">'+(CH[t.how]||'•')+'</span><div style="flex:1;min-width:0"><div class="meta">'+t.date+' · '+esc(t.who)+' · '+t.how+(t.isNew?' · <b style="color:var(--navy)">new</b>':'')+'</div><div class="sum">'+esc(t.sum)+'</div><div class="meta">'+esc(t.prop)+' · '+esc(t.out)+(t.stmts&&t.stmts.length?' · '+t.stmts.length+' statement'+(t.stmts.length>1?'s':''):'')+'</div></div></div>'+
@@ -503,7 +512,7 @@ function brief(k){
   var told=addedStmts.concat(b.told);
   var asked=S.chat[k].map(function(m){return m[0]}); var chips=b.chips.filter(function(c){return asked.indexOf(c[0])<0});
   $app.innerHTML=hdr('Attack Brief',{right:'<span class="orb">✦</span>'})+'<div class="scroll" id="bscroll">'+
-    '<div class="rhead" style="margin-bottom:10px"><h1 style="font-size:20px">'+esc(o.name)+'</h1><div class="who">'+esc(o.contact)+' · <a href="tel:'+o.phone.replace(/\D/g,'')+'">'+o.phone+'</a></div></div>'+
+    '<div class="rhead" style="margin-bottom:10px"><h1 style="font-size:20px">'+esc(o.name)+'</h1><div class="who">'+esc(o.contact)+'</div></div>'+contactRow(o)+'<div style="height:12px"></div>'+
     '<div class="watch">⚑ '+esc(b.watch)+'</div>'+
     bs('Who they are','<p>'+esc(b.who)+'</p>')+
     bs('What they own','<ul>'+b.own.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>')+
