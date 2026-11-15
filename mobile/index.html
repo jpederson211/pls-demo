@@ -526,7 +526,7 @@ function brief(k){
   var o=OWNERS[k]; if(!o) return home(); var b=BRIEF[k]||genericBrief(k); S.chat[k]=S.chat[k]||[];
   var addedStmts=[]; (S.added[k]||[]).forEach(function(t){(t.stmts||[]).forEach(function(s){addedStmts.push(s)})});
   var told=addedStmts.concat(b.told);
-  var asked=S.chat[k].map(function(m){return m[0]}); var chips=b.chips.filter(function(c){return asked.indexOf(c[0])<0});
+  var asked=S.chat[k].map(function(m){return m[0]}); var chips=b.chips.filter(function(c){return asked.indexOf(c[0])<0}).slice(0,2);
   $app.innerHTML=hdr('Attack Brief',{right:'<span class="orb">✦</span>'})+'<div class="scroll" id="bscroll">'+
     '<div class="rhead" style="margin-bottom:10px"><h1 style="font-size:20px">'+esc(o.name)+'</h1><div class="who">'+esc(o.contact)+'</div></div>'+contactRow(o)+'<div style="height:12px"></div>'+
     strategyHtml(k)+
@@ -540,7 +540,7 @@ function brief(k){
     '<div class="sec">Ask the brief</div><div class="chat" id="chat">'+S.chat[k].map(function(m){return '<div class="msg u">'+esc(m[0])+'</div><div class="msg a">'+esc(m[1])+'<div class="src">Source: '+esc(m[2])+'</div></div>'}).join('')+'</div>'+
     '<div class="chips" style="flex-wrap:wrap">'+chips.map(function(c,i){return '<button class="chip" onclick="askChip(\''+k+'\','+b.chips.indexOf(c)+')">'+esc(c[0])+'</button>'}).join('')+'</div>'+
   '</div>'+
-  '<div class="askbar"><input id="askq" placeholder="Ask about '+esc(o.first)+'…" onkeydown="if(event.key===\'Enter\')askTyped(\''+k+'\')"><button class="mic" onclick="askVoice(\''+k+'\')">'+ICON.mic+'</button><button class="send" onclick="askTyped(\''+k+'\')">↑</button></div>'+
+  '<div class="askbar"><input id="askq" placeholder="Reply" onkeydown="if(event.key===\'Enter\')askTyped(\''+k+'\')"><button class="mic" onclick="askVoice(\''+k+'\')">'+ICON.mic+'</button><button class="send" onclick="askTyped(\''+k+'\')">↑</button></div>'+
   '<div class="bfoot"><button class="btn ghost" onclick="back()">Done</button><button class="btn primary" onclick="startDebrief(\''+k+'\')">Log this touch →</button></div>';
 }
 /* Suggested Strategy: depends on where the conversation stands */
