@@ -63,7 +63,9 @@ a{color:var(--navy)}
 .hdr .back{all:unset;cursor:pointer;font-size:16px;color:var(--navy);display:flex;align-items:center;gap:2px;padding:6px 4px;min-width:44px}
 .hdr .back::before{content:"‹";font-size:28px;line-height:16px;margin-right:2px}
 .hdr .t{flex:1;font-weight:600;text-align:center;font-size:16px;line-height:1.25}
-.hdr .sp{min-width:44px}
+.hdr .sp{min-width:56px}
+.homebtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);display:inline-flex;align-items:center;justify-content:center;padding:0}
+.homebtn svg{width:19px;height:19px}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 28px}
 .foot{padding:10px 16px 26px;background:var(--ground);border-top:1px solid var(--line);display:flex;gap:10px}
 .foot .btn{flex:1}
@@ -400,7 +402,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 function go(h){ if(location.hash==='#'+h) render(); else location.hash=h; }
 function back(){ if(history.length>1) history.back(); else go('home'); }
 function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('on')},2400)}
-function hdr(title,opts){opts=opts||{};return '<div class="hdr">'+(opts.noBack?'<span class="sp"></span>':'<button class="back" onclick="'+(opts.backFn||'back()')+'">'+(opts.backLabel||'Back')+'</button>')+'<div class="t">'+title+'</div><span class="sp">'+(opts.right||'')+'</span></div>'}
+function hdr(title,opts){opts=opts||{};return '<div class="hdr">'+(opts.noBack?'<span class="sp"></span>':'<button class="back" onclick="'+(opts.backFn||'back()')+'">'+(opts.backLabel||'Back')+'</button>')+'<div class="t">'+title+'</div><span class="sp" style="text-align:right"><button class="homebtn" aria-label="Home" onclick="go(\'home\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button></span></div>'}
 function setSig(){document.getElementById('sig').textContent=S.offline?'No Service ▮':'●●●● 5G ▮'}
 function ownerTouches(k){var a=(S.added[k]||[]).slice();return a.concat(OWNERS[k].touches)}
 
