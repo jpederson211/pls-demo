@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Orbit Mobile · Prescott Listing System</title>
+<title>Orbit AI Mobile · Prescott Listing System</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Orbit">
+<meta name="apple-mobile-web-app-title" content="Orbit AI">
 <meta name="theme-color" content="#2D2E41">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -400,13 +400,13 @@ function home(){
   if(S.draft) b+='<div class="banner"><div style="flex:1"><b>Finish your debrief</b>'+esc(S.draft.label)+'</div><button class="btn sm primary" onclick="resumeDraft()">Finish</button></div>';
   var rec=S.recents.map(function(k){return OWNERS[k]?liOwner(k):liProp(k)}).join('');
   $app.innerHTML='<div class="scroll" style="padding-top:8px">'+
-    '<div class="hello"><h1>Orbit</h1><div class="avatar">NJ</div></div>'+
+    '<div class="hello"><h1>Orbit AI Mobile</h1><div class="avatar">NJ</div></div>'+
     '<div class="search"><span class="mute">⌕</span><input id="q" placeholder="Owner, address or APN" autocomplete="off" onkeydown="if(event.key===\'Enter\')go(\'search/\'+encodeURIComponent(this.value))" oninput="liveSearch(this.value)"><button class="mic" aria-label="Search by voice" onclick="voiceSearch()">'+ICON.mic+'</button></div>'+
     '<div id="live"></div>'+
     '<button class="debriefbtn" onclick="startDebrief(null)"><span class="big">'+ICON.mic+'</span><span><b>Debrief</b><span>Just finished a call or meeting? Say what happened.</span></span></button>'+
     b+
-    '<div class="sec">Recent</div><div class="list">'+rec+'</div>'+
-    '<div class="ro">Orbit Mobile is for meetings: look up, prepare, debrief.<br>Lists, campaigns and settings live on desktop.</div>'+
+    '<div class="sec">My active prospects</div><div class="list">'+rec+'</div>'+
+    '<div class="ro">Orbit AI Mobile is for meetings: look up, prepare, debrief.<br>Lists, campaigns and settings live on desktop.</div>'+
   '</div>';
 }
 function liOwner(k){var o=OWNERS[k];var t=ownerTouches(k)[0];return '<div class="li" onclick="go(\'owner/'+k+'\')"><span class="ic">◎</span><span class="tx"><b>'+esc(o.name)+'</b><span>'+o.props.length+' building'+(o.props.length>1?'s':'')+' · '+(t?'last touch '+t.date:'no touches yet')+'</span></span><span class="chev">›</span></div>'}
@@ -744,7 +744,7 @@ function iosAlert(){var a=document.createElement('div');a.className='alert';a.in
 /* ---------------- review guide ---------------- */
 var STEPS=[
   ['Main path',[
-    ['1 · Home','Search, voice search, Debrief button, recents',function(){fresh();go('home')}],
+    ['1 · Home','Search, voice search, Debrief button, my active prospects',function(){fresh();go('home')}],
     ['2 · Find an owner','Type “Haddad” or tap the mic',function(){fresh();go('search/Haddad')}],
     ['3 · Owner record','Signal, buildings, team touch history, statements',function(){fresh();go('owner/haddad')}],
     ['4 · Attack Brief','Brief for the meeting, with “What they’ve told us”',function(){fresh();go('brief/haddad')}],
@@ -771,7 +771,7 @@ var STEPS=[
 function fresh(){var keep=S.recents;clearInterval(S.undoTimer);if(S.db)clearInterval(S.db.tick);reset();S.recents=keep}
 function jumpCard(k){S.db={owner:k,from:'record',step:'card',variant:'normal',text:SCRIPT.full,answers:['Mon, Mar 15','Mon, Nov 16, 9:00 AM'],items:null,sec:112};buildItems();go('debrief')}
 function guideHtml(){
-  var h='<h1>Orbit Mobile</h1><div class="sub">Clickable mockup for Orbit AI PRD v0.5 §15 · Nov 15, 2026. Built for iPhone (Safari, added to the Home Screen).</div>';
+  var h='<h1>Orbit AI Mobile</h1><div class="sub">Clickable mockup for Orbit AI PRD v0.5 §15 · Nov 15, 2026. Built for iPhone (Safari, added to the Home Screen).</div>';
   STEPS.forEach(function(g,gi){h+='<h2>'+g[0]+'</h2><ol>'+g[1].map(function(s,si){return '<li><button onclick="STEPS['+gi+'][1]['+si+'][2]();closeDemoSheet()"><b>'+s[0]+'</b><span>'+s[1]+'</span></button></li>'}).join('')+'</ol>'});
   h+='<div class="note"><b>Demo notes.</b> Voice is scripted: tapping the mic plays a sample debrief. Nothing is stored. Data matches the desktop demo. Today is Fri, Nov 13, 2026, 2:14 PM.</div>';
   h+='<div class="note"><b>Not on mobile by design:</b> lists, campaigns, call queues, market screens, settings, editing records. Orbit never records calls or meetings, never predicts who will sell, and never gives a value.</div>';

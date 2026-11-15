@@ -1,6 +1,6 @@
 {
-  "name": "Orbit · Prescott",
-  "short_name": "Orbit",
+  "name": "Orbit AI Mobile",
+  "short_name": "Orbit AI",
   "start_url": "./index.html#home",
   "scope": "./",
   "display": "standalone",
